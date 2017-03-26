@@ -13,7 +13,12 @@ public class ZooConferenceEdition extends ZooPC implements ConferenceEdition {
 	int year;
 	Proceedings proceedings;
 	
-	public ZooConferenceEdition(String id, Conference conference, int year, Proceedings proceedings){
+	public ZooConferenceEdition() {
+		
+	}
+	
+	public ZooConferenceEdition(String id, Conference conference, int year, Proceedings proceedings) {
+		zooActivateWrite();
 		this.id = id;
 		this.conference = conference;
 		this.year = year;
@@ -29,7 +34,6 @@ public class ZooConferenceEdition extends ZooPC implements ConferenceEdition {
 	public void setId(String id) {
 		zooActivateWrite();
 		this.id = id;
-
 	}
 
 	public Conference getConference() {
@@ -40,7 +44,6 @@ public class ZooConferenceEdition extends ZooPC implements ConferenceEdition {
 	public void setConference(Conference conference) {
 		zooActivateWrite();
 		this.conference = conference;
-
 	}
 
 	public int getYear() {
@@ -51,7 +54,6 @@ public class ZooConferenceEdition extends ZooPC implements ConferenceEdition {
 	public void setYear(int year) {
 		zooActivateWrite();
 		this.year = year;
-
 	}
 
 	public Proceedings getProceedings() {
@@ -62,7 +64,6 @@ public class ZooConferenceEdition extends ZooPC implements ConferenceEdition {
 	public void setProceedings(Proceedings proceedings) {
 		zooActivateWrite();
 		this.proceedings = proceedings;
-
 	}
 
 }

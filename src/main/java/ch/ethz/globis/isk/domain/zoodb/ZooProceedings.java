@@ -1,5 +1,6 @@
 package ch.ethz.globis.isk.domain.zoodb;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import ch.ethz.globis.isk.domain.ConferenceEdition;
@@ -10,17 +11,18 @@ import ch.ethz.globis.isk.domain.Series;
 
 public class ZooProceedings extends ZooPublication implements Proceedings {
 	
-	private String note;
-	private int number;
-	private Publisher publisher;
-	private String volume;
-	private String isbn;
-	private Series series;
-	private ConferenceEdition conferenceEdition;
-	private Set<InProceedings> publications;
+	String note;
+	int number;
+	Publisher publisher;
+	String volume;
+	String isbn;
+	Series series;
+	ConferenceEdition conferenceEdition;
+	Set<InProceedings> publications;
 	
 	public ZooProceedings() {
-		
+		zooActivateWrite();
+		publications = new HashSet<>();
 	}
 	
 	public ZooProceedings(String note, int number, Publisher publisher, String volume, String isbn,

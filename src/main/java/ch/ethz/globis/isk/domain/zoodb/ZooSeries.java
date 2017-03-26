@@ -1,5 +1,6 @@
 package ch.ethz.globis.isk.domain.zoodb;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.zoodb.api.impl.ZooPC;
@@ -14,7 +15,8 @@ public class ZooSeries extends ZooPC implements Series {
 	Set<Publication> publications;
 	
 	public ZooSeries() {
-		
+		zooActivateWrite();
+		publications = new HashSet<>();
 	}
 	
 	public ZooSeries(String id, String name, Set<Publication> publications) {

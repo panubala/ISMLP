@@ -1,5 +1,6 @@
 package ch.ethz.globis.isk.domain.zoodb;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.zoodb.api.impl.ZooPC;
@@ -13,7 +14,13 @@ public class ZooConference extends ZooPC implements Conference {
 	String name;
 	Set<ConferenceEdition> editions;
 	
-	public ZooConference(String id, String name, Set<ConferenceEdition> editions){
+	public ZooConference() {
+		zooActivateWrite();
+		editions = new HashSet<>();
+	}
+	
+	public ZooConference(String id, String name, Set<ConferenceEdition> editions) {
+		zooActivateWrite();
 		this.id = id;
 		this.name = name;
 		this.editions = editions;
@@ -28,7 +35,6 @@ public class ZooConference extends ZooPC implements Conference {
 	public void setId(String id) {
 		zooActivateWrite();
 		this.id = id;
-
 	}
 
 	public String getName() {
@@ -39,7 +45,6 @@ public class ZooConference extends ZooPC implements Conference {
 	public void setName(String name) {
 		zooActivateWrite();
 		this.name = name;
-
 	}
 
 	public Set<ConferenceEdition> getEditions() {
@@ -50,7 +55,6 @@ public class ZooConference extends ZooPC implements Conference {
 	public void setEditions(Set<ConferenceEdition> editions) {
 		zooActivateWrite();
 		this.editions = editions;
-
 	}
 
 }

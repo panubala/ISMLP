@@ -1,5 +1,6 @@
 package ch.ethz.globis.isk.domain.zoodb;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.zoodb.api.impl.ZooPC;
@@ -15,7 +16,17 @@ public class ZooPublication extends ZooPC implements Publication {
 	int year;
 	String electronicEdition;
 	
+<<<<<<< HEAD
 	public ZooPublication(String id, String title, List<Person> authors, int year, String electronicEdition){
+=======
+	public ZooPublication() {
+		zooActivateWrite();
+		authors = new ArrayList<>();
+	}
+	
+	public ZooPublication(String id, String title, List<Person> authors, int year, String electronicEdition) {
+		zooActivateWrite();
+>>>>>>> origin/master
 		this.id = id;
 		this.title = title;
 		this.authors = authors;
@@ -23,8 +34,11 @@ public class ZooPublication extends ZooPC implements Publication {
 		this.electronicEdition = electronicEdition;
 	}
 	
+<<<<<<< HEAD
 	
 
+=======
+>>>>>>> origin/master
 	public String getId() {
 		zooActivateRead();
 		return id;
@@ -33,7 +47,10 @@ public class ZooPublication extends ZooPC implements Publication {
 	public void setId(String id) {
 		zooActivateWrite();
 		this.id = id;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 	}
 
 	public String getTitle() {
@@ -44,7 +61,10 @@ public class ZooPublication extends ZooPC implements Publication {
 	public void setTitle(String title) {
 		zooActivateWrite();
 		this.title = title;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 	}
 
 	public List<Person> getAuthors() {
@@ -55,7 +75,10 @@ public class ZooPublication extends ZooPC implements Publication {
 	public void setAuthors(List<Person> authors) {
 		zooActivateWrite();
 		this.authors = authors;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 	}
 
 	public int getYear() {
@@ -66,7 +89,10 @@ public class ZooPublication extends ZooPC implements Publication {
 	public void setYear(int year) {
 		zooActivateWrite();
 		this.year = year;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 	}
 
 	public String getElectronicEdition() {
@@ -77,7 +103,10 @@ public class ZooPublication extends ZooPC implements Publication {
 	public void setElectronicEdition(String electronicEdition) {
 		zooActivateWrite();
 		this.electronicEdition = electronicEdition;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 	}
 
 }
