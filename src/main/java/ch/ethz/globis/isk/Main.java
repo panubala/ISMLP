@@ -68,6 +68,11 @@ public class Main  {
     private static ZooInProceedings parseInProceedings(Element element) {
     	ZooInProceedings inProceedings = new ZooInProceedings();
     	
+    	if(element.hasAttribute("key")){
+        	element.getAttribute("key");
+        	inProceedings.setId(element.getAttribute("key"));
+    	}
+    	
 		Node node = element.getFirstChild();
 		while (node != null) {
 			if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -141,6 +146,25 @@ public class Main  {
 		}
 		
 		return proceedings;
+    }
+    
+    public ZooPublication getPublicationById(PersistenceManager pm, String id){
+    	
+    	ZooPublication result;
+    	
+    	Query q = pm.newQuery(ZooPublication.class);
+    	q.setFilter("this.getId() == " + id + "");
+    	Collection c = (Collection) q.execute();
+    	
+    	if(c.isEmpty()){
+    		return null;
+    	}else if (c.size() > 1){
+    		throw new RuntimeException("Non-Unique ID");
+    	}else{
+    		result = (ZooPublication) c.iterator().next();
+    		return result;
+    	}
+    	
     }
     
 }
