@@ -13,8 +13,7 @@ public class ZooConferenceEdition extends ZooPC implements ConferenceEdition {
 	int year;
 	Proceedings proceedings;
 	
-	public ZooConferenceEdition() {
-		
+	public ZooConferenceEdition() {	
 	}
 	
 	public ZooConferenceEdition(String id, Conference conference, int year, Proceedings proceedings) {
@@ -24,7 +23,6 @@ public class ZooConferenceEdition extends ZooPC implements ConferenceEdition {
 		this.year = year;
 		this.proceedings = proceedings;
 	}
-	
 
 	public String getId() {
 		zooActivateRead();
