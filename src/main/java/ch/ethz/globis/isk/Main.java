@@ -25,6 +25,7 @@ public class Main  {
     	
 		try {
 	    	pm.currentTransaction().begin();
+	    	pm.currentTransaction().setRetainValues(true);
 	    	List<ZooPublication> publications = parseXml();
 	    	for (ZooPublication publication : publications)
 	    		pm.makePersistent(publication);
