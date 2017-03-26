@@ -19,8 +19,9 @@ public class GUI extends JFrame{
     }
 	
 	public static void myGuiProgramm(){
-		
-		
+    	//ZooDatabase database = new ZooDatabase("database");
+    	//String filter = "...";
+		//database.getWithFilter(ZooPerson.class, filter);
 		
 		JFrame frame = new MainFrame("Publications");
 		
