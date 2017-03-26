@@ -143,6 +143,7 @@ public class ZooDatabase {
 	            Element child = (Element) node;
 	            Conference conference;
 	            ConferenceEdition conferenceEdition;
+	            Collection<ZooConferenceEdition> zooConferenceEditions;
 	            String value = child.getFirstChild().getNodeValue();
 	            
 				switch(child.getTagName()) {
@@ -170,7 +171,8 @@ public class ZooDatabase {
 				case "year":
 					proceedings.setYear(Integer.valueOf(value));
 					
-					conferenceEdition = getWithFilter(ZooConferenceEdition.class, "proceedings.id == '" + proceedings.getId() + "'");
+					zooConferenceEditions = getWithFilter(ZooConferenceEdition.class, "proceedings.getId() == '" + proceedings.getId() + "'");
+					conferenceEdition = zooConferenceEditions.isEmpty() ? null : zooConferenceEditions.iterator().next();
 					if (conferenceEdition == null) {
 						conferenceEdition = new ZooConferenceEdition();
 						conferenceEdition.setProceedings(proceedings);
@@ -184,7 +186,8 @@ public class ZooDatabase {
 					proceedings.setIsbn(value);
 					break;
 				case "bookTitle":
-					conferenceEdition = getWithFilter(ZooConferenceEdition.class, "proceedings.id == '" + proceedings.getId() + "'");
+					zooConferenceEditions = getWithFilter(ZooConferenceEdition.class, "proceedings.getId() == '" + proceedings.getId() + "'");
+					conferenceEdition = zooConferenceEditions.isEmpty() ? null : zooConferenceEditions.iterator().next();
 					if (conferenceEdition == null) {
 						conferenceEdition = new ZooConferenceEdition();
 						conferenceEdition.setProceedings(proceedings);
@@ -204,7 +207,7 @@ public class ZooDatabase {
     }
     
     public <T extends ZooPC>T getById(Class<T> c, String id) {
-        String filter = "this.getId()=='" + id + "'";
+        String filter = "this.getId() == '" + id + "'";
         Collection<T> collection = getWithFilter(c, filter);
         
         if(collection.isEmpty()){
@@ -227,11 +230,7 @@ public class ZooDatabase {
 //    }
     
     public <T extends ZooPC> Collection<T> getWithFilter(Class<T> c, String filter) {
-		Collection<T> collection = (Collection<T>) pm.newQuery(c, filter).execute();
-		if (collection.isEmpty())
-			return null;
-		else
-			return collection;
+		return (Collection<T>) pm.newQuery(c, filter).execute();
     }
     
     //---------------------- Quick access functions-------------------
