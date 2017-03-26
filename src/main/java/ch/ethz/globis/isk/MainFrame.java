@@ -8,6 +8,9 @@ import java.awt.Insets;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -41,12 +44,12 @@ public class MainFrame extends JFrame{
 		JLabel authorLabel = new JLabel("Authors:");
 		JLabel conferenceLabel = new JLabel("Authors:");
 		
-		JTextField titleTextField = new JTextField();
-		JTextField idTextField = new JTextField();
+		final JTextField titleTextField = new JTextField();
+		final JTextField idTextField = new JTextField();
 		JTextField beginTextField = new JTextField();
 		JTextField endTextField = new JTextField();
-		JTextField authorTextField = new JTextField();
-		JTextField conferenceTextField = new JTextField();
+		final JTextField authorTextField = new JTextField();
+		final JTextField conferenceTextField = new JTextField();
 
 		
 		JPanel pane = new JPanel(new GridBagLayout());
@@ -125,10 +128,23 @@ public class MainFrame extends JFrame{
 		
 		////////////////
 	
-		//Add behaviour
+
+		
+		
+		
 		searchButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				String query = "";
+				
+				//TODO:
+				query = query + titleTextField.getText();
+									
+				
+				
+				//////////////Table/////////
 				JFrame frame = new JFrame("FrameDemo");
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				
@@ -141,7 +157,7 @@ public class MainFrame extends JFrame{
 				
 				//TODO: Here we need to put our own data
 				Object[][] data = {
-					    {"Kathy", "Smith",
+					    {query, "Smith",
 					     "Snowboarding", new Integer(5), new Boolean(false), new Boolean(false)},
 					    {"John", "Doe",
 					     "Rowing", new Integer(3), new Boolean(true), new Boolean(false)},
