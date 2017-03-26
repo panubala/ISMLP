@@ -7,44 +7,61 @@ import ch.ethz.globis.isk.domain.ConferenceEdition;
 import ch.ethz.globis.isk.domain.Proceedings;
 
 public class ZooConferenceEdition extends ZooPC implements ConferenceEdition {
+	
+	String id;
+	Conference conference;
+	int year;
+	Proceedings proceedings;
+	
+	public ZooConferenceEdition(String id, Conference conference, int year, Proceedings proceedings){
+		this.id = id;
+		this.conference = conference;
+		this.year = year;
+		this.proceedings = proceedings;
+	}
+	
 
 	public String getId() {
-		// TODO Auto-generated method stub
-		return null;
+		zooActivateRead();
+		return id;
 	}
 
 	public void setId(String id) {
-		// TODO Auto-generated method stub
+		zooActivateWrite();
+		this.id = id;
 
 	}
 
 	public Conference getConference() {
-		// TODO Auto-generated method stub
-		return null;
+		zooActivateRead();
+		return conference;
 	}
 
 	public void setConference(Conference conference) {
-		// TODO Auto-generated method stub
+		zooActivateWrite();
+		this.conference = conference;
 
 	}
 
 	public int getYear() {
-		// TODO Auto-generated method stub
-		return 0;
+		zooActivateRead();
+		return year;
 	}
 
 	public void setYear(int year) {
-		// TODO Auto-generated method stub
+		zooActivateWrite();
+		this.year = year;
 
 	}
 
 	public Proceedings getProceedings() {
-		// TODO Auto-generated method stub
-		return null;
+		zooActivateRead();
+		return proceedings;
 	}
 
 	public void setProceedings(Proceedings proceedings) {
-		// TODO Auto-generated method stub
+		zooActivateWrite();
+		this.proceedings = proceedings;
 
 	}
 
