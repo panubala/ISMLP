@@ -29,8 +29,9 @@ public class GUI extends JFrame{
         
         frame.setSize(800,500);
        // frame.add(new JLabel("Publication Search"));
- 
         frame.setVisible(true);
-	}
+
+  	}
+
 }
 
