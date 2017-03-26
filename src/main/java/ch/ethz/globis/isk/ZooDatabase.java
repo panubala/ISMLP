@@ -16,6 +16,10 @@ import org.zoodb.api.impl.ZooPC;
 import org.zoodb.jdo.ZooJdoHelper;
 import org.zoodb.tools.ZooHelper;
 
+import ch.ethz.globis.isk.domain.Conference;
+import ch.ethz.globis.isk.domain.ConferenceEdition;
+import ch.ethz.globis.isk.domain.zoodb.ZooConference;
+import ch.ethz.globis.isk.domain.zoodb.ZooConferenceEdition;
 import ch.ethz.globis.isk.domain.zoodb.ZooInProceedings;
 import ch.ethz.globis.isk.domain.zoodb.ZooPerson;
 import ch.ethz.globis.isk.domain.zoodb.ZooProceedings;
@@ -72,18 +76,9 @@ public class ZooDatabase {
 		while (node != null) {
 			if (node.getNodeType() == Node.ELEMENT_NODE) {
 	            Element element = (Element) node;
-	            String id = element.getAttribute("key");
-	            
-	            ZooPublication publication;
 				switch(element.getTagName()) {
-				case "inproceedings":		publication = parseInProceedings(element);	break;
-				case "proceedings":			publication = parseProceedings(element);	break;
-				default:					publication = null;
-				}
-				
-				if (publication != null) {
-					publication.setId(id);
-					publications.add(publication);
+				case "inproceedings":		publications.add(parseInProceedings(element));	break;
+				case "proceedings":			publications.add(parseProceedings(element));	break;
 				}
 	        }
 			node = node.getNextSibling();
@@ -94,23 +89,18 @@ public class ZooDatabase {
     
     ZooInProceedings parseInProceedings(Element element) {
     	ZooInProceedings inProceedings = new ZooInProceedings();
+    	inProceedings.setId(element.getAttribute("key"));
     	
 		Node node = element.getFirstChild();
 		while (node != null) {
 			if (node.getNodeType() == Node.ELEMENT_NODE) {
 	            Element child = (Element) node;
-	            
-	            String id = child.getAttribute("key");
 	            String value = child.getFirstChild().getNodeValue();
 	            
 				switch(child.getTagName()) {
 				case "author":
-					ZooPerson author = getById(ZooPerson.class, id);
-					if (author == null) {
-						author = new ZooPerson();
-						author.setId(id);
-						author.setName(value);
-					}
+					ZooPerson author = new ZooPerson();
+					author.setName(value);
 					author.getAuthoredPublications().add(inProceedings);
 					inProceedings.getAuthors().add(author);
 					break;
@@ -123,6 +113,14 @@ public class ZooDatabase {
 				case "pages":
 					inProceedings.setPages(value);
 					break;
+				case "crossref":
+					ZooProceedings proceedings = getById(ZooProceedings.class, value);
+					if (proceedings == null) {
+						proceedings = new ZooProceedings();
+						proceedings.setId(value);
+					}
+					proceedings.getPublications().add(inProceedings);
+					break;
 				}
 			}
 			node = node.getNextSibling();
@@ -132,24 +130,25 @@ public class ZooDatabase {
     }
     
     ZooProceedings parseProceedings(Element element) {
-    	ZooProceedings proceedings = new ZooProceedings();
+    	String id = element.getAttribute("key");
+		ZooProceedings proceedings = getById(ZooProceedings.class, id);
+		if (proceedings == null) {
+			proceedings = new ZooProceedings();
+			proceedings.setId(id);
+		}
     	
 		Node node = element.getFirstChild();
 		while (node != null) {
 			if (node.getNodeType() == Node.ELEMENT_NODE) {
 	            Element child = (Element) node;
-	            
-	            String id = child.getAttribute("key");
+	            Conference conference;
+	            ConferenceEdition conferenceEdition;
 	            String value = child.getFirstChild().getNodeValue();
 	            
 				switch(child.getTagName()) {
 				case "editor":
-					ZooPerson editor = getById(ZooPerson.class, id);
-					if (editor == null) {
-						editor = new ZooPerson();
-						editor.setId(id);
-						editor.setName(value);
-					}
+					ZooPerson editor = new ZooPerson();
+					editor.setName(value);
 					editor.getEditedPublications().add(proceedings);
 					proceedings.getAuthors().add(editor);
 					break;
@@ -157,30 +156,44 @@ public class ZooDatabase {
 					proceedings.setTitle(value);
 					break;
 				case "publisher":
-					ZooPublisher publisher = getById(ZooPublisher.class, id);
-					if (publisher == null) {
-						publisher = new ZooPublisher();
-						publisher.setId(id);
-						publisher.setName(value);
-					}
+					ZooPublisher publisher = new ZooPublisher();
+					publisher.setName(value);
 					publisher.getPublications().add(proceedings);
 					proceedings.setPublisher(publisher);
 					break;
 				case "series":
-					ZooSeries series = getById(ZooSeries.class, id);
-					if (series == null) {
-						series = new ZooSeries();
-						series.setId(id);
-						series.setName(value);
-					}
+					ZooSeries series = new ZooSeries();
+					series.setName(value);
 					series.getPublications().add(proceedings);
 					proceedings.setSeries(series);
 					break;
 				case "year":
 					proceedings.setYear(Integer.valueOf(value));
+					
+					conferenceEdition = getWithFilter(ZooConferenceEdition.class, "proceedings.id == '" + proceedings.getId() + "'");
+					if (conferenceEdition == null) {
+						conferenceEdition = new ZooConferenceEdition();
+						conferenceEdition.setProceedings(proceedings);
+						conference = new ZooConference();
+						conference.getEditions().add(conferenceEdition);
+						conferenceEdition.setConference(conference);
+					}
+					conferenceEdition.setYear(proceedings.getYear());
 					break;
 				case "isbn":
 					proceedings.setIsbn(value);
+					break;
+				case "bookTitle":
+					conferenceEdition = getWithFilter(ZooConferenceEdition.class, "proceedings.id == '" + proceedings.getId() + "'");
+					if (conferenceEdition == null) {
+						conferenceEdition = new ZooConferenceEdition();
+						conferenceEdition.setProceedings(proceedings);
+						conference = new ZooConference();
+						conferenceEdition.setConference(conference);
+						conference.getEditions().add(conferenceEdition);
+					} else
+						conference = conferenceEdition.getConference();
+					conference.setName(value);
 					break;
 				}
 			}
