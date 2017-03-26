@@ -1,5 +1,6 @@
 package ch.ethz.globis.isk.domain.zoodb;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.zoodb.api.impl.ZooPC;
@@ -9,13 +10,15 @@ import ch.ethz.globis.isk.domain.Publication;
 
 public class ZooPerson extends ZooPC implements Person {
 	
-	private String id;
-	private String name;
-	private Set<Publication> authoredPublications;
-	private Set<Publication> editedPublications;
+	String id;
+	String name;
+	Set<Publication> authoredPublications;
+	Set<Publication> editedPublications;
 	
 	public ZooPerson() {
-		
+		zooActivateWrite();
+		authoredPublications = new HashSet<>();
+		editedPublications = new HashSet<>();
 	}
 	
 	public ZooPerson(String id, String name, Set<Publication> authoredPublications, Set<Publication> editedPublications) {

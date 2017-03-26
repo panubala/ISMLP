@@ -1,5 +1,6 @@
 package ch.ethz.globis.isk.domain.zoodb;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.zoodb.api.impl.ZooPC;
@@ -8,55 +9,75 @@ import ch.ethz.globis.isk.domain.Person;
 import ch.ethz.globis.isk.domain.Publication;
 
 public class ZooPublication extends ZooPC implements Publication {
-
+	
+	String id;
+	String title;
+	List<Person> authors;
+	int year;
+	String electronicEdition;
+	
+	public ZooPublication() {
+		zooActivateWrite();
+		authors = new ArrayList<>();
+	}
+	
+	public ZooPublication(String id, String title, List<Person> authors, int year, String electronicEdition) {
+		zooActivateWrite();
+		this.id = id;
+		this.title = title;
+		this.authors = authors;
+		this.year = year;
+		this.electronicEdition = electronicEdition;
+	}
+	
 	public String getId() {
-		// TODO Auto-generated method stub
-		return null;
+		zooActivateRead();
+		return id;
 	}
 
 	public void setId(String id) {
-		// TODO Auto-generated method stub
-
+		zooActivateWrite();
+		this.id = id;
 	}
 
 	public String getTitle() {
-		// TODO Auto-generated method stub
-		return null;
+		zooActivateRead();
+		return title;
 	}
 
 	public void setTitle(String title) {
-		// TODO Auto-generated method stub
-
+		zooActivateWrite();
+		this.title = title;
 	}
 
 	public List<Person> getAuthors() {
-		// TODO Auto-generated method stub
-		return null;
+		zooActivateRead();
+		return authors;
 	}
 
 	public void setAuthors(List<Person> authors) {
-		// TODO Auto-generated method stub
-
+		zooActivateWrite();
+		this.authors = authors;
 	}
 
 	public int getYear() {
-		// TODO Auto-generated method stub
-		return 0;
+		zooActivateRead();
+		return year;
 	}
 
 	public void setYear(int year) {
-		// TODO Auto-generated method stub
-
+		zooActivateWrite();
+		this.year = year;
 	}
 
 	public String getElectronicEdition() {
-		// TODO Auto-generated method stub
-		return null;
+		zooActivateRead();
+		return electronicEdition;
 	}
 
 	public void setElectronicEdition(String electronicEdition) {
-		// TODO Auto-generated method stub
-
+		zooActivateWrite();
+		this.electronicEdition = electronicEdition;
 	}
 
 }
