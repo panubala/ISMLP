@@ -1,4 +1,4 @@
-package ch.ethz.globis.isk.domain;
+package main.java.ch.ethz.globis.isk.domain;
 
 
 import java.util.Set;

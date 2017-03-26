@@ -1,4 +1,4 @@
-package ch.ethz.globis.isk.domain;
+package main.java.ch.ethz.globis.isk.domain;
 
 /**
  * Represents one edition of a conference. It contains a reference

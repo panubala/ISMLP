@@ -1,4 +1,4 @@
-package ch.ethz.globis.isk.domain;
+package main.java.ch.ethz.globis.isk.domain;
 
 /**
  * A type of article that was published as part of a conference proceedings.
