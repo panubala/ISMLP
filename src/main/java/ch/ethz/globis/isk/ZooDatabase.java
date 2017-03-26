@@ -191,18 +191,63 @@ public class ZooDatabase {
     }
     
     public <T extends ZooPC>T getById(Class<T> c, String id) {
-        String filter = "id=='" + id + "'";
-        return getWithFilter(c, filter);
+        String filter = "this.getId()=='" + id + "'";
+        Collection<T> collection = getWithFilter(c, filter);
+        
+        if(collection.isEmpty()){
+        	return null;
+        }else if(collection.size() > 1){
+        	throw new RuntimeException("Non-unique ID");
+        }else{
+        	return (T) collection.iterator().next();
+        }
     }
     
-    public <T extends ZooPC>T getWithFilter(Class<T> c, String filter) {
+//    public <T extends ZooPC>T getWithFilter(Class<T> c, String filter) {
+//		Collection<T> collection = (Collection<T>) pm.newQuery(c, filter).execute();
+//		if (collection.isEmpty())
+//			return null;
+//		else if (collection.size() > 1)
+//			throw new RuntimeException("Non-unique ID");
+//		else
+//			return (T) collection.iterator().next();
+//    }
+    
+    public <T extends ZooPC> Collection<T> getWithFilter(Class<T> c, String filter) {
 		Collection<T> collection = (Collection<T>) pm.newQuery(c, filter).execute();
 		if (collection.isEmpty())
 			return null;
-		else if (collection.size() > 1)
-			throw new RuntimeException("Non-unique ID");
 		else
-			return (T) collection.iterator().next();
+			return collection;
     }
+    
+    //---------------------- Quick access functions-------------------
+    
+    // 1.) Find publication by id
+    
+    public ZooPublication getPublicationById(String id){
+    	return getById(ZooPublication.class, id);
+    }
+    
+    // TODO: Check if colleciton.toArray(pubsArray) is used correctly
+    // 2.) Find publication by filter (Title, begin-offset, end-offset)
+    public ZooPublication[] getPublicationsByFilter(String title, int beginOffset, int endOffset){
+    	
+    	String filter = "this.getTitle() == '" + title + "'";
+    	Collection<ZooPublication> collection = getWithFilter(ZooPublication.class, filter);
+    	
+    	ZooPublication[] pubsArray = new ZooPublication[collection.size()];
+    	collection.toArray(pubsArray);
+    	
+    	ZooPublication[] subArray = new ZooPublication[endOffset-beginOffset];
+    	
+    	System.arraycopy(pubsArray, beginOffset, subArray, 0, endOffset-beginOffset);
+    	
+    	return subArray;
+    	
+    }
+    
+    // 3.) Find publication by filter ordered by name
+    // 4.) Find co-authors of a person with given name.
 	
 }
