@@ -3,6 +3,7 @@ package ch.ethz.globis.isk;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import org.zoodb.api.impl.ZooPC;
 import org.zoodb.jdo.ZooJdoHelper;
 import org.zoodb.tools.ZooHelper;
 
@@ -25,7 +26,6 @@ import java.util.List;
 public class Main  {
 	
 	static PersistenceManager pm;
-	static final String selectUniqueFrom = "select unique from ch.ethz.globis.isk.domain.zoodb.";
 	
     public static void main(String[] args) {
     	String dbName = "database";
@@ -99,19 +99,15 @@ public class Main  {
 	            Element child = (Element) node;
 	            
 	            String id = child.getAttribute("key");
-	            String filter = "id=='" + id + "'";
 	            String value = child.getFirstChild().getNodeValue();
 	            
 				switch(child.getTagName()) {
 				case "author":
-					Collection<ZooPerson> authors = (Collection<ZooPerson>) pm.newQuery(ZooPerson.class, filter).execute();
-					ZooPerson author;
-					if (authors.isEmpty()) {
+					ZooPerson author = getById(ZooPerson.class, id);
+					if (author == null) {
 						author = new ZooPerson();
 						author.setId(id);
 						author.setName(value);
-					} else {
-						author = authors.iterator().next();
 					}
 					author.getAuthoredPublications().add(inProceedings);
 					inProceedings.getAuthors().add(author);
@@ -142,19 +138,15 @@ public class Main  {
 	            Element child = (Element) node;
 	            
 	            String id = child.getAttribute("key");
-	            String filter = "id=='" + id + "'";
 	            String value = child.getFirstChild().getNodeValue();
 	            
 				switch(child.getTagName()) {
 				case "editor":
-					Collection<ZooPerson> editors = (Collection<ZooPerson>) pm.newQuery(ZooPerson.class, filter).execute();
-					ZooPerson editor;
-					if (editors.isEmpty()) {
+					ZooPerson editor = getById(ZooPerson.class, id);
+					if (editor == null) {
 						editor = new ZooPerson();
 						editor.setId(id);
 						editor.setName(value);
-					} else {
-						editor = editors.iterator().next();
 					}
 					editor.getEditedPublications().add(proceedings);
 					proceedings.getAuthors().add(editor);
@@ -163,27 +155,21 @@ public class Main  {
 					proceedings.setTitle(value);
 					break;
 				case "publisher":
-					Collection<ZooPublisher> publishers = (Collection<ZooPublisher>) pm.newQuery(ZooPublisher.class, filter).execute();
-					ZooPublisher publisher;
-					if (publishers.isEmpty()) {
+					ZooPublisher publisher = getById(ZooPublisher.class, id);
+					if (publisher == null) {
 						publisher = new ZooPublisher();
 						publisher.setId(id);
 						publisher.setName(value);
-					} else {
-						publisher = publishers.iterator().next();
 					}
 					publisher.getPublications().add(proceedings);
 					proceedings.setPublisher(publisher);
 					break;
 				case "series":
-					ZooSeries series = new ZooSeries();
-					Collection<ZooSeries> seriess = (Collection<ZooSeries>) pm.newQuery(ZooSeries.class, filter).execute();
-					if (seriess.isEmpty()) {
+					ZooSeries series = getById(ZooSeries.class, id);
+					if (series == null) {
 						series = new ZooSeries();
 						series.setId(id);
 						series.setName(value);
-					} else {
-						series = (ZooSeries) seriess.iterator().next();
 					}
 					series.getPublications().add(proceedings);
 					proceedings.setSeries(series);
@@ -200,6 +186,17 @@ public class Main  {
 		}
 		
 		return proceedings;
+    }
+    
+    private static <T extends ZooPC>T getById(Class<T> c, String id) {
+        String filter = "id=='" + id + "'";
+		Collection<T> collection = (Collection<T>) pm.newQuery(c, filter).execute();
+		if (collection.isEmpty())
+			return null;
+		else if (collection.size() > 1)
+			throw new RuntimeException("Non-unique ID");
+		else
+			return (T) collection.iterator().next();
     }
     
 }
