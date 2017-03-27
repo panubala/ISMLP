@@ -279,9 +279,11 @@ public class ZooDatabase {
     		resultList.add(publicationList.get(beginOffset));
     		return resultList;
     	}
+
     	// To avoid an error, handle this case separately
     	if(endOffset >= publicationList.size()){
     		return publicationList.subList(beginOffset, publicationList.size());
+
     	}
     	
     	resultList = publicationList.subList(beginOffset, endOffset);
@@ -313,10 +315,35 @@ public class ZooDatabase {
     }
     
     // 5.) Shortest Path between 2 authors
-    // TODO: Implement
-    public List<ZooPerson> getShortestAuthorPath(ZooPerson author1, ZooPerson author2){
+    // TODO: Implement --> Does this work? First 4.) need to be fixed
+    public int getShortestAuthorPath(ZooPerson author1, ZooPerson author2){
     	
-    	return null;
+    	List<ZooPerson> authorList = new ArrayList<>();
+    	List<ZooPerson> tempAuthorList = new ArrayList<>();
+    	tempAuthorList.add(author1);
+    	
+    	Boolean found = false;
+    	int count = 0;
+    	
+    	while(!found){
+    		
+    		
+    		for(ZooPerson author: authorList){
+    			tempAuthorList.addAll(getCoAuthors(author.toString()));
+    		}
+    		authorList.clear();
+    		authorList.addAll(tempAuthorList);
+    		tempAuthorList.clear();
+    		
+    		count++;
+    		for(ZooPerson author: authorList){
+    			if (author == author2){
+    				found = true;
+    			}
+    		}
+    	}
+    	
+    	return count;
     }
     
     // 6.) Compute global average of authors per publication
