@@ -22,6 +22,8 @@ import org.zoodb.tools.ZooHelper;
 
 import ch.ethz.globis.isk.domain.Conference;
 import ch.ethz.globis.isk.domain.ConferenceEdition;
+import ch.ethz.globis.isk.domain.Person;
+import ch.ethz.globis.isk.domain.Publication;
 import ch.ethz.globis.isk.domain.zoodb.ZooConference;
 import ch.ethz.globis.isk.domain.zoodb.ZooConferenceEdition;
 import ch.ethz.globis.isk.domain.zoodb.ZooInProceedings;
@@ -303,33 +305,62 @@ public class ZooDatabase {
     
     // 4.) Find co-authors of a person with given name
     public Collection<ZooPerson> getCoAuthors(String name) {
-    	Collection<ZooPerson> authors = (Collection<ZooPerson>) getWithFilter(ZooPerson.class, "name == '" + name + "'");
+    	Collection<ZooPerson> authors = getWithFilter(ZooPerson.class, "name == '" + name + "'");
     	if (authors.isEmpty())
     		throw new RuntimeException("Author not found.");
-
     	ZooPerson author = authors.iterator().next();
-    	String filter = /*"name != '" + name + "' && */ "authoredPublications.authors.name == '" + name + "'";
-    	return getWithFilter(ZooPerson.class, filter);
+    	return getCoAuthors(author);
     }
     
-    // 5.) Shortest Path between 2 authors
-    // TODO: Implement
-    public List<ZooPerson> getShortestAuthorPath(ZooPerson author1, ZooPerson author2){
+    // 4.) Helper function for 5.)
+    public Collection<ZooPerson> getCoAuthors(ZooPerson author) {
+    	Collection<ZooPerson> coAuthors = new ArrayList<>();
+    	for (Publication publication : author.getAuthoredPublications()) {
+        	for (Person coAuth : publication.getAuthors()) {
+        		ZooPerson coAuthor = (ZooPerson) coAuth;
+    			if (coAuthor.getName() != author.getName()) {
+    				coAuthors.add(coAuthor);
+    			}
+        	}
+    	}
+    	return coAuthors;
+    }
+    
+    // 5.) Shortest Path between two authors
+    public int getShortestAuthorPath(String name1, String name2) {
+    	Collection<ZooPerson> authors = getWithFilter(ZooPerson.class, "name == '" + name1 + "'");
+    	if (authors.isEmpty())
+    		throw new RuntimeException("Author1 not found.");
+    	ZooPerson author1 = authors.iterator().next();
     	
-    	return null;
+    	authors = getWithFilter(ZooPerson.class, "name == '" + name2 + "'");
+    	if (authors.isEmpty())
+    		throw new RuntimeException("Author2 not found.");
+    	ZooPerson author2 = authors.iterator().next();
+    	
+    	return getShortestAuthorPath(author1, author2);
+    }
+    
+    // 5.) Helper function for faster recursion in 5.)
+    private int getShortestAuthorPath(ZooPerson author1, ZooPerson author2) {
+    	Collection<ZooPerson> coAuthors = getCoAuthors(author1.getName());
+    	for (Publication publication : author1.getAuthoredPublications()) {
+    		if (publication.getAuthors().contains(author2))
+    			return 1;
+    		else
+    			return 1 + getShortestAuthorPath(author1, author2);
+    	}
+    	return 1 + getShortestAuthorPath(author1, author2);
+    	
     }
     
     // 6.) Compute global average of authors per publication
-    // TODO: Check if editors count as well
-    // TODO: Check filter.
-    public int globalAverageAuthors(){
-    	
-    	String filter = "setResult(avg(author.size()))";
-    	
-    	int avgNum = (Integer) pm.newQuery(ZooInProceedings.class, filter).execute();
-    	
-    	return avgNum;
+    public float getGlobalAverageAuthors() {
+    	Collection<ZooInProceedings> inProceedings = getWithFilter(ZooInProceedings.class, "");
+    	int count = 0;
+    	for (ZooInProceedings inProceeding : inProceedings)
+    		count += inProceeding.getAuthors().size();
+    	return count / (float) inProceedings.size();
     }
-    
-	
+
 }
