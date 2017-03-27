@@ -6,7 +6,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
@@ -23,7 +25,9 @@ import org.zoodb.tools.ZooHelper;
 
 import ch.ethz.globis.isk.domain.Conference;
 import ch.ethz.globis.isk.domain.ConferenceEdition;
+import ch.ethz.globis.isk.domain.InProceedings;
 import ch.ethz.globis.isk.domain.Person;
+import ch.ethz.globis.isk.domain.Proceedings;
 import ch.ethz.globis.isk.domain.Publication;
 import ch.ethz.globis.isk.domain.zoodb.ZooConference;
 import ch.ethz.globis.isk.domain.zoodb.ZooConferenceEdition;
@@ -409,10 +413,62 @@ public class ZooDatabase {
     }
     
     // 8.) Count the number of publications by conference
-    public int getNumPublicationsByConference(String conferenceName){
+    //TODO
+//    public int getNumPublicationsByConference(String conferenceName){
+//    	
+//    	
+//    	return null;
+//    }
+    
+    // 9.) Count all authors and editors of a conference
+    //TODO
+    public int getNumAuthorsAndEditiorsByConference(String conferenceName){
+    	return 0;
+    }
+    
+    
+    //10.) Retrieve all authors of a given conference
+    //TODO: Implement
+    public List<ZooPerson> getAllAuthorsByConference(Conference conference){
+    	
+//    	List<ZooPerson> authors = (List<ZooPerson>) getWithFilter(ZooPerson.class, "");
+    	
+    	Set<ConferenceEdition> editions = conference.getEditions();
+    	
+    	List<Proceedings> proceedings = new ArrayList<>();
+    	
+    	for(ConferenceEdition edition: editions){
+    		proceedings.add(edition.getProceedings());
+    	}
+    	
+    	List<Proceedings> publications = new ArrayList<>();
+    	
+    	for(Proceedings preceeding:proceedings ){
+//    		publications.addAll(preceeding.getPublications());
+    	}
+    		
     	
     	return 0;
     }
     
+    //11.) Retrieve all publications of a given conference
+    //TODO: Implement
+    
+    public List<ZooProceedings> getAllPublicationsByConference(String conference){
 	
-}
+    	
+    	Collection<ZooProceedings> proceedings = getWithFilter(ZooProceedings.class, "");
+    	
+    	List<ZooProceedings> publications = new ArrayList<>();
+    	
+    	for(ZooProceedings proceeding:proceedings){
+    		if (proceeding.getConferenceEdition().getConference().getName().equals(conference) && !publications.contains(proceeding)){
+    			publications.add(proceeding);
+    		};
+    	}
+    	
+    	return publications;
+    }
+    
+    
+   }

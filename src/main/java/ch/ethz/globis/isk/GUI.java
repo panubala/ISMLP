@@ -81,11 +81,24 @@ public class GUI extends JFrame{
     		// 6.)
     		float avg = database.getGlobalAverageAuthors();
 			System.out.println(avg);
-        	
+        	}
         	
     	} catch (Exception e) {
     		System.out.println(e.getMessage());
     		// TODO: Display error message in UI
+    		
+    		SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                	JFrame frame = new JFrame("Error Message");
+                	PanelErrorMessage panel = new PanelErrorMessage();
+                	frame.add(panel);
+                	frame.pack();
+                	frame.setVisible(true);
+                }
+            });
+    		
+    		
     	}
     	
     	
