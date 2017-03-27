@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.xml.parsers.DocumentBuilder;
@@ -22,6 +23,8 @@ import org.zoodb.tools.ZooHelper;
 
 import ch.ethz.globis.isk.domain.Conference;
 import ch.ethz.globis.isk.domain.ConferenceEdition;
+import ch.ethz.globis.isk.domain.Person;
+import ch.ethz.globis.isk.domain.Publication;
 import ch.ethz.globis.isk.domain.zoodb.ZooConference;
 import ch.ethz.globis.isk.domain.zoodb.ZooConferenceEdition;
 import ch.ethz.globis.isk.domain.zoodb.ZooInProceedings;
@@ -279,9 +282,11 @@ public class ZooDatabase {
     		resultList.add(publicationList.get(beginOffset));
     		return resultList;
     	}
+
     	// To avoid an error, handle this case separately
     	if(endOffset >= publicationList.size()){
     		return publicationList.subList(beginOffset, publicationList.size());
+
     	}
     	
     	resultList = publicationList.subList(beginOffset, endOffset);
@@ -301,36 +306,96 @@ public class ZooDatabase {
     	return getWithFilter(ZooPublication.class, filter);
     }
     
-    // 4.) Find co-authors of a person with given name
-    public Collection<ZooPerson> getCoAuthors(String name) {
-    	Collection<ZooPerson> authors = (Collection<ZooPerson>) getWithFilter(ZooPerson.class, "name == '" + name + "'");
+    // 4.) Find co-authors of a person by name
+    public Collection<ZooPerson> getCoAuthors(String name) throws JDOObjectNotFoundException {
+    	Collection<ZooPerson> authors = getWithFilter(ZooPerson.class, "name == '" + name + "'");
     	if (authors.isEmpty())
-    		throw new RuntimeException("Author not found.");
-
+    		throw new JDOObjectNotFoundException("Author " + name + " not found.");
     	ZooPerson author = authors.iterator().next();
-    	String filter = /*"name != '" + name + "' && */ "authoredPublications.authors.name == '" + name + "'";
-    	return getWithFilter(ZooPerson.class, filter);
+    	return getCoAuthors(author);
     }
     
-    // 5.) Shortest Path between 2 authors
-    // TODO: Implement
-    public List<ZooPerson> getShortestAuthorPath(ZooPerson author1, ZooPerson author2){
-    	
-    	return null;
+    // 4.) Find co-authors of a person
+    private Collection<ZooPerson> getCoAuthors(ZooPerson author) {
+    	Collection<ZooPerson> coAuthors = new ArrayList<>();
+    	for (Publication publication : author.getAuthoredPublications()) {
+        	for (Person coAuth : publication.getAuthors()) {
+        		ZooPerson coAuthor = (ZooPerson) coAuth;
+    			if (coAuthor != author) {
+    				coAuthors.add(coAuthor);
+    			}
+        	}
+    	}
+    	return coAuthors;
     }
+    
+    // 5.) Shortest Path between two authors by name
+    public int getShortestAuthorPath(String name1, String name2) throws JDOObjectNotFoundException {
+    	Collection<ZooPerson> authors = getWithFilter(ZooPerson.class, "name == '" + name1 + "'");
+    	if (authors.isEmpty())
+    		throw new JDOObjectNotFoundException("Author " + name1 + " not found.");
+    	ZooPerson author1 = authors.iterator().next();
+    	
+    	authors = getWithFilter(ZooPerson.class, "name == '" + name2 + "'");
+    	if (authors.isEmpty())
+    		throw new JDOObjectNotFoundException("Author " + name2 + " not found.");
+    	ZooPerson author2 = authors.iterator().next();
+    	
+    	return getShortestAuthorPath(author1, author2);
+    }
+    
+    // 5.) Shortest Path between two authors
+    private int getShortestAuthorPath(ZooPerson author1, ZooPerson author2) throws JDOObjectNotFoundException {
+    	List<ZooPerson> authors = new ArrayList<>();
+    	List<ZooPerson> doneAuthors = new ArrayList<>();
+    	authors.add(author1);
+    	
+    	int shortestPath = 0;
+    	
+    	while (!authors.isEmpty()) {    		
+    		for (ZooPerson author : authors) {
+    			if (author.equals(author2)){
+    				return shortestPath;
+    			}
+    		}
+    		
+    		shortestPath++;
+    		for (int i = 0; i < authors.size(); i++) {
+    			ZooPerson doneAuthor = authors.get(i);
+    			for (ZooPerson author : getCoAuthors(doneAuthor.getName())) {
+    				if (!doneAuthors.contains(author))
+    						authors.add(author);
+    			}
+    			authors.remove(doneAuthor);
+    			doneAuthors.add(doneAuthor);
+    		}
+    	}
+    	
+    	throw new JDOObjectNotFoundException("Author " + author1.getName() + " and author " + author2.getName() + " are not connected.");
+    }
+    
+    // 5.) Helper function for faster recursion in 5.)
+    /*private int getShortestAuthorPath(ZooPerson author1, ZooPerson author2) {
+    	Collection<ZooPerson> coAuthors = getCoAuthors(author1.getName());
+    	for (Publication publication : author1.getAuthoredPublications()) {
+    		if (publication.getAuthors().contains(author2))
+    			return 1;
+    		else
+    			return 1 + getShortestAuthorPath(author1, author2);
+    	}
+    	return 1 + getShortestAuthorPath(author1, author2);
+    	
+    }*/
     
     // 6.) Compute global average of authors per publication
-    // TODO: Check if editors count as well
-    // TODO: Check filter.
-    public int globalAverageAuthors(){
-    	
-    	String filter = "setResult(avg(author.size()))";
-    	
-    	int avgNum = (Integer) pm.newQuery(ZooInProceedings.class, filter).execute();
-    	
-    	return avgNum;
+    public float getGlobalAverageAuthors() {
+    	Collection<ZooInProceedings> inProceedings = getWithFilter(ZooInProceedings.class, "");
+    	int count = 0;
+    	for (ZooInProceedings inProceeding : inProceedings)
+    		count += inProceeding.getAuthors().size();
+    	return count / (float) inProceedings.size();
     }
-    
+
     // 7.) Count the number of publications per year in a given interval of years.
     public Collection<Integer> getPublicationsPerYear(int yearBegin, int yearEnd){
 

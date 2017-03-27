@@ -33,7 +33,7 @@ public class GUI extends JFrame{
     	
     	try {
     		// 1.)
-    		ZooPublication publication = database.getPublicationById("some");
+    		ZooPublication publication = database.getPublicationById("conf/sigplan/BurkeC86");
         	if (publication != null)
     			System.out.println(publication.getTitle());
         	else
@@ -56,12 +56,10 @@ public class GUI extends JFrame{
         		System.out.println("Not found");
     		
     		// 4.)
-//    		Collection<ZooPerson> authors = database.getCoAuthors("Michael G. Burke");
-//        	if (!authors.isEmpty()) {
-//        		for (ZooPerson a : authors)
-//        			System.out.println(a.getName());
-//        	} else
-//        		System.out.println("Not found");
+        	Collection<ZooPerson> authors = database.getCoAuthors("Anita L. Chow");
+        	if (!authors.isEmpty()) {
+        		for (ZooPerson a : authors)
+        			System.out.println(a.getName());
         	
         	// 7.)
         	Collection<Integer> publicationsFromTo = database.getPublicationsPerYear(1980, 1970);
@@ -74,8 +72,16 @@ public class GUI extends JFrame{
         	} else
         		System.out.println("Not found");
         	
+    		// 5.)
+        	int shortestPath = database.getShortestAuthorPath("Andres Rudmik", "Anita L. Chow");
+    		System.out.println("Shortest path: " + shortestPath);
         	
-    	} catch (JDOUserException e) {
+    		// 6.)
+    		float avg = database.getGlobalAverageAuthors();
+			System.out.println(avg);
+        	
+        	
+    	} catch (Exception e) {
     		System.out.println(e.getMessage());
     		// TODO: Display error message in UI
     	}
