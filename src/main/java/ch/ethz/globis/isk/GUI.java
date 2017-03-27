@@ -1,5 +1,6 @@
 package ch.ethz.globis.isk;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -72,15 +73,24 @@ public class GUI extends JFrame{
     	
     	database.close();
 		
-		/*JFrame frame = new MainFrame("Publications");
+//		JFrame frame = new MainFrame("Publications");
+////		
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        
+//        frame.setSize(800,500);
+//       // frame.add(new JLabel("Publication Search"));
+//        frame.setVisible(true);
 		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        frame.setSize(800,500);
-       // frame.add(new JLabel("Publication Search"));
-        frame.setVisible(true);*/
+		SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+//                new MainFrame("Publications").setVisible(true);
+            	JFrame frame = new MainFrame("Publications");
+            	frame.setSize(580,560);
+            	frame.setVisible(true);
+            	
+            }
+        });
 
-  	}
-
-}
+}}
 
