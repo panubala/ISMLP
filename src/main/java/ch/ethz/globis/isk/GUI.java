@@ -56,7 +56,7 @@ public class GUI extends JFrame{
         		System.out.println("Not found");
     		
     		// 4.)
-        	Collection<ZooPerson> authors = database.getCoAuthors("Jon Mauney");
+        	Collection<ZooPerson> authors = database.getCoAuthors("Anita L. Chow");
         	if (!authors.isEmpty()) {
         		for (ZooPerson a : authors)
         			System.out.println(a.getName());
@@ -64,15 +64,15 @@ public class GUI extends JFrame{
         		System.out.println("Not found");
         	
     		// 5.)
-        	int shortestPath = database.getShortestAuthorPath("Jon Mauney", "Charles N. Fischer");
-    		System.out.println(shortestPath);
+        	int shortestPath = database.getShortestAuthorPath("Andres Rudmik", "Anita L. Chow");
+    		System.out.println("Shortest path: " + shortestPath);
         	
     		// 6.)
     		float avg = database.getGlobalAverageAuthors();
 			System.out.println(avg);
         	
         	
-    	} catch (JDOUserException e) {
+    	} catch (Exception e) {
     		System.out.println(e.getMessage());
     		// TODO: Display error message in UI
     	}
