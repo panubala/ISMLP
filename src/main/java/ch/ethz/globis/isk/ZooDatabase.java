@@ -331,5 +331,23 @@ public class ZooDatabase {
     	return avgNum;
     }
     
+    // 7.) Count the number of publications per year in a given interval of years.
+    public Collection<Integer> getPublicationsPerYear(int yearBegin, int yearEnd){
+
+    	List<Integer> list = new ArrayList<Integer>();
+    	
+    	for(int i = yearBegin; i <= yearEnd; i++){
+    		list.add(getWithFilter(ZooPublication.class, "this.year == " + i).size());
+    	}
+    	
+    	return list;
+    }
+    
+    // 8.) Count the number of publications by conference
+    public int getNumPublicationsByConference(String conferenceName){
+    	
+    	return null;
+    }
+    
 	
 }

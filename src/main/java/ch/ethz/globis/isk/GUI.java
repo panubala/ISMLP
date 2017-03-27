@@ -56,10 +56,21 @@ public class GUI extends JFrame{
         		System.out.println("Not found");
     		
     		// 4.)
-    		Collection<ZooPerson> authors = database.getCoAuthors("Michael G. Burke");
-        	if (!authors.isEmpty()) {
-        		for (ZooPerson a : authors)
-        			System.out.println(a.getName());
+//    		Collection<ZooPerson> authors = database.getCoAuthors("Michael G. Burke");
+//        	if (!authors.isEmpty()) {
+//        		for (ZooPerson a : authors)
+//        			System.out.println(a.getName());
+//        	} else
+//        		System.out.println("Not found");
+        	
+        	// 7.)
+        	Collection<Integer> publicationsFromTo = database.getPublicationsPerYear(1980, 1970);
+        	if(!publicationsFromTo.isEmpty()){
+        		int currYear = 1980;
+        		for(Integer i: publicationsFromTo){
+        			System.out.println(currYear + ": " + i.toString());
+        			currYear++;
+        		}
         	} else
         		System.out.println("Not found");
         	
