@@ -85,7 +85,6 @@ public class GUI extends JFrame{
         	
     	} catch (Exception e) {
     		System.out.println(e.getMessage());
-    		// TODO: Display error message in UI
     		
     		SwingUtilities.invokeLater(new Runnable() {
                 @Override
