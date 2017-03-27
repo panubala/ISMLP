@@ -1,5 +1,6 @@
 package ch.ethz.globis.isk.domain.zoodb;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -56,7 +57,7 @@ public class ZooPerson extends ZooPC implements Person {
 	@Override
 	public Set<Publication> getAuthoredPublications() {
 		zooActivateRead();
-		return authoredPublications;
+		return Collections.unmodifiableSet(authoredPublications);
 	}
 
 	@Override
@@ -66,15 +67,27 @@ public class ZooPerson extends ZooPC implements Person {
 	}
 
 	@Override
+	public void addAuthoredPublication(Publication publication) {
+		zooActivateWrite();
+		authoredPublications.add(publication);
+	}
+
+	@Override
 	public Set<Publication> getEditedPublications() {
 		zooActivateRead();
-		return editedPublications;
+		return Collections.unmodifiableSet(editedPublications);
 	}
 
 	@Override
 	public void setEditedPublications(Set<Publication> editedPublications) {
 		zooActivateWrite();
 		this.editedPublications = editedPublications;
+	}
+
+	@Override
+	public void addEditedPublication(Publication publication) {
+		zooActivateWrite();
+		editedPublications.add(publication);
 	}
 
 }

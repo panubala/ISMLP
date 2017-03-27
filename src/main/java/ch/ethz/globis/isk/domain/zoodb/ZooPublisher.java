@@ -1,5 +1,6 @@
 package ch.ethz.globis.isk.domain.zoodb;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -52,13 +53,19 @@ public class ZooPublisher extends ZooPC implements Publisher {
 	@Override
 	public Set<Publication> getPublications() {
 		zooActivateRead();
-		return publications;
+		return Collections.unmodifiableSet(publications);
 	}
 
 	@Override
 	public void setPublications(Set<Publication> publications) {
 		zooActivateWrite();
 		this.publications = publications;
+	}
+	
+	@Override
+	public void addPublication(Publication publication) {
+		zooActivateWrite();
+		publications.add(publication);
 	}
 
 }

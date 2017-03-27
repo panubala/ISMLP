@@ -36,17 +36,18 @@ public class ZooDatabase {
 	String name;
 	PersistenceManager pm;
 	
-	public ZooDatabase(String name) {
+	public ZooDatabase(String name, boolean overwrite) {
+        this.name = name;
         if (ZooHelper.dbExists(name)) {
+        	if (!overwrite)
+        		return;
             ZooHelper.removeDb(name);
         }
-        this.name = name;
         ZooHelper.createDb(name);
     	pm = ZooJdoHelper.openDB(name);
     	
 		try {
 	    	pm.currentTransaction().begin();
-	    	pm.currentTransaction().setNontransactionalRead(true);
 	    	pm.currentTransaction().setRetainValues(true);
 	    	List<ZooPublication> publications = parseXml();
 	    	for (ZooPublication publication : publications)
@@ -104,8 +105,8 @@ public class ZooDatabase {
 				case "author":
 					ZooPerson author = new ZooPerson();
 					author.setName(value);
-					author.getAuthoredPublications().add(inProceedings);
-					inProceedings.getAuthors().add(author);
+					author.addAuthoredPublication(inProceedings);
+					inProceedings.addAuthor(author);
 					break;
 				case "title":
 					inProceedings.setTitle(value);
@@ -122,7 +123,7 @@ public class ZooDatabase {
 						proceedings = new ZooProceedings();
 						proceedings.setId(value);
 					}
-					proceedings.getPublications().add(inProceedings);
+					proceedings.addPublication(inProceedings);
 					break;
 				}
 			}
@@ -153,8 +154,8 @@ public class ZooDatabase {
 				case "editor":
 					ZooPerson editor = new ZooPerson();
 					editor.setName(value);
-					editor.getEditedPublications().add(proceedings);
-					proceedings.getAuthors().add(editor);
+					editor.addEditedPublication(proceedings);
+					proceedings.addAuthor(editor);
 					break;
 				case "title":
 					proceedings.setTitle(value);
@@ -162,25 +163,25 @@ public class ZooDatabase {
 				case "publisher":
 					ZooPublisher publisher = new ZooPublisher();
 					publisher.setName(value);
-					publisher.getPublications().add(proceedings);
+					publisher.addPublication(proceedings);
 					proceedings.setPublisher(publisher);
 					break;
 				case "series":
 					ZooSeries series = new ZooSeries();
 					series.setName(value);
-					series.getPublications().add(proceedings);
+					series.addPublication(proceedings);
 					proceedings.setSeries(series);
 					break;
 				case "year":
 					proceedings.setYear(Integer.valueOf(value));
 					
-					zooConferenceEditions = getWithFilter(ZooConferenceEdition.class, "proceedings.getId() == '" + proceedings.getId() + "'");
+					zooConferenceEditions = getWithFilter(ZooConferenceEdition.class, "proceedings.id == '" + proceedings.getId() + "'");
 					conferenceEdition = zooConferenceEditions.isEmpty() ? null : zooConferenceEditions.iterator().next();
 					if (conferenceEdition == null) {
 						conferenceEdition = new ZooConferenceEdition();
 						conferenceEdition.setProceedings(proceedings);
 						conference = new ZooConference();
-						conference.getEditions().add(conferenceEdition);
+						conference.addEdition(conferenceEdition);
 						conferenceEdition.setConference(conference);
 					}
 					conferenceEdition.setYear(proceedings.getYear());
@@ -189,14 +190,14 @@ public class ZooDatabase {
 					proceedings.setIsbn(value);
 					break;
 				case "bookTitle":
-					zooConferenceEditions = getWithFilter(ZooConferenceEdition.class, "proceedings.getId() == '" + proceedings.getId() + "'");
+					zooConferenceEditions = getWithFilter(ZooConferenceEdition.class, "proceedings.id == '" + proceedings.getId() + "'");
 					conferenceEdition = zooConferenceEditions.isEmpty() ? null : zooConferenceEditions.iterator().next();
 					if (conferenceEdition == null) {
 						conferenceEdition = new ZooConferenceEdition();
 						conferenceEdition.setProceedings(proceedings);
 						conference = new ZooConference();
 						conferenceEdition.setConference(conference);
-						conference.getEditions().add(conferenceEdition);
+						conference.addEdition(conferenceEdition);
 					} else
 						conference = conferenceEdition.getConference();
 					conference.setName(value);
@@ -209,10 +210,24 @@ public class ZooDatabase {
 		return proceedings;
     }
     
+    public void open() {
+        pm = ZooJdoHelper.openDB(name);
+    	pm.currentTransaction().begin();
+    	pm.currentTransaction().setRetainValues(true);
+    }
+    
+    public void close() {
+    	pm.currentTransaction().commit();
+    	if (pm.currentTransaction().isActive()) {
+	        pm.currentTransaction().rollback();
+	    }
+		pm.close();
+		pm.getPersistenceManagerFactory().close();
+    }
+    
     public <T extends ZooPC>T getById(Class<T> c, String id) {
-        String filter = "this.getId() == '" + id + "'";
+        String filter = "id == '" + id + "'";
         Collection<T> collection = getWithFilter(c, filter);
-        
         if(collection.isEmpty()){
         	return null;
         }else if(collection.size() > 1){
@@ -223,7 +238,9 @@ public class ZooDatabase {
     }
     
     public <T extends ZooPC> Collection<T> getWithFilter(Class<T> c, String filter) {
-		return (Collection<T>) pm.newQuery(c, filter).execute();
+    	assert !pm.isClosed() && pm.currentTransaction().isActive();
+		Collection<T> collection = (Collection<T>) pm.newQuery(c, filter).execute();
+		return collection;
     }
     
     //---------------------- Quick access functions-------------------

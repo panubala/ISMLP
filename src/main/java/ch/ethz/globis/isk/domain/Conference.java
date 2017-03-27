@@ -16,4 +16,6 @@ public interface Conference extends DomainObject {
 
     public void setEditions(Set<ConferenceEdition> editions);
     
+    public void addEdition(ConferenceEdition edition);
+    
 }

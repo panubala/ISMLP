@@ -16,4 +16,6 @@ public interface Publisher extends DomainObject {
 
     public void setPublications(Set<Publication> publications);
     
+    public void addPublication(Publication publications);
+    
 }

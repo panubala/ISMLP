@@ -15,9 +15,13 @@ public interface Person extends DomainObject {
     public Set<Publication> getAuthoredPublications();
 
     public void setAuthoredPublications(Set<Publication> authoredPublications);
+    
+    public void addAuthoredPublication(Publication publication);
 
     public Set<Publication> getEditedPublications();
 
     public void setEditedPublications(Set<Publication> editedPublications);
+    
+    public void addEditedPublication(Publication publication);
 
 }

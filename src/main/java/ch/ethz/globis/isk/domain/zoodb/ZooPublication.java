@@ -1,6 +1,7 @@
 package ch.ethz.globis.isk.domain.zoodb;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.zoodb.api.impl.ZooPC;
@@ -31,60 +32,72 @@ public class ZooPublication extends ZooPC implements Publication {
 		this.electronicEdition = electronicEdition;
 	}
 	
-
+	@Override
 	public String getId() {
 		zooActivateRead();
 		return id;
 	}
 
+	@Override
 	public void setId(String id) {
 		zooActivateWrite();
 		this.id = id;
 
 	}
 
+	@Override
 	public String getTitle() {
 		zooActivateRead();
 		return title;
 	}
 
+	@Override
 	public void setTitle(String title) {
 		zooActivateWrite();
 		this.title = title;
 
 	}
 
+	@Override
 	public List<Person> getAuthors() {
 		zooActivateRead();
-		return authors;
+		return Collections.unmodifiableList(authors);
 	}
 
+	@Override
+	public void addAuthor(Person author) {
+		zooActivateRead();
+		authors.add(author);
+	}
+
+	@Override
 	public void setAuthors(List<Person> authors) {
 		zooActivateWrite();
 		this.authors = authors;
-
 	}
 
+	@Override
 	public int getYear() {
 		zooActivateRead();
 		return year;
 	}
 
+	@Override
 	public void setYear(int year) {
 		zooActivateWrite();
 		this.year = year;
-
 	}
 
+	@Override
 	public String getElectronicEdition() {
 		zooActivateRead();
 		return electronicEdition;
 	}
 
+	@Override
 	public void setElectronicEdition(String electronicEdition) {
 		zooActivateWrite();
 		this.electronicEdition = electronicEdition;
-
 	}
 
 }

@@ -41,5 +41,7 @@ public interface Proceedings extends Publication {
     public Set<InProceedings> getPublications();
 
     public void setPublications(Set<InProceedings> publications);
+    
+    public void addPublication(InProceedings publication);
 
 }

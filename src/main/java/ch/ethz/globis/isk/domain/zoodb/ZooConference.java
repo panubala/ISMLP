@@ -1,5 +1,6 @@
 package ch.ethz.globis.isk.domain.zoodb;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,35 +27,46 @@ public class ZooConference extends ZooPC implements Conference {
 		this.editions = editions;
 	}
 	
-	
+	@Override
 	public String getId() {
 		zooActivateRead();
 		return id;
 	}
 
+	@Override
 	public void setId(String id) {
 		zooActivateWrite();
 		this.id = id;
 	}
 
+	@Override
 	public String getName() {
 		zooActivateRead();
 		return name;
 	}
 
+	@Override
 	public void setName(String name) {
 		zooActivateWrite();
 		this.name = name;
 	}
 
+	@Override
 	public Set<ConferenceEdition> getEditions() {
 		zooActivateRead();
-		return editions;
+		return Collections.unmodifiableSet(editions);
 	}
 
+	@Override
 	public void setEditions(Set<ConferenceEdition> editions) {
 		zooActivateWrite();
 		this.editions = editions;
+	}
+
+	@Override
+	public void addEdition(ConferenceEdition edition) {
+		zooActivateWrite();
+		editions.add(edition);
 	}
 
 }

@@ -15,6 +15,8 @@ public interface Publication extends DomainObject {
     public List<Person> getAuthors();
 
     public void setAuthors(List<Person> authors);
+    
+    public void addAuthor(Person author);
 
     public int getYear();
 

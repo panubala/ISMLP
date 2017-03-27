@@ -1,6 +1,7 @@
 package ch.ethz.globis.isk;
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.util.Collection;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,6 +12,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.*;
 
+import ch.ethz.globis.isk.domain.zoodb.ZooPerson;
+import ch.ethz.globis.isk.domain.zoodb.ZooProceedings;
+
 public class GUI extends JFrame{
 	public static void main(String[] args)
     {
@@ -19,9 +23,14 @@ public class GUI extends JFrame{
     }
 	
 	public static void myGuiProgramm(){
-    	//ZooDatabase database = new ZooDatabase("database");
-    	//String filter = "...";
-		//database.getWithFilter(ZooPerson.class, filter);
+    	ZooDatabase database = new ZooDatabase("database", true);
+    	database.open();
+    	Collection<ZooPerson> persons = database.getWithFilter(ZooPerson.class, "name.startsWith('Michael G. Burke')");
+    	if (!persons.isEmpty()) {
+    		System.out.println("found");
+    	} else
+    		System.out.println("not found");
+    	database.close();
 		
 		JFrame frame = new MainFrame("Publications");
 		

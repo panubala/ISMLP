@@ -17,4 +17,6 @@ public interface Series extends DomainObject {
 
     public void setPublications(Set<Publication> publications);
     
+    public void addPublication(Publication publication);
+    
 }
