@@ -60,11 +60,13 @@ public class GUI extends JFrame{
         	if (!authors.isEmpty()) {
         		for (ZooPerson a : authors)
         			System.out.println(a.getName());
+        	} else
+        		System.out.println("Not found");
         	
         	// 7.)
-        	Collection<Integer> publicationsFromTo = database.getPublicationsPerYear(1980, 1970);
+        	Collection<Integer> publicationsFromTo = database.getPublicationsPerYear(1970, 1975);
         	if(!publicationsFromTo.isEmpty()){
-        		int currYear = 1980;
+        		int currYear = 1970;
         		for(Integer i: publicationsFromTo){
         			System.out.println(currYear + ": " + i.toString());
         			currYear++;

@@ -411,7 +411,7 @@ public class ZooDatabase {
     // 8.) Count the number of publications by conference
     public int getNumPublicationsByConference(String conferenceName){
     	
-    	return null;
+    	return 0;
     }
     
 	
