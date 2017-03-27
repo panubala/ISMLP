@@ -9,6 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -238,99 +239,77 @@ public class ZooDatabase {
     }
     
     public <T extends ZooPC> Collection<T> getWithFilter(Class<T> c, String filter) {
+		return getWithFilter(c, filter, null);
+    }
+    
+    public <T extends ZooPC> Collection<T> getWithFilter(Class<T> c, String filter, String variables) {
     	assert !pm.isClosed() && pm.currentTransaction().isActive();
-		Collection<T> collection = (Collection<T>) pm.newQuery(c, filter).execute();
+		Query query = pm.newQuery(c, filter);
+		if (variables != null)
+			query.declareVariables(variables);
+		Collection<T> collection = (Collection<T>) query.execute();
 		return collection;
     }
     
-    //---------------------- Quick access functions-------------------
+    //---------------------- Quick access functions -------------------
     
     // 1.) Find publication by id
-    
     public ZooPublication getPublicationById(String id){
     	return getById(ZooPublication.class, id);
     }
     
-    // 2.) Find publication by filter (Title, begin-offset, end-offset)
-    // TODO: Check if colleciton.toArray(pubsArray) is used correctly
-    // TODO: Check if this behaves correctly (e.g. return empty string if beginOffset > List.length())
-    public List<ZooPublication> getPublicationsByFilter(String title, int beginOffset, int endOffset){
-    	
-    	String filter = "this.getTitle() == '" + title + "'";
+    /*// Helper function for 2.) and 3.)
+    private Collection<ZooPublication> getPublicationsWithFilter(String filter, int beginOffset, int endOffset) {
     	Collection<ZooPublication> collection = getWithFilter(ZooPublication.class, filter);
-    	
-    	// NEW IMPLEMENTATION
     	
     	List<ZooPublication> publicationList = new ArrayList<ZooPublication>(collection);
     	List<ZooPublication> resultList      = new ArrayList<ZooPublication>();
     	
     	
-    	// Asssume the input should be the other way around
+    	// Assume the input should be the other way around
     	if(beginOffset > endOffset){
-    		return getPublicationsByFilter(title, endOffset, beginOffset);
+    		return getPublicationsWithFilter(filter, endOffset, beginOffset);
     	}
     	// If the list is shorter than the Offset, return an empty list
-    	if(beginOffset > publicationList.size()){
+    	if(beginOffset >= publicationList.size()){
     		return resultList;
     	}
-    	// Handle seperately because subList() would return an empty list
+    	// Handle separately because subList() would return an empty list
     	if(beginOffset == endOffset){
     		resultList.add(publicationList.get(beginOffset));
     		return resultList;
     	}
-    	// To avoid an error, Handle this case seperately
-    	if(endOffset > publicationList.size()){
-    		resultList = publicationList.subList(beginOffset, publicationList.size());
+    	// To avoid an error, handle this case separately
+    	if(endOffset >= publicationList.size()){
+    		return publicationList.subList(beginOffset, publicationList.size());
     	}
     	
     	resultList = publicationList.subList(beginOffset, endOffset);
     	
-    	return resultList;
-    	
-    	// OLD IMPLEMENTATION
-//    	ZooPublication[] pubsArray = new ZooPublication[collection.size()];
-//    	collection.toArray(pubsArray);
-//    	
-//    	ZooPublication[] subArray = new ZooPublication[endOffset-beginOffset];
-//    	
-//    	System.arraycopy(pubsArray, beginOffset, subArray, 0, endOffset-beginOffset);
-//    	
-//    	return subArray;
-    	
+    	return collection;
+    }*/
+    
+    // 2.) Find publication by filter (title, begin-offset, end-offset)
+    public Collection<ZooPublication> getPublicationsByTitle(String title, int beginOffset, int endOffset) {
+    	String filter = "title.contains('" + title + "') range " + beginOffset + ", " + endOffset;
+    	return getWithFilter(ZooPublication.class, filter);
     }
     
     // 3.) Find publication by filter ordered by name
-    // TODO: Check if we need to offset first and then sort (this function) or the other way around.
-    // TODO: Check if the returned list actually is the sorted List or just the original  list.
-    public List<ZooPublication> getPublicationsByFilterOrdered(String title, int beginOffset, int endOffset){
-    	
-    	List<ZooPublication> pubList = getPublicationsByFilter(title, beginOffset, endOffset);
-    	
-    	Comparator<ZooPublication> compTitles = new Comparator<ZooPublication>(){
-    		public int compare(ZooPublication z1, ZooPublication z2){
-    			return z1.getTitle().compareTo(z2.getTitle());
-    		}
-    	};
-    	
-    	Collections.sort(pubList, compTitles);
-    	
-    	return pubList;
+    public Collection<ZooPublication> getPublicationsByTitleOrdered(String title, int beginOffset, int endOffset) {
+    	String filter = "title.contains('" + title + "') order by title asc range " + beginOffset + ", " + endOffset;
+    	return getWithFilter(ZooPublication.class, filter);
     }
     
-    // TODO: Fix filter string. Might not work
-    // TODO: Check if editors count as well
     // 4.) Find co-authors of a person with given name
-    public List<ZooPerson> getCoAuthors(ZooPerson author){
-    	
-    	String AuthorId = author.getId();
-    	
-    	// TODO: Fix this filter
-    	String filter = "this.getAuthoredPublications().getAuthors().contains('" + author.getName() + "'";
-    	Collection <ZooPerson> collection = getWithFilter(ZooPerson.class, filter);
-    	
-    	List<ZooPerson> resultList = new ArrayList<ZooPerson>(collection);
-    	
-    	return resultList;
+    public Collection<ZooPerson> getCoAuthors(String name) {
+    	Collection<ZooPerson> authors = (Collection<ZooPerson>) getWithFilter(ZooPerson.class, "name == '" + name + "'");
+    	if (authors.isEmpty())
+    		throw new RuntimeException("Author not found.");
+
+    	ZooPerson author = authors.iterator().next();
+    	String filter = /*"name != '" + name + "' && */ "authoredPublications.authors.name == '" + name + "'";
+    	return getWithFilter(ZooPerson.class, filter);
     }
     
     // 5.) Shortest Path between 2 authors
@@ -345,7 +324,7 @@ public class ZooDatabase {
     // TODO: Check filter.
     public int globalAverageAuthors(){
     	
-    	String filter = "avg(getAuthors().size())";
+    	String filter = "setResult(avg(author.size()))";
     	
     	int avgNum = (Integer) pm.newQuery(ZooInProceedings.class, filter).execute();
     	
