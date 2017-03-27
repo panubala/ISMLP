@@ -448,7 +448,7 @@ public class ZooDatabase {
     	}
     		
     	
-    	return 0;
+    	return null;
     }
     
     //11.) Retrieve all publications of a given conference
@@ -470,5 +470,44 @@ public class ZooDatabase {
     	return publications;
     }
     
+    //12.) Retrieve a list of persons which were at the same time author in an InProceedings and editor in the appropriate Proceedings.
+    //TODO
+    public List<ZooPerson> getAllPersonByAuthorInPreAndEditorInPre(String name){
+    	
+    	Collection<ZooPerson> authors = getWithFilter(ZooPerson.class, "name == '" + name + "'");
+    	Set<Publication> authoredPublications = new HashSet<Publication>();
+    	Set<Publication> editedPublications = new HashSet<Publication>();
+    	
+    	for(ZooPerson author: authors){
+    		authoredPublications.addAll(author.getAuthoredPublications());
+    		editedPublications.addAll(author.getEditedPublications());
+    	}
+    	
+    	Collection<ZooInProceedings> inPreceedings = getWithFilter(ZooInProceedings.class, "");
+    	
+    	for(ZooInProceedings inPreceeding: inPreceedings){
+    		inPreceeding.getProceedings().getPublications();
+    	}
+    	return null;
+    }
     
-   }
+    //13.) List of all publications where a given author appears as the last author.
+    public List<ZooPublication> getAllPublicationsByLastAuthor(String name){
+    	Collection<ZooPublication> publications = getWithFilter(ZooPublication.class, "");
+    	
+    	List<Person> authors = new ArrayList<>();
+    	List<ZooPublication> publicationsList = new ArrayList<>();
+    	
+    	for(ZooPublication publication: publications){
+    		authors.addAll(publication.getAuthors());
+    		
+    		if (authors.get(authors.size() - 1).getName().equals(name)){
+    			publicationsList.add(publication);
+    		}
+    		
+    		authors.clear();
+    	}
+    	
+    	return publicationsList;
+    }
+ }

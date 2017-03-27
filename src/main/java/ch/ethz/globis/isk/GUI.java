@@ -83,7 +83,7 @@ public class GUI extends JFrame{
 			System.out.println(avg);
         	}
         	
-    	} catch (Exception e) {
+    	 catch (Exception e) {
     		System.out.println(e.getMessage());
     		
     		SwingUtilities.invokeLater(new Runnable() {
