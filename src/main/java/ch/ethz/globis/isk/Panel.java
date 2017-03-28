@@ -71,6 +71,7 @@ public class Panel extends javax.swing.JPanel {
         jButton16 = new javax.swing.JButton();
         jButton17 = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
+        jButton20 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(97, 212, 195));
         setForeground(new java.awt.Color(255, 255, 255));
@@ -228,9 +229,19 @@ public class Panel extends javax.swing.JPanel {
 
         jButton5.setText("Search Edition");
         add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 230, -1));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("Search InProceeding");
         add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 230, -1));
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("Search Proceeding");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -242,6 +253,11 @@ public class Panel extends javax.swing.JPanel {
 
         jButton8.setText("Search Author");
         add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 230, -1));
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jButton10.setText("Search Publisher");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
@@ -296,6 +312,8 @@ public class Panel extends javax.swing.JPanel {
             }
         });
         add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 450, 230, -1));
+        
+      
     }// </editor-fold>                        
 
     private void jTextField16MouseClicked(java.awt.event.MouseEvent evt) {
@@ -319,7 +337,34 @@ public class Panel extends javax.swing.JPanel {
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-    }                                           
+    }    
+    
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {     
+    	Pair<Object[][], String[]> objectsAndTitle = null;
+		ZooDatabase db = new ZooDatabase("database", false);
+		try {
+			db.open();
+			Collection<ZooPerson> collection = db.getWithFilter(ZooPerson.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    		final String error = e.getMessage();
+    		SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                	JFrame frame = new JFrame(error);
+                	PanelErrorMessage panel = new PanelErrorMessage();
+                	frame.add(panel);
+                	frame.pack();
+                	frame.setVisible(true);
+                }
+            });
+		} finally {
+			db.close();
+		}
+    }  
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
@@ -351,13 +396,112 @@ public class Panel extends javax.swing.JPanel {
 			db.close();
 		}
     }                                       
-
+    
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {     
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ZooDatabase db = new ZooDatabase("database", false);
+		try {
+			db.open();
+			Collection<ZooConferenceEdition> collection = db.getWithFilter(ZooConferenceEdition.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    		final String error = e.getMessage();
+    		SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                	JFrame frame = new JFrame(error);
+                	PanelErrorMessage panel = new PanelErrorMessage();
+                	frame.add(panel);
+                	frame.pack();
+                	frame.setVisible(true);
+                }
+            });
+		} finally {
+			db.close();
+		}
+    }
+    
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {     
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ZooDatabase db = new ZooDatabase("database", false);
+		try {
+			db.open();
+			Collection<ZooInProceedings> collection = db.getWithFilter(ZooInProceedings.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    		final String error = e.getMessage();
+    		SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                	JFrame frame = new JFrame(error);
+                	PanelErrorMessage panel = new PanelErrorMessage();
+                	frame.add(panel);
+                	frame.pack();
+                	frame.setVisible(true);
+                }
+            });
+		} finally {
+			db.close();
+		}
+    }
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
+    	Pair<Object[][], String[]> objectsAndTitle = null;
+		ZooDatabase db = new ZooDatabase("database", false);
+		try {
+			db.open();
+			Collection<ZooSeries> collection = db.getWithFilter(ZooSeries.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    		final String error = e.getMessage();
+    		SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                	JFrame frame = new JFrame(error);
+                	PanelErrorMessage panel = new PanelErrorMessage();
+                	frame.add(panel);
+                	frame.pack();
+                	frame.setVisible(true);
+                }
+            });
+		} finally {
+			db.close();
+		}
     }                                         
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+    	Pair<Object[][], String[]> objectsAndTitle = null;
+		ZooDatabase db = new ZooDatabase("database", false);
+		try {
+			db.open();
+			Collection<ZooProceedings> collection = db.getWithFilter(ZooProceedings.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    		final String error = e.getMessage();
+    		SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                	JFrame frame = new JFrame(error);
+                	PanelErrorMessage panel = new PanelErrorMessage();
+                	frame.add(panel);
+                	frame.pack();
+                	frame.setVisible(true);
+                }
+            });
+		} finally {
+			db.close();
+		}
     }                                        
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -365,7 +509,30 @@ public class Panel extends javax.swing.JPanel {
     }                                        
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
+    	Pair<Object[][], String[]> objectsAndTitle = null;
+		ZooDatabase db = new ZooDatabase("database", false);
+		try {
+			db.open();
+			Collection<ZooPublication> collection = db.getWithFilter(ZooPublication.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    		final String error = e.getMessage();
+    		SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                	JFrame frame = new JFrame(error);
+                	PanelErrorMessage panel = new PanelErrorMessage();
+                	frame.add(panel);
+                	frame.pack();
+                	frame.setVisible(true);
+                }
+            });
+		} finally {
+			db.close();
+		}
     }                                         
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {                                          
@@ -404,7 +571,31 @@ public class Panel extends javax.swing.JPanel {
     }                                         
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
+    	Pair<Object[][], String[]> objectsAndTitle = null;
+		ZooDatabase db = new ZooDatabase("database", false);
+		try {
+			db.open();
+			Collection<ZooPerson> collection = db.getCoAuthors(jTextField6.getText());
+			
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    		final String error = e.getMessage();
+    		SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                	JFrame frame = new JFrame(error);
+                	PanelErrorMessage panel = new PanelErrorMessage();
+                	frame.add(panel);
+                	frame.pack();
+                	frame.setVisible(true);
+                }
+            });
+		} finally {
+			db.close();
+		}
     }                                         
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {                                          
@@ -413,6 +604,7 @@ public class Panel extends javax.swing.JPanel {
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
+    	
     }                                         
 
 
@@ -434,6 +626,7 @@ public class Panel extends javax.swing.JPanel {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JButton jButton20;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
