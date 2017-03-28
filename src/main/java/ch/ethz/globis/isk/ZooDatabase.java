@@ -19,6 +19,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.ranges.Range;
 import org.zoodb.api.impl.ZooPC;
 import org.zoodb.jdo.ZooJdoHelper;
 import org.zoodb.tools.ZooHelper;
@@ -29,6 +30,7 @@ import ch.ethz.globis.isk.domain.InProceedings;
 import ch.ethz.globis.isk.domain.Person;
 import ch.ethz.globis.isk.domain.Proceedings;
 import ch.ethz.globis.isk.domain.Publication;
+import ch.ethz.globis.isk.domain.Publisher;
 import ch.ethz.globis.isk.domain.zoodb.ZooConference;
 import ch.ethz.globis.isk.domain.zoodb.ZooConferenceEdition;
 import ch.ethz.globis.isk.domain.zoodb.ZooInProceedings;
@@ -431,22 +433,22 @@ public class ZooDatabase {
     //TODO: Implement
     public List<ZooPerson> getAllAuthorsByConference(Conference conference){
     	
-//    	List<ZooPerson> authors = (List<ZooPerson>) getWithFilter(ZooPerson.class, "");
-    	
-    	Set<ConferenceEdition> editions = conference.getEditions();
-    	
-    	List<Proceedings> proceedings = new ArrayList<>();
-    	
-    	for(ConferenceEdition edition: editions){
-    		proceedings.add(edition.getProceedings());
-    	}
-    	
-    	List<Proceedings> publications = new ArrayList<>();
-    	
-    	for(Proceedings preceeding:proceedings ){
-//    		publications.addAll(preceeding.getPublications());
-    	}
-    		
+////    	List<ZooPerson> authors = (List<ZooPerson>) getWithFilter(ZooPerson.class, "");
+//    	
+//    	Set<ConferenceEdition> editions = conference.getEditions();
+//    	
+//    	List<Proceedings> proceedings = new ArrayList<>();
+//    	
+//    	for(ConferenceEdition edition: editions){
+//    		proceedings.add(edition.getProceedings());
+//    	}
+//    	
+//    	List<Proceedings> publications = new ArrayList<>();
+//    	
+//    	for(Proceedings preceeding:proceedings ){
+////    		publications.addAll(preceeding.getPublications());
+//    	}
+//    		
     	
     	return null;
     }
@@ -474,20 +476,21 @@ public class ZooDatabase {
     //TODO
     public List<ZooPerson> getAllPersonByAuthorInPreAndEditorInPre(String name){
     	
-    	Collection<ZooPerson> authors = getWithFilter(ZooPerson.class, "name == '" + name + "'");
-    	Set<Publication> authoredPublications = new HashSet<Publication>();
-    	Set<Publication> editedPublications = new HashSet<Publication>();
-    	
-    	for(ZooPerson author: authors){
-    		authoredPublications.addAll(author.getAuthoredPublications());
-    		editedPublications.addAll(author.getEditedPublications());
-    	}
-    	
-    	Collection<ZooInProceedings> inPreceedings = getWithFilter(ZooInProceedings.class, "");
-    	
-    	for(ZooInProceedings inPreceeding: inPreceedings){
-    		inPreceeding.getProceedings().getPublications();
-    	}
+//    	Collection<ZooPerson> authors = getWithFilter(ZooPerson.class, "name == '" + name + "'");
+//    	Set<Publication> authoredPublications = new HashSet<Publication>();
+//    	Set<Publication> editedPublications = new HashSet<Publication>();
+//    	
+//    	for(ZooPerson author: authors){
+//    		authoredPublications.addAll(author.getAuthoredPublications());
+//    		editedPublications.addAll(author.getEditedPublications());
+//    	}
+//    	
+//    	Collection<ZooInProceedings> inPreceedings = getWithFilter(ZooInProceedings.class, "");
+//    	
+//    	for(ZooInProceedings inPreceeding: inPreceedings){
+//    		inPreceeding.getProceedings().getPublications();
+//    		
+//    	}
     	return null;
     }
     
@@ -510,4 +513,36 @@ public class ZooDatabase {
     	
     	return publicationsList;
     }
+    
+    //14.) Retrieve the list of publishers of Proceedings whose authors appear in any InProceedings 
+    //		in a range of years, e.g. between 1982 and 1986.
+    
+    public List<Publisher> getAllPublisherInRange(int year1, int year2){
+    	Collection<ZooConferenceEdition> editions = getWithFilter(ZooConferenceEdition.class, "");
+    	
+    	List<ZooConferenceEdition> checkedEditions = new ArrayList<>();
+    	
+    	for(ZooConferenceEdition edition: editions){
+    		if (year1 <= edition.getYear() && edition.getYear() <= year2 ){
+    			checkedEditions.add(edition);	
+    		}
+    	}
+    	
+    	List<Proceedings> proceedings = new ArrayList<>();
+    	
+    	for(ZooConferenceEdition checkedEdition: checkedEditions){
+    		proceedings.add(checkedEdition.getProceedings());
+    	}
+    	
+    	List<Publisher> publisher = new ArrayList<>();
+    	
+    	for(Proceedings proceeding: proceedings){
+    		if (!publisher.contains(proceeding.getPublisher())){
+    			publisher.add(proceeding.getPublisher());
+    		};
+    	}
+    	
+    	return publisher;
+    }
+    
  }

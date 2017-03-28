@@ -16,6 +16,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.*;
 
+import ch.ethz.globis.isk.domain.Publisher;
 import ch.ethz.globis.isk.domain.zoodb.ZooPerson;
 import ch.ethz.globis.isk.domain.zoodb.ZooProceedings;
 import ch.ethz.globis.isk.domain.zoodb.ZooPublication;
@@ -28,7 +29,7 @@ public class GUI extends JFrame{
     }
 	
 	public static void myGuiProgramm(){
-    	ZooDatabase database = new ZooDatabase("database", false);
+    	ZooDatabase database = new ZooDatabase("database", true);
     	database.open();
     	
     	/*try {
@@ -81,6 +82,28 @@ public class GUI extends JFrame{
     		// 6.)
     		float avg = database.getGlobalAverageAuthors();
 			System.out.println(avg);
+			
+			
+			//13.)
+//			List<ZooPublication> publications =  database.getAllPublicationsByLastAuthor("Anita L. Chow");
+//			
+//			for(ZooPublication publication1: publications){
+//				System.out.println(publication1);
+//			}
+			
+			//14.)
+			
+			List<Publisher> publishers = database.getAllPublisherInRange(1900, 2000);
+			if(!publishers.isEmpty()){
+				for(Publisher publisher: publishers){
+					System.out.println(publisher);
+				}
+			}else{
+				System.out.println("Not found");
+			}
+			
+			
+			
         	}
         	
     	 catch (Exception e) {
@@ -117,7 +140,7 @@ public class GUI extends JFrame{
             public void run() {
 //                new MainFrame("Publications").setVisible(true);
             	JFrame frame = new MainFrame("Publications");
-            	frame.setSize(580,560);
+            	frame.setSize(890,560);
             	frame.setVisible(true);
             	
             }
