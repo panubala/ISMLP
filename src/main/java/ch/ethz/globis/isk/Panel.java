@@ -12,13 +12,22 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import org.zoodb.api.impl.ZooPC;
+
+import ch.ethz.globis.isk.domain.Conference;
+import ch.ethz.globis.isk.domain.ConferenceEdition;
 import ch.ethz.globis.isk.domain.DomainObject;
 import ch.ethz.globis.isk.domain.InProceedings;
 import ch.ethz.globis.isk.domain.Person;
+import ch.ethz.globis.isk.domain.Publication;
+import ch.ethz.globis.isk.domain.zoodb.ZooConference;
+import ch.ethz.globis.isk.domain.zoodb.ZooConferenceEdition;
 import ch.ethz.globis.isk.domain.zoodb.ZooInProceedings;
 import ch.ethz.globis.isk.domain.zoodb.ZooPerson;
 import ch.ethz.globis.isk.domain.zoodb.ZooProceedings;
 import ch.ethz.globis.isk.domain.zoodb.ZooPublication;
+import ch.ethz.globis.isk.domain.zoodb.ZooPublisher;
+import ch.ethz.globis.isk.domain.zoodb.ZooSeries;
 
 public class Panel extends javax.swing.JPanel {
 
@@ -535,8 +544,9 @@ public class Panel extends javax.swing.JPanel {
 		ZooDatabase db = new ZooDatabase("database", false);
 		try {
 			db.open();
-			Collection<ZooPublication> publications = db.getWithFilter(ZooPublication.class, "");
-			objectsAndTitle = getObjectsAndTitle(publications);
+			Collection<ZooPublisher> zooObjects = db.getWithFilter(ZooPublisher.class, "");
+			System.out.println(zooObjects.size());
+			objectsAndTitle = getObjectsAndTitle(zooObjects, "");
 			
 			table.setModel(new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b));
 			table.setFont(new java.awt.Font("Century Gothic", 0, 12));
@@ -568,21 +578,100 @@ public class Panel extends javax.swing.JPanel {
 
     }
     
-    private Pair<Object[][], String[]> getObjectsAndTitle(Collection<ZooPublication> publications) {
-		Object[][] objects = new Object[publications.size()][];
+    private Pair<Object[][], String[]> getObjectsAndTitle(Collection<?> collection, String filter) {
+    	if (collection.isEmpty())
+    		return null;
+		
+		Object[][] objects = new Object[collection.size()][];
 		int i = 0;
-		for (ZooPublication publication : publications) {
-	    	String authors = "";
-	    	for (Person author : publication.getAuthors()) {
-	    		authors += author.getName() + ", ";
-	    	}
-	    	if (authors.length() > 2)
-	    		authors = authors.substring(0, authors.length() - 2);
-	    	
-			objects[i++] = new Object[]{ publication.getTitle(), publication.getYear(), authors };
+		for (Object object : collection) {
+			if (object instanceof ZooPublication) {
+				ZooPublication publication = (ZooPublication) object;
+		    	String authors = "";
+		    	for (Person author : publication.getAuthors()) {
+		    		authors += author.getName() + ", ";
+		    	}
+		    	if (authors.length() > 2)
+		    		authors = authors.substring(0, authors.length() - 2);
+		    	
+		    	if ((publication.getTitle() != null && publication.getTitle().contains(filter))
+		    			|| (Integer.toString(publication.getYear()).contains(filter))
+		    			|| (authors.contains(filter)))
+		    		objects[i++] = new Object[]{ publication.getTitle(), publication.getYear(), authors };
+			} else if (object instanceof ZooConference) {
+				ZooConference conference = (ZooConference) object;
+		    	String editions = "";
+		    	for (ConferenceEdition edition : conference.getEditions()) {
+		    		editions += edition.getYear() + ", ";
+		    	}
+		    	if (editions.length() > 2)
+		    		editions = editions.substring(0, editions.length() - 2);
+		    	
+		    	if ((conference.getName() != null && conference.getName().contains(filter))
+		    			|| (editions.contains(filter)))
+		    		objects[i++] = new Object[]{ conference.getName(), editions };
+			} else if (object instanceof ZooConferenceEdition) {
+				ZooConferenceEdition conferenceEdition = (ZooConferenceEdition) object;
+		    	if ((conferenceEdition.getConference() != null && conferenceEdition.getConference().getName() != null && conferenceEdition.getConference().getName().contains(filter))
+		    			|| (Integer.toString(conferenceEdition.getYear()).contains(filter)))
+		    		objects[i++] = new Object[]{ conferenceEdition.getConference().getName(), conferenceEdition.getYear() };
+			} else if (object instanceof ZooPerson) {
+				ZooPerson person = (ZooPerson) object;
+		    	String publications = "";
+		    	for (Publication publication : person.getAuthoredPublications()) {
+		    		publications += publication.getTitle() + ", ";
+		    	}
+		    	for (Publication publication : person.getEditedPublications()) {
+		    		publications += publication.getTitle() + ", ";
+		    	}
+		    	if (publications.length() > 2)
+		    		publications = publications.substring(0, publications.length() - 2);
+		    	
+		    	if ((person.getName() != null && person.getName().contains(filter))
+		    			|| (publications.contains(filter)))
+		    		objects[i++] = new Object[]{ person.getName(), publications };
+			} else if (object instanceof ZooPublisher) {
+				ZooPublisher publisher = (ZooPublisher) object;
+		    	String publications = "";
+		    	for (Publication publication : publisher.getPublications()) {
+		    		publications += publication.getTitle() + ", ";
+		    	}
+		    	if (publications.length() > 2)
+		    		publications = publications.substring(0, publications.length() - 2);
+		    	
+		    	if ((publisher.getName() != null && publisher.getName().contains(filter))
+		    			|| (publications.contains(filter)))
+		    		objects[i++] = new Object[]{ publisher.getName(), publications };
+			} else if (object instanceof ZooSeries) {
+				ZooSeries series = (ZooSeries) object;
+		    	String publications = "";
+		    	for (Publication publication : series.getPublications()) {
+		    		publications += publication.getTitle() + ", ";
+		    	}
+		    	if (publications.length() > 2)
+		    		publications = publications.substring(0, publications.length() - 2);
+		    	
+		    	if ((series.getName() != null && series.getName().contains(filter))
+		    			|| (publications.contains(filter)))
+		    		objects[i++] = new Object[]{ series.getName(), publications };
+			}
 		}
+
+		String[] title = null;
+		if (collection.iterator().next() instanceof ZooPublication)
+			title = new String[] { "Title", "Year", "Authors" };
+		else if (collection.iterator().next() instanceof ZooConference)
+			title = new String[] { "Name", "Editions" };
+		else if (collection.iterator().next() instanceof ZooConferenceEdition)
+			title = new String[] { "Conference", "Edition" };
+		else if (collection.iterator().next() instanceof ZooPerson)
+			title = new String[] { "Name", "Publications" };
+		else if (collection.iterator().next() instanceof ZooPublisher)
+			title = new String[] { "Name", "Publications" };
+		else if (collection.iterator().next() instanceof ZooSeries)
+			title = new String[] { "Name", "Publications" };
     	
-    	return new Pair<Object[][], String[]> (objects, new String[]{ "title", "year", "authors" });
+    	return new Pair<Object[][], String[]> (objects, title);
     }
     
    /* private Pair<Object[][], String[]> getObjectsAndTitle(Collection<ZooPerson> persons) {
