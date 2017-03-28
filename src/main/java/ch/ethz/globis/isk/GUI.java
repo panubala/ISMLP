@@ -29,6 +29,7 @@ public class GUI extends JFrame{
     }
 	
 	public static void myGuiProgramm(){
+
     	ZooDatabase database = new ZooDatabase("database", true);
     	database.open();
     	
@@ -86,10 +87,17 @@ public class GUI extends JFrame{
 			
 			//13.)
 //			List<ZooPublication> publications =  database.getAllPublicationsByLastAuthor("Anita L. Chow");
+
 //			
-//			for(ZooPublication publication1: publications){
-//				System.out.println(publication1);
+//			List<Publisher> publishers = database.getAllPublisherInRange(1900, 2000);
+//			if(!publishers.isEmpty()){
+//				for(Publisher publisher: publishers){
+//					System.out.println(publisher);
+//				}
+//			}else{
+//				System.out.println("Not found");
 //			}
+
 			
 			//14.)
 			
@@ -122,10 +130,11 @@ public class GUI extends JFrame{
     		
     		
     	}*/
+
     	
     	
     	
-    	database.close();
+//    	database.close();
 		
 //		JFrame frame = new MainFrame("Publications");
 ////		

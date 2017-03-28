@@ -7,34 +7,403 @@ import java.util.Collection;
 import java.util.Collections;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import org.zoodb.api.impl.ZooPC;
-
-import ch.ethz.globis.isk.domain.Conference;
-import ch.ethz.globis.isk.domain.ConferenceEdition;
 import ch.ethz.globis.isk.domain.DomainObject;
 import ch.ethz.globis.isk.domain.InProceedings;
 import ch.ethz.globis.isk.domain.Person;
-import ch.ethz.globis.isk.domain.Publication;
-import ch.ethz.globis.isk.domain.zoodb.ZooConference;
-import ch.ethz.globis.isk.domain.zoodb.ZooConferenceEdition;
 import ch.ethz.globis.isk.domain.zoodb.ZooInProceedings;
 import ch.ethz.globis.isk.domain.zoodb.ZooPerson;
 import ch.ethz.globis.isk.domain.zoodb.ZooProceedings;
 import ch.ethz.globis.isk.domain.zoodb.ZooPublication;
-import ch.ethz.globis.isk.domain.zoodb.ZooPublisher;
-import ch.ethz.globis.isk.domain.zoodb.ZooSeries;
 
 public class Panel extends javax.swing.JPanel {
 
     public Panel() {
         initComponents();
     }
+    
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jPanel4 = new javax.swing.JPanel();
+        jSeparator8 = new javax.swing.JSeparator();
+        jTextField16 = new javax.swing.JTextField();
+        jTextField17 = new javax.swing.JTextField();
+        jPanel5 = new javax.swing.JPanel();
+        jButton9 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
+        jButton19 = new javax.swing.JButton();
+        jTextField6 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
+        jSeparator7 = new javax.swing.JSeparator();
+        jButton16 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
+        jButton18 = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(97, 212, 195));
+        setForeground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(36, 47, 65));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(379, 0, -1, 529));
+
+        jPanel2.setBackground(new java.awt.Color(36, 47, 65));
+
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setIcon(new javax.swing.ImageIcon("/Users/panuyabalasuntharam/Desktop/0001.png")); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel9)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 550));
+
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 30)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Publication Search");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 300, 47));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1057, 243, 300, 0));
+
+        jPanel4.setBackground(new java.awt.Color(36, 47, 65));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jSeparator8.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel4.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 290, -1));
+
+        jTextField16.setBackground(new java.awt.Color(36, 47, 65));
+        jTextField16.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+        jTextField16.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField16.setText("Enter");
+        jTextField16.setBorder(null);
+        jTextField16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField16MouseClicked(evt);
+            }
+        });
+        jTextField16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField16ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 120, 20));
+
+        jTextField17.setBackground(new java.awt.Color(36, 47, 65));
+        jTextField17.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+        jTextField17.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField17.setText("Enter");
+        jTextField17.setBorder(null);
+        jTextField17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField17MouseClicked(evt);
+            }
+        });
+        jTextField17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField17ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 140, 20));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 480, -1, 40));
+
+        jButton9.setText("No of Publications per year");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 230, -1));
+
+        jButton14.setText("Search Publisher");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 230, -1));
+
+        jButton15.setText("Shortest Path between 2 authors");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 230, -1));
+
+        jButton19.setText("Search Publication");
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 230, -1));
+
+        add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 0, 340, 550));
+
+        jTextField6.setBackground(new java.awt.Color(97, 212, 195));
+        jTextField6.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+        jTextField6.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField6.setText("Enter filter ");
+        jTextField6.setBorder(null);
+        jTextField6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField6MouseClicked(evt);
+            }
+        });
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+        add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 210, 26));
+
+        jButton3.setText("No of authors of a conference");
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 390, 230, -1));
+
+        jButton4.setText("Search author/ editors");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 480, 230, -1));
+
+        jButton5.setText("Search Edition");
+        add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 230, -1));
+
+        jButton6.setText("Search InProceeding");
+        add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 230, -1));
+
+        jButton7.setText("Search Proceeding");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 230, -1));
+
+        jButton8.setText("Search Author");
+        add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 230, -1));
+
+        jButton10.setText("Search Publisher");
+        add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, 230, -1));
+
+        jButton11.setText("Search Series");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+        add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 230, -1));
+
+        jButton12.setText("Find average number of authors");
+        add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 360, 230, -1));
+
+        jButton13.setText("Search Publication");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+        add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, 230, -1));
+
+        jSeparator7.setForeground(new java.awt.Color(255, 255, 255));
+        add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 210, -1));
+
+        jButton16.setText("Search Conference");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
+        add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 230, -1));
+
+        jButton17.setText("Search Co-Authors");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
+        add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 230, -1));
+
+        jButton18.setText("No of publications in conference");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
+        add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 450, 230, -1));
+    }// </editor-fold>                        
+
+    private void jTextField16MouseClicked(java.awt.event.MouseEvent evt) {                                          
+        // TODO add your handling code here:
+    }                                         
+
+    private void jTextField16ActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
+
+    private void jTextField17MouseClicked(java.awt.event.MouseEvent evt) {                                          
+        // TODO add your handling code here:
+    }                                         
+
+    private void jTextField17ActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    }                                            
+
+    private void jTextField6MouseClicked(java.awt.event.MouseEvent evt) {                                         
+        // TODO add your handling code here:
+    }                                        
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+    }                                           
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+    }                                        
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+    }                                         
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+    }                                        
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+    }                                        
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+    }                                         
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+    }                                         
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+    }                                         
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+    }                                         
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+    }                                         
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+    }                                         
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+    }                                         
+
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
+    private javax.swing.JButton jButton19;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JTextField jTextField16;
+    private javax.swing.JTextField jTextField17;
+    private javax.swing.JTextField jTextField6;
+    // End of variables declaration                   
+
+
+private Pair<Object[][], String[]> getObjectsAndTitle(Collection<ZooPublication> publications) {
+	Object[][] objects = new Object[publications.size()][];
+	int i = 0;
+	for (ZooPublication publication : publications) {
+    	String authors = "";
+    	for (Person author : publication.getAuthors()) {
+    		authors += author.getName() + ", ";
+    	}
+    	if (authors.length() > 2)
+    		authors = authors.substring(0, authors.length() - 2);
+    	
+		objects[i++] = new Object[]{ publication.getTitle(), publication.getYear(), authors };
+	}
+	
+	return new Pair<Object[][], String[]> (objects, new String[]{ "title", "year", "authors" });
+}}
+  
+
+    
+/*
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
@@ -530,7 +899,7 @@ public class Panel extends javax.swing.JPanel {
 		
 		//////////////Table/////////
 		JFrame frame = new JFrame("Result");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 	
@@ -544,9 +913,8 @@ public class Panel extends javax.swing.JPanel {
 		ZooDatabase db = new ZooDatabase("database", false);
 		try {
 			db.open();
-			Collection<ZooPublisher> zooObjects = db.getWithFilter(ZooPublisher.class, "");
-			System.out.println(zooObjects.size());
-			objectsAndTitle = getObjectsAndTitle(zooObjects, "");
+			Collection<ZooPublication> publications = db.getWithFilter(ZooPublication.class, "");
+			objectsAndTitle = getObjectsAndTitle(publications);
 			
 			table.setModel(new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b));
 			table.setFont(new java.awt.Font("Century Gothic", 0, 12));
@@ -578,103 +946,24 @@ public class Panel extends javax.swing.JPanel {
 
     }
     
-    private Pair<Object[][], String[]> getObjectsAndTitle(Collection<?> collection, String filter) {
-    	if (collection.isEmpty())
-    		return null;
-		
-		Object[][] objects = new Object[collection.size()][];
+    private Pair<Object[][], String[]> getObjectsAndTitle(Collection<ZooPublication> publications) {
+		Object[][] objects = new Object[publications.size()][];
 		int i = 0;
-		for (Object object : collection) {
-			if (object instanceof ZooPublication) {
-				ZooPublication publication = (ZooPublication) object;
-		    	String authors = "";
-		    	for (Person author : publication.getAuthors()) {
-		    		authors += author.getName() + ", ";
-		    	}
-		    	if (authors.length() > 2)
-		    		authors = authors.substring(0, authors.length() - 2);
-		    	
-		    	if ((publication.getTitle() != null && publication.getTitle().contains(filter))
-		    			|| (Integer.toString(publication.getYear()).contains(filter))
-		    			|| (authors.contains(filter)))
-		    		objects[i++] = new Object[]{ publication.getTitle(), publication.getYear(), authors };
-			} else if (object instanceof ZooConference) {
-				ZooConference conference = (ZooConference) object;
-		    	String editions = "";
-		    	for (ConferenceEdition edition : conference.getEditions()) {
-		    		editions += edition.getYear() + ", ";
-		    	}
-		    	if (editions.length() > 2)
-		    		editions = editions.substring(0, editions.length() - 2);
-		    	
-		    	if ((conference.getName() != null && conference.getName().contains(filter))
-		    			|| (editions.contains(filter)))
-		    		objects[i++] = new Object[]{ conference.getName(), editions };
-			} else if (object instanceof ZooConferenceEdition) {
-				ZooConferenceEdition conferenceEdition = (ZooConferenceEdition) object;
-		    	if ((conferenceEdition.getConference() != null && conferenceEdition.getConference().getName() != null && conferenceEdition.getConference().getName().contains(filter))
-		    			|| (Integer.toString(conferenceEdition.getYear()).contains(filter)))
-		    		objects[i++] = new Object[]{ conferenceEdition.getConference().getName(), conferenceEdition.getYear() };
-			} else if (object instanceof ZooPerson) {
-				ZooPerson person = (ZooPerson) object;
-		    	String publications = "";
-		    	for (Publication publication : person.getAuthoredPublications()) {
-		    		publications += publication.getTitle() + ", ";
-		    	}
-		    	for (Publication publication : person.getEditedPublications()) {
-		    		publications += publication.getTitle() + ", ";
-		    	}
-		    	if (publications.length() > 2)
-		    		publications = publications.substring(0, publications.length() - 2);
-		    	
-		    	if ((person.getName() != null && person.getName().contains(filter))
-		    			|| (publications.contains(filter)))
-		    		objects[i++] = new Object[]{ person.getName(), publications };
-			} else if (object instanceof ZooPublisher) {
-				ZooPublisher publisher = (ZooPublisher) object;
-		    	String publications = "";
-		    	for (Publication publication : publisher.getPublications()) {
-		    		publications += publication.getTitle() + ", ";
-		    	}
-		    	if (publications.length() > 2)
-		    		publications = publications.substring(0, publications.length() - 2);
-		    	
-		    	if ((publisher.getName() != null && publisher.getName().contains(filter))
-		    			|| (publications.contains(filter)))
-		    		objects[i++] = new Object[]{ publisher.getName(), publications };
-			} else if (object instanceof ZooSeries) {
-				ZooSeries series = (ZooSeries) object;
-		    	String publications = "";
-		    	for (Publication publication : series.getPublications()) {
-		    		publications += publication.getTitle() + ", ";
-		    	}
-		    	if (publications.length() > 2)
-		    		publications = publications.substring(0, publications.length() - 2);
-		    	
-		    	if ((series.getName() != null && series.getName().contains(filter))
-		    			|| (publications.contains(filter)))
-		    		objects[i++] = new Object[]{ series.getName(), publications };
-			}
+		for (ZooPublication publication : publications) {
+	    	String authors = "";
+	    	for (Person author : publication.getAuthors()) {
+	    		authors += author.getName() + ", ";
+	    	}
+	    	if (authors.length() > 2)
+	    		authors = authors.substring(0, authors.length() - 2);
+	    	
+			objects[i++] = new Object[]{ publication.getTitle(), publication.getYear(), authors };
 		}
-
-		String[] title = null;
-		if (collection.iterator().next() instanceof ZooPublication)
-			title = new String[] { "Title", "Year", "Authors" };
-		else if (collection.iterator().next() instanceof ZooConference)
-			title = new String[] { "Name", "Editions" };
-		else if (collection.iterator().next() instanceof ZooConferenceEdition)
-			title = new String[] { "Conference", "Edition" };
-		else if (collection.iterator().next() instanceof ZooPerson)
-			title = new String[] { "Name", "Publications" };
-		else if (collection.iterator().next() instanceof ZooPublisher)
-			title = new String[] { "Name", "Publications" };
-		else if (collection.iterator().next() instanceof ZooSeries)
-			title = new String[] { "Name", "Publications" };
     	
-    	return new Pair<Object[][], String[]> (objects, title);
+    	return new Pair<Object[][], String[]> (objects, new String[]{ "title", "year", "authors" });
     }
     
-   /* private Pair<Object[][], String[]> getObjectsAndTitle(Collection<ZooPerson> persons) {
+    private Pair<Object[][], String[]> getObjectsAndTitle(Collection<ZooPerson> persons) {
     	String publications = "";
     	for (Person person : persons) {
     		publications += author.getName() + ", ";
@@ -695,7 +984,7 @@ public class Panel extends javax.swing.JPanel {
 		}
     	
     	return new Pair<Object[][], String[]> (objects, new String[]{ "title", "year", "authors" });
-    }*/                   
+    }                  
 
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {                                         
         // TODO add your handling code here:
@@ -762,7 +1051,7 @@ public class Panel extends javax.swing.JPanel {
     }                                            
 
     private void jTextField16MouseClicked(java.awt.event.MouseEvent evt) {                                          
-        // TODO add your handling code here:
+    	jTextField18.setText("");
     }                                         
 
     private void jTextField16ActionPerformed(java.awt.event.ActionEvent evt) {                                             
@@ -778,7 +1067,7 @@ public class Panel extends javax.swing.JPanel {
     }                                            
 
     private void jTextField18MouseClicked(java.awt.event.MouseEvent evt) {                                          
-        // TODO add your handling code here:
+    	jTextField18.setText("");
     }                                         
 
     private void jTextField18ActionPerformed(java.awt.event.ActionEvent evt) {                                             
@@ -843,325 +1132,10 @@ public class Panel extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField9;
     // End of variables declaration                   
 }
-
+*/
     
     
     
     
     
-    ///////////OLDVERSION/////
-//    @SuppressWarnings("unchecked")
-//    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-//    private void initComponents() {
-//
-//        jPanel1 = new javax.swing.JPanel();
-//        jPanel2 = new javax.swing.JPanel();
-//        jLabel9 = new javax.swing.JLabel();
-//        jLabel1 = new javax.swing.JLabel();
-//        jLabel2 = new javax.swing.JLabel();
-//        jLabel3 = new javax.swing.JLabel();
-//        jLabel4 = new javax.swing.JLabel();
-//        jTextField1 = new javax.swing.JTextField();
-//        jSeparator1 = new javax.swing.JSeparator();
-//        jSeparator2 = new javax.swing.JSeparator();
-//        jTextField2 = new javax.swing.JTextField();
-//        jTextField3 = new javax.swing.JTextField();
-//        jTextField4 = new javax.swing.JTextField();
-//        jSeparator3 = new javax.swing.JSeparator();
-//        jSeparator4 = new javax.swing.JSeparator();
-//        jPanel3 = new javax.swing.JPanel();
-//        jLabel5 = new javax.swing.JLabel();
-//        jButton1 = new javax.swing.JButton();
-//        jLabel10 = new javax.swing.JLabel();
-//        jSeparator5 = new javax.swing.JSeparator();
-//
-//        setBackground(new java.awt.Color(97, 212, 195));
-//        setForeground(new java.awt.Color(255, 255, 255));
-//        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-//
-//        jPanel1.setBackground(new java.awt.Color(36, 47, 65));
-//        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-//        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(379, 0, -1, 529));
-//
-//        jPanel2.setBackground(new java.awt.Color(36, 47, 65));
-//
-//        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
-//        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-//        jLabel9.setIcon(new javax.swing.ImageIcon("/Users/panuyabalasuntharam/Desktop/0001.png")); // NOI18N
-//
-//        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-//        jPanel2.setLayout(jPanel2Layout);
-//        jPanel2Layout.setHorizontalGroup(
-//            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addGroup(jPanel2Layout.createSequentialGroup()
-//                .addGap(17, 17, 17)
-//                .addComponent(jLabel9)
-//                .addContainerGap(23, Short.MAX_VALUE))
-//        );
-//        jPanel2Layout.setVerticalGroup(
-//            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addGroup(jPanel2Layout.createSequentialGroup()
-//                .addGap(18, 18, 18)
-//                .addComponent(jLabel9)
-//                .addContainerGap(372, Short.MAX_VALUE))
-//        );
-//
-//        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 540));
-//
-//        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 30)); // NOI18N
-//        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-//        jLabel1.setText("Publication Search");
-//        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 300, 47));
-//
-//        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
-//        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-//        jLabel2.setText("PUBLICATION TITLE");
-//        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, -1, -1));
-//
-//        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
-//        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-//        jLabel3.setText("ID");
-//        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, -1, 20));
-//
-//        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
-//        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-//        jLabel4.setText("AUTHORS ");
-//        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, -1, 20));
-//
-//        jTextField1.setBackground(new java.awt.Color(97, 212, 195));
-//        jTextField1.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-//        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-//        jTextField1.setText("Enter ");
-//        jTextField1.setBorder(null);
-//        jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
-//            public void mouseClicked(java.awt.event.MouseEvent evt) {
-//                jTextField1MouseClicked(evt);
-//            }
-//        });
-//        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                jTextField1ActionPerformed(evt);
-//            }
-//        });
-//        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 305, 26));
-//        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1057, 243, 300, 0));
-//
-//        jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
-//        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 305, -1));
-//
-//        jTextField2.setBackground(new java.awt.Color(97, 212, 195));
-//        jTextField2.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-//        jTextField2.setForeground(new java.awt.Color(255, 255, 255));
-//        jTextField2.setText("Enter");
-//        jTextField2.setBorder(null);
-//        jTextField2.addMouseListener(new java.awt.event.MouseAdapter() {
-//            public void mouseClicked(java.awt.event.MouseEvent evt) {
-//                jTextField2MouseClicked(evt);
-//            }
-//        });
-//        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                jTextField2ActionPerformed(evt);
-//            }
-//        });
-//        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 303, 30));
-//
-//        jTextField3.setBackground(new java.awt.Color(97, 212, 195));
-//        jTextField3.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-//        jTextField3.setForeground(new java.awt.Color(255, 255, 255));
-//        jTextField3.setText("Enter");
-//        jTextField3.setBorder(null);
-//        jTextField3.addMouseListener(new java.awt.event.MouseAdapter() {
-//            public void mouseClicked(java.awt.event.MouseEvent evt) {
-//                jTextField3MouseClicked(evt);
-//            }
-//        });
-//        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                jTextField3ActionPerformed(evt);
-//            }
-//        });
-//        add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 390, 303, 30));
-//
-//        jTextField4.setBackground(new java.awt.Color(97, 212, 195));
-//        jTextField4.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-//        jTextField4.setForeground(new java.awt.Color(255, 255, 255));
-//        jTextField4.setText("Enter");
-//        jTextField4.setBorder(null);
-//        jTextField4.addMouseListener(new java.awt.event.MouseAdapter() {
-//            public void mouseClicked(java.awt.event.MouseEvent evt) {
-//                jTextField4MouseClicked(evt);
-//            }
-//        });
-//        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                jTextField4ActionPerformed(evt);
-//            }
-//        });
-//        add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, 303, 30));
-//
-//        jSeparator3.setForeground(new java.awt.Color(255, 255, 255));
-//        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 303, 20));
-//
-//        jSeparator4.setForeground(new java.awt.Color(255, 255, 255));
-//        add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, 303, 20));
-//
-//        jPanel3.setBackground(new java.awt.Color(36, 47, 65));
-//        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-//
-//        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
-//        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-//        jLabel5.setText("Conference");
-//        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(439, 380, -1, -1));
-//
-//        jButton1.setBackground(new java.awt.Color(36, 47, 65));
-//        jButton1.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
-//        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-//        jButton1.setText("Search");
-//        jButton1.setBorder(null);
-//        jButton1.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                jButton1ActionPerformed(evt);
-//            }
-//        });
-//        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 40));
-//
-//        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 460, 120, 40));
-//
-//        jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
-//        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-//        jLabel10.setText("CONFERENCE");
-//        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, -1, 20));
-//
-//        jSeparator5.setForeground(new java.awt.Color(255, 255, 255));
-//        add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 303, 20));
-//    }// </editor-fold>                        
-//
-//    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-//        // TODO add your handling code here:
-//       
-//    }                                           
-//
-//    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-//        // TODO add your handling code here:
-//    }                                           
-//
-//    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-//        // TODO add your handling code here:
-//    }                                           
-//
-//    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-//        // TODO add your handling code here:
-//    }                                           
-//
-//    
-//    private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {                                         
-//        jTextField1.setText("");
-//    }
-//    
-//    private void jTextField2MouseClicked(java.awt.event.MouseEvent evt) {                                         
-//    	jTextField2.setText("");
-//    }
-//    
-//    private void jTextField3MouseClicked(java.awt.event.MouseEvent evt) {                                         
-//    	jTextField3.setText("");
-//    }
-//    
-//    private void jTextField4MouseClicked(java.awt.event.MouseEvent evt) {                                         
-//    	jTextField4.setText("");
-//    }
-//    
-//    
-//    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-//    	
-//		
-//		String query = "";
-//		
-//		//TODO:
-//		
-//		query = jTextField2.getText();
-//		
-//							
-//		
-//		
-//		//////////////Table/////////
-//		JFrame frame = new JFrame("Result");
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		
-//		JPanel panel = new JPanel();
-//	
-//		panel.setBackground(new java.awt.Color(97, 212, 195));
-//        panel.setForeground(new java.awt.Color(255, 255, 255));
-//        panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-//		
-//		JTable table = new JTable();
-//		
-//		table.setModel(new javax.swing.table.DefaultTableModel(
-//	            new Object [][] {
-//	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-//	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-//	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-//	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-//	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-//	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-//	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-//	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-//	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-//	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-//	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-//	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-//	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"}
-//	            },
-//	            new String [] {
-//	                "Publication Title", "Year", "Electronic Edition", "Authors", "Conference", "Part of Proceedings"
-//	            }
-//	        ));
-//		table.setFont(new java.awt.Font("Century Gothic", 0, 12));
-//		table.setGridColor(new java.awt.Color(97, 212, 195));
-////		table.setBackground(new java.awt.Color(97, 212, 195));
-//		table.getTableHeader().setOpaque(false);
-//		table.getTableHeader().setBackground(new java.awt.Color(97, 212, 195));
-//		table.getTableHeader().setForeground(new java.awt.Color(255, 255, 255));
-//		table.getTableHeader().setBorder(null);
-//		table.getTableHeader().setFont(new java.awt.Font("Century Gothic", 0, 12));
-//		
-//		
-//		
-//		Container container = getRootPane();
-//		
-//		container.setLayout(new BorderLayout());
-//		container.setBackground(new java.awt.Color(97, 212, 195));
-//		container.add(table.getTableHeader(), BorderLayout.PAGE_START);
-//		container.add(table, BorderLayout.CENTER);
-//		frame.add(new JScrollPane(table));
-//		frame.pack();
-////		frame.add(panel);
-//		frame.setVisible(true);		
-//
-//    }                                        
-//
-//
-//    // Variables declaration - do not modify                     
-//    private javax.swing.JButton jButton1;
-//    private javax.swing.JLabel jLabel1;
-//    private javax.swing.JLabel jLabel10;
-//    private javax.swing.JLabel jLabel2;
-//    private javax.swing.JLabel jLabel3;
-//    private javax.swing.JLabel jLabel4;
-//    private javax.swing.JLabel jLabel5;
-//    private javax.swing.JLabel jLabel9;
-//    private javax.swing.JPanel jPanel1;
-//    private javax.swing.JPanel jPanel2;
-//    private javax.swing.JPanel jPanel3;
-//    private javax.swing.JSeparator jSeparator1;
-//    private javax.swing.JSeparator jSeparator2;
-//    private javax.swing.JSeparator jSeparator3;
-//    private javax.swing.JSeparator jSeparator4;
-//    private javax.swing.JSeparator jSeparator5;
-//    private javax.swing.JTextField jTextField1;
-//    private javax.swing.JTextField jTextField2;
-//    private javax.swing.JTextField jTextField3;
-//    private javax.swing.JTextField jTextField4;
-//    // End of variables declaration                   
-//}
 
