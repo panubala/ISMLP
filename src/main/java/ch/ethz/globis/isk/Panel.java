@@ -11,17 +11,28 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
+import ch.ethz.globis.isk.domain.ConferenceEdition;
 import ch.ethz.globis.isk.domain.DomainObject;
 import ch.ethz.globis.isk.domain.InProceedings;
 import ch.ethz.globis.isk.domain.Person;
+import ch.ethz.globis.isk.domain.Publication;
+import ch.ethz.globis.isk.domain.zoodb.ZooConference;
+import ch.ethz.globis.isk.domain.zoodb.ZooConferenceEdition;
 import ch.ethz.globis.isk.domain.zoodb.ZooInProceedings;
 import ch.ethz.globis.isk.domain.zoodb.ZooPerson;
 import ch.ethz.globis.isk.domain.zoodb.ZooProceedings;
 import ch.ethz.globis.isk.domain.zoodb.ZooPublication;
+import ch.ethz.globis.isk.domain.zoodb.ZooPublisher;
+import ch.ethz.globis.isk.domain.zoodb.ZooSeries;
 
 public class Panel extends javax.swing.JPanel {
+    
+    String filter = "";
+    String field1 = "";
+    String field2 = "";
 
     public Panel() {
         initComponents();
@@ -233,6 +244,11 @@ public class Panel extends javax.swing.JPanel {
         add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 230, -1));
 
         jButton10.setText("Search Publisher");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
         add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, 230, -1));
 
         jButton11.setText("Search Series");
@@ -282,8 +298,7 @@ public class Panel extends javax.swing.JPanel {
         add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 450, 230, -1));
     }// </editor-fold>                        
 
-    private void jTextField16MouseClicked(java.awt.event.MouseEvent evt) {                                          
-        // TODO add your handling code here:
+    private void jTextField16MouseClicked(java.awt.event.MouseEvent evt) {
     }                                         
 
     private void jTextField16ActionPerformed(java.awt.event.ActionEvent evt) {                                             
@@ -308,7 +323,34 @@ public class Panel extends javax.swing.JPanel {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }                                        
+    }                                          
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {     
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ZooDatabase db = new ZooDatabase("database", false);
+		try {
+			db.open();
+			Collection<ZooPublisher> collection = db.getWithFilter(ZooPublisher.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    		final String error = e.getMessage();
+    		SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                	JFrame frame = new JFrame(error);
+                	PanelErrorMessage panel = new PanelErrorMessage();
+                	frame.add(panel);
+                	frame.pack();
+                	frame.setVisible(true);
+                }
+            });
+		} finally {
+			db.close();
+		}
+    }                                       
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
@@ -334,8 +376,31 @@ public class Panel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }                                         
 
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {  
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ZooDatabase db = new ZooDatabase("database", false);
+		try {
+			db.open();
+			Collection<ZooConference> collection = db.getWithFilter(ZooConference.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    		final String error = e.getMessage();
+    		SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                	JFrame frame = new JFrame(error);
+                	PanelErrorMessage panel = new PanelErrorMessage();
+                	frame.add(panel);
+                	frame.pack();
+                	frame.setVisible(true);
+                }
+            });
+		} finally {
+			db.close();
+		}
     }                                         
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {                                          
@@ -384,22 +449,136 @@ public class Panel extends javax.swing.JPanel {
     // End of variables declaration                   
 
 
-private Pair<Object[][], String[]> getObjectsAndTitle(Collection<ZooPublication> publications) {
-	Object[][] objects = new Object[publications.size()][];
-	int i = 0;
-	for (ZooPublication publication : publications) {
-    	String authors = "";
-    	for (Person author : publication.getAuthors()) {
-    		authors += author.getName() + ", ";
-    	}
-    	if (authors.length() > 2)
-    		authors = authors.substring(0, authors.length() - 2);
+    private Pair<Object[][], String[]> getObjectsAndTitle(Collection<?> collection, String filter) {
+    	if (collection.isEmpty())
+    		return null;
+		
+		Object[][] objects = new Object[collection.size()][];
+		int i = 0;
+		for (Object object : collection) {
+			if (object instanceof ZooPublication) {
+				ZooPublication publication = (ZooPublication) object;
+		    	String authors = "";
+		    	for (Person author : publication.getAuthors()) {
+		    		authors += author.getName() + ", ";
+		    	}
+		    	if (authors.length() > 2)
+		    		authors = authors.substring(0, authors.length() - 2);
+		    	
+		    	if ((publication.getTitle() != null && publication.getTitle().contains(filter))
+		    			|| (Integer.toString(publication.getYear()).contains(filter))
+		    			|| (authors.contains(filter)))
+		    		objects[i++] = new Object[]{ publication.getTitle(), publication.getYear(), authors };
+			} else if (object instanceof ZooConference) {
+				ZooConference conference = (ZooConference) object;
+		    	String editions = "";
+		    	for (ConferenceEdition edition : conference.getEditions()) {
+		    		editions += edition.getYear() + ", ";
+		    	}
+		    	if (editions.length() > 2)
+		    		editions = editions.substring(0, editions.length() - 2);
+		    	
+		    	if ((conference.getName() != null && conference.getName().contains(filter))
+		    			|| (editions.contains(filter)))
+		    		objects[i++] = new Object[]{ conference.getName(), editions };
+			} else if (object instanceof ZooConferenceEdition) {
+				ZooConferenceEdition conferenceEdition = (ZooConferenceEdition) object;
+		    	if ((conferenceEdition.getConference() != null && conferenceEdition.getConference().getName() != null && conferenceEdition.getConference().getName().contains(filter))
+		    			|| (Integer.toString(conferenceEdition.getYear()).contains(filter)))
+		    		objects[i++] = new Object[]{ conferenceEdition.getConference().getName(), conferenceEdition.getYear() };
+			} else if (object instanceof ZooPerson) {
+				ZooPerson person = (ZooPerson) object;
+		    	String publications = "";
+		    	for (Publication publication : person.getAuthoredPublications()) {
+		    		publications += publication.getTitle() + ", ";
+		    	}
+		    	for (Publication publication : person.getEditedPublications()) {
+		    		publications += publication.getTitle() + ", ";
+		    	}
+		    	if (publications.length() > 2)
+		    		publications = publications.substring(0, publications.length() - 2);
+		    	
+		    	if ((person.getName() != null && person.getName().contains(filter))
+		    			|| (publications.contains(filter)))
+		    		objects[i++] = new Object[]{ person.getName(), publications };
+			} else if (object instanceof ZooPublisher) {
+				ZooPublisher publisher = (ZooPublisher) object;
+		    	String publications = "";
+		    	for (Publication publication : publisher.getPublications()) {
+		    		publications += publication.getTitle() + ", ";
+		    	}
+		    	if (publications.length() > 2)
+		    		publications = publications.substring(0, publications.length() - 2);
+		    	
+		    	if ((publisher.getName() != null && publisher.getName().contains(filter))
+		    			|| (publications.contains(filter)))
+		    		objects[i++] = new Object[]{ publisher.getName(), publications };
+			} else if (object instanceof ZooSeries) {
+				ZooSeries series = (ZooSeries) object;
+		    	String publications = "";
+		    	for (Publication publication : series.getPublications()) {
+		    		publications += publication.getTitle() + ", ";
+		    	}
+		    	if (publications.length() > 2)
+		    		publications = publications.substring(0, publications.length() - 2);
+		    	
+		    	if ((series.getName() != null && series.getName().contains(filter))
+		    			|| (publications.contains(filter)))
+		    		objects[i++] = new Object[]{ series.getName(), publications };
+			}
+		}
+
+		String[] title = null;
+		if (collection.iterator().next() instanceof ZooPublication)
+			title = new String[] { "Title", "Year", "Authors" };
+		else if (collection.iterator().next() instanceof ZooConference)
+			title = new String[] { "Name", "Editions" };
+		else if (collection.iterator().next() instanceof ZooConferenceEdition)
+			title = new String[] { "Conference", "Edition" };
+		else if (collection.iterator().next() instanceof ZooPerson)
+			title = new String[] { "Name", "Publications" };
+		else if (collection.iterator().next() instanceof ZooPublisher)
+			title = new String[] { "Name", "Publications" };
+		else if (collection.iterator().next() instanceof ZooSeries)
+			title = new String[] { "Name", "Publications" };
     	
-		objects[i++] = new Object[]{ publication.getTitle(), publication.getYear(), authors };
-	}
+    	return new Pair<Object[][], String[]> (objects, title);
+    }
 	
-	return new Pair<Object[][], String[]> (objects, new String[]{ "title", "year", "authors" });
-}}
+	private void openNewTable(DefaultTableModel model) {
+		//////////////Table/////////
+		JFrame frame = new JFrame("Result");
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		JPanel panel = new JPanel();
+	
+		panel.setBackground(new java.awt.Color(97, 212, 195));
+        panel.setForeground(new java.awt.Color(255, 255, 255));
+        panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+		JTable table = new JTable();
+		table.setModel(model);
+		table.setFont(new java.awt.Font("Century Gothic", 0, 12));
+		table.setGridColor(new java.awt.Color(97, 212, 195));
+//		table.setBackground(new java.awt.Color(97, 212, 195));
+		table.getTableHeader().setOpaque(false);
+		table.getTableHeader().setBackground(new java.awt.Color(97, 212, 195));
+		table.getTableHeader().setForeground(new java.awt.Color(255, 255, 255));
+		table.getTableHeader().setBorder(null);
+		table.getTableHeader().setFont(new java.awt.Font("Century Gothic", 0, 12));
+		
+		Container container = getRootPane();
+		
+		container.setLayout(new BorderLayout());
+		container.setBackground(new java.awt.Color(97, 212, 195));
+		container.add(table.getTableHeader(), BorderLayout.PAGE_START);
+		container.add(table, BorderLayout.CENTER);
+		frame.add(new JScrollPane(table));
+		frame.pack();
+//		frame.add(panel);
+		frame.setVisible(true);		
+	}
+}
   
 
     

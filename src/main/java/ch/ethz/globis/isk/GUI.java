@@ -30,8 +30,8 @@ public class GUI extends JFrame{
 	
 	public static void myGuiProgramm(){
 
-    	ZooDatabase database = new ZooDatabase("database", true);
-    	database.open();
+    	//ZooDatabase database = new ZooDatabase("database", false);
+    	//database.open();
     	
     	/*try {
     		// 1.)
