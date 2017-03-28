@@ -31,7 +31,7 @@ public class GUI extends JFrame{
     	ZooDatabase database = new ZooDatabase("database", false);
     	database.open();
     	
-    	try {
+    	/*try {
     		// 1.)
     		ZooPublication publication = database.getPublicationById("conf/sigplan/BurkeC86");
         	if (publication != null)
@@ -98,7 +98,7 @@ public class GUI extends JFrame{
             });
     		
     		
-    	}
+    	}*/
     	
     	
     	

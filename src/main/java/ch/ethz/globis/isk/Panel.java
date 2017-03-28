@@ -3,11 +3,22 @@ package ch.ethz.globis.isk;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.util.Collection;
+import java.util.Collections;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import ch.ethz.globis.isk.domain.DomainObject;
+import ch.ethz.globis.isk.domain.InProceedings;
+import ch.ethz.globis.isk.domain.Person;
+import ch.ethz.globis.isk.domain.zoodb.ZooInProceedings;
+import ch.ethz.globis.isk.domain.zoodb.ZooPerson;
+import ch.ethz.globis.isk.domain.zoodb.ZooProceedings;
+import ch.ethz.globis.isk.domain.zoodb.ZooPublication;
 
 public class Panel extends javax.swing.JPanel {
 
@@ -259,34 +270,27 @@ public class Panel extends javax.swing.JPanel {
 		
 		JTable table = new JTable();
 		
-		table.setModel(new javax.swing.table.DefaultTableModel(
-	            new Object [][] {
-	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"},
-	                {"hallo", "hallo", "hallo", "hallo", "hallo", "hallo"}
-	            },
-	            new String [] {
-	                "Publication Title", "Year", "Electronic Edition", "Authors", "Conference", "Part of Proceedings"
-	            }
-	        ));
-		table.setFont(new java.awt.Font("Century Gothic", 0, 12));
-		table.setGridColor(new java.awt.Color(97, 212, 195));
-//		table.setBackground(new java.awt.Color(97, 212, 195));
-		table.getTableHeader().setOpaque(false);
-		table.getTableHeader().setBackground(new java.awt.Color(97, 212, 195));
-		table.getTableHeader().setForeground(new java.awt.Color(255, 255, 255));
-		table.getTableHeader().setBorder(null);
-		table.getTableHeader().setFont(new java.awt.Font("Century Gothic", 0, 12));
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ZooDatabase db = new ZooDatabase("database", false);
+		try {
+			db.open();
+			Collection<ZooPublication> publications = db.getWithFilter(ZooPublication.class, "");
+			objectsAndTitle = getObjectsAndTitle(publications);
+			
+			table.setModel(new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b));
+			table.setFont(new java.awt.Font("Century Gothic", 0, 12));
+			table.setGridColor(new java.awt.Color(97, 212, 195));
+	//		table.setBackground(new java.awt.Color(97, 212, 195));
+			table.getTableHeader().setOpaque(false);
+			table.getTableHeader().setBackground(new java.awt.Color(97, 212, 195));
+			table.getTableHeader().setForeground(new java.awt.Color(255, 255, 255));
+			table.getTableHeader().setBorder(null);
+			table.getTableHeader().setFont(new java.awt.Font("Century Gothic", 0, 12));
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.close();
+		}
 		
 		
 		
@@ -301,7 +305,47 @@ public class Panel extends javax.swing.JPanel {
 //		frame.add(panel);
 		frame.setVisible(true);		
 
-    }                                        
+    }
+    
+    private Pair<Object[][], String[]> getObjectsAndTitle(Collection<ZooPublication> publications) {
+		Object[][] objects = new Object[publications.size()][];
+		int i = 0;
+		for (ZooPublication publication : publications) {
+	    	String authors = "";
+	    	for (Person author : publication.getAuthors()) {
+	    		authors += author.getName() + ", ";
+	    	}
+	    	if (authors.length() > 2)
+	    		authors = authors.substring(0, authors.length() - 2);
+	    	
+			objects[i++] = new Object[]{ publication.getTitle(), publication.getYear(), authors };
+		}
+    	
+    	return new Pair<Object[][], String[]> (objects, new String[]{ "title", "year", "authors" });
+    }
+    
+   /* private Pair<Object[][], String[]> getObjectsAndTitle(Collection<ZooPerson> persons) {
+    	String publications = "";
+    	for (Person person : persons) {
+    		publications += author.getName() + ", ";
+	    	String authors = "";
+	    	for (Person author : publication.getAuthors()) {
+	    		authors += author.getName() + ", ";
+	    	}
+	    	if (authors.length() > 2)
+	    		authors = authors.substring(0, authors.length() - 2);
+    	}
+    	if (publications.length() > 2)
+    		publications = publications.substring(0, publications.length() - 2);
+    	
+		Object[][] objects = new Object[persons.size()][];
+		int i = 0;
+		for (ZooPerson person : persons) {
+			objects[i++] = new Object[]{ person.getName(), person.get(), person };
+		}
+    	
+    	return new Pair<Object[][], String[]> (objects, new String[]{ "title", "year", "authors" });
+    }*/
 
 
     // Variables declaration - do not modify                     
