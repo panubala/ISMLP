@@ -1,4 +1,4 @@
-package ch.ethz.globis.isk.mongodb;
+package ch.ethz.globis.isk.domain.mongodb;
 
 import java.util.Collections;
 import java.util.HashSet;

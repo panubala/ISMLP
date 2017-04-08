@@ -1,4 +1,4 @@
-package ch.ethz.globis.isk;
+package ch.ethz.globis.isk.Zoo;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -41,12 +41,12 @@ import ch.ethz.globis.isk.domain.zoodb.ZooPublisher;
 import ch.ethz.globis.isk.domain.zoodb.ZooSeries;
 
 @SuppressWarnings("unchecked")
-public class ZooDatabase {
+public class Database {
 	
 	String name;
 	PersistenceManager pm;
 	
-	public ZooDatabase(String name, boolean overwrite) {
+	public Database(String name, boolean overwrite) {
         this.name = name;
         if (ZooHelper.dbExists(name)) {
         	if (!overwrite)

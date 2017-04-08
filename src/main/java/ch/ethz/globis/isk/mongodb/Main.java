@@ -1,9 +1,9 @@
-package ch.ethz.globis.isk;
+package ch.ethz.globis.isk.mongodb;
 
 public class Main  {
 	
     public static void main(String[] args) {
-    	MongoDomainDB db = new MongoDomainDB("database");
+    	Database db = new Database("database");
     	db.open();
     	try {
 			db.parseXml();
@@ -12,5 +12,4 @@ public class Main  {
 		}
     	db.close();
     }
-    
 }

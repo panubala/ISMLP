@@ -1,4 +1,4 @@
-package ch.ethz.globis.isk.mongodb;
+package ch.ethz.globis.isk.domain.mongodb;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -6,17 +6,17 @@ import java.util.Set;
 
 import org.bson.Document;
 
-public class MongoPublisher extends MongoDomainObject {
+public class MongoSeries extends MongoDomainObject {
 	
 	String name;
 	Set<MongoPublication> publications;
 	
-	public MongoPublisher() {
+	public MongoSeries() {
 		super();
 		publications = new HashSet<>();
 	}
 	
-	public MongoPublisher(String id, String name, Set<MongoPublication> publications) {
+	public MongoSeries(String id, String name, Set<MongoPublication> publications) {
 		super(id);
 		this.name = name;
 		this.publications = publications;

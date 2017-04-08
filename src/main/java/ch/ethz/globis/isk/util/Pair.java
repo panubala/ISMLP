@@ -1,4 +1,4 @@
-package ch.ethz.globis.isk;
+package ch.ethz.globis.isk.util;
 
 public class Pair<A, B> {
 	

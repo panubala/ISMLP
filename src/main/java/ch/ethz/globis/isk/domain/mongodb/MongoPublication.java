@@ -1,5 +1,6 @@
-package ch.ethz.globis.isk.mongodb;
+package ch.ethz.globis.isk.domain.mongodb;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.Document;
@@ -19,6 +20,25 @@ public class MongoPublication extends MongoDomainObject {
 		this.title = title;
 		this.year = year;
 		this.electronicEdition = electronicEdition;
+	}
+
+	@Override
+	public String getWindowTitle() {
+		return "Publications";
+	}
+
+	@Override
+	public List<String> getColumnNames() {
+		List<String> columnNames = super.getColumnNames();
+		columnNames.add("Title");
+		columnNames.add("Year");
+		return columnNames;
+	}
+
+	public void fromDocument(Document document) {
+		super.fromDocument(document);
+		title = document.getString("title");
+		year = document.getInteger("year");
 	}
 	
 	@Override

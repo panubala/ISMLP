@@ -1,58 +1,41 @@
-package ch.ethz.globis.isk;
+package ch.ethz.globis.isk.mongodb;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
-import javax.jdo.JDOObjectNotFoundException;
-import javax.jdo.PersistenceManager;
-import javax.jdo.Query;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.bson.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.zoodb.api.impl.ZooPC;
-import org.zoodb.jdo.ZooJdoHelper;
 
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.InsertOptions;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.IndexOptions;
-import com.mongodb.client.model.Indexes;
-import com.mongodb.client.model.InsertOneOptions;
 import com.mongodb.client.model.UpdateOptions;
+
+import ch.ethz.globis.isk.domain.mongodb.MongoDomainObject;
 
 import static com.mongodb.client.model.Filters.*;
 import static com.mongodb.client.model.Updates.*;
 
-import ch.ethz.globis.isk.mongodb.MongoInProceedings;
-import ch.ethz.globis.isk.mongodb.MongoPerson;
-import ch.ethz.globis.isk.mongodb.MongoProceedings;
-
-public class MongoDomainDB {
+public class Database {
 	
-	String name;
-	MongoClient mongoClient;
+	private String name;
+	private MongoClient mongoClient;
 	
-	MongoCollection<Document> conferences;
-	MongoCollection<Document> conferenceEditions;
-	MongoCollection<Document> inProceedings;
-	MongoCollection<Document> persons;
-	MongoCollection<Document> proceedings;
-	MongoCollection<Document> publications;
-	MongoCollection<Document> publishers;
-	MongoCollection<Document> series;
+	//private IndexOptions unique = new IndexOptions().unique(true);
+	private UpdateOptions upsert = new UpdateOptions().upsert(true);
 	
-	//IndexOptions unique = new IndexOptions().unique(true);
-	UpdateOptions upsert = new UpdateOptions().upsert(true);
+	public MongoCollection<Document> conferences;
+	public MongoCollection<Document> conferenceEditions;
+	public MongoCollection<Document> persons;
+	public MongoCollection<Document> publications;
+	public MongoCollection<Document> publishers;
+	public MongoCollection<Document> series;
 	
-	public MongoDomainDB(String name) {
+	public Database(String name) {
         this.name = name;
 	}
 	
@@ -62,9 +45,7 @@ public class MongoDomainDB {
         
     	conferences 		= database.getCollection("conferences");
     	conferenceEditions 	= database.getCollection("conferenceEditions");
-        inProceedings 		= database.getCollection("inProceedings");
     	persons 			= database.getCollection("persons");
-    	proceedings 		= database.getCollection("proceedings");
     	publications 		= database.getCollection("publications");
     	publishers 			= database.getCollection("publishers");
     	series 				= database.getCollection("series");
@@ -118,7 +99,7 @@ public class MongoDomainDB {
 	            
 				switch(child.getTagName()) {
 				case "author":
-					inProceedings.updateOne(
+					publications.updateOne(
 							eq("_id", id),
 							push("authors", value),
 							upsert
@@ -130,33 +111,33 @@ public class MongoDomainDB {
 					);
 					break;
 				case "title":
-					inProceedings.updateOne(
+					publications.updateOne(
 							eq("_id", id),
 							set("title", value),
 							upsert
 					);
 					break;
 				case "year":
-					inProceedings.updateOne(
+					publications.updateOne(
 							eq("_id", id),
 							set("year", Integer.valueOf(value)),
 							upsert
 					);
 					break;
 				case "pages":
-					inProceedings.updateOne(
+					publications.updateOne(
 							eq("_id", id),
 							set("pages", value),
 							upsert
 					);
 					break;
 				case "crossref":
-					inProceedings.updateOne(
+					publications.updateOne(
 							eq("_id", id),
 							set("proceedings", value),
 							upsert
 					);
-					proceedings.updateOne(
+					publications.updateOne(
 							eq("_id", value),
 							push("publications", id),
 							upsert
@@ -181,7 +162,7 @@ public class MongoDomainDB {
 	            
 				switch(child.getTagName()) {
 				case "editor":
-					proceedings.updateOne(
+					publications.updateOne(
 							eq("_id", id),
 							push("editors", value),
 							upsert
@@ -193,14 +174,14 @@ public class MongoDomainDB {
 					);
 					break;
 				case "title":
-					proceedings.updateOne(
+					publications.updateOne(
 							eq("_id", id),
 							set("title", value),
 							upsert
 					);
 					break;
 				case "publisher":
-					proceedings.updateOne(
+					publications.updateOne(
 							eq("_id", id),
 							set("publisher", value),
 							upsert
@@ -212,7 +193,7 @@ public class MongoDomainDB {
 					);
 					break;
 				case "series":
-					proceedings.updateOne(
+					publications.updateOne(
 							eq("_id", id),
 							set("series", value),
 							upsert
@@ -224,12 +205,12 @@ public class MongoDomainDB {
 					);
 					break;
 				case "year":
-					proceedings.updateOne(
+					publications.updateOne(
 							eq("_id", id),
 							set("year", Integer.valueOf(value)),
 							upsert
 					);
-					proceedings.updateOne(
+					publications.updateOne(
 							eq("_id", id),
 							set("conferenceEdition", id),
 							upsert
@@ -246,14 +227,14 @@ public class MongoDomainDB {
 					);
 					break;
 				case "isbn":
-					proceedings.updateOne(
+					publications.updateOne(
 							eq("_id", id),
 							set("isbn", value),
 							upsert
 					);
 					break;
 				case "booktitle":
-					proceedings.updateOne(
+					publications.updateOne(
 							eq("_id", id),
 							set("conference", value),
 							upsert
@@ -275,6 +256,11 @@ public class MongoDomainDB {
 				push("editions", id),
 				upsert
 		);
+    }
+    
+    public <T extends MongoDomainObject> MongoCursor<Document> find() {
+    	MongoCursor<Document> cursor = publications.find().iterator();
+    	return cursor;
     }
 /*    
     public <T extends ZooPC>T getById(Class<T> c, String id) {
