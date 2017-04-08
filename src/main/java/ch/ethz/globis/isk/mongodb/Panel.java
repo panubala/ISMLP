@@ -171,7 +171,7 @@ public class Panel extends JPanel {
         });
         jPanel4.add(jButton9, new AbsoluteConstraints(60, 210, 230, -1));
 
-        jButton14.setText("Search Publisher");
+        jButton14.setText("Search Publishers");
         jButton14.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jButton14ActionPerformed(evt);
@@ -187,7 +187,7 @@ public class Panel extends JPanel {
         });
         jPanel4.add(jButton15, new AbsoluteConstraints(60, 240, 230, -1));
 
-        jButton19.setText("Search Publication");
+        jButton19.setText("Search Publications");
         jButton19.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jButton19ActionPerformed(evt);
@@ -217,7 +217,7 @@ public class Panel extends JPanel {
         jButton3.setText("No of authors of a conference");
         add(jButton3, new AbsoluteConstraints(250, 390, 230, -1));
 
-        jButton4.setText("Search author/ editors");
+        jButton4.setText("Search Authors/Editors");
         jButton4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -225,7 +225,7 @@ public class Panel extends JPanel {
         });
         add(jButton4, new AbsoluteConstraints(250, 480, 230, -1));
 
-        jButton5.setText("Search Edition");
+        jButton5.setText("Conference Editions");
         add(jButton5, new AbsoluteConstraints(250, 150, 230, -1));
         jButton5.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -233,7 +233,7 @@ public class Panel extends JPanel {
             }
         });
 
-        jButton6.setText("Search InProceeding");
+        jButton6.setText("Inproceedings");
         add(jButton6, new AbsoluteConstraints(250, 180, 230, -1));
         jButton6.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -241,7 +241,7 @@ public class Panel extends JPanel {
             }
         });
 
-        jButton7.setText("Search Proceeding");
+        jButton7.setText("Proceedings");
         jButton7.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -249,7 +249,7 @@ public class Panel extends JPanel {
         });
         add(jButton7, new AbsoluteConstraints(250, 210, 230, -1));
 
-        jButton8.setText("Search Author");
+        jButton8.setText("Authors/Editors");
         add(jButton8, new AbsoluteConstraints(250, 240, 230, -1));
         jButton8.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -257,7 +257,7 @@ public class Panel extends JPanel {
             }
         });
 
-        jButton10.setText("Search Publisher");
+        jButton10.setText("Publishers");
         jButton10.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jButton10ActionPerformed(evt);
@@ -265,7 +265,7 @@ public class Panel extends JPanel {
         });
         add(jButton10, new AbsoluteConstraints(250, 300, 230, -1));
 
-        jButton11.setText("Search Series");
+        jButton11.setText("Series");
         jButton11.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jButton11ActionPerformed(evt);
@@ -276,7 +276,7 @@ public class Panel extends JPanel {
         jButton12.setText("Find average number of authors");
         add(jButton12, new AbsoluteConstraints(250, 360, 230, -1));
 
-        jButton13.setText("Search Publication");
+        jButton13.setText("Publications");
         jButton13.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jButton13ActionPerformed(evt);
@@ -287,7 +287,7 @@ public class Panel extends JPanel {
         jSeparator7.setForeground(new Color(255, 255, 255));
         add(jSeparator7, new AbsoluteConstraints(260, 100, 210, -1));
 
-        jButton16.setText("Search Conference");
+        jButton16.setText("Conferences");
         jButton16.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jButton16ActionPerformed(evt);
@@ -315,7 +315,6 @@ public class Panel extends JPanel {
     }                      
 
     private void jTextField16MouseClicked(MouseEvent evt) {
-    	
     }                                         
 
     private void jTextField16ActionPerformed(ActionEvent evt) {
@@ -339,7 +338,11 @@ public class Panel extends JPanel {
     }    
     
     private void jButton8ActionPerformed(ActionEvent evt) {
-    	
+    	new Table(db.persons,
+				db.persons.find().iterator(),
+    			"Authors/Editors",
+    			new String[] { "ID", "Name", "Authored Publications", "Edited Publications" },
+    			new String[] { "_id", "name", "authoredPublications", "editedPublications" });
     }  
 
     private void jButton9ActionPerformed(ActionEvent evt) {
@@ -347,11 +350,19 @@ public class Panel extends JPanel {
     }                                          
 
     private void jButton10ActionPerformed(ActionEvent evt) {
-    	
+    	new Table(db.publishers,
+				db.publishers.find().iterator(),
+    			"Publishers",
+    			new String[] { "ID", "Name", "Publications" },
+    			new String[] { "_id", "name", "publications" });
     }                                       
     
     private void jButton5ActionPerformed(ActionEvent evt) {
-    	
+    	new Table(db.conferenceEditions,
+				db.conferenceEditions.find().iterator(),
+    			"Conference Editions",
+    			new String[] { "ID", "Conference", "Year", "Proceedings" },
+    			new String[] { "_id", "conference", "year", "proceedings" });
     }
     
     private void jButton6ActionPerformed(ActionEvent evt) {
@@ -363,7 +374,11 @@ public class Panel extends JPanel {
     }
     
     private void jButton11ActionPerformed(ActionEvent evt) {
-    	
+    	new Table(db.series,
+				db.series.find().iterator(),
+    			"Series",
+    			new String[] { "ID", "Name", "Publications" },
+    			new String[] { "_id", "name", "publications" });
     }                                         
 
     private void jButton7ActionPerformed(ActionEvent evt) {
@@ -375,7 +390,6 @@ public class Panel extends JPanel {
     }                                        
 
     private void jButton4ActionPerformed(ActionEvent evt) {
-    	
     }                                        
 
     private void jButton13ActionPerformed(ActionEvent evt) {
@@ -387,7 +401,6 @@ public class Panel extends JPanel {
     }                    
 
     private void jButton14ActionPerformed(ActionEvent evt) {
-    	
     }                                         
 
     private void jButton15ActionPerformed(ActionEvent evt) {
@@ -395,7 +408,11 @@ public class Panel extends JPanel {
     }                                         
 
     private void jButton16ActionPerformed(ActionEvent evt) {
-    	
+    	new Table(db.conferences,
+				db.conferences.find().iterator(),
+    			"Conferences",
+    			new String[] { "ID", "Name", "Conference Edition" },
+    			new String[] { "_id", "name", "editions" });
     }                                         
 
     private void jButton17ActionPerformed(ActionEvent evt) {
