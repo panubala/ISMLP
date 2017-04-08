@@ -368,7 +368,7 @@ public class Panel extends JPanel {
 
     private void jButton7ActionPerformed(ActionEvent evt) {
     	new Table(db.publications,
-				db.publications.find(Filters.exists("publisher")).iterator(),
+				db.publications.find(Filters.exists("publications")).iterator(),
     			"Proceedings",
     			new String[] { "ID", "Title", "Year", "Publisher", "ISBN", "Editors", "Series", "Conference Edition", "Publications" },
     			new String[] { "_id", "title", "year", "publisher", "isbn", "editors", "series", "conferenceEdition", "publications" });
