@@ -9,6 +9,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
@@ -45,7 +49,8 @@ public class Panel extends JPanel {
 	private JButton query12Button = new JButton();
 	private JButton query13Button = new JButton();
 	private JButton query14Button = new JButton();
-	private JLabel title = new JLabel();
+	private JLabel titleLabel = new JLabel();
+	private JLabel resultLabel = new JLabel();
 	private JPanel leftPanel = new JPanel();
 	private JPanel rightPanel = new JPanel();
 	private JTextField textField1 = new JTextField();
@@ -60,16 +65,16 @@ public class Panel extends JPanel {
 
         leftPanel.setLayout(new AbsoluteLayout());
         leftPanel.setBackground(bgDark);
-        add(leftPanel, new AbsoluteConstraints(0, 0, 190, 550));
+        add(leftPanel, new AbsoluteConstraints(0, 0, 190, 580));
         
         rightPanel.setLayout(new AbsoluteLayout());
         rightPanel.setBackground(bgDark);
-        add(rightPanel, new AbsoluteConstraints(550, 0, 340, 550));
+        add(rightPanel, new AbsoluteConstraints(540, 0, 340, 580));
         
         
-        title.setFont(new Font("Century Gothic", 1, 30));
-        title.setForeground(font);
-        title.setText("Domain Objects");
+        titleLabel.setFont(new Font("Century Gothic", 1, 30));
+        titleLabel.setForeground(font);
+        titleLabel.setText("Domain Objects");
         
 
         publicationsButton.setText("Publications");
@@ -128,7 +133,7 @@ public class Panel extends JPanel {
             }
         });
         
-        add(title, 						new AbsoluteConstraints(230, 45, 300, 47));
+        add(titleLabel, 				new AbsoluteConstraints(230, 45, 300, 47));
         add(publicationsButton, 		new AbsoluteConstraints(250, 120, 230, -1));
         add(proceedingsButton, 			new AbsoluteConstraints(250, 150, 230, -1));
         add(inProceedingsButton, 		new AbsoluteConstraints(250, 180, 230, -1));
@@ -178,7 +183,7 @@ public class Panel extends JPanel {
                 query5ButtonActionPerformed(evt);
             }
         });
-
+		
         query6Button.setText("6. ");
         query6Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -206,7 +211,7 @@ public class Panel extends JPanel {
                 query9ButtonActionPerformed(evt);
             }
         });
-
+		
         query10Button.setText("10. ");
         query10Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -242,6 +247,10 @@ public class Panel extends JPanel {
             }
         });
         
+        resultLabel = new JLabel("", SwingConstants.CENTER);
+        resultLabel.setFont(new Font("Century Gothic", 0, 26));
+        resultLabel.setForeground(font);
+        
         rightPanel.add(textField1, 		new AbsoluteConstraints(60, 30, 230, -1));
         rightPanel.add(textField2, 		new AbsoluteConstraints(60, 60, 230, -1));
         rightPanel.add(textField3, 		new AbsoluteConstraints(60, 90, 230, -1));
@@ -259,6 +268,7 @@ public class Panel extends JPanel {
         rightPanel.add(query12Button, 	new AbsoluteConstraints(60, 450, 230, -1));
         rightPanel.add(query13Button, 	new AbsoluteConstraints(60, 480, 230, -1));
         rightPanel.add(query14Button, 	new AbsoluteConstraints(60, 510, 230, -1));
+        rightPanel.add(resultLabel, 	new AbsoluteConstraints(60, 540, 230, -1));
     }
 
     private void publicationsButtonActionPerformed(ActionEvent evt) {
@@ -307,6 +317,11 @@ public class Panel extends JPanel {
     }
     
     private void personsButtonActionPerformed(ActionEvent evt) {
+    	// Search persons by name
+    	
+    	/*String name = this.jTextField6.getText();
+    	String expr = "(this['name'] != undefined && this['name'].toString().includes('" + name + "'))";*/
+    	
     	new Table(db.persons,
 				db.persons.find().iterator(),
     			"Authors/Editors",
@@ -346,7 +361,15 @@ public class Panel extends JPanel {
     }
 
     private void query4ButtonActionPerformed(ActionEvent evt) {
+    	//String name = "Kevin D. Ashley";
+    	String name = textField1.getText();
     	
+    	new Table(db.publications, 
+    			db.publications.find(Filters.eq("authors", name)).iterator(), 
+    			"Co-Authors", 
+    			new String[] { "Title", "Authors"}, 
+    			new String[] { "title", "authors"},
+    			false);
     }
 
     private void query5ButtonActionPerformed(ActionEvent evt) {
@@ -358,7 +381,34 @@ public class Panel extends JPanel {
     }
 
     private void query7ButtonActionPerformed(ActionEvent evt) {
+    	// Number of publications per year
+    	String str1  = textField1.getText();
+    	String str2 = textField2.getText();
     	
+    	int yearFrom = Integer.parseInt(str1 );
+    	int yearTo   = Integer.parseInt(str2);
+    	
+    	if(yearFrom > yearTo){
+    		int temp = yearTo;
+    		yearTo = yearFrom;
+    		yearFrom = temp;
+    	}
+    	
+    	String expr = "(this['year'] != undefined && this['year'] >= "
+    					+ yearFrom
+    					+ " && this['year'] <= "
+    					+ yearTo
+    					+ ")";
+    	    	
+		long result = db.publications.count(Filters.where(expr)); 
+		resultLabel.setText(Long.toString(result));
+    	
+    	new Table(db.publications, 
+    			db.publications.find(Filters.where(expr)).iterator(), 
+    			"Publications between " + yearFrom + " and " + yearTo,
+    			new String[] {"Title", "Year"}, 
+    			new String[] {"title", "year"},
+    			false);
     }
 
     private void query8ButtonActionPerformed(ActionEvent evt) {
@@ -388,5 +438,4 @@ public class Panel extends JPanel {
     private void query14ButtonActionPerformed(ActionEvent evt) {
 		
     }
-	
 }

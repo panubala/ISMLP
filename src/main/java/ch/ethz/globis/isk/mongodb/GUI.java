@@ -24,7 +24,7 @@ public class GUI extends JFrame {
 					}
 				});
 				
-            	frame.setSize(890,589);
+            	frame.setSize(896,619);
             	frame.setVisible(true);
             }
         });
