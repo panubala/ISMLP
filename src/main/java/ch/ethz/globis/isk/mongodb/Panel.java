@@ -17,8 +17,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
@@ -30,6 +32,7 @@ import ch.ethz.globis.isk.domain.mongodb.MongoInProceedings;
 import ch.ethz.globis.isk.domain.mongodb.MongoPerson;
 import ch.ethz.globis.isk.domain.mongodb.MongoPublisher;
 import ch.ethz.globis.isk.domain.mongodb.MongoSeries;
+import ch.ethz.globis.isk.domain.mongodb.MongoPublication;
 
 public class Panel extends JPanel {
     
@@ -71,6 +74,8 @@ public class Panel extends JPanel {
         jButton17 = new JButton();
         jButton18 = new JButton();
         jButton20 = new JButton();
+
+        
 
         setBackground(new Color(97, 212, 195));
         setForeground(new Color(255, 255, 255));
@@ -313,6 +318,12 @@ public class Panel extends JPanel {
         });
         add(jButton18, new AbsoluteConstraints(250, 450, 230, -1));
         
+        
+        jLabelResult = new JLabel("", SwingConstants.CENTER);
+        jLabelResult.setFont(new Font("Century Gothic", 0, 26));
+        jLabelResult.setForeground(new Color(255, 255, 255));
+        jPanel4.add(jLabelResult, new AbsoluteConstraints(60, 360, 230, -1));
+        
       
     }                      
 
@@ -347,8 +358,30 @@ public class Panel extends JPanel {
     			new String[] { "_id", "name", "authoredPublications", "editedPublications" },
     			true);
     }  
-
+    
+    
+    // TODO: fix
     private void jButton9ActionPerformed(ActionEvent evt) {
+    	
+    	// Number of publications per year
+    	String str1 = this.jTextField6.getText();
+
+    	    	
+    	int year = Integer.parseInt(this.jTextField6.getText());
+
+    	
+    	MongoPublication query = new MongoPublication(null, null, null, year, null);
+    	
+		long result = db.publications.count(query.toDocument()); 
+		this.jLabelResult.setText(Long.toString(result));
+    	
+    	new Table(db.publications, 
+    			db.publications.find(query.toDocument()).iterator(), 
+    			"Publications of " + year,
+    			new String[] {"Title", "Year"}, 
+    			new String[] {"title", "year"},
+    			false);
+    	
     	
     }                                          
 
@@ -398,6 +431,8 @@ public class Panel extends JPanel {
     }                                        
 
     private void jButton4ActionPerformed(ActionEvent evt) {
+    	
+    	
     }                                        
 
     private void jButton13ActionPerformed(ActionEvent evt) {
@@ -428,6 +463,19 @@ public class Panel extends JPanel {
 
     private void jButton17ActionPerformed(ActionEvent evt) {
     	
+
+    	String name = "Kevin D. Ashley";
+    	
+    	
+    	new Table(db.publications, 
+    			db.publications.find(Filters.eq("authors", name)).iterator(), 
+    			"Co-Authors", 
+    			new String[] { "Title", "Authors"}, 
+    			new String[] { "title", "authors"},
+    			false);
+    	
+    	
+    	
     }                                         
 
     private void jButton18ActionPerformed(ActionEvent evt) {
@@ -440,24 +488,24 @@ public class Panel extends JPanel {
 
 
     // Variables declaration - do not modify
-    private JButton jButton3;
-    private JButton jButton4;
-    private JButton jButton5;
-    private JButton jButton6;
-    private JButton jButton7;
-    private JButton jButton8;
-    private JButton jButton9;                   
-    private JButton jButton10;
-    private JButton jButton11;
-    private JButton jButton12;
-    private JButton jButton13;
-    private JButton jButton14;
-    private JButton jButton15;
-    private JButton jButton16;
-    private JButton jButton17;
-    private JButton jButton18;
-    private JButton jButton19;
-    private JButton jButton20;
+    private JButton jButton3;		// No of authors of a converence
+    private JButton jButton4;		// Search author/editors
+    private JButton jButton5;		// Search Edition
+    private JButton jButton6;		// Search InProceeding
+    private JButton jButton7;		// Search Proceeding
+    private JButton jButton8;		// Search Author
+    private JButton jButton9;		// No of Publications per year
+    private JButton jButton10;		// Search Publisher
+    private JButton jButton11;		// Search Series
+    private JButton jButton12;		// Find average number of authors
+    private JButton jButton13;		// Search Publication
+    private JButton jButton14;		// Search Publisher
+    private JButton jButton15;		// Shortest Path between 2 authors
+    private JButton jButton16;		// Search Conference
+    private JButton jButton17;		// Search Co-Authors
+    private JButton jButton18;		// No of publications in conference
+    private JButton jButton19;		// Search Publication
+    private JButton jButton20;		// UNASSIGNED
     private JLabel jLabel1;
     private JLabel jLabel9;
     private JPanel jPanel1;
@@ -470,5 +518,6 @@ public class Panel extends JPanel {
     private JTextField jTextField16;
     private JTextField jTextField17;
     private JTextField jTextField6;
+    private JLabel jLabelResult;	// Bottom right result label
 	
 }
