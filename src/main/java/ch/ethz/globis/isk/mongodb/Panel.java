@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
 
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -200,7 +201,7 @@ public class Panel extends JPanel {
         jTextField6.setBackground(new Color(97, 212, 195));
         jTextField6.setFont(new Font("Century Gothic", 0, 10)); // NOI18N
         jTextField6.setForeground(new Color(255, 255, 255));
-        jTextField6.setText("Enter filter ");
+        jTextField6.setText("Enter filter");
         jTextField6.setBorder(null);
         jTextField6.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
@@ -303,6 +304,7 @@ public class Panel extends JPanel {
         });
         add(jButton17, new AbsoluteConstraints(250, 420, 230, -1));
 
+        
         jButton18.setText("No of publications in conference");
         jButton18.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -342,7 +344,8 @@ public class Panel extends JPanel {
 				db.persons.find().iterator(),
     			"Authors/Editors",
     			new String[] { "ID", "Name", "Authored Publications", "Edited Publications" },
-    			new String[] { "_id", "name", "authoredPublications", "editedPublications" });
+    			new String[] { "_id", "name", "authoredPublications", "editedPublications" },
+    			true);
     }  
 
     private void jButton9ActionPerformed(ActionEvent evt) {
@@ -354,7 +357,8 @@ public class Panel extends JPanel {
 				db.publishers.find().iterator(),
     			"Publishers",
     			new String[] { "ID", "Name", "Publications" },
-    			new String[] { "_id", "name", "publications" });
+    			new String[] { "_id", "name", "publications" },
+    			true);
     }                                       
     
     private void jButton5ActionPerformed(ActionEvent evt) {
@@ -362,7 +366,8 @@ public class Panel extends JPanel {
 				db.conferenceEditions.find().iterator(),
     			"Conference Editions",
     			new String[] { "ID", "Conference", "Year", "Proceedings" },
-    			new String[] { "_id", "conference", "year", "proceedings" });
+    			new String[] { "_id", "conference", "year", "proceedings" },
+    			true);
     }
     
     private void jButton6ActionPerformed(ActionEvent evt) {
@@ -370,7 +375,8 @@ public class Panel extends JPanel {
 				db.publications.find(Filters.exists("proceedings")).iterator(),
     			"Inproceedings",
     			new String[] { "ID", "Title", "Authors", "Proceedings" },
-    			new String[] { "_id", "title", "authors", "proceedings" });
+    			new String[] { "_id", "title", "authors", "proceedings" },
+    			true);
     }
     
     private void jButton11ActionPerformed(ActionEvent evt) {
@@ -378,7 +384,8 @@ public class Panel extends JPanel {
 				db.series.find().iterator(),
     			"Series",
     			new String[] { "ID", "Name", "Publications" },
-    			new String[] { "_id", "name", "publications" });
+    			new String[] { "_id", "name", "publications" },
+    			true);
     }                                         
 
     private void jButton7ActionPerformed(ActionEvent evt) {
@@ -386,7 +393,8 @@ public class Panel extends JPanel {
 				db.publications.find(Filters.exists("publications")).iterator(),
     			"Proceedings",
     			new String[] { "ID", "Title", "Year", "Publisher", "ISBN", "Editors", "Series", "Conference Edition", "Publications" },
-    			new String[] { "_id", "title", "year", "publisher", "isbn", "editors", "series", "conferenceEdition", "publications" });
+    			new String[] { "_id", "title", "year", "publisher", "isbn", "editors", "series", "conferenceEdition", "publications" },
+    			true);
     }                                        
 
     private void jButton4ActionPerformed(ActionEvent evt) {
@@ -397,10 +405,12 @@ public class Panel extends JPanel {
 				db.publications.find().iterator(),
     			"Publications",
     			new String[] { "ID", "Title" },
-    			new String[] { "_id", "title" });
+    			new String[] { "_id", "title" },
+    			true);
     }                    
 
     private void jButton14ActionPerformed(ActionEvent evt) {
+    	
     }                                         
 
     private void jButton15ActionPerformed(ActionEvent evt) {
@@ -412,7 +422,8 @@ public class Panel extends JPanel {
 				db.conferences.find().iterator(),
     			"Conferences",
     			new String[] { "ID", "Name", "Conference Edition" },
-    			new String[] { "_id", "name", "editions" });
+    			new String[] { "_id", "name", "editions" },
+    			true);
     }                                         
 
     private void jButton17ActionPerformed(ActionEvent evt) {

@@ -101,12 +101,12 @@ public class Database {
 				case "author":
 					publications.updateOne(
 							eq("_id", id),
-							push("authors", value),
+							addToSet("authors", value),
 							upsert
 					);
 					persons.updateOne(
 							eq("name", value),
-							push("authoredPublications", id),
+							addToSet("authoredPublications", id),
 							upsert
 					);
 					break;
@@ -139,7 +139,7 @@ public class Database {
 					);
 					publications.updateOne(
 							eq("_id", value),
-							push("publications", id),
+							addToSet("publications", id),
 							upsert
 					);
 					break;
@@ -164,12 +164,12 @@ public class Database {
 				case "editor":
 					publications.updateOne(
 							eq("_id", id),
-							push("editors", value),
+							addToSet("editors", value),
 							upsert
 					);
 					persons.updateOne(
 							eq("name", value),
-							push("editedPublications", id),
+							addToSet("editedPublications", id),
 							upsert
 					);
 					break;
@@ -188,7 +188,7 @@ public class Database {
 					);
 					publishers.updateOne(
 							eq("name", value),
-							push("publications", id),
+							addToSet("publications", id),
 							upsert
 					);
 					break;
@@ -200,7 +200,7 @@ public class Database {
 					);
 					series.updateOne(
 							eq("name", value),
-							push("publications", id),
+							addToSet("publications", id),
 							upsert
 					);
 					break;
@@ -253,7 +253,7 @@ public class Database {
 		
 		conferences.updateOne(
 				eq("name", conferenceName),
-				push("editions", id),
+				addToSet("editions", id),
 				upsert
 		);
     }

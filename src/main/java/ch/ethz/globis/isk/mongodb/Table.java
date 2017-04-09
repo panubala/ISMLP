@@ -47,16 +47,23 @@ public class Table extends JTable {
 	JTextField idTextField;
 	
 	
-	public <T extends MongoDomainObject> Table(final MongoCollection<Document> collection, final MongoCursor<Document> cursor, final String title, final String[] columnNames, final String[] fieldNames) {
+	public <T extends MongoDomainObject> Table(final MongoCollection<Document> collection, final MongoCursor<Document> cursor, final String title, final String[] columnNames, final String[] fieldNames, final boolean allowModifications) {
 		this.collection = collection;
 		this.fieldNames = fieldNames;
 		
 		frame = new JFrame(title);
         
-		createTopPanel();
-		createBottomPanel();
-		
-        model = new DefaultTableModel();
+		if (allowModifications) {
+			createTopPanel();
+			createBottomPanel();
+		}
+
+        model = new DefaultTableModel() {        	
+			@Override
+				public boolean isCellEditable(int row, int column) {
+				return allowModifications;
+			}
+		};
         model.setColumnIdentifiers(columnNames);
         
         setModel(model);
@@ -71,42 +78,46 @@ public class Table extends JTable {
         frame.setSize(1280, 720);
         
         // Listener for cell edit
-        TableCellListener tcl = new TableCellListener(this, new AbstractAction() {
-        	@Override
-            public void actionPerformed(ActionEvent e) {
-    			TableCellListener tcl = (TableCellListener) e.getSource();
-    			
-        		if (tcl.getColumn() == 0) {
-        			model.setValueAt(tcl.getOldValue(), tcl.getRow(), tcl.getColumn());
-        			return;
-        		}
-        		
-    			String fieldName = fieldNames[tcl.getColumn()];
-    			Object id = model.getValueAt(tcl.getRow(), 0);
-    			String value = (String) tcl.getNewValue();
-    			if (!(value.charAt(0) == '[' && value.charAt(value.length()-1) == ']'))
-    				collection.findOneAndUpdate(Filters.eq(fieldNames[0], id), Updates.set(fieldName, value));
-    			else {
-    				List<String> values = Arrays.asList(value.substring(1, value.length()-1).split("\\s*,\\s*"));
-					collection.findOneAndUpdate(Filters.eq(fieldNames[0], id), Updates.set(fieldName, values));
-    			}
-            }
-        });
+        if (allowModifications) {
+	        TableCellListener tcl = new TableCellListener(this, new AbstractAction() {
+	        	@Override
+	            public void actionPerformed(ActionEvent e) {
+	    			TableCellListener tcl = (TableCellListener) e.getSource();
+	    			
+	        		if (tcl.getColumn() == 0) {
+	        			model.setValueAt(tcl.getOldValue(), tcl.getRow(), tcl.getColumn());
+	        			return;
+	        		}
+	        		
+	    			String fieldName = fieldNames[tcl.getColumn()];
+	    			Object id = model.getValueAt(tcl.getRow(), 0);
+	    			String value = (String) tcl.getNewValue();
+	    			if (!(value.charAt(0) == '[' && value.charAt(value.length()-1) == ']'))
+	    				collection.findOneAndUpdate(Filters.eq(fieldNames[0], id), Updates.set(fieldName, value));
+	    			else {
+	    				List<String> values = Arrays.asList(value.substring(1, value.length()-1).split("\\s*,\\s*"));
+						collection.findOneAndUpdate(Filters.eq(fieldNames[0], id), Updates.set(fieldName, values));
+	    			}
+	            }
+	        });
+        }
         
         // Delete action
-        getInputMap().put(KeyStroke.getKeyStroke("DELETE"), "delete");
-        getActionMap().put("delete", new AbstractAction() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int[] rows = getSelectedRows();
-				Object id;
-				for (int i = rows.length - 1; i >= 0; i--) {
-					id = model.getValueAt(rows[i], 0);
-					model.removeRow(rows[i]);
-					collection.findOneAndDelete(Filters.eq(fieldNames[0], id));
+        if (allowModifications) {
+	        getInputMap().put(KeyStroke.getKeyStroke("DELETE"), "delete");
+	        getActionMap().put("delete", new AbstractAction() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int[] rows = getSelectedRows();
+					Object id;
+					for (int i = rows.length - 1; i >= 0; i--) {
+						id = model.getValueAt(rows[i], 0);
+						model.removeRow(rows[i]);
+						collection.findOneAndDelete(Filters.eq(fieldNames[0], id));
+					}
 				}
-			}
-		});
+			});
+        }
         
         insert(cursor);
         
