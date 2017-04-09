@@ -247,7 +247,7 @@ public class Panel extends JPanel {
             }
         });
 
-        jButton7.setText("Proceedings");
+        jButton7.setText("Proceedings by ID");
         jButton7.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -282,7 +282,7 @@ public class Panel extends JPanel {
         jButton12.setText("Find average number of authors");
         add(jButton12, new AbsoluteConstraints(250, 360, 230, -1));
 
-        jButton13.setText("Publications");
+        jButton13.setText("Publications by ID");
         jButton13.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jButton13ActionPerformed(evt);
@@ -351,8 +351,15 @@ public class Panel extends JPanel {
     }    
     
     private void jButton8ActionPerformed(ActionEvent evt) {
+    	
+    	// Search persons by name
+    	
+    	String name = this.jTextField6.getText();
+    	String expr = "(this['name'] != undefined && this['name'].toString().includes('" + name + "'))";
+    	
+    	
     	new Table(db.persons,
-				db.persons.find().iterator(),
+				db.persons.find(Filters.where(expr)).iterator(),
     			"Authors/Editors",
     			new String[] { "ID", "Name", "Authored Publications", "Edited Publications" },
     			new String[] { "_id", "name", "authoredPublications", "editedPublications" },
@@ -360,24 +367,33 @@ public class Panel extends JPanel {
     }  
     
     
-    // TODO: fix
     private void jButton9ActionPerformed(ActionEvent evt) {
     	
     	// Number of publications per year
-    	String str1 = this.jTextField6.getText();
-
+    	String strLeft  = this.jTextField17.getText();
+    	String strRight = this.jTextField16.getText();
+    	
+    	int yearFrom = Integer.parseInt(strLeft );
+    	int yearTo   = Integer.parseInt(strRight);
+    	
+    	if(yearFrom > yearTo){
+    		int temp = yearTo;
+    		yearTo = yearFrom;
+    		yearFrom = temp;
+    	}
+    	
+    	String expr = "(this['year'] != undefined && this['year'] >= "
+    					+ yearFrom
+    					+ " && this['year'] <= "
+    					+ yearTo
+    					+ ")";
     	    	
-    	int year = Integer.parseInt(this.jTextField6.getText());
-
-    	
-    	MongoPublication query = new MongoPublication(null, null, null, year, null);
-    	
-		long result = db.publications.count(query.toDocument()); 
+		long result = db.publications.count(Filters.where(expr)); 
 		this.jLabelResult.setText(Long.toString(result));
     	
     	new Table(db.publications, 
-    			db.publications.find(query.toDocument()).iterator(), 
-    			"Publications of " + year,
+    			db.publications.find(Filters.where(expr)).iterator(), 
+    			"Publications between " + yearFrom + " and " + yearTo,
     			new String[] {"Title", "Year"}, 
     			new String[] {"title", "year"},
     			false);
@@ -422,8 +438,14 @@ public class Panel extends JPanel {
     }                                         
 
     private void jButton7ActionPerformed(ActionEvent evt) {
+    	
+    	String input = this.jTextField6.getText();
+    	String expr = "(this['_id'] != undefined && this['_id'].toString().includes('" + input + "'))";
+
+    	
+    	
     	new Table(db.publications,
-				db.publications.find(Filters.exists("publications")).iterator(),
+				db.publications.find(Filters.where(expr)).iterator(),
     			"Proceedings",
     			new String[] { "ID", "Title", "Year", "Publisher", "ISBN", "Editors", "Series", "Conference Edition", "Publications" },
     			new String[] { "_id", "title", "year", "publisher", "isbn", "editors", "series", "conferenceEdition", "publications" },
@@ -436,12 +458,19 @@ public class Panel extends JPanel {
     }                                        
 
     private void jButton13ActionPerformed(ActionEvent evt) {
+    	
+    	String input = this.jTextField6.getText();
+    	String expr = "(this['_id'] != undefined && this['_id'].toString().includes('" + input + "'))";
+
+    	
+    	
     	new Table(db.publications,
-				db.publications.find().iterator(),
+				db.publications.find(Filters.where(expr)).iterator(),
     			"Publications",
-    			new String[] { "ID", "Title" },
-    			new String[] { "_id", "title" },
+    			new String[] { "ID", "Title", "Year" },
+    			new String[] { "_id", "title", "year" },
     			true);
+
     }                    
 
     private void jButton14ActionPerformed(ActionEvent evt) {
@@ -477,8 +506,13 @@ public class Panel extends JPanel {
     	
     	
     }                                         
-
+    
+    // Numer of publications in a conference
     private void jButton18ActionPerformed(ActionEvent evt) {
+    	
+    	String title = this.jTextField6.getText();
+    	
+    	db.
     	
     }                                         
 
