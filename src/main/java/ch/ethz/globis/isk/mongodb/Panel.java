@@ -613,7 +613,46 @@ public class Panel extends JPanel {
     }
 
     private void query8ButtonActionPerformed(ActionEvent evt) {
+    	String name = textField1.getText();
     	
+    	Iterator<Document> iterator =
+    			db.conferences.aggregate(Arrays.asList(
+    				new Document("$match",
+    					new Document("name", name)
+					),
+					new Document("$lookup",
+						new Document("from", "conferenceEditions")
+						.append("localField", "editions")
+						.append("foreignField", "_id")
+						.append("as", "editions")
+					),
+					new Document("$unwind", "$editions"),
+					
+					new Document("$lookup",
+						new Document("from", "publications")
+						.append("localField", "editions.proceedings")
+						.append("foreignField", "_id")
+						.append("as", "proceedings")
+					),
+					new Document("$group",
+						new Document("_id", null)
+						.append("name",
+							new Document("$first", "$name")
+						)
+						.append("count",
+							new Document("$sum",
+								new Document("$size", "$proceedings.publications")
+							)
+						)
+					)
+    			)).iterator();
+    	
+    	new Table(db.conferences, 
+    			iterator,
+    			"Publications of conference " + name,
+    			new String[] {"Name", "Number of publications" },
+    			new String[] {"name", "count" },
+    			false);
     }
 
     private void query9ButtonActionPerformed(ActionEvent evt) {
