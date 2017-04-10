@@ -863,6 +863,22 @@ public class Panel extends JPanel {
 
     private void query12ButtonActionPerformed(ActionEvent evt) {
     	
+    	
+    	// JavaScript command: Always returns empty arrays as intersection. (???)
+//    	db.getCollection('persons').aggregate([
+//    	                                       {$match: {"authoredPublications": {$exists: true}}},
+//    	                                       {$match: {"editedPublications": {$exists: true}}},
+//    	                                       {$project: {"_id": 1, "name": 1, "authoredPublications": 1, "editedPublications": 1,
+//    	                                           "intersect": {$setIntersection: ["$authoredPublications", "$editedPublications"]}
+//    	                                           }
+//    	                                       },
+//    	                                       {$match: {"intersect": { $exists: true, $ne: [] }}}
+//    	                                   ])
+		
+    }
+
+    private void query13ButtonActionPerformed(ActionEvent evt) {
+		
     	String name = textField1.getText();
     	
     	// Exact matching could be used alternatively
@@ -876,12 +892,8 @@ public class Panel extends JPanel {
     			"Publications containing " + name + " as last author",
     			new String[]{"ID", "Title", "Authors", "Pages", "Year"},
     			new String[]{"_id", "title", "authors", "pages", "year"},
-    			false);
-		
-    }
-
-    private void query13ButtonActionPerformed(ActionEvent evt) {
-		
+    			true);
+    	
     }
 
     private void query14ButtonActionPerformed(ActionEvent evt) {
