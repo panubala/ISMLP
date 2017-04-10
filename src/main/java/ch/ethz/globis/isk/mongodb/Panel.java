@@ -198,7 +198,7 @@ public class Panel extends JPanel {
             }
         });
 		
-        query6Button.setText("6. Avg number of publications per year");
+        query6Button.setText("6. Avg number of publications");
         query6Button.setFont(smallFont);
         query6Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
