@@ -1,4 +1,4 @@
-package ch.ethz.globis.isk.domain.mongodb;
+ package ch.ethz.globis.isk.domain.mongodb;
 
 import java.util.ArrayList;
 import java.util.Collections;

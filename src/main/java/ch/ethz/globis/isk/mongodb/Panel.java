@@ -576,16 +576,26 @@ public class Panel extends JPanel {
     	
     	Iterator<Document> iterator =
     			db.publications.aggregate(Arrays.asList(
+					new Document("$project",
+						new Document("_id", "$_id")
+						.append("year", "$year")
+						.append("gte",
+							new Document("$gte", Arrays.asList(
+								"$year", yearFrom
+							))
+						)
+						.append("lte",
+							new Document("$lte", Arrays.asList(
+								"$year", yearTo
+							))
+						)
+					),
 					new Document("$match",
 						new Document("$and", Arrays.asList(
-							new Document("year",
-								new Document("$gte", yearFrom)
-							),
-							new Document("year",
-								new Document("$lte", yearTo)
-							)
-						)
-					)),
+							new Document("gte", true),
+							new Document("lte", true)
+						))
+					),
 					new Document("$group",
 						new Document("_id", "$_id")
 						.append("count",
@@ -607,8 +617,8 @@ public class Panel extends JPanel {
     	new Table(db.publications, 
     			iterator,
     			"Publications between " + yearFrom + " and " + yearTo,
-    			new String[] {"Year", "Number of Publications" },
-    			new String[] {"_id", "count" },
+    			new String[] {"Year", "Number of Publications"},
+    			new String[] {"_id", "count"},
     			false);
     }
 
@@ -897,6 +907,60 @@ public class Panel extends JPanel {
     }
 
     private void query14ButtonActionPerformed(ActionEvent evt) {
-		
+    	int yearFrom;
+    	int yearTo;
+    	
+    	try {
+        	yearFrom = Integer.parseInt(textField1.getText());
+        	yearTo = Integer.parseInt(textField2.getText());
+    	} catch (Exception e) {
+    		resultLabel.setText(invalidInput);
+    		return;
+    	}
+    	
+    	Iterator<Document> iterator =
+    			db.publications.aggregate(Arrays.asList(
+					new Document("$project",
+						new Document("_id", "$_id")
+						.append("publisher", "$publisher")
+						.append("authors", "$authors")
+						.append("editors", "$editors")
+						.append("year", "$year")
+						.append("gte",
+							new Document("$gte", Arrays.asList(
+								"$year", yearFrom
+							))
+						)
+						.append("lte",
+							new Document("$lte", Arrays.asList(
+								"$year", yearTo
+							))
+						)
+					),
+					new Document("$match",
+						new Document("$and", Arrays.asList(
+							new Document("gte", true),
+							new Document("lte", true)
+						))
+					),
+					
+					new Document("$lookup",
+						new Document("from", "$$ROOT")
+						.append("localField", "authors")
+						.append("foreignField", "editors")
+						.append("as", "proceedings")
+					),
+					
+					new Document("$group",
+						new Document("_id", "$publisher")
+					)
+    			)).iterator();
+    	
+    	new Table(db.publishers, 
+    			iterator,
+    			"Publishers of proceedings whose authors appear in inproceedings in range of years " + yearFrom + " to " + yearTo,
+    			new String[] {"Publisher"},
+    			new String[] {"_id"},
+    			false);
     }
 }
