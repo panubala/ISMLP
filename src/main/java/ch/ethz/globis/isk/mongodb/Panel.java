@@ -20,6 +20,7 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import com.mongodb.QueryBuilder;
+import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.*;
 import com.mongodb.operation.GroupOperation;
@@ -492,6 +493,46 @@ public class Panel extends JPanel {
     }
 
     private void query6ButtonActionPerformed(ActionEvent evt) {
+    	
+//    	dbpublications.aggregate([
+//    	                          {$project: {_id: 1, title: 1, authors: 1,
+//    	                        	  total: {$size: {"$ifNull": ["$authors", []]}}}},
+//    	                          {$group: {_id: "Average Number", count: {$avg: "$total"}}}
+//    	    ])
+    	
+    	AggregateIterable<Document> query = db.publications.aggregate(Arrays.asList(
+    			new Document("$project", 
+    					new Document("_id", 1)
+    					.append("title", 1)
+    					.append("authors", 1)
+    					.append("total",
+    							new Document("$size",
+    									new Document("$ifNull",
+    											Arrays.asList("$authors", Arrays.asList())
+    											)
+    									)
+    							)
+    					),
+    			new Document("$group", 
+    					new Document("_id", "average")
+    					.append("count",
+    							new Document("$avg", "$total")))
+    			));
+    	
+    	Document firstRes = query.first();
+    	
+    	if(firstRes.containsKey("count")){
+    		this.resultLabel.setText(Double.toString(firstRes.getDouble("count")));
+    	}
+    	
+
+    	
+    	new Table(db.publications,
+    			query.iterator(),
+    			"Global avg",
+    			new String[] {"ID", "Count"},
+    			new String[] {"_id", "count"},
+    			true);
     	
     }
 
