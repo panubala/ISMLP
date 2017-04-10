@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -17,15 +19,21 @@ import org.bson.conversions.Bson;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
+import com.mongodb.QueryBuilder;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.*;
+import com.mongodb.operation.GroupOperation;
 
 public class Panel extends JPanel {
     
 	private Database db;
 	private Color bgLight = new Color(97, 212, 195);
 	private Color bgDark = new Color(36, 47, 65);
-	private Color font = Color.WHITE;
+	private Color fontColor = Color.WHITE;
+	private Font smallFont = new Font("Century Gothic", 0, 10);
+	private Font mediumFont = new Font("Century Gothic", 0, 26);
+	private Font largeFont = new Font("Century Gothic", 1, 30);
+	private String invalidInput = "Invalid Input";
 	
 	private JButton conferenceEditionsButton = new JButton();
 	private JButton inProceedingsButton = new JButton();
@@ -72,8 +80,8 @@ public class Panel extends JPanel {
         add(rightPanel, new AbsoluteConstraints(540, 0, 340, 580));
         
         
-        titleLabel.setFont(new Font("Century Gothic", 1, 30));
-        titleLabel.setForeground(font);
+        titleLabel.setFont(largeFont);
+        titleLabel.setForeground(fontColor);
         titleLabel.setText("Domain Objects");
         
 
@@ -144,103 +152,117 @@ public class Panel extends JPanel {
         add(seriesButton, 				new AbsoluteConstraints(250, 330, 230, -1));
         
         
-        textField1.setFont(new Font("Century Gothic", 0, 10));
-        textField2.setFont(new Font("Century Gothic", 0, 10));
-        textField3.setFont(new Font("Century Gothic", 0, 10));
+        textField1.setFont(smallFont);
+        textField2.setFont(smallFont);
+        textField3.setFont(smallFont);
         
         
-        query1Button.setText("1. Find publication by id");
+        query1Button.setText("1. Publication by id");
+        query1Button.setFont(smallFont);
         query1Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 query1ButtonActionPerformed(evt);
             }
         });
 
-        query2Button.setText("2. ");
+        query2Button.setText("2. Publications by title, begin-, end-offset");
+        query2Button.setFont(smallFont);
         query2Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 query2ButtonActionPerformed(evt);
             }
         });
 
-        query3Button.setText("3. ");
+        query3Button.setText("3. Query 2 ordered by title");
+        query3Button.setFont(smallFont);
         query3Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 query3ButtonActionPerformed(evt);
             }
         });
 
-        query4Button.setText("4. ");
+        query4Button.setText("4. Co-authors of person");
+        query4Button.setFont(smallFont);
         query4Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 query4ButtonActionPerformed(evt);
             }
         });
 
-        query5Button.setText("5. ");
+        query5Button.setText("5. Shortest path between two authors");
+        query5Button.setFont(smallFont);
         query5Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 query5ButtonActionPerformed(evt);
             }
         });
 		
-        query6Button.setText("6. ");
+        query6Button.setText("6. Avg number of publications per year");
+        query6Button.setFont(smallFont);
         query6Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 query6ButtonActionPerformed(evt);
             }
         });
 
-        query7Button.setText("7. ");
+        query7Button.setText("7. Publications count per year in interval");
+        query7Button.setFont(smallFont);
         query7Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 query7ButtonActionPerformed(evt);
             }
         });
         
-        query8Button.setText("8. ");
+        query8Button.setText("8. Publications count of conference");
+        query8Button.setFont(smallFont);
         query8Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 query8ButtonActionPerformed(evt);
             }
         });
 
-        query9Button.setText("9. ");
+        query9Button.setText("9. Authors/Editors count of conference");
+        query9Button.setFont(smallFont);
         query9Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 query9ButtonActionPerformed(evt);
             }
         });
 		
-        query10Button.setText("10. ");
+        query10Button.setText("10. Authors of conference");
+        query10Button.setFont(smallFont);
         query10Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 query10ButtonActionPerformed(evt);
             }
         });
 
-        query11Button.setText("11. ");
+        query11Button.setText("11. Publications of conference");
+        query11Button.setFont(smallFont);
         query11Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 query11ButtonActionPerformed(evt);
             }
         });
 
-        query12Button.setText("12. ");
+        query12Button.setText("12. Authors that are also the editors");
+        query12Button.setFont(smallFont);
         query12Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 query12ButtonActionPerformed(evt);
             }
         });
 
-        query13Button.setText("13. ");
+        query13Button.setText("13. Publications where author listed last");
+        query13Button.setFont(smallFont);
         query13Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 query13ButtonActionPerformed(evt);
             }
         });
 
-        query14Button.setText("14. ");
+        query14Button.setText("14. Publishers of proceedings whose authors appear in any inproceedings in range of years");
+        query14Button.setFont(smallFont);
         query14Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 query14ButtonActionPerformed(evt);
@@ -248,8 +270,8 @@ public class Panel extends JPanel {
         });
         
         resultLabel = new JLabel("", SwingConstants.CENTER);
-        resultLabel.setFont(new Font("Century Gothic", 0, 26));
-        resultLabel.setForeground(font);
+        resultLabel.setFont(mediumFont);
+        resultLabel.setForeground(fontColor);
         
         rightPanel.add(textField1, 		new AbsoluteConstraints(60, 30, 230, -1));
         rightPanel.add(textField2, 		new AbsoluteConstraints(60, 60, 230, -1));
@@ -349,26 +371,119 @@ public class Panel extends JPanel {
     }
 
     private void query1ButtonActionPerformed(ActionEvent evt) {
+    	String id = textField1.getText();
     	
+    	Iterator<Document> iterator = db.publications.find(Filters.eq("_id", id)).iterator();
+    	new Table(db.publications,
+				iterator,
+    			"Publication by ID",
+    			new String[] { "ID", "Title" },
+    			new String[] { "_id", "title" },
+    			false);
     }
 
     private void query2ButtonActionPerformed(ActionEvent evt) {
+    	String title = textField1.getText();
+    	int beginOffset;
+    	int endOffset;
     	
+    	try {
+        	beginOffset = Integer.parseInt(textField2.getText());
+        	endOffset = Integer.parseInt(textField3.getText());
+    	} catch (Exception e) {
+    		resultLabel.setText(invalidInput);
+    		return;
+    	}
+    	
+    	Iterator<Document> iterator =
+    			db.publications.aggregate(Arrays.asList(
+    				new Document("$match",
+    					new Document("title",
+    						new Document("$regex", ".*" + title + ".*i")
+    					)
+					),
+					new Document("$skip", beginOffset),
+					new Document("$limit", endOffset - beginOffset)
+    			)).iterator();
+    	
+    	new Table(db.publications,
+				iterator,
+    			"Publications by title, begin-offset, end-offset",
+    			new String[] { "ID", "Title" },
+    			new String[] { "_id", "title" },
+    			false);
     }
 
     private void query3ButtonActionPerformed(ActionEvent evt) {
+    	String title = textField1.getText();
+    	int beginOffset;
+    	int endOffset;
     	
+    	try {
+        	beginOffset = Integer.parseInt(textField2.getText());
+        	endOffset = Integer.parseInt(textField3.getText());
+    	} catch (Exception e) {
+    		resultLabel.setText(invalidInput);
+    		return;
+    	}
+    	
+    	Iterator<Document> iterator =
+    			db.publications.aggregate(Arrays.asList(
+    				new Document("$match",
+    					new Document("title",
+    						new Document("$regex", ".*" + title + ".*i")
+    					)
+					),
+					new Document("$skip", beginOffset),
+					new Document("$limit", endOffset - beginOffset),
+					new Document("$sort", new Document("title", 1))
+    			)).iterator();
+    	
+    	new Table(db.publications,
+				iterator,
+    			"Publications by title, begin-offset, end-offset ordered by title",
+    			new String[] { "ID", "Title" },
+    			new String[] { "_id", "title" },
+    			false);
     }
 
     private void query4ButtonActionPerformed(ActionEvent evt) {
     	//String name = "Kevin D. Ashley";
     	String name = textField1.getText();
     	
-    	new Table(db.publications, 
-    			db.publications.find(Filters.eq("authors", name)).iterator(), 
-    			"Co-Authors", 
-    			new String[] { "Title", "Authors"}, 
-    			new String[] { "title", "authors"},
+    	Iterator<Document> iterator =
+    			db.publications.aggregate(Arrays.asList(
+    				new Document("$match",
+						new Document("authors", name)
+					),
+    				new Document("$project",
+    					new Document("author", name)
+    					.append("coAuthors",
+		    				new Document("$filter",
+								new Document("input", "$authors")
+			    				.append("as", "author")
+			    				.append("cond",
+			    					new Document("$ne", Arrays.asList(
+			    						"$$author", name
+		    						))
+								)
+		    				)
+	    				)
+					),
+    				new Document("$unwind", "$coAuthors"),
+    				new Document("$group",
+    					new Document("_id", "$author")
+    					.append("coAuthors",
+							new Document("$addToSet", "$coAuthors")
+						)
+					)
+    			)).iterator();
+    	
+    	new Table(db.publications,
+				iterator,
+    			"Co-Authors",
+    			new String[] { "Author", "Co-Authors" },
+    			new String[] { "_id", "coAuthors" },
     			false);
     }
 
@@ -385,8 +500,16 @@ public class Panel extends JPanel {
     	String str1  = textField1.getText();
     	String str2 = textField2.getText();
     	
-    	int yearFrom = Integer.parseInt(str1 );
-    	int yearTo   = Integer.parseInt(str2);
+    	int yearFrom;
+    	int yearTo;
+    	
+    	try {
+	    	yearFrom = Integer.parseInt(str1);
+	    	yearTo   = Integer.parseInt(str2);
+    	} catch (Exception e) {
+    		resultLabel.setText(invalidInput);
+    		return;
+    	}
     	
     	if(yearFrom > yearTo){
     		int temp = yearTo;
@@ -394,7 +517,7 @@ public class Panel extends JPanel {
     		yearFrom = temp;
     	}
     	
-    	String expr = "(this['year'] != undefined && this['year'] >= "
+    	/*String expr = "(this['year'] != undefined && this['year'] >= "
     					+ yearFrom
     					+ " && this['year'] <= "
     					+ yearTo
@@ -408,6 +531,43 @@ public class Panel extends JPanel {
     			"Publications between " + yearFrom + " and " + yearTo,
     			new String[] {"Title", "Year"}, 
     			new String[] {"title", "year"},
+    			false);*/
+    	
+    	Iterator<Document> iterator =
+    			db.publications.aggregate(Arrays.asList(
+					new Document("$match",
+						new Document("$and", Arrays.asList(
+							new Document("year",
+								new Document("$gte", yearFrom)
+							),
+							new Document("year",
+								new Document("$lte", yearTo)
+							)
+						)
+					)),
+					new Document("$group",
+						new Document("_id", "$_id")
+						.append("count",
+							new Document("$sum", 1)
+						)
+						.append("year",
+							new Document("$first", "$year")
+						)
+					),
+					new Document("$group",
+						new Document("_id", "$year")
+						.append("count",
+							new Document("$sum", "$count")
+						)
+					),
+					new Document("$sort", new Document("_id", 1))
+    			)).iterator();
+    	
+    	new Table(db.publications, 
+    			iterator,
+    			"Publications between " + yearFrom + " and " + yearTo,
+    			new String[] {"Year", "Number of Publications" },
+    			new String[] {"_id", "count" },
     			false);
     }
 

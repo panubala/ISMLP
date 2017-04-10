@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -46,8 +47,11 @@ public class Table extends JTable {
 	JLabel idLabel;
 	JTextField idTextField;
 	
+	public Table(String title, String[] columnNames) {
+		
+	}
 	
-	public <T extends MongoDomainObject> Table(final MongoCollection<Document> collection, final MongoCursor<Document> cursor, final String title, final String[] columnNames, final String[] fieldNames, final boolean allowModifications) {
+	public <T extends MongoDomainObject> Table(final MongoCollection<Document> collection, final Iterator<Document> cursor, final String title, final String[] columnNames, final String[] fieldNames, final boolean allowModifications) {
 		this.collection = collection;
 		this.fieldNames = fieldNames;
 		
@@ -200,7 +204,7 @@ public class Table extends JTable {
 	}
 	
     // Insert all documents as rows
-	private void insert(MongoCursor<Document> cursor) {
+	private void insert(Iterator<Document> cursor) {
 		Document document;
         Vector<Object> row;
         while (cursor.hasNext()) {
