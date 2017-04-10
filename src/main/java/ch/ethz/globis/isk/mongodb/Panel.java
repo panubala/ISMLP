@@ -613,12 +613,12 @@ public class Panel extends JPanel {
     }
 
     private void query8ButtonActionPerformed(ActionEvent evt) {
-    	String name = textField1.getText();
+    	String conferenceName = textField1.getText();
     	
     	Iterator<Document> iterator =
     			db.conferences.aggregate(Arrays.asList(
     				new Document("$match",
-    					new Document("name", name)
+    					new Document("name", conferenceName)
 					),
 					new Document("$lookup",
 						new Document("from", "conferenceEditions")
@@ -634,6 +634,8 @@ public class Panel extends JPanel {
 						.append("foreignField", "_id")
 						.append("as", "proceedings")
 					),
+					new Document("$unwind", "$proceedings"),
+					
 					new Document("$group",
 						new Document("_id", null)
 						.append("name",
@@ -649,22 +651,214 @@ public class Panel extends JPanel {
     	
     	new Table(db.conferences, 
     			iterator,
-    			"Publications of conference " + name,
+    			"Number of Publications of conference " + conferenceName,
     			new String[] {"Name", "Number of publications" },
     			new String[] {"name", "count" },
     			false);
     }
 
     private void query9ButtonActionPerformed(ActionEvent evt) {
-		
+    	String conferenceName = textField1.getText();
+    	
+    	Iterator<Document> iterator =
+    			db.conferences.aggregate(Arrays.asList(
+    				new Document("$match",
+    					new Document("name", conferenceName)
+					),
+					new Document("$lookup",
+						new Document("from", "conferenceEditions")
+						.append("localField", "editions")
+						.append("foreignField", "_id")
+						.append("as", "editions")
+					),
+					new Document("$unwind", "$editions"),
+					
+					new Document("$lookup",
+						new Document("from", "publications")
+						.append("localField", "editions.proceedings")
+						.append("foreignField", "_id")
+						.append("as", "proceedings")
+					),
+					new Document("$unwind", "$proceedings"),
+					
+					new Document("$lookup",
+						new Document("from", "publications")
+						.append("localField", "proceedings.publications")
+						.append("foreignField", "_id")
+						.append("as", "inProceedings")
+					),
+					new Document("$unwind", "$inProceedings"),
+					
+					new Document("$group",
+						new Document("_id", null)
+						.append("name",
+							new Document("$first", "$name")
+						)
+						.append("editors",
+							new Document("$addToSet", "$proceedings.editors")
+						)
+						.append("authors",
+							new Document("$addToSet", "$inProceedings.authors")
+						)
+					),
+					
+					new Document("$project",
+						new Document("name", "$name")
+						.append("authors",
+							new Document("$setUnion", Arrays.asList(
+								"$authors", "$editors"
+							))
+						)
+					),
+					
+					new Document("$group",
+						new Document("_id", null)
+						.append("name",
+							new Document("$first", "$name")
+						)
+						.append("count",
+							new Document("$sum",
+								new Document("$size", "$authors")
+							)
+						)
+					)
+    			)).iterator();
+    	
+    	new Table(db.conferences, 
+    			iterator,
+    			"Number of Authors/Editors of conference " + conferenceName,
+    			new String[] {"Name", "Number of authors/editors" },
+    			new String[] {"name", "count" },
+    			false);
     }
 
     private void query10ButtonActionPerformed(ActionEvent evt) {
-		
+    	String conferenceName = textField1.getText();
+	
+		Iterator<Document> iterator =
+				db.conferences.aggregate(Arrays.asList(
+					new Document("$match",
+						new Document("name", conferenceName)
+					),
+					new Document("$lookup",
+						new Document("from", "conferenceEditions")
+						.append("localField", "editions")
+						.append("foreignField", "_id")
+						.append("as", "editions")
+					),
+					new Document("$unwind", "$editions"),
+					
+					new Document("$lookup",
+						new Document("from", "publications")
+						.append("localField", "editions.proceedings")
+						.append("foreignField", "_id")
+						.append("as", "proceedings")
+					),
+					new Document("$unwind", "$proceedings"),
+					
+					new Document("$lookup",
+						new Document("from", "publications")
+						.append("localField", "proceedings.publications")
+						.append("foreignField", "_id")
+						.append("as", "inProceedings")
+					),
+					new Document("$unwind", "$inProceedings"),
+					
+					new Document("$group",
+						new Document("_id", null)
+						.append("name",
+							new Document("$first", "$name")
+						)
+						.append("authors",
+							new Document("$addToSet", "$proceedings.editors")
+						)
+						.append("authors",
+							new Document("$addToSet", "$inProceedings.authors")
+						)
+					),
+					new Document("$unwind", "$authors"),
+					new Document("$unwind", "$authors"),
+					
+					new Document("$group",
+						new Document("_id", null)
+						.append("name",
+							new Document("$first", "$name")
+						)
+						.append("authors",
+							new Document("$addToSet", "$authors")
+						)
+					)
+				)).iterator();
+	
+		new Table(db.conferences, 
+				iterator,
+				"Authors/Editors of conference " + conferenceName,
+				new String[] {"Name", "Authors/Editors" },
+				new String[] {"name", "authors" },
+				false);
     }
 
     private void query11ButtonActionPerformed(ActionEvent evt) {
-		
+    	String conferenceName = textField1.getText();
+    	
+    	Iterator<Document> iterator =
+    			db.conferences.aggregate(Arrays.asList(
+    				new Document("$match",
+    					new Document("name", conferenceName)
+					),
+					new Document("$lookup",
+						new Document("from", "conferenceEditions")
+						.append("localField", "editions")
+						.append("foreignField", "_id")
+						.append("as", "editions")
+					),
+					new Document("$unwind", "$editions"),
+					
+					new Document("$lookup",
+						new Document("from", "publications")
+						.append("localField", "editions.proceedings")
+						.append("foreignField", "_id")
+						.append("as", "proceedings")
+					),
+					new Document("$unwind", "$proceedings"),
+					
+					new Document("$lookup",
+						new Document("from", "publications")
+						.append("localField", "proceedings.publications")
+						.append("foreignField", "_id")
+						.append("as", "inProceedings")
+					),
+					new Document("$unwind", "$inProceedings"),
+					
+					new Document("$group",
+						new Document("_id", null)
+						.append("name",
+							new Document("$first", "$name")
+						)
+						.append("inProceedings",
+							new Document("$addToSet", "$inProceedings._id")
+						)
+						.append("proceedings",
+							new Document("$addToSet", "$proceedings._id")
+						)
+					),
+					
+					new Document("$project",
+						new Document("name", "$name")
+						.append("publications",
+							new Document("$setUnion", Arrays.asList(
+								"$inProceedings", "$proceedings"
+							))
+						)
+					)
+    			)).iterator();
+    	
+    	new Table(db.conferences, 
+    			iterator,
+    			"Publications of conference " + conferenceName,
+    			new String[] {"Name", "Publications" },
+    			new String[] {"name", "publications" },
+    			false);
     }
 
     private void query12ButtonActionPerformed(ActionEvent evt) {
