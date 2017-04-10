@@ -862,6 +862,21 @@ public class Panel extends JPanel {
     }
 
     private void query12ButtonActionPerformed(ActionEvent evt) {
+    	
+    	String name = textField1.getText();
+    	
+    	// Exact matching could be used alternatively
+    	//String expr = "this.authors != undefined && this.authors[this.authors.length - 1] === '" + name + "'";
+    	String expr = "this.authors != undefined && this.authors[this.authors.length - 1].includes('" + name + "')";
+    	
+    	Iterator<Document> iterator = db.publications.find(Filters.where(expr)).iterator();
+    	
+    	new Table(db.publications,
+    			iterator,
+    			"Publications containing " + name + " as last author",
+    			new String[]{"ID", "Title", "Authors", "Pages", "Year"},
+    			new String[]{"_id", "title", "authors", "pages", "year"},
+    			false);
 		
     }
 
