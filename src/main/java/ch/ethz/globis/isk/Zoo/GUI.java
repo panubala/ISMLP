@@ -1,9 +1,9 @@
-package ch.ethz.globis.isk.Zoo;
+package ch.ethz.globis.isk.zoo;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import ch.ethz.globis.isk.Zoo.MainFrame;
+import ch.ethz.globis.isk.zoo.MainFrame;
 
 public class GUI extends JFrame{
 	public static void main(String[] args) {

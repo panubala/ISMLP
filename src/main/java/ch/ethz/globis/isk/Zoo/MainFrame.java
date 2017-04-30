@@ -1,4 +1,4 @@
-package ch.ethz.globis.isk.Zoo;
+package ch.ethz.globis.isk.zoo;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
