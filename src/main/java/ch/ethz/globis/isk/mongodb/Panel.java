@@ -489,7 +489,40 @@ public class Panel extends JPanel {
     }
 
     private void query5ButtonActionPerformed(ActionEvent evt) {
+    	String author1 = textField1.getText();
+    	String author2 = textField2.getText();
     	
+    	Iterator<Document> iterator =
+    			db.publications.aggregate(Arrays.asList(
+					new Document("$match",
+						new Document("$or", Arrays.asList(
+							new Document("authors", author1),
+							new Document("authors", author2)
+						))
+					),
+					/*new Document("$lookup",
+						new Document("from", "persons")
+						.append("localField", "authors")
+						.append("foreignField", "name")
+						.append("as", "author")
+					),*/
+					new Document("$unwind", "$authors"),
+    						
+					new Document("$graphLookup",
+						new Document("from", "$$ROOT")
+						.append("startWith", "$authors")
+						.append("connectFromField", "authors")
+						.append("connectToField", "authors")
+						.append("as", "connectedAuthors")
+					)
+    			)).iterator();
+    	
+    	new Table(db.publications,
+				iterator,
+    			"Co-Authors",
+    			new String[] { "Author", "connectedAuthors", "authors", "author" },
+    			new String[] { "_id", "connectedAuthors", "authors", "author" },
+    			false);
     }
 
     private void query6ButtonActionPerformed(ActionEvent evt) {
