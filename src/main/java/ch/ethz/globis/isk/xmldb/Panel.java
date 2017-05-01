@@ -405,7 +405,26 @@ public class Panel extends JPanel {
     }
 
     private void query1ButtonActionPerformed(ActionEvent evt) {
-    	//String id = textField1.getText();
+    	String id = textField1.getText();
+    	String input = "let $publications := doc('publications.xml')/root//* "
+		+ "return <root>{ "
+		+ "for $p in $publications "
+		+ "return "
+		+ "if (contains($p/id, '" + id + "')) "
+		+ "then $p "
+		+ "else () "
+		+ "}</root> ";
+    	Query query = db.execute(input);
+    	
+    	new Table(
+    			db,
+    			null,
+    			query,
+    			"Publications by id",
+    			new String[] { "ID", "Title" },
+    			new String[] { "id", "title" },
+    			false
+    	);
     }
 
     private void query2ButtonActionPerformed(ActionEvent evt) {
@@ -417,7 +436,6 @@ public class Panel extends JPanel {
     }
 
     private void query4ButtonActionPerformed(ActionEvent evt) {
-    	
     }
 
     private void query5ButtonActionPerformed(ActionEvent evt) {

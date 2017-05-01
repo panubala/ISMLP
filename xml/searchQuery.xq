@@ -1,10 +1,8 @@
-let $root := doc('inproceedings.xml')/root
+let $publications := doc('publications.xml')/root//*
 return <root>{
-  
-  for $i in $root//*
+  for $p in $publications
   return
-    if (some $el in $i//* satisfies (contains($el, '1987')))
-    then $i
+    if (contains($p/id, "conf"))
+    then $p
     else ()
-    
 }</root>
