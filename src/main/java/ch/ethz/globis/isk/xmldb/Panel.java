@@ -645,6 +645,45 @@ public class Panel extends JPanel {
 
     private void query10ButtonActionPerformed(ActionEvent evt) {
     	
+    	// e.g. "CONPAR"
+    	String confID = textField1.getText();
+    	
+    	
+    	String input = "let $publications := doc('publications.xml')/root "
+    			+ "return <root>{ "
+    			+ 	"for $p in $publications/proceedings "
+    			+ 	"where $p/cid = '" + confID +"' "
+    			+ 	"return( "
+    			+ 		"for $e in $p/editor "
+    			+ 		"return <name><author>{$e/text()}</author></name> "
+    			+ 	") "
+    			+ "} "
+    			+ "{ "
+    			+ 	"for $p in $publications/proceedings "
+    			+ 	"where $p/cid = '" + confID +"' "
+    			+ 	"return ( "
+    			+ 		"for $ip in $publications/inproceedings "
+    			+ 		"where $ip/pid = $p/id "
+    			+ 		"return "
+    			+ 			"for $a in $ip/author "
+    			+ 			"return <name>{$a}</name> "
+    			+ 	") "
+    			+ "}</root>";
+    	
+    	
+    	
+    	Query query = db.execute(input);
+    	
+    	new Table(
+    			db,
+    			null,
+    			query,
+    			"Names of authors and editors of conference " + confID + ". ",
+    			new String[] { "Name" },
+    			new String[] { "author" },
+    			false
+    	);
+    	
     }
 
     private void query11ButtonActionPerformed(ActionEvent evt) {
