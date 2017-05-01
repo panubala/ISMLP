@@ -405,7 +405,7 @@ public class Panel extends JPanel {
     }
 
     private void query1ButtonActionPerformed(ActionEvent evt) {
-    	
+    	//String id = textField1.getText();
     }
 
     private void query2ButtonActionPerformed(ActionEvent evt) {
@@ -425,10 +425,12 @@ public class Panel extends JPanel {
     }
 
     private void query6ButtonActionPerformed(ActionEvent evt) {
+    	Query query = db.executeFile("query6.xq");
+    	
     	new Table(
     			db,
     			null,
-    			"query6.xq",
+    			query,
     			"Global average number of authors per publication",
     			new String[] { "Avg number of authors" },
     			new String[] { "avg" },

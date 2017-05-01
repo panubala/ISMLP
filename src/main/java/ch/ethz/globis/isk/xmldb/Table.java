@@ -48,7 +48,7 @@ public class Table extends JTable {
 	public <T extends MongoDomainObject> Table(
 			final Database db,
 			final String xml,
-			final String queryFileName,
+			final Query query,
 			final String title,
 			final String[] columnNames,
 			final String[] tagNames,
@@ -56,7 +56,7 @@ public class Table extends JTable {
 		
 		this.db = db;
 		this.xml = xml;
-		this.query = queryFileName != null ? db.executeFile(queryFileName) : null;
+		this.query = query;
 		this.tagNames = tagNames;
 		
 		frame = new JFrame(title);
