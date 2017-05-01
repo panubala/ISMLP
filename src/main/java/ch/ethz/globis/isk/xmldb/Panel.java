@@ -500,6 +500,34 @@ public class Panel extends JPanel {
 
     private void query8ButtonActionPerformed(ActionEvent evt) {
     	
+    	// e.g. "ICPP"
+    	String confID = textField1.getText();
+    	
+    	String input = "let $publications := doc('publications.xml')/root//* "
+    			+ "return <root>{ "
+    			+ 	"<item>{ "
+    			+ 		"<num>{ "
+    			+ 			"count( "
+    			+ 				"for $p in $publications "
+    			+ 				"where $p/cid = '" + confID + "' "
+    			+ 				"return $p "
+    			+ 			") "
+    			+ 		"}</num> "
+    			+ 	"}</item> "
+    			+ "}</root> ";
+    	
+    	Query query = db.execute(input);
+    	
+    	new Table(
+    			db,
+    			null,
+    			query,
+    			"Number of publications for conference " + confID + ". ",
+    			new String[] { "Total" },
+    			new String[] { "num" },
+    			false
+    	);
+    	
     }
 
     private void query9ButtonActionPerformed(ActionEvent evt) {
