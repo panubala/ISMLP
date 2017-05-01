@@ -406,13 +406,14 @@ public class Panel extends JPanel {
 
     private void query1ButtonActionPerformed(ActionEvent evt) {
     	String id = textField1.getText();
-    	String input = "let $publications := doc('publications.xml')/root//* "
+    	String input =
+    	  "let $publications := doc('publications.xml')/root//* "
 		+ "return <root>{ "
-		+ "for $p in $publications "
-		+ "return "
-		+ "if (contains($p/id, '" + id + "')) "
-		+ "then $p "
-		+ "else () "
+		+   "for $p in $publications "
+		+   "return "
+		+     "if (contains($p/id, '" + id + "')) "
+		+     "then $p "
+		+     "else () "
 		+ "}</root> ";
     	Query query = db.execute(input);
     	
@@ -428,18 +429,126 @@ public class Panel extends JPanel {
     }
 
     private void query2ButtonActionPerformed(ActionEvent evt) {
+    	String id = textField1.getText();
+    	int beginOffset = 0;
+    	int endOffset = 0;
+    	try {
+	    	beginOffset = Integer.parseInt(textField2.getText());
+	    	endOffset = Integer.parseInt(textField3.getText());
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	String input =
+		 "let $publications := doc('publications.xml')/root//*[contains(id, '" + id + "')] "
+		+"return <root>{ "
+		+  "subsequence($publications, " + beginOffset +  ", " + (endOffset - beginOffset) + ") "
+		+"}</root> ";
+    	Query query = db.execute(input);
     	
+    	new Table(
+    			db,
+    			null,
+    			query,
+    			"Publications by id limited",
+    			new String[] { "ID", "Title" },
+    			new String[] { "id", "title" },
+    			false
+    	);
     }
 
     private void query3ButtonActionPerformed(ActionEvent evt) {
+    	String id = textField1.getText();
+    	int beginOffset = 0;
+    	int endOffset = 0;
+    	try {
+	    	beginOffset = Integer.parseInt(textField2.getText());
+	    	endOffset = Integer.parseInt(textField3.getText());
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	String input =
+		 "let $publications := doc('publications.xml')/root//*[contains(id, '" + id + "')] "
+		+"return <root>{ "
+		+  "let $sorted := for $publication in $publications "
+		+     "order by $publication/id/text() "
+		+     "return $publication "
+		+  "return subsequence($sorted, " + beginOffset +  ", " + (endOffset - beginOffset) + ") "
+		+"}</root> ";
+    	Query query = db.execute(input);
     	
+    	new Table(
+    			db,
+    			null,
+    			query,
+    			"Publications by id sorted limited",
+    			new String[] { "ID", "Title" },
+    			new String[] { "id", "title" },
+    			false
+    	);
     }
 
     private void query4ButtonActionPerformed(ActionEvent evt) {
+    	String authorId = textField1.getText();
+    	String input =
+		 "let $author := doc('persons.xml')/root//*[id = '" + authorId + "'] "
+		+"return <root>{ "
+		+  "<author>{ "
+		+    "$author/id, "
+		+    "for $i in doc('inproceedings.xml')/root//*[id = $author//iid/text()] "
+		+    "return "
+		+      "for $coAuthor in $i//author "
+		+      "return "
+		+        "if ($coAuthor/text() = $author/id/text()) "
+		+        "then () "
+		+        "else <coAuthor>{$coAuthor/text()}</coAuthor> "
+		+  "}</author> "
+		+"}</root> ";
+    	Query query = db.execute(input);
+    	
+    	new Table(
+    			db,
+    			null,
+    			query,
+    			"Co-Authors",
+    			new String[] { "Author", "Co-Authors" },
+    			new String[] { "id", "coAuthor" },
+    			false
+    	);
     }
 
     private void query5ButtonActionPerformed(ActionEvent evt) {
+    	String author1Id = textField1.getText();
+    	String author2Id = textField2.getText();
+    	String input =
+    	 "declare function local:shortestPath($authors, $target, $depth) { "
+    	+  "if ($depth > 20) "
+    	+  "then 'The authors do not have anything in common' "
+    	+  "else "
+    	+    "if (some $author in $authors satisfies $author/id/text() = $target/id/text()) "
+    	+    "then $depth "
+    	+    "else local:shortestPath(doc('coAuthors.xml')/root//*[id/text() = $authors//coAuthor/text()], $target, $depth + 1) "
+    	+"}; "
+    	+"let $coAuthors := doc('coAuthors.xml')/root//*, "
+    	+"$author := $coAuthors[id = '" + author1Id + "'], "
+    	+"$target := $coAuthors[id = '" + author2Id + "'] "
+    	+"return <root>{ "
+    	+  "<item>{ "
+    	+    "<shortestPath>{ "
+    	+      "local:shortestPath($author, $target, 0) "
+    	+    "}</shortestPath> "
+    	+  "}</item> "
+    	+"}</root> ";
+    	Query query = db.execute(input);
     	
+    	new Table(
+    			db,
+    			null,
+    			query,
+    			"Shortest Path",
+    			new String[] { "Shortest Path" },
+    			new String[] { "shortestPath" },
+    			false
+    	);
     }
 
     private void query6ButtonActionPerformed(ActionEvent evt) {
