@@ -458,6 +458,44 @@ public class Panel extends JPanel {
 
     private void query7ButtonActionPerformed(ActionEvent evt) {
     	
+    	int beginYear = Integer.parseInt(textField1.getText());
+    	int endYear   = Integer.parseInt(textField2.getText());
+    	
+    	if (beginYear > endYear){
+    		int temp = beginYear;
+    		beginYear = endYear;
+    		endYear = temp;
+    	}
+    	
+    	String beginStr = Integer.toString(beginYear);
+    	String endStr   = Integer.toString(endYear);
+    	
+    	String input = "let $publications := doc('publications.xml')/root//* "
+    			+ "return <root>{ "
+    			+ 	"<item>{ "
+    			+ 		"<num>{ "
+    			+ 			"count( "
+    			+ 				"for $p in $publications "
+    			+ 				"where (($p/year >= " + beginStr + ") and ($p/year <= " + endStr + ")) or (($p/ceid >= " + beginStr + ") and ($p/ceid <= " + endStr + ")) "
+    			+ 				"return $p "
+    			+ 			") "
+    			+ 		"}</num> "
+    			+ 	"}</item> "
+    			+ "}</root> ";
+    	
+    	
+    	Query query = db.execute(input);
+    	
+    	new Table(
+    			db,
+    			null,
+    			query,
+    			"Number of publications per year between " + beginStr + " and " + endStr + ".",
+    			new String[] { "Total" },
+    			new String[] { "num" },
+    			false
+    	);
+    	
     }
 
     private void query8ButtonActionPerformed(ActionEvent evt) {
