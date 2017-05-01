@@ -566,9 +566,14 @@ public class Panel extends JPanel {
     }
 
     private void query7ButtonActionPerformed(ActionEvent evt) {
-    	
-    	int beginYear = Integer.parseInt(textField1.getText());
-    	int endYear   = Integer.parseInt(textField2.getText());
+    	int beginYear = 0;
+    	int endYear = 0;
+    	try {
+    		beginYear = Integer.parseInt(textField1.getText());
+    		endYear = Integer.parseInt(textField2.getText());
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
     	
     	if (beginYear > endYear){
     		int temp = beginYear;
@@ -640,7 +645,24 @@ public class Panel extends JPanel {
     }
 
     private void query9ButtonActionPerformed(ActionEvent evt) {
+    	String confID = textField1.getText();
     	
+    	String input =
+    			"let $proceedings := doc('proceedings.xml')/root//*[cid/text() = '" + confID + "'], "
+    			+ "$inproceedings := doc('inproceedings.xml')/root//*[pid/text() = $proceedings/id/text()] "
+    			+ "return <root><item><count>{count(distinct-values($proceedings/editor/text() | $inproceedings/author/text()))}</count></item></root> ";
+        	
+        	Query query = db.execute(input);
+        	
+        	new Table(
+        			db,
+        			null,
+        			query,
+        			"Count of authors and editors of conference " + confID + ".",
+        			new String[] { "Count" },
+        			new String[] { "count" },
+        			false
+        	);
     }
 
     private void query10ButtonActionPerformed(ActionEvent evt) {
@@ -649,7 +671,7 @@ public class Panel extends JPanel {
     	String confID = textField1.getText();
     	
     	
-    	String input = "let $publications := doc('publications.xml')/root "
+    	/*String input = "let $publications := doc('publications.xml')/root "
     			+ "return <root>{ "
     			+ 	"for $p in $publications/proceedings "
     			+ 	"where $p/cid = '" + confID +"' "
@@ -668,8 +690,19 @@ public class Panel extends JPanel {
     			+ 			"for $a in $ip/author "
     			+ 			"return <name>{$a}</name> "
     			+ 	") "
-    			+ "}</root>";
+    			+ "}</root>";*/
     	
+    	String input =
+	    	"let $proceedings := doc('proceedings.xml')/root//*[cid/text() = '" + confID + "'], "
+			+"$inproceedings := doc('inproceedings.xml')/root//*[pid/text() = $proceedings/id/text()] "
+			+"return "
+			+  "<root>{ "
+			+    "for $author in distinct-values($proceedings/editor/text() | $inproceedings/author/text()) "
+			+    "return "
+			+      "<author>{ "
+			+        "<id>{$author}</id> "
+			+      "}</author> "
+			+  "}</root> ";
     	
     	
     	Query query = db.execute(input);
@@ -678,27 +711,111 @@ public class Panel extends JPanel {
     			db,
     			null,
     			query,
-    			"Names of authors and editors of conference " + confID + ". ",
+    			"Names of authors and editors of conference " + confID + ".",
     			new String[] { "Name" },
-    			new String[] { "author" },
+    			new String[] { "id" },
     			false
     	);
     	
     }
 
     private void query11ButtonActionPerformed(ActionEvent evt) {
+    	String confID = textField1.getText();
     	
+    	String input =
+    			"let $proceedings := doc('proceedings.xml')/root//*[cid/text() = '" + confID + "'], "
+    			+ "$inproceedings := doc('inproceedings.xml')/root//*[pid/text() = $proceedings/id/text()] "
+    			+ "return <root>{$inproceedings}</root> ";
+    		
+        	Query query = db.execute(input);
+        	
+        	new Table(
+        			db,
+        			null,
+        			query,
+        			"Inproceedings of conference " + confID + ".",
+        			new String[] { "ID", "Title", "Proceedings", "Authors" },
+        			new String[] { "id", "title", "pid", "author" },
+        			false
+        	);
     }
 
     private void query12ButtonActionPerformed(ActionEvent evt) {
+    	Query query = db.executeFile("query12.xq");
     	
+    	new Table(
+    			db,
+    			null,
+    			query,
+    			"Persons that are author in InProceedings and editor in appropriate Proceedings",
+    			new String[] { "Name" },
+    			new String[] { "id" },
+    			false
+    	);
     }
 
     private void query13ButtonActionPerformed(ActionEvent evt) {
+    	String authorID = textField1.getText();
     	
+    	String input =
+    			"let $inproceedings :=doc('inproceedings.xml')/root/* "
+    			+"return <root>{ "
+    			+  "for $ip in $inproceedings "
+    			+  "where some $author in $ip/author[last()] satisfies $author/text() = '" + authorID + "' "
+    			+  "return $ip "
+    			+"}</root> ";
+    		
+        	Query query = db.execute(input);
+        	
+        	new Table(
+        			db,
+        			null,
+        			query,
+        			"Publications where author " + authorID + " appears as last author.",
+        			new String[] { "ID", "Title", "Proceedings", "Authors" },
+        			new String[] { "id", "title", "pid", "author" },
+        			false
+        	);
     }
 
     private void query14ButtonActionPerformed(ActionEvent evt) {
+    	int beginYear = 0;
+    	int endYear = 0;
+    	try {
+    		beginYear = Integer.parseInt(textField1.getText());
+    		endYear = Integer.parseInt(textField2.getText());
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
     	
+    	if (beginYear > endYear){
+    		int temp = beginYear;
+    		beginYear = endYear;
+    		endYear = temp;
+    	}
+    	
+    	String input =
+    			"let $proceedings := doc('proceedings.xml')/root/*[1982 <= ceid and ceid <= 1986], "
+    			+"$inproceedings := doc('inproceedings.xml')/root/*, "
+    			+"$publishers := "
+    			+  "for $p in $proceedings "
+    			+  "where every $e in $p/editor satisfies $e/id/text() = $inproceedings/author/id/text() "
+    			+  "return $p/publisher "
+    			+"return <root>{ "
+    			+  "for $publisher in distinct-values($publishers) "
+    			+  "return <publisher><id>{$publisher}</id></publisher> "
+    			+"}</root> ";
+    		
+        	Query query = db.execute(input);
+        	
+        	new Table(
+        			db,
+        			null,
+        			query,
+        			"Publishers of Proceedings whose authors appear in any InProceedings in range of years",
+        			new String[] { "Publisher" },
+        			new String[] { "id"  },
+        			false
+        	);
     }
 }
