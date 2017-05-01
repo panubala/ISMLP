@@ -218,12 +218,18 @@ public class Table extends JTable {
     		while (rowNode != null) {
     			if (rowNode.getNodeType() == Node.ELEMENT_NODE) {
     	        	Vector<Object> row = new Vector<>();
+    	        	row.setSize(tagNames.length);
     	        	
     	    		Node fieldNode = rowNode.getFirstChild();
     	    		while (fieldNode != null) {
-    	    			if (fieldNode.getNodeType() == Node.ELEMENT_NODE
-    	    					&& Arrays.asList(tagNames).contains(fieldNode.getNodeName())) {
-	    	        		row.add(fieldNode.getTextContent());
+    	    			if (fieldNode.getNodeType() == Node.ELEMENT_NODE) {
+    	    				int index = Arrays.asList(tagNames).indexOf(fieldNode.getNodeName());
+    	    				if (index >= 0) {
+	    	    				if (row.get(index) == null)
+	    	    					row.set(index, fieldNode.getTextContent());
+	    	    				else
+	    	    					row.set(index, row.get(index).toString() + ", " + fieldNode.getTextContent());
+    	    				}
     	    			}
     	    			fieldNode = fieldNode.getNextSibling();
     	    		}

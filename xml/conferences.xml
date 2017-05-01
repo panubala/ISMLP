@@ -1,0 +1,2677 @@
+<root>
+  <conference>
+    <id>History of Medical Informatics</id>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>CONCUR</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Concurrency</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Seminar on Concurrency</id>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>Foundations of Logic and Functional Programming</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Knowledge Representation and Organization in Machine Learning</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>ICPP</id>
+    <ceid>1983</ceid>
+    <ceid>1982</ceid>
+  </conference>
+  <conference>
+    <id>ICPP (2)</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>ICPP (1)</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>ICPP (3)</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>ALIFE</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>ICASSP</id>
+    <ceid>1983</ceid>
+    <ceid>1982</ceid>
+    <ceid>1981</ceid>
+    <ceid>1979</ceid>
+    <ceid>1976</ceid>
+    <ceid>1980</ceid>
+    <ceid>1978</ceid>
+  </conference>
+  <conference>
+    <id>Winter Simulation Conference</id>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>ICFPC</id>
+    <ceid>1981</ceid>
+  </conference>
+  <conference>
+    <id>CSCW</id>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>ÖGAI</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>DAC</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1982</ceid>
+    <ceid>1981</ceid>
+    <ceid>1990</ceid>
+    <ceid>1969</ceid>
+    <ceid>1979</ceid>
+    <ceid>1971</ceid>
+    <ceid>1964</ceid>
+    <ceid>1975</ceid>
+    <ceid>1966</ceid>
+    <ceid>1988</ceid>
+    <ceid>1968</ceid>
+    <ceid>1985</ceid>
+    <ceid>1965</ceid>
+    <ceid>1986</ceid>
+    <ceid>1976</ceid>
+    <ceid>1980</ceid>
+    <ceid>1978</ceid>
+    <ceid>1972</ceid>
+    <ceid>1977</ceid>
+    <ceid>1974</ceid>
+    <ceid>1967</ceid>
+    <ceid>1984</ceid>
+    <ceid>1970</ceid>
+    <ceid>1973</ceid>
+  </conference>
+  <conference>
+    <id>Wissensbasierte Systeme</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>Wissensarten und ihre Darstellung</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>EACL</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>ECHT</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>EDBT</id>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>ICCAL</id>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id/>
+    <ceid>1975</ceid>
+    <ceid>1976</ceid>
+    <ceid>1990</ceid>
+    <ceid>1981</ceid>
+    <ceid>1978</ceid>
+    <ceid>1977</ceid>
+    <ceid>1987</ceid>
+    <ceid>1985</ceid>
+    <ceid>1983</ceid>
+    <ceid>1979</ceid>
+    <ceid>1980</ceid>
+    <ceid>1984</ceid>
+    <ceid>1982</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+    <ceid>1989</ceid>
+    <ceid>1986</ceid>
+    <ceid>1990</ceid>
+    <ceid>1987</ceid>
+    <ceid>1984</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+    <ceid>1989</ceid>
+    <ceid>1986</ceid>
+    <ceid>1983</ceid>
+    <ceid>1982</ceid>
+    <ceid>1983</ceid>
+    <ceid>1986</ceid>
+    <ceid>1983</ceid>
+    <ceid>1983</ceid>
+    <ceid>1982</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+    <ceid>1990</ceid>
+    <ceid>1980</ceid>
+    <ceid>1988</ceid>
+    <ceid>1984</ceid>
+    <ceid>1986</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+    <ceid>1990</ceid>
+    <ceid>1987</ceid>
+    <ceid>1985</ceid>
+    <ceid>1983</ceid>
+    <ceid>1984</ceid>
+    <ceid>1982</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+    <ceid>1981</ceid>
+    <ceid>1978</ceid>
+    <ceid>1987</ceid>
+    <ceid>1985</ceid>
+    <ceid>1983</ceid>
+    <ceid>1979</ceid>
+    <ceid>1981</ceid>
+    <ceid>1984</ceid>
+    <ceid>1971</ceid>
+    <ceid>1983</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+    <ceid>1983</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+    <ceid>1983</ceid>
+    <ceid>1980</ceid>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1990</ceid>
+    <ceid>1990</ceid>
+    <ceid>1987</ceid>
+    <ceid>1975</ceid>
+    <ceid>1976</ceid>
+    <ceid>1990</ceid>
+    <ceid>1972</ceid>
+    <ceid>1971</ceid>
+    <ceid>1977</ceid>
+    <ceid>1981</ceid>
+    <ceid>1981</ceid>
+    <ceid>1980</ceid>
+    <ceid>1978</ceid>
+    <ceid>1977</ceid>
+    <ceid>1987</ceid>
+    <ceid>1978</ceid>
+    <ceid>1985</ceid>
+    <ceid>1975</ceid>
+    <ceid>1983</ceid>
+    <ceid>1983</ceid>
+    <ceid>1974</ceid>
+    <ceid>1979</ceid>
+    <ceid>1980</ceid>
+    <ceid>1984</ceid>
+    <ceid>1983</ceid>
+    <ceid>1971</ceid>
+    <ceid>1982</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+    <ceid>1989</ceid>
+    <ceid>1986</ceid>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1976</ceid>
+    <ceid>1976</ceid>
+    <ceid>1988</ceid>
+    <ceid>1990</ceid>
+    <ceid>1990</ceid>
+    <ceid>1987</ceid>
+    <ceid>1989</ceid>
+    <ceid>1978</ceid>
+    <ceid>1981</ceid>
+    <ceid>1984</ceid>
+    <ceid>1988</ceid>
+    <ceid>1976</ceid>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Category Theory and Computer Science</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>CTCS</id>
+    <ceid>1987</ceid>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>CTRS</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Symposium on Programming</id>
+    <ceid>1982</ceid>
+    <ceid>1980</ceid>
+    <ceid>1974</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>SIGAL International Symposium on Algorithms</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>EURO-DAC</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>SMC</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>OODBS</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>AAAI</id>
+    <ceid>1987</ceid>
+    <ceid>1986</ceid>
+    <ceid>1983</ceid>
+    <ceid>1982</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+    <ceid>1980</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>Personal Computing</id>
+    <ceid>1982</ceid>
+  </conference>
+  <conference>
+    <id>SIGUCCS</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1990</ceid>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>Computing Methods in Applied Sciences and Engineering</id>
+    <ceid>1974</ceid>
+    <ceid>1974</ceid>
+  </conference>
+  <conference>
+    <id>Conference on Operating Systems</id>
+    <ceid>1983</ceid>
+  </conference>
+  <conference>
+    <id>Symposium on Operating Systems</id>
+    <ceid>1974</ceid>
+  </conference>
+  <conference>
+    <id>Supercomputer</id>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>NMR</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>PEARL</id>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>CAAP</id>
+    <ceid>1983</ceid>
+    <ceid>1981</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>CLAAP</id>
+    <ceid>1980</ceid>
+  </conference>
+  <conference>
+    <id>GI-Fachgespräch über Rechenzentren</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1981</ceid>
+    <ceid>1976</ceid>
+    <ceid>1985</ceid>
+    <ceid>1978</ceid>
+  </conference>
+  <conference>
+    <id>Entwicklungstendenzen wissenschaftlicher Rechenzentren</id>
+    <ceid>1980</ceid>
+  </conference>
+  <conference>
+    <id>PODC</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1982</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+    <ceid>1986</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>BCS HCI</id>
+    <ceid>1987</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>ISER</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>SWAT</id>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Parallel Algorithms and Architectures</id>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>HCI (1)</id>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>HCI (2)</id>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>MMB</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1981</ceid>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>Formale Modelle für Informationssysteme</id>
+    <ceid>1979</ceid>
+  </conference>
+  <conference>
+    <id>Modelle für Rechensysteme</id>
+    <ceid>1977</ceid>
+  </conference>
+  <conference>
+    <id>MICRO</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>ESC</id>
+    <ceid>1983</ceid>
+  </conference>
+  <conference>
+    <id>WIMPEL</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Visualisierungstechniken und Algorithmen</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>DISCO</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Online-Systeme im Finanz- und Rechnungswesen</id>
+    <ceid>1980</ceid>
+  </conference>
+  <conference>
+    <id>Shell Conference</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Software-Architektur</id>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>SIGCOMM</id>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>Informatik im Umweltschutz</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Informatikanwendungen im Umweltbereich</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Visualisierung von Umweltdaten</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>IEEE Visualization</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>OOPSLA</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>Graph Theory and Algorithms</id>
+    <ceid>1981</ceid>
+  </conference>
+  <conference>
+    <id>Digital Image Processing Systems</id>
+    <ceid>1981</ceid>
+  </conference>
+  <conference>
+    <id>International Computing Symposium</id>
+    <ceid>1977</ceid>
+  </conference>
+  <conference>
+    <id>XP4.5 Workshop on Database Theory</id>
+    <ceid>1983</ceid>
+  </conference>
+  <conference>
+    <id>XP2 Workshop on Relational Database Theory</id>
+    <ceid>1981</ceid>
+  </conference>
+  <conference>
+    <id>XP7.52 Workshop on Database Theory</id>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>XP1 Workshop on Database Theory</id>
+    <ceid>1980</ceid>
+  </conference>
+  <conference>
+    <id>Requirements Engineering</id>
+    <ceid>1983</ceid>
+  </conference>
+  <conference>
+    <id>LOPSTR</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Advanced Programming Environments</id>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>ICCI</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>ICDT</id>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>Workshop on Parallel Lisp</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>The IOTA Programming System</id>
+    <ceid>1983</ceid>
+  </conference>
+  <conference>
+    <id>CSL</id>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>SSDBM</id>
+    <ceid>1990</ceid>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Computation Theory and Logic</id>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>VDM Europe</id>
+    <ceid>1987</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Program Specification</id>
+    <ceid>1982</ceid>
+  </conference>
+  <conference>
+    <id>The Use of Formal Specification of Software</id>
+    <ceid>1980</ceid>
+  </conference>
+  <conference>
+    <id>The Vienna Development Method: The Meta-Language</id>
+    <ceid>1978</ceid>
+  </conference>
+  <conference>
+    <id>Expert Systems in Engineering</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Textverarbeitung und Informatik</id>
+    <ceid>1980</ceid>
+    <ceid>1979</ceid>
+  </conference>
+  <conference>
+    <id>ISCA</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1982</ceid>
+    <ceid>1981</ceid>
+    <ceid>1990</ceid>
+    <ceid>1979</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+    <ceid>1983</ceid>
+    <ceid>1986</ceid>
+    <ceid>1976</ceid>
+    <ceid>1980</ceid>
+    <ceid>1978</ceid>
+    <ceid>1977</ceid>
+    <ceid>1975</ceid>
+    <ceid>1984</ceid>
+    <ceid>1973</ceid>
+  </conference>
+  <conference>
+    <id>CRYPTO</id>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1984</ceid>
+    <ceid>1983</ceid>
+    <ceid>1982</ceid>
+    <ceid>1990</ceid>
+    <ceid>1986</ceid>
+    <ceid>1987</ceid>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>Design and Implementation of Programming Languages</id>
+    <ceid>1977</ceid>
+  </conference>
+  <conference>
+    <id>Towards a Formal Description of Ada</id>
+    <ceid>1980</ceid>
+  </conference>
+  <conference>
+    <id>SEE</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Logic Colloquium</id>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>INFOS</id>
+    <ceid>1989</ceid>
+    <ceid>1986</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>AII</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>Mathematical Methods of Specification and Synthesis of Software Systems</id>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>FORTE</id>
+    <ceid>1990</ceid>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>ICSI</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>EUROCRYPT</id>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+    <ceid>1985</ceid>
+    <ceid>1988</ceid>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>ICLP</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1982</ceid>
+    <ceid>1990</ceid>
+    <ceid>1986</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>ICLP/SPL</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Electronic Dictionaries and Automata in Computational Linguistics</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Semantics of Systems of Concurrent Processes</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Formal Properties of Finite Automata and Applications</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Combinators and Functional Programming Languages</id>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>Automata Networks</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Automata on Infinite Words</id>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>Fehlertolerierende Rechensysteme</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1982</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>Software-Fehlertoleranz und -Zuverlässigkeit</id>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>RIAO</id>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>AFIPS Fall Joint Computing Conference</id>
+    <ceid>1972</ceid>
+    <ceid>1966</ceid>
+    <ceid>1972</ceid>
+    <ceid>1969</ceid>
+    <ceid>1967</ceid>
+    <ceid>1970</ceid>
+    <ceid>1971</ceid>
+  </conference>
+  <conference>
+    <id>AFIPS Spring Joint Computing Conference</id>
+    <ceid>1968</ceid>
+    <ceid>1972</ceid>
+    <ceid>1971</ceid>
+    <ceid>1970</ceid>
+    <ceid>1968</ceid>
+    <ceid>1967</ceid>
+    <ceid>1966</ceid>
+  </conference>
+  <conference>
+    <id>AFIPS National Computer Conference</id>
+    <ceid>1983</ceid>
+    <ceid>1982</ceid>
+    <ceid>1981</ceid>
+    <ceid>1975</ceid>
+    <ceid>1976</ceid>
+    <ceid>1980</ceid>
+    <ceid>1977</ceid>
+    <ceid>1974</ceid>
+    <ceid>1984</ceid>
+    <ceid>1974</ceid>
+  </conference>
+  <conference>
+    <id>AFIPS Fall Joint Computing Conference (2)</id>
+    <ceid>1968</ceid>
+  </conference>
+  <conference>
+    <id>AFIPS Fall Joint Computing Conference (1)</id>
+    <ceid>1968</ceid>
+  </conference>
+  <conference>
+    <id>Computer Performance and Reliability</id>
+    <ceid>1988</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>Transputer-Anwender-Treffen</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Graph-Grammars and Their Application to Computer Science</id>
+    <ceid>1983</ceid>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>Graph-Grammars and Their Application to Computer Science and Biology</id>
+    <ceid>1979</ceid>
+  </conference>
+  <conference>
+    <id>ECCV</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Büroautomation</id>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>FPCA</id>
+    <ceid>1987</ceid>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>Symposium on Computation Theory</id>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>SIGCSE</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>Cognitive Ergonomics</id>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>C++</id>
+    <ceid>1987</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>ACL</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1982</ceid>
+    <ceid>1981</ceid>
+    <ceid>1990</ceid>
+    <ceid>1979</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+    <ceid>1986</ceid>
+    <ceid>1980</ceid>
+  </conference>
+  <conference>
+    <id>European Workshop on Applications and Theory of Petri Nets</id>
+    <ceid>1988</ceid>
+    <ceid>1983</ceid>
+  </conference>
+  <conference>
+    <id>Selected Papers from the First and the Second European Workshop on Application and Theory of Petri Nets</id>
+    <ceid>1982</ceid>
+  </conference>
+  <conference>
+    <id>Applications and Theory of Petri Nets</id>
+    <ceid>1990</ceid>
+    <ceid>1986</ceid>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>European Workshop on Applications and Theory in Petri Nets</id>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>BDA</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>EURASIP</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>PSTV</id>
+    <ceid>1990</ceid>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1982</ceid>
+    <ceid>1990</ceid>
+    <ceid>1985</ceid>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>UIST</id>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Hypertext und Hypermedia</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Annual Simulation Symposium</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Algebraic Logic and Universal Algebra in Computer Science</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>DAGM-Symposium</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1981</ceid>
+    <ceid>1990</ceid>
+    <ceid>1979</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+    <ceid>1986</ceid>
+    <ceid>1980</ceid>
+    <ceid>1978</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>Digital Image Processing</id>
+    <ceid>1977</ceid>
+  </conference>
+  <conference>
+    <id>Microcomputing</id>
+    <ceid>1983</ceid>
+    <ceid>1979</ceid>
+  </conference>
+  <conference>
+    <id>LICS</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1988</ceid>
+    <ceid>1987</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1989</ceid>
+    <ceid>1986</ceid>
+    <ceid>1986</ceid>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Entwurf und Betrieb verteilter Systeme</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>SEKE</id>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Informatics and Psychology Workshop</id>
+    <ceid>1990</ceid>
+    <ceid>1990</ceid>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>Advances in Computer Graphics V</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Advances in Computer Graphics III</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Advances in Computer Graphics I</id>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>Advances in Computer Graphics II</id>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>Objektorientierte Software- und Hardwarearchitekturen</id>
+    <ceid>1983</ceid>
+  </conference>
+  <conference>
+    <id>Intelligenztechnologie</id>
+    <ceid>1983</ceid>
+  </conference>
+  <conference>
+    <id>Software-Qualitätssicherung</id>
+    <ceid>1982</ceid>
+  </conference>
+  <conference>
+    <id>Implementierungssprachen für nichtsequentielle Programmsysteme</id>
+    <ceid>1981</ceid>
+  </conference>
+  <conference>
+    <id>Wissenschaftliches Rechnen und Programmiersprachen</id>
+    <ceid>1982</ceid>
+  </conference>
+  <conference>
+    <id>Entwurf großer Software-Systeme</id>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>Hardware für Software</id>
+    <ceid>1980</ceid>
+  </conference>
+  <conference>
+    <id>Programmierumgebungen und Compiler</id>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>USENIX Winter</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>USENIX Summer</id>
+    <ceid>1987</ceid>
+    <ceid>1990</ceid>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>ALGOL 68 Implementation</id>
+    <ceid>1971</ceid>
+  </conference>
+  <conference>
+    <id>PPOPP</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>PPEALS (PPOPP)</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>INTERACT</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>NACLP</id>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>SLP</id>
+    <ceid>1987</ceid>
+    <ceid>1985</ceid>
+    <ceid>1986</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>CA(i)SE</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>CAiSE</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>ACM Southeast Regional Conference</id>
+    <ceid>1982</ceid>
+    <ceid>1990</ceid>
+    <ceid>1979</ceid>
+    <ceid>1980</ceid>
+  </conference>
+  <conference>
+    <id>ESEC</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>ICDCS</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1982</ceid>
+    <ceid>1981</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+    <ceid>1986</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>IEEE Symposium on Security and Privacy</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+    <ceid>1980</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>INDC</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Database Machine Performance</id>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>Advanced Database Machine Architecture</id>
+    <ceid>1983</ceid>
+  </conference>
+  <conference>
+    <id>Datenbanken in Rechnernetzen mit Kleinrechnern</id>
+    <ceid>1978</ceid>
+  </conference>
+  <conference>
+    <id>Non-Standard Datenbanken für Anwendungen der Graphischen Datenverarbeitung</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Data Base Design Techniques I</id>
+    <ceid>1982</ceid>
+  </conference>
+  <conference>
+    <id>PRISMA Workshop</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Natural Language Communication with Computers</id>
+    <ceid>1978</ceid>
+  </conference>
+  <conference>
+    <id>Data Base Design Techniques II</id>
+    <ceid>1982</ceid>
+  </conference>
+  <conference>
+    <id>NIPS</id>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>TEX for Scientific Documentation</id>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>The Analysis of Concurrent Systems</id>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>Functional Programming</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Accurate Scientific Computations</id>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>RIMS Symposium on Software Science and Engineering</id>
+    <ceid>1983</ceid>
+  </conference>
+  <conference>
+    <id>RIMS Symposia on Software Science and Engineering</id>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>SC</id>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Koordination von Informationen</id>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>Neue Informationstechnologien und Verwaltung</id>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>Organisation informationstechnik-gestützter öffentlicher Verwaltung</id>
+    <ceid>1981</ceid>
+  </conference>
+  <conference>
+    <id>Öffentliche Verwaltung und Informationstechnik</id>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>Frauenwelt - Computerräume</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>FODO</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>SCM</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Impacts of Artificial Intelligence</id>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>Geometry and Robotics</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>PLDI</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>PPSC</id>
+    <ceid>1990</ceid>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>Automata Theory and Formal Languages</id>
+    <ceid>1975</ceid>
+  </conference>
+  <conference>
+    <id>Automatentheorie und Formale Sprachen</id>
+    <ceid>1973</ceid>
+  </conference>
+  <conference>
+    <id>SODA</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>VLSI Engineering</id>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>Parallel Computing in Science and Engineering</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Advances in Computer Graphics Hardware II</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Advances in Computer Graphics Hardware I</id>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>CHI</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Workshop on Deductive Databases</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>MFDBS</id>
+    <ceid>1988</ceid>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Fachtagung Prozessrechner</id>
+    <ceid>1981</ceid>
+    <ceid>1977</ceid>
+    <ceid>1974</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>Prozeßrechnersysteme</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Datenschutz und Datensicherung</id>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>GI Jahrestagung</id>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1982</ceid>
+    <ceid>1981</ceid>
+    <ceid>1979</ceid>
+    <ceid>1975</ceid>
+    <ceid>1985</ceid>
+    <ceid>1976</ceid>
+    <ceid>1980</ceid>
+    <ceid>1978</ceid>
+    <ceid>1977</ceid>
+    <ceid>1975</ceid>
+    <ceid>1984</ceid>
+    <ceid>1973</ceid>
+  </conference>
+  <conference>
+    <id>GI Jahrestagung (1)</id>
+    <ceid>1986</ceid>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>GI Jahrestagung (2)</id>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+    <ceid>1990</ceid>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>GI Jahrestagung (Fachgespräche)</id>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>GI Jahrestagung (3)</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>FIFF Jahrestagung</id>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>FCT</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1981</ceid>
+    <ceid>1985</ceid>
+    <ceid>1977</ceid>
+  </conference>
+  <conference>
+    <id>Algebraic Methods</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Sagamore Computer Conference</id>
+    <ceid>1975</ceid>
+  </conference>
+  <conference>
+    <id>Software-Ergonomie</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>SNePS</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>POS</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>Data Types and Persistence (Appin), Informal Proceedings</id>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>EUROCAL</id>
+    <ceid>1989</ceid>
+    <ceid>1983</ceid>
+    <ceid>1985</ceid>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>EUROCAM</id>
+    <ceid>1982</ceid>
+  </conference>
+  <conference>
+    <id>WADS</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Forum Wissenschaft und Technik</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>IMYCS</id>
+    <ceid>1990</ceid>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>ESOP</id>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>Sprachen für Datenbanken</id>
+    <ceid>1983</ceid>
+  </conference>
+  <conference>
+    <id>BTW</id>
+    <ceid>1987</ceid>
+    <ceid>1985</ceid>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Alvey Vision Conference</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>BMVC</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Parallel and Distributed Debugging</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Automatic Verification Methods for Finite State Systems</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Codes for Boundary-Value Problems in Ordinary Differential Equations</id>
+    <ceid>1979</ceid>
+  </conference>
+  <conference>
+    <id>Repräsentation und Verarbeitung räumlichen Wissens</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Portability of Numerical Software</id>
+    <ceid>1977</ceid>
+  </conference>
+  <conference>
+    <id>Artificial Intelligence in Higher Education</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>WOPPLOT</id>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>East/West Database Workshop</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>RSP</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>ICIS</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>ALP</id>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>SIGDOC</id>
+    <ceid>1989</ceid>
+    <ceid>1983</ceid>
+    <ceid>1982</ceid>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>EPIA</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>CAIA</id>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>GI-BIFOA</id>
+    <ceid>1974</ceid>
+  </conference>
+  <conference>
+    <id>ICCL</id>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Programs as Data Objects</id>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>ARCS</id>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+    <ceid>1980</ceid>
+    <ceid>1974</ceid>
+    <ceid>1984</ceid>
+    <ceid>1974</ceid>
+  </conference>
+  <conference>
+    <id>Computer Architecture</id>
+    <ceid>1976</ceid>
+  </conference>
+  <conference>
+    <id>ASST</id>
+    <ceid>1987</ceid>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Kommunikation in Verteilten Systemen</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1981</ceid>
+    <ceid>1979</ceid>
+  </conference>
+  <conference>
+    <id>Data Networks with Satellites</id>
+    <ceid>1983</ceid>
+  </conference>
+  <conference>
+    <id>Kommunikation in Verteilten Systemen (2)</id>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>Rechnernetze und Datenfernverarbeitung</id>
+    <ceid>1976</ceid>
+  </conference>
+  <conference>
+    <id>Kommunikation in Verteilten Systemen (1)</id>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>Offene Multifunktionale Büroarbeitsplätze und Bildschirmtext</id>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>EUROSPEECH</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>ECST</id>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>ICSLP</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>PNPM</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>Performance</id>
+    <ceid>1988</ceid>
+    <ceid>1983</ceid>
+    <ceid>1990</ceid>
+    <ceid>1979</ceid>
+    <ceid>1977</ceid>
+    <ceid>1977</ceid>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>Informatik und "Dritte Welt"</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Arbeit und Informationstechnik</id>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>STACS</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+    <ceid>1986</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>CONPAR</id>
+    <ceid>1981</ceid>
+    <ceid>1990</ceid>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>SSW</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>FMLDO</id>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Optimization Techniques</id>
+    <ceid>1976</ceid>
+    <ceid>1973</ceid>
+    <ceid>1976</ceid>
+    <ceid>1974</ceid>
+    <ceid>1973</ceid>
+  </conference>
+  <conference>
+    <id>Modelling the Innovation</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>ICALP</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1982</ceid>
+    <ceid>1981</ceid>
+    <ceid>1990</ceid>
+    <ceid>1979</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+    <ceid>1986</ceid>
+    <ceid>1980</ceid>
+    <ceid>1978</ceid>
+    <ceid>1977</ceid>
+    <ceid>1974</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>REX Workshop</id>
+    <ceid>1990</ceid>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>EUROSAM</id>
+    <ceid>1979</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>Semantics of Concurrent Computation</id>
+    <ceid>1979</ceid>
+  </conference>
+  <conference>
+    <id>Int. CMG Conference</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1982</ceid>
+    <ceid>1981</ceid>
+    <ceid>1990</ceid>
+    <ceid>1979</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+    <ceid>1986</ceid>
+    <ceid>1976</ceid>
+    <ceid>1980</ceid>
+    <ceid>1978</ceid>
+    <ceid>1977</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>Fault-Tolerant Distributed Computing</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Expert Planning Systems</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Logic and Machines</id>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>CC</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Semantics-Directed Compiler Generation</id>
+    <ceid>1980</ceid>
+  </conference>
+  <conference>
+    <id>MFPS</id>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>AAECC</id>
+    <ceid>1989</ceid>
+    <ceid>1989</ceid>
+    <ceid>1986</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>NF²</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>L Systems</id>
+    <ceid>1974</ceid>
+  </conference>
+  <conference>
+    <id>LANSEC</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>IMA Conference on the Mathematics of Surfaces</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Graphik und KI</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Graphik im Bürobereich</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Graphik in Dokumenten</id>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>KBCS</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Simulationstechnik</id>
+    <ceid>1987</ceid>
+    <ceid>1982</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>TARK</id>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>Experiences with Distributed Systems</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Australian Joint Conference on Artificial Intelligence</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>IWDM</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Language Hierarchies and Interfaces</id>
+    <ceid>1976</ceid>
+  </conference>
+  <conference>
+    <id>Advanced Course: Net Theory and Applications 1975</id>
+    <ceid>1980</ceid>
+  </conference>
+  <conference>
+    <id>Embedded Systems</id>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>Compiler Construction</id>
+    <ceid>1976</ceid>
+  </conference>
+  <conference>
+    <id>Advanced Course: Distributed Systems</id>
+    <ceid>1981</ceid>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>Mathematical Models for the Semantics of Parallelism</id>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>Advanced Topics in Artificial Intelligence</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Future Parallel Computers</id>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>Advanced Course: Microcomputer System Design</id>
+    <ceid>1982</ceid>
+  </conference>
+  <conference>
+    <id>Software Reliability Modelling and Identification</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Abstract Software Specifications</id>
+    <ceid>1980</ceid>
+  </conference>
+  <conference>
+    <id>Method and tools for compiler construction</id>
+    <ceid>1983</ceid>
+  </conference>
+  <conference>
+    <id>Advances in Petri Nets</id>
+    <ceid>1987</ceid>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>Komplexität von Entscheidungsproblemen</id>
+    <ceid>1976</ceid>
+  </conference>
+  <conference>
+    <id>Advanced Course: Local Area Networks</id>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>Advanced Course: Software Engineering</id>
+    <ceid>1975</ceid>
+  </conference>
+  <conference>
+    <id>Advanced Course: Fundamentals of Artificial Intelligence</id>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>Advanced Course: Operating Systems</id>
+    <ceid>1978</ceid>
+  </conference>
+  <conference>
+    <id>POPL</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1990</ceid>
+    <ceid>1981</ceid>
+    <ceid>1975</ceid>
+    <ceid>1988</ceid>
+    <ceid>1977</ceid>
+    <ceid>1985</ceid>
+    <ceid>1979</ceid>
+    <ceid>1986</ceid>
+    <ceid>1976</ceid>
+    <ceid>1980</ceid>
+    <ceid>1978</ceid>
+    <ceid>1982</ceid>
+    <ceid>1984</ceid>
+    <ceid>1973</ceid>
+  </conference>
+  <conference>
+    <id>Software-Entwicklung</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Formal Aspects of Cognitive Processes</id>
+    <ceid>1975</ceid>
+  </conference>
+  <conference>
+    <id>Programierumgebungen</id>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>Arbeitsplätze morgen</id>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>Austrographics</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Recent Issues in Pattern Analysis and Recognition</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Pattern Recognition</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Ada Software Tools Interfaces</id>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>Software Development and Ada</id>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>CADE</id>
+    <ceid>1982</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+    <ceid>1980</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>MPC</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>RTA</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>ISPW</id>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>SIGGRAPH</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>SIGGRAPH (Panels)</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>EWSL</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Innovative Informations-Infrastrukturen</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>ICS</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>UNIX - Konzepte und Anwendungen</id>
+    <ceid>1983</ceid>
+  </conference>
+  <conference>
+    <id>PLILP</id>
+    <ceid>1990</ceid>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>TAPSOFT, Vol.1</id>
+    <ceid>1987</ceid>
+    <ceid>1989</ceid>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>TAPSOFT, Vol.2</id>
+    <ceid>1985</ceid>
+    <ceid>1987</ceid>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Optimal Algorithms</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Categorial Methods in Computer Science</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Category Theory Applied to Computation and Control</id>
+    <ceid>1975</ceid>
+  </conference>
+  <conference>
+    <id>Workshop on Computational Geometry</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Hardware Specification, Verification and Synthesis</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>HPTS</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>RGU</id>
+    <ceid>1974</ceid>
+  </conference>
+  <conference>
+    <id>FTCS</id>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Specification and Verification of Concurrent Systems</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Firmware Engineering</id>
+    <ceid>1980</ceid>
+  </conference>
+  <conference>
+    <id>CBMS</id>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>FTRTFT</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Mathematical Studies of Information Processing</id>
+    <ceid>1979</ceid>
+  </conference>
+  <conference>
+    <id>STOC</id>
+    <ceid>1978</ceid>
+    <ceid>1986</ceid>
+    <ceid>1987</ceid>
+    <ceid>1977</ceid>
+    <ceid>1984</ceid>
+    <ceid>1988</ceid>
+    <ceid>1971</ceid>
+    <ceid>1981</ceid>
+    <ceid>1974</ceid>
+    <ceid>1985</ceid>
+    <ceid>1982</ceid>
+    <ceid>1983</ceid>
+    <ceid>1979</ceid>
+    <ceid>1980</ceid>
+    <ceid>1989</ceid>
+    <ceid>1972</ceid>
+    <ceid>1990</ceid>
+    <ceid>1970</ceid>
+    <ceid>1976</ceid>
+    <ceid>1973</ceid>
+    <ceid>1975</ceid>
+    <ceid>1969</ceid>
+  </conference>
+  <conference>
+    <id>ESORICS</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>IEEE Symposium on Computer Arithmetic</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1981</ceid>
+    <ceid>1975</ceid>
+    <ceid>1985</ceid>
+    <ceid>1978</ceid>
+    <ceid>1972</ceid>
+  </conference>
+  <conference>
+    <id>Program Construction</id>
+    <ceid>1979</ceid>
+  </conference>
+  <conference>
+    <id>EUROCAST</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>ISSAC</id>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>SYMSAC</id>
+    <ceid>1981</ceid>
+    <ceid>1986</ceid>
+    <ceid>1976</ceid>
+  </conference>
+  <conference>
+    <id>ADT</id>
+    <ceid>1987</ceid>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>Temporal Logic in Specification</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>COLT</id>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>ECI</id>
+    <ceid>1981</ceid>
+    <ceid>1976</ceid>
+    <ceid>1978</ceid>
+  </conference>
+  <conference>
+    <id>Conference on Computer Logic</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Graph Reduction</id>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>USENIX MACH Symposium</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Software Engineering</id>
+    <ceid>1981</ceid>
+  </conference>
+  <conference>
+    <id>ACM SIGOPS European Workshop</id>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>ITC</id>
+    <ceid>1989</ceid>
+    <ceid>1983</ceid>
+    <ceid>1982</ceid>
+    <ceid>1981</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+    <ceid>1986</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>EMISA</id>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>ICSE</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1982</ceid>
+    <ceid>1981</ceid>
+    <ceid>1990</ceid>
+    <ceid>1979</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+    <ceid>1976</ceid>
+    <ceid>1978</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>FOCS</id>
+    <ceid>1980</ceid>
+    <ceid>1989</ceid>
+    <ceid>1982</ceid>
+    <ceid>1990</ceid>
+    <ceid>1987</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1984</ceid>
+    <ceid>1986</ceid>
+    <ceid>1976</ceid>
+    <ceid>1981</ceid>
+    <ceid>1985</ceid>
+    <ceid>1979</ceid>
+    <ceid>1983</ceid>
+    <ceid>1977</ceid>
+    <ceid>1975</ceid>
+    <ceid>1978</ceid>
+  </conference>
+  <conference>
+    <id>SWAT (FOCS)</id>
+    <ceid>1968</ceid>
+    <ceid>1972</ceid>
+    <ceid>1971</ceid>
+    <ceid>1969</ceid>
+    <ceid>1966</ceid>
+    <ceid>1970</ceid>
+    <ceid>1974</ceid>
+    <ceid>1973</ceid>
+    <ceid>1967</ceid>
+  </conference>
+  <conference>
+    <id>SWCT (FOCS)</id>
+    <ceid>1960</ceid>
+    <ceid>1963</ceid>
+    <ceid>1961</ceid>
+    <ceid>1964</ceid>
+    <ceid>1965</ceid>
+    <ceid>1962</ceid>
+  </conference>
+  <conference>
+    <id>ACM Conference on Computer Science</id>
+    <ceid>1987</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+    <ceid>1986</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>ACM Annual Conference (1)</id>
+    <ceid>1978</ceid>
+  </conference>
+  <conference>
+    <id>ACM Annual Conference (2)</id>
+    <ceid>1978</ceid>
+  </conference>
+  <conference>
+    <id>IPMU</id>
+    <ceid>1988</ceid>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>Logic at Botik</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Algorithms in Modern Mathematics and Computer Science</id>
+    <ceid>1981</ceid>
+  </conference>
+  <conference>
+    <id>Methods of Algorithmic Language Implementation</id>
+    <ceid>1977</ceid>
+  </conference>
+  <conference>
+    <id>International Sympoisum on Theoretical Programming</id>
+    <ceid>1974</ceid>
+  </conference>
+  <conference>
+    <id>Computer-Aided Production Management</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Natural Language and Logic</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Trends in Computer Algebra</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Enduser Systems and Their Human Factors</id>
+    <ceid>1983</ceid>
+  </conference>
+  <conference>
+    <id>IBM Symposium: Database Systems of the 90s</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Data Base Techniques for Pictorial Applications</id>
+    <ceid>1980</ceid>
+  </conference>
+  <conference>
+    <id>IBM Symposium: Data Base Systems</id>
+    <ceid>1976</ceid>
+  </conference>
+  <conference>
+    <id>Natural Language at the Computer</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Networking in Open Systems</id>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>IBM Symposium: Interactive Systems</id>
+    <ceid>1977</ceid>
+  </conference>
+  <conference>
+    <id>Wissensrepräsentation in Expertensystemen</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Operating Systems Engineering</id>
+    <ceid>1982</ceid>
+  </conference>
+  <conference>
+    <id>IBM Symposium: Programming Methodology</id>
+    <ceid>1975</ceid>
+  </conference>
+  <conference>
+    <id>Programming Languages and Their Definition</id>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>HLT</id>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>PASCAL</id>
+    <ceid>1982</ceid>
+    <ceid>1979</ceid>
+  </conference>
+  <conference>
+    <id>Pascal - The Language and its Implementation</id>
+    <ceid>1981</ceid>
+  </conference>
+  <conference>
+    <id>CSEE</id>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Kognitive Aspekte der Mensch-Computer-Interaktion</id>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>IAS</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>Geometrisches Modellieren</id>
+    <ceid>1983</ceid>
+  </conference>
+  <conference>
+    <id>CAD-Fachgespräch</id>
+    <ceid>1980</ceid>
+    <ceid>1977</ceid>
+  </conference>
+  <conference>
+    <id>CAD Advanced Course</id>
+    <ceid>1980</ceid>
+  </conference>
+  <conference>
+    <id>Computerlinguistik und ihre theoretischen Grundlagen</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Sprachverarbeitung in Information und Dokumentation</id>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>Logics of Programs</id>
+    <ceid>1984</ceid>
+    <ceid>1982</ceid>
+    <ceid>1981</ceid>
+    <ceid>1985</ceid>
+    <ceid>1983</ceid>
+  </conference>
+  <conference>
+    <id>Parcella</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>MFCS</id>
+    <ceid>1989</ceid>
+    <ceid>1981</ceid>
+    <ceid>1990</ceid>
+    <ceid>1979</ceid>
+    <ceid>1975</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+    <ceid>1976</ceid>
+    <ceid>1980</ceid>
+    <ceid>1978</ceid>
+    <ceid>1977</ceid>
+    <ceid>1975</ceid>
+    <ceid>1984</ceid>
+    <ceid>1973</ceid>
+  </conference>
+  <conference>
+    <id>Problems and Methodologies in Mathematical Software Production</id>
+    <ceid>1982</ceid>
+  </conference>
+  <conference>
+    <id>FSTTCS</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+    <ceid>1986</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>ECOOP</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Semantics of Data Types</id>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>WG</id>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1984</ceid>
+    <ceid>1983</ceid>
+    <ceid>1982</ceid>
+    <ceid>1980</ceid>
+    <ceid>1976</ceid>
+    <ceid>1989</ceid>
+    <ceid>1986</ceid>
+    <ceid>1987</ceid>
+    <ceid>1977</ceid>
+    <ceid>1981</ceid>
+    <ceid>1979</ceid>
+    <ceid>1978</ceid>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>RTSS</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1982</ceid>
+    <ceid>1981</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>Distributed Data Acquisition, Computing, and Control Symposium</id>
+    <ceid>1980</ceid>
+  </conference>
+  <conference>
+    <id>AWOC</id>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>WAGA</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>UAI</id>
+    <ceid>1990</ceid>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>IJCAI</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1981</ceid>
+    <ceid>1969</ceid>
+    <ceid>1979</ceid>
+    <ceid>1971</ceid>
+    <ceid>1975</ceid>
+    <ceid>1985</ceid>
+    <ceid>1977</ceid>
+    <ceid>1973</ceid>
+  </conference>
+  <conference>
+    <id>ICCV</id>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Rechnergestützter Entwurf und Architektur mikroelektronischer Systeme</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>SPLT</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1982</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+    <ceid>1986</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>Fachtagung über Programmiersprachen</id>
+    <ceid>1982</ceid>
+    <ceid>1976</ceid>
+    <ceid>1980</ceid>
+    <ceid>1978</ceid>
+    <ceid>1974</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>Werkzeuge der Programmiertechnik</id>
+    <ceid>1981</ceid>
+  </conference>
+  <conference>
+    <id>Methods and Tools for Computer Integrated Manufacturing</id>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>Begründungsverwaltung</id>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>KR</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>KIFS</id>
+    <ceid>1989</ceid>
+    <ceid>1988</ceid>
+    <ceid>1989</ceid>
+    <ceid>1982</ceid>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>GWAI</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1983</ceid>
+    <ceid>1982</ceid>
+    <ceid>1981</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+    <ceid>1986</ceid>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>CSFW</id>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>IPCO</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Lambda-Calculus and Computer Science Theory</id>
+    <ceid>1975</ceid>
+  </conference>
+  <conference>
+    <id>MVA</id>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>LP</id>
+    <ceid>1988</ceid>
+    <ceid>1989</ceid>
+    <ceid>1986</ceid>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>SDE</id>
+    <ceid>1990</ceid>
+    <ceid>1989</ceid>
+    <ceid>1986</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>ASIACRYPT</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Interval Mathemantics</id>
+    <ceid>1975</ceid>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>Expertensysteme</id>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>COMPCON</id>
+    <ceid>1987</ceid>
+    <ceid>1982</ceid>
+    <ceid>1988</ceid>
+    <ceid>1985</ceid>
+    <ceid>1986</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>SIGPLAN Symposium on Compiler Construction</id>
+    <ceid>1982</ceid>
+    <ceid>1979</ceid>
+    <ceid>1986</ceid>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>PARLE</id>
+    <ceid>1987</ceid>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>Language Design and Programming Methodology</id>
+    <ceid>1980</ceid>
+  </conference>
+  <conference>
+    <id>Symposium on Computational Geometry</id>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>Process in Distributed Operating Systems and Distributed Systems Management</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>LCN</id>
+    <ceid>1989</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Structure in Complexity Theory Conference</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+    <ceid>1986</ceid>
+  </conference>
+  <conference>
+    <id>Complexity of Computer Computations</id>
+    <ceid>1972</ceid>
+  </conference>
+  <conference>
+    <id>ISI</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>Datenverarbeitung im Marketing</id>
+    <ceid>1981</ceid>
+  </conference>
+  <conference>
+    <id>WDAG</id>
+    <ceid>1989</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>Coding Theory and Applications</id>
+    <ceid>1989</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>ML</id>
+    <ceid>1989</ceid>
+  </conference>
+  <conference>
+    <id>ICML</id>
+    <ceid>1990</ceid>
+    <ceid>1988</ceid>
+  </conference>
+  <conference>
+    <id>ICGA</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1985</ceid>
+  </conference>
+  <conference>
+    <id>LPE</id>
+    <ceid>1990</ceid>
+  </conference>
+  <conference>
+    <id>ASPLOS</id>
+    <ceid>1989</ceid>
+    <ceid>1987</ceid>
+    <ceid>1982</ceid>
+  </conference>
+  <conference>
+    <id>Theoretical Computer Science</id>
+    <ceid>1982</ceid>
+    <ceid>1981</ceid>
+    <ceid>1979</ceid>
+    <ceid>1977</ceid>
+  </conference>
+  <conference>
+    <id>I3D</id>
+    <ceid>1990</ceid>
+    <ceid>1987</ceid>
+  </conference>
+  <conference>
+    <id>Datenbanktechnologie</id>
+    <ceid>1979</ceid>
+  </conference>
+  <conference>
+    <id>COLING</id>
+    <ceid>1982</ceid>
+    <ceid>1990</ceid>
+    <ceid>1969</ceid>
+    <ceid>1988</ceid>
+    <ceid>1965</ceid>
+    <ceid>1986</ceid>
+    <ceid>1980</ceid>
+    <ceid>1967</ceid>
+    <ceid>1973</ceid>
+  </conference>
+  <conference>
+    <id>ACL/COLING</id>
+    <ceid>1984</ceid>
+  </conference>
+  <conference>
+    <id>BNCOD</id>
+    <ceid>1981</ceid>
+  </conference>
+  <conference>
+    <id>Portable Software</id>
+    <ceid>1980</ceid>
+  </conference>
+  <conference>
+    <id>GLDV-Jahrestagung</id>
+    <ceid>1990</ceid>
+    <ceid>1987</ceid>
+    <ceid>1986</ceid>
+    <ceid>1990</ceid>
+    <ceid>1987</ceid>
+  </conference>
+</root>

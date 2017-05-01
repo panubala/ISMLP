@@ -11,6 +11,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -30,6 +32,11 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.*;
 import com.mongodb.operation.GroupOperation;
 
+import ch.ethz.globis.isk.domain.mongodb.MongoConferenceEdition;
+import ch.ethz.globis.isk.domain.mongodb.MongoInProceedings;
+import ch.ethz.globis.isk.domain.mongodb.MongoPerson;
+import ch.ethz.globis.isk.domain.mongodb.MongoPublisher;
+import ch.ethz.globis.isk.domain.mongodb.MongoSeries;
 import ch.ethz.globis.isk.xmldb.api.BaseXClient.Query;
 
 public class Panel extends JPanel {
@@ -314,31 +321,87 @@ public class Panel extends JPanel {
     }
 
     private void proceedingsButtonActionPerformed(ActionEvent evt) {
-    	
+    	new Table(
+    			db,
+    			"proceedings.xml",
+    			null,
+    			"Proceedings",
+    			new String[] { "ID", "Title", "Conference", "Conference Edition", "Publisher", "Series", "ISBN", "Editors"  },
+    			new String[] { "id", "title", "cid", "ceid", "publisher", "sid", "isbn", "editor"  },
+    			true
+    	);
     }
     
     private void inProceedingsButtonActionPerformed(ActionEvent evt) {
-    	
+    	new Table(
+    			db,
+    			"inproceedings.xml",
+    			null,
+    			"Inproceedings",
+    			new String[] { "ID", "Title", "Proceedings", "Authors" },
+    			new String[] { "id", "title", "pid", "author" },
+    			true
+    	);
     }
     
     private void conferenceEditionsButtonActionPerformed(ActionEvent evt) {
-    	
+    	new Table(
+    			db,
+    			"conferenceEditions.xml",
+    			null,
+    			"ConferenceEditions",
+    			new String[] { "Year", "Conference", "Proceedings" },
+    			new String[] { "id", "cid", "pid" },
+    			true
+    	);
     }
 
     private void conferencesButtonActionPerformed(ActionEvent evt) {
-    	
+    	new Table(
+    			db,
+    			"conferences.xml",
+    			null,
+    			"Conferences",
+    			new String[] { "Name", "Editions" },
+    			new String[] { "id", "ceid" },
+    			true
+    	);
     }
     
     private void personsButtonActionPerformed(ActionEvent evt) {
-    	
+    	new Table(
+    			db,
+    			"persons.xml",
+    			null,
+    			"Authors/Editors",
+    			new String[] { "Name", "Authored Publications", "Edited Publications" },
+    			new String[] { "id", "iid", "pid" },
+    			true
+    	);
     }
 
     private void publishersButtonActionPerformed(ActionEvent evt) {
-    	
+    	new Table(
+    			db,
+    			"publishers.xml",
+    			null,
+    			"Publishers",
+    			new String[] { "Name", "Publications" },
+    			new String[] { "id", "pid" },
+    			true
+    	);
     }
     
     private void seriesButtonActionPerformed(ActionEvent evt) {
-    	
+    	new Table(
+    			db,
+    			"series.xml",
+    			null,
+    			"Series",
+    			new String[] { "Name", "Publications" },
+    			new String[] { "id", "pid" },
+    			true
+    	);
     }
 
     private void query1ButtonActionPerformed(ActionEvent evt) {
