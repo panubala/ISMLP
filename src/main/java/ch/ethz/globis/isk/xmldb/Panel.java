@@ -439,7 +439,7 @@ public class Panel extends JPanel {
     		e.printStackTrace();
     	}
     	String input =
-		 "let $publications := doc('publications.xml')/root//*[contains(id, '" + id + "')] "
+		 "let $publications := doc('publications.xml')/root//*[contains(title, '" + id + "')] "
 		+"return <root>{ "
 		+  "subsequence($publications, " + beginOffset +  ", " + (endOffset - beginOffset) + ") "
 		+"}</root> ";
@@ -467,10 +467,10 @@ public class Panel extends JPanel {
     		e.printStackTrace();
     	}
     	String input =
-		 "let $publications := doc('publications.xml')/root//*[contains(id, '" + id + "')] "
+		 "let $publications := doc('publications.xml')/root//*[contains(title, '" + id + "')] "
 		+"return <root>{ "
 		+  "let $sorted := for $publication in $publications "
-		+     "order by $publication/id/text() "
+		+     "order by $publication/title/text() "
 		+     "return $publication "
 		+  "return subsequence($sorted, " + beginOffset +  ", " + (endOffset - beginOffset) + ") "
 		+"}</root> ";
@@ -584,18 +584,21 @@ public class Panel extends JPanel {
     	String beginStr = Integer.toString(beginYear);
     	String endStr   = Integer.toString(endYear);
     	
-    	String input = "let $publications := doc('publications.xml')/root//* "
+    	
+    	String input = "let $inproceedings := doc('publications.xml')/root/inproceedings[(ceid >= " + beginYear + ") and (ceid <= " + endYear + ")] "
     			+ "return <root>{ "
-    			+ 	"<item>{ "
-    			+ 		"<num>{ "
-    			+ 			"count( "
-    			+ 				"for $p in $publications "
-    			+ 				"where (($p/year >= " + beginStr + ") and ($p/year <= " + endStr + ")) or (($p/ceid >= " + beginStr + ") and ($p/ceid <= " + endStr + ")) "
-    			+ 				"return $p "
-    			+ 			") "
-    			+ 		"}</num> "
-    			+ 	"}</item> "
-    			+ "}</root> ";
+    			+ "for $year in distinct-values($inproceedings/ceid) "
+    			+ "order by $year "
+    			+ "return "
+    			+ "<result> "
+    			+ "<year>{ "
+    			+ "$year "
+    			+ "}</year> "
+    			+ "<num>{ "
+    			+ "count($inproceedings[ceid = $year]) "
+    			+ "}</num> "
+    			+ "</result> "
+    			+ "}</root>";
     	
     	
     	Query query = db.execute(input);
@@ -605,8 +608,8 @@ public class Panel extends JPanel {
     			null,
     			query,
     			"Number of publications per year between " + beginStr + " and " + endStr + ".",
-    			new String[] { "Total" },
-    			new String[] { "num" },
+    			new String[] { "Year", "Number" },
+    			new String[] { "year", "num" },
     			false
     	);
     	
@@ -617,18 +620,22 @@ public class Panel extends JPanel {
     	// e.g. "ICPP"
     	String confID = textField1.getText();
     	
-    	String input = "let $publications := doc('publications.xml')/root//* "
+    	
+    	String input = "let $publications := doc('publications.xml')/root "
     			+ "return <root>{ "
     			+ 	"<item>{ "
     			+ 		"<num>{ "
-    			+ 			"count( "
-    			+ 				"for $p in $publications "
-    			+ 				"where $p/cid = '" + confID + "' "
-    			+ 				"return $p "
+    			+ 			"for $p in $publications/proceedings[cid = '" + confID + "'] "
+    			+ 			"return ( "
+    			+ 				"count( "
+    			+ 					"for $ip in  $publications/inproceedings "
+    			+ 					"where $ip/pid = $p/id "
+    			+ 					"return $ip "
+    			+ 				") "
     			+ 			") "
     			+ 		"}</num> "
     			+ 	"}</item> "
-    			+ "}</root> ";
+    			+ "}</root>";
     	
     	Query query = db.execute(input);
     	
