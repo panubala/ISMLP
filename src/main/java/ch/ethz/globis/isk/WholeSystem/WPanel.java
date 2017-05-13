@@ -304,107 +304,40 @@ public class WPanel extends javax.swing.JPanel {
        });
 
       
-
-       xQuery13Button.setText("13. Pub Auth last");
-       xQuery13Button.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton42ActionPerformed(evt);
-           }
-       });
-       jPanel4.add(xQuery13Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 500, 150, -1));
-
-       xQuery5Button.setText("5. Short. P Authors");
        
-
-       xQuery1Button.setText("1.Pub by ID");
-       jPanel4.add(xQuery1Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 150, -1));
-
-       jSeparator12.setForeground(new java.awt.Color(255, 255, 255));
-       jPanel4.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 260, -1));
-
+       
+       
+       
+       //------------------------------------------------------------------------------------//
+       
        xPreButton.setText("InProceddings");
        xPreButton.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
                jButton26ActionPerformed(evt);
            }
        });
-       jPanel4.add(xPreButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 150, -1));
-
-       xSerButton.setText("Series");
-       xSerButton.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton20ActionPerformed(evt);
-           }
-       });
-       jPanel4.add(xSerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 150, -1));
-
-       xQuery2Button.setText("2. Pub by title");
-       xQuery2Button.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton32ActionPerformed(evt);
-           }
-       });
        
-
-       xQuery3Button.setText("3. Q2 ord by title");
-       xQuery3Button.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton33ActionPerformed(evt);
-           }
-       });
-       jPanel4.add(xQuery3Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, -1, -1));
-
-       xQuery11Button.setText("11. Pub of Conf");
-       xQuery11Button.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton38ActionPerformed(evt);
-           }
-       });
-       jPanel4.add(xQuery11Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 440, 150, -1));
-
-       xConfButton.setText("Conferences");
-       xConfButton.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton27ActionPerformed(evt);
-           }
-       });
-       jPanel4.add(xConfButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 150, -1));
-
        xPublisherButton.setText("Publishers");
        xPublisherButton.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
                jButton30ActionPerformed(evt);
            }
        });
-       jPanel4.add(xPublisherButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 150, -1));
-
-       xQuery6Button.setText("6. Avg Pub");
-       xQuery6Button.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton39ActionPerformed(evt);
-           }
-       });
-       jPanel4.add(xQuery6Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 150, -1));
-
-       xQuery8Button.setText("8. PubCount Conf");
-       jPanel4.add(xQuery8Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 150, -1));
-
-       xQuery10Button.setText("10. Auth of Conf");
-       xQuery10Button.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton36ActionPerformed(evt);
-           }
-       });
-       jPanel4.add(xQuery10Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 150, -1));
-
+       
        xProButton.setText("Proceedings");
        xProButton.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
                jButton25ActionPerformed(evt);
            }
        });
-       jPanel4.add(xProButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 150, -1));
-
+       
+       xSerButton.setText("Series");
+       xSerButton.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               jButton20ActionPerformed(evt);
+           }
+       });
+       
        xAuthEdButton.setText("Authors/Editors");
        xAuthEdButton.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -412,26 +345,6 @@ public class WPanel extends javax.swing.JPanel {
            }
        });
        
-
-       xQuery12Button.setText("12. Auth = Ed");
-      
-
-       xQuery4Button.setText("4. Co-Authors");
-       xQuery4Button.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton34ActionPerformed(evt);
-           }
-       });
-
-
-       xQuery7Button.setText("7. PubCount y");
-       xQuery7Button.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton40ActionPerformed(evt);
-           }
-       });
-      
-
        xConfEdButton.setText("Conf Editions");
        xConfEdButton.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -439,15 +352,6 @@ public class WPanel extends javax.swing.JPanel {
            }
        });
        
-
-       xQuery14Button.setText("14. Pub of Pro");
-       xQuery14Button.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton43ActionPerformed(evt);
-           }
-       });
-       
-
        xPublicationButton.setText("Publications");
        xPublicationButton.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent evt) {
@@ -455,14 +359,114 @@ public class WPanel extends javax.swing.JPanel {
            }
        });
        
-
+       xConfButton.setText("Conferences");
+       xConfButton.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               jButton27ActionPerformed(evt);
+           }
+       });
+       
+       xQuery1Button.setText("1.Pub by ID");
+       
+       xQuery2Button.setText("2. Pub by title");
+       xQuery2Button.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               jButton32ActionPerformed(evt);
+           }
+       });
+       
+       xQuery3Button.setText("3. Q2 ord by title");
+       xQuery3Button.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               jButton33ActionPerformed(evt);
+           }
+       });
+       
+       xQuery4Button.setText("4. Co-Authors");
+       xQuery4Button.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               jButton34ActionPerformed(evt);
+           }
+      
+       });
+       
+       xQuery5Button.setText("5. Short. P Authors");
+       
+       xQuery6Button.setText("6. Avg Pub");
+       xQuery6Button.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               jButton39ActionPerformed(evt);
+           }
+       });
+       
+       
+       xQuery7Button.setText("7. PubCount y");
+       xQuery7Button.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               jButton40ActionPerformed(evt);
+           }
+       });
+       
+       xQuery8Button.setText("8. PubCount Conf");
+       
        xQuery9Button.setText("9. Auth/Ed Count");
        xQuery9Button.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
                jButton35ActionPerformed(evt);
            }
        });
+       
+       xQuery10Button.setText("10. Auth of Conf");
+       xQuery10Button.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               jButton36ActionPerformed(evt);
+           }
+       });
+       
+       xQuery11Button.setText("11. Pub of Conf");
+       xQuery11Button.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               jButton38ActionPerformed(evt);
+           }
+       });
+       
+       xQuery12Button.setText("12. Auth = Ed");
+       
+       xQuery13Button.setText("13. Pub Auth last");
+       xQuery13Button.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               jButton42ActionPerformed(evt);
+           }
+       });
+       
+       xQuery14Button.setText("14. Pub of Pro");
+       xQuery14Button.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               jButton43ActionPerformed(evt);
+           }
+       });
 
+
+       
+      
+
+      
+
+       
+      
+
+      
+       
+
+      
+       
+
+       
+       
+
+       
+
+     //------------------------------------------------------------------------------------//
 
        jButton1.setText("Series");
        jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -735,6 +739,22 @@ public class WPanel extends javax.swing.JPanel {
        });
        jPanel4.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 260, 30));
        jSeparator17.setForeground(new java.awt.Color(255, 255, 255));
+       
+       jPanel4.add(xQuery13Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 500, 150, -1));
+       jPanel4.add(xQuery1Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 150, -1));
+
+       jSeparator12.setForeground(new java.awt.Color(255, 255, 255));
+       jPanel4.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 260, -1));
+       jPanel4.add(xPreButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 150, -1));
+       jPanel4.add(xSerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 150, -1));
+       jPanel4.add(xQuery3Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, -1, -1));
+       jPanel4.add(xQuery11Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 440, 150, -1));
+       jPanel4.add(xConfButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 150, -1));
+       jPanel4.add(xPublisherButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 150, -1));
+       jPanel4.add(xQuery6Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 150, -1));
+       jPanel4.add(xQuery8Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 150, -1));
+       jPanel4.add(xQuery10Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 150, -1));
+       jPanel4.add(xProButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 150, -1));
        
        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
        jPanel2.setLayout(jPanel2Layout);
