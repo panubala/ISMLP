@@ -688,7 +688,7 @@ public class WPanel extends javax.swing.JPanel {
 		ztextField2.setBorder(null);
 		ztextField2.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jTextField18MouseClicked(evt);
+				ztextField2MouseClicked(evt);
 			}
 		});
 		ztextField2.addActionListener(new java.awt.event.ActionListener() {
@@ -724,7 +724,7 @@ public class WPanel extends javax.swing.JPanel {
 		ztextField3.setBorder(null);
 		ztextField3.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jTextField15MouseClicked(evt);
+				ztextField3MouseClicked(evt);
 			}
 		});
 		ztextField3.addActionListener(new java.awt.event.ActionListener() {
@@ -917,7 +917,7 @@ public class WPanel extends javax.swing.JPanel {
 		xtextField1.setBorder(null);
 		xtextField1.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jTextField11MouseClicked(evt);
+				xtextField1MouseClicked(evt);
 			}
 		});
 		xtextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -961,7 +961,7 @@ public class WPanel extends javax.swing.JPanel {
 		xtextField2.setBorder(null);
 		xtextField2.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jTextField12MouseClicked(evt);
+				xtextField2MouseClicked(evt);
 			}
 		});
 		xtextField2.addActionListener(new java.awt.event.ActionListener() {
@@ -977,7 +977,7 @@ public class WPanel extends javax.swing.JPanel {
 		xtextField3.setBorder(null);
 		xtextField3.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jTextField13MouseClicked(evt);
+				jTextField3MouseClicked(evt);
 			}
 		});
 		xtextField3.addActionListener(new java.awt.event.ActionListener() {
@@ -999,7 +999,7 @@ public class WPanel extends javax.swing.JPanel {
 		mtextField1.setBorder(null);
 		mtextField1.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jTextField8MouseClicked(evt);
+				mtextField1MouseClicked(evt);
 			}
 		});
 		mtextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -1016,7 +1016,7 @@ public class WPanel extends javax.swing.JPanel {
 		mtextField2.setBorder(null);
 		mtextField2.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jTextField9MouseClicked(evt);
+				mtextField2MouseClicked(evt);
 			}
 		});
 		mtextField2.addActionListener(new java.awt.event.ActionListener() {
@@ -1039,7 +1039,7 @@ public class WPanel extends javax.swing.JPanel {
 		mtextField3.setBorder(null);
 		mtextField3.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jTextField10MouseClicked(evt);
+				mtextField3MouseClicked(evt);
 			}
 		});
 		mtextField3.addActionListener(new java.awt.event.ActionListener() {
@@ -1058,43 +1058,437 @@ public class WPanel extends javax.swing.JPanel {
 		add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 300, 47));
 	}// </editor-fold>
 
-	private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+	private void zInProActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
+		try {
+			db.open();
+			Collection<ZooInProceedings> collection = db.getWithFilter(ZooInProceedings.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			final String error = e.getMessage();
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					JFrame frame = new JFrame(error);
+					PanelErrorMessage panel = new PanelErrorMessage();
+					frame.add(panel);
+					frame.pack();
+					frame.setVisible(true);
+				}
+			});
+		} finally {
+			db.close();
+		}
+
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
-	private void jTextField8MouseClicked(java.awt.event.MouseEvent evt) {
-		// TODO add your handling code here:
+	private void zSerActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
+		try {
+			db.open();
+			Collection<ZooSeries> collection = db.getWithFilter(ZooSeries.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			final String error = e.getMessage();
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					JFrame frame = new JFrame(error);
+					PanelErrorMessage panel = new PanelErrorMessage();
+					frame.add(panel);
+					frame.pack();
+					frame.setVisible(true);
+				}
+			});
+		} finally {
+			db.close();
+		}
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
-	private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+	private void zConfActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
+		try {
+			db.open();
+			Collection<ZooConference> collection = db.getWithFilter(ZooConference.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			final String error = e.getMessage();
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					JFrame frame = new JFrame(error);
+					PanelErrorMessage panel = new PanelErrorMessage();
+					frame.add(panel);
+					frame.pack();
+					frame.setVisible(true);
+				}
+			});
+		} finally {
+			db.close();
+		}
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
-	private void jTextField9MouseClicked(java.awt.event.MouseEvent evt) {
-		// TODO add your handling code here:
+	private void zPublisherActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
+		try {
+			db.open();
+			Collection<ZooPublication> collection = db.getWithFilter(ZooPublication.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			final String error = e.getMessage();
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					JFrame frame = new JFrame(error);
+					PanelErrorMessage panel = new PanelErrorMessage();
+					frame.add(panel);
+					frame.pack();
+					frame.setVisible(true);
+				}
+			});
+		} finally {
+			db.close();
+		}
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
-	private void jTextField10MouseClicked(java.awt.event.MouseEvent evt) {
-		// TODO add your handling code here:
+	private void zPublishcationActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
+		try {
+			db.open();
+			Collection<ZooPublisher> collection = db.getWithFilter(ZooPublisher.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			final String error = e.getMessage();
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					JFrame frame = new JFrame(error);
+					PanelErrorMessage panel = new PanelErrorMessage();
+					frame.add(panel);
+					frame.pack();
+					frame.setVisible(true);
+				}
+			});
+		} finally {
+			db.close();
+		}
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
-	private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+	private void zProActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
+		try {
+			db.open();
+			Collection<ZooProceedings> collection = db.getWithFilter(ZooProceedings.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			final String error = e.getMessage();
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					JFrame frame = new JFrame(error);
+					PanelErrorMessage panel = new PanelErrorMessage();
+					frame.add(panel);
+					frame.pack();
+					frame.setVisible(true);
+				}
+			});
+		} finally {
+			db.close();
+		}
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
-	
-	
+
+	private void zAuthEdActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
+		try {
+			db.open();
+			Collection<ZooPerson> collection = db.getWithFilter(ZooPerson.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			final String error = e.getMessage();
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					JFrame frame = new JFrame(error);
+					PanelErrorMessage panel = new PanelErrorMessage();
+					frame.add(panel);
+					frame.pack();
+					frame.setVisible(true);
+				}
+			});
+		} finally {
+			db.close();
+		}
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
+	}
+
+	private void zConfEdActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
+		try {
+			db.open();
+			Collection<ZooConferenceEdition> collection = db.getWithFilter(ZooConferenceEdition.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			final String error = e.getMessage();
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					JFrame frame = new JFrame(error);
+					PanelErrorMessage panel = new PanelErrorMessage();
+					frame.add(panel);
+					frame.pack();
+					frame.setVisible(true);
+				}
+			});
+		} finally {
+			db.close();
+		}
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
+	}
+
+	private void zQuery1ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
+	}
+
+	private void zQuery2ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
+	}
+
+	private void zQuery3ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
+	}
+
+	private void zQuery4ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
+		try {
+			db.open();
+			Collection<ZooPerson> collection = db.getCoAuthors(ztextField1.getText());
+
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			final String error = e.getMessage();
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					JFrame frame = new JFrame(error);
+					PanelErrorMessage panel = new PanelErrorMessage();
+					frame.add(panel);
+					frame.pack();
+					frame.setVisible(true);
+				}
+			});
+		} finally {
+			db.close();
+		}
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
+	}
+
+	private void zQuery5ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
+	}
+
+	private void zQuery6ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
+	}
+
+	private void zQuery7ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
+	}
+
+	private void zQuery8ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
+	}
+
+	private void zQuery9ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
+	}
+
+	private void zQuery10ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
+	}
+
+	private void zQuery11ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
+	}
+
+	private void zQuery12ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
+	}
+
+	private void zQuery13ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
+	}
+
+	private void zQuery14ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
+		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
+	}
+
+	// -----------------------------------------------------------------------------------------//
 
 	private void mPublicationActionPerformed(ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.mongodb.Table(db2.publications, db2.publications.find().iterator(), "Publications",
 				new String[] { "ID", "Title" }, new String[] { "_id", "title" }, true);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mProActionPerformed(ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.mongodb.Table(db2.publications,
 				db2.publications.find(Filters.exists("publications")).iterator(), "Proceedings",
@@ -1105,76 +1499,83 @@ public class WPanel extends javax.swing.JPanel {
 				true);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mSerActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.mongodb.Table(db2.series, db2.series.find().iterator(), "Series",
 				new String[] { "ID", "Name", "Publications" }, new String[] { "_id", "name", "publications" }, true);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mInProActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.mongodb.Table(db2.publications,
 				db2.publications.find(Filters.exists("proceedings")).iterator(), "Inproceedings",
 				new String[] { "ID", "Title", "Authors", "Proceedings" },
 				new String[] { "_id", "title", "authors", "proceedings" }, true);
-		
+
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mConfActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.mongodb.Table(db2.conferences, db2.conferences.find().iterator(), "Conferences",
 				new String[] { "ID", "Name", "Conference Edition" }, new String[] { "_id", "name", "editions" }, true);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mConfEdActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.mongodb.Table(db2.conferenceEditions, db2.conferenceEditions.find().iterator(),
 				"Conference Editions", new String[] { "ID", "Conference", "Year", "Proceedings" },
 				new String[] { "_id", "conference", "year", "proceedings" }, true);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mAuthEdActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.mongodb.Table(db2.persons, db2.persons.find().iterator(), "Authors/Editors",
 				new String[] { "ID", "Name", "Authored Publications", "Edited Publications" },
 				new String[] { "_id", "name", "authoredPublications", "editedPublications" }, true);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mPublisherActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.mongodb.Table(db2.publishers, db2.publishers.find().iterator(), "Publishers",
 				new String[] { "ID", "Name", "Publications" }, new String[] { "_id", "name", "publications" }, true);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mQuery1ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		String id = mtextField1.getText();
 
@@ -1183,11 +1584,12 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "ID", "Title" }, new String[] { "_id", "title" }, false);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mQuery2ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		String title = mtextField1.getText();
 		int beginOffset;
@@ -1212,11 +1614,12 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "_id", "title" }, false);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mQuery3ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		String title = mtextField1.getText();
 		int beginOffset;
@@ -1240,11 +1643,12 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "_id", "title" }, false);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mQuery4ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		// String name = "Kevin D. Ashley";
 		String name = mtextField1.getText();
@@ -1265,11 +1669,12 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "Author", "Co-Authors" }, new String[] { "_id", "coAuthors" }, false);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mQuery5ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		String author1 = mtextField1.getText();
 		String author2 = mtextField2.getText();
@@ -1295,11 +1700,12 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "_id", "connectedAuthors", "authors", "author" }, false);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mQuery6ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		AggregateIterable<Document> query = db2.publications
 				.aggregate(
@@ -1322,11 +1728,12 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "ID", "Count" }, new String[] { "_id", "count" }, true);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mQuery7ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		// Number of publications per year
 		String str1 = mtextField1.getText();
@@ -1380,11 +1787,12 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "Year", "Number of Publications" }, new String[] { "_id", "count" }, false);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mQuery8ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		String conferenceName = mtextField1.getText();
 
@@ -1411,11 +1819,12 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "Name", "Number of publications" }, new String[] { "name", "count" }, false);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mQuery9ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		String conferenceName = mtextField1.getText();
 
@@ -1454,11 +1863,12 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "Name", "Number of authors/editors" }, new String[] { "name", "count" }, false);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mQuery10ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		String conferenceName = mtextField1.getText();
 
@@ -1494,11 +1904,12 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "name", "authors" }, false);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mQuery11ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		String conferenceName = mtextField1.getText();
 
@@ -1533,19 +1944,21 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "Name", "Publications" }, new String[] { "name", "publications" }, false);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mQuery12ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mQuery13ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		String name = mtextField1.getText();
 
@@ -1562,11 +1975,12 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "_id", "title", "authors", "pages", "year" }, true);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
 	private void mQuery14ActionPerformed(java.awt.event.ActionEvent evt) {
+		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
 		int yearFrom;
 		int yearTo;
@@ -1597,38 +2011,11 @@ public class WPanel extends javax.swing.JPanel {
 				"Publishers of proceedings whose authors appear in inproceedings in range of years " + yearFrom + " to "
 						+ yearTo,
 				new String[] { "Publisher" }, new String[] { "_id" }, false);
-		
+
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-	}
-	
-	
-	
-
-	private void jTextField11MouseClicked(java.awt.event.MouseEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jTextField12MouseClicked(java.awt.event.MouseEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jTextField13MouseClicked(java.awt.event.MouseEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
 	}
 
 	// -----------------------------------------------------------------------------------------//
@@ -1636,15 +2023,15 @@ public class WPanel extends javax.swing.JPanel {
 	private void xSerActionPerformed(java.awt.event.ActionEvent evt) {
 		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
-		
+
 		new ch.ethz.globis.isk.xmldb.Table(db3, "series.xml", null, "Series", new String[] { "Name", "Publications" },
 				new String[] { "id", "pid" }, true);
-		
+
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-		
+
 	}
 
 	private void xProActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1656,7 +2043,7 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "id", "title", "cid", "ceid", "publisher", "sid", "isbn", "editor" }, true);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
@@ -1668,7 +2055,7 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "id", "title", "pid", "author" }, true);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
@@ -1679,7 +2066,7 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "Name", "Editions" }, new String[] { "id", "ceid" }, true);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
@@ -1690,7 +2077,7 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "Year", "Conference", "Proceedings" }, new String[] { "id", "cid", "pid" }, true);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
@@ -1702,7 +2089,7 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "id", "iid", "pid" }, true);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
@@ -1713,7 +2100,7 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "Name", "Publications" }, new String[] { "id", "pid" }, true);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
@@ -1730,7 +2117,7 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "id", "title" }, false);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
@@ -1755,7 +2142,7 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "ID", "Title" }, new String[] { "id", "title" }, false);
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
@@ -1779,10 +2166,10 @@ public class WPanel extends javax.swing.JPanel {
 
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Publications by id sorted limited",
 				new String[] { "ID", "Title" }, new String[] { "id", "title" }, false);
-		
+
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
@@ -1799,10 +2186,10 @@ public class WPanel extends javax.swing.JPanel {
 
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Co-Authors", new String[] { "Author", "Co-Authors" },
 				new String[] { "id", "coAuthor" }, false);
-		
+
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
@@ -1823,10 +2210,10 @@ public class WPanel extends javax.swing.JPanel {
 
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Shortest Path", new String[] { "Shortest Path" },
 				new String[] { "shortestPath" }, false);
-		
+
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
@@ -1837,10 +2224,10 @@ public class WPanel extends javax.swing.JPanel {
 
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Global average number of authors per publication",
 				new String[] { "Avg number of authors" }, new String[] { "avg" }, false);
-		
+
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
@@ -1876,10 +2263,10 @@ public class WPanel extends javax.swing.JPanel {
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
 				"Number of publications per year between " + beginStr + " and " + endStr + ".",
 				new String[] { "Year", "Number" }, new String[] { "year", "num" }, false);
-		
+
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
@@ -1898,10 +2285,10 @@ public class WPanel extends javax.swing.JPanel {
 
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Number of publications for conference " + confID + ". ",
 				new String[] { "Total" }, new String[] { "num" }, false);
-		
+
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
@@ -1919,10 +2306,10 @@ public class WPanel extends javax.swing.JPanel {
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
 				"Count of authors and editors of conference " + confID + ".", new String[] { "Count" },
 				new String[] { "count" }, false);
-		
+
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
@@ -1956,10 +2343,10 @@ public class WPanel extends javax.swing.JPanel {
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
 				"Names of authors and editors of conference " + confID + ".", new String[] { "Name" },
 				new String[] { "id" }, false);
-		
+
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
@@ -1977,10 +2364,10 @@ public class WPanel extends javax.swing.JPanel {
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Inproceedings of conference " + confID + ".",
 				new String[] { "ID", "Title", "Proceedings", "Authors" },
 				new String[] { "id", "title", "pid", "author" }, false);
-		
+
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
@@ -1992,10 +2379,10 @@ public class WPanel extends javax.swing.JPanel {
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
 				"Persons that are author in InProceedings and editor in appropriate Proceedings",
 				new String[] { "Name" }, new String[] { "id" }, false);
-		
+
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
@@ -2014,10 +2401,10 @@ public class WPanel extends javax.swing.JPanel {
 				"Publications where author " + authorID + " appears as last author.",
 				new String[] { "ID", "Title", "Proceedings", "Authors" },
 				new String[] { "id", "title", "pid", "author" }, false);
-		
+
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
 
@@ -2050,440 +2437,77 @@ public class WPanel extends javax.swing.JPanel {
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
 				"Publishers of Proceedings whose authors appear in any InProceedings in range of years",
 				new String[] { "Publisher" }, new String[] { "id" }, false);
-		
+
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
+		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		xLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
 	}
-	
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private void ztextField1MouseClicked(java.awt.event.MouseEvent evt) {
+		ztextField1.setText("");
+	}
+
+	private void ztextField2MouseClicked(java.awt.event.MouseEvent evt) {
+		ztextField2.setText("");
+	}
+
+	private void ztextField3MouseClicked(java.awt.event.MouseEvent evt) {
+		ztextField3.setText("");
+	}
+
+
+	private void mtextField1MouseClicked(java.awt.event.MouseEvent evt) {
+		mtextField1.setText("");
+	}
+
+	private void mtextField2MouseClicked(java.awt.event.MouseEvent evt) {
+		mtextField2.setText("");
+	}
+
+	private void mtextField3MouseClicked(java.awt.event.MouseEvent evt) {
+		mtextField3.setText("");
+	}
+
+
+	private void xtextField1MouseClicked(java.awt.event.MouseEvent evt) {
+		xtextField1.setText("");
+	}
+
+	private void xtextField2MouseClicked(java.awt.event.MouseEvent evt) {
+		xtextField2.setText("");
+	}
+
+	private void jTextField3MouseClicked(java.awt.event.MouseEvent evt) {
+		xtextField3.setText("");
+	}
 	
 	// -----------------------------------------------------------------------------------------//
 	
 	
-
-	private void zInProActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		Pair<Object[][], String[]> objectsAndTitle = null;
-		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
-		try {
-			db.open();
-			Collection<ZooInProceedings> collection = db.getWithFilter(ZooInProceedings.class, "");
-			objectsAndTitle = getObjectsAndTitle(collection, filter);
-			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
-			openNewTable(model);
-		} catch (Exception e) {
-    		System.out.println(e.getMessage());
-    		final String error = e.getMessage();
-    		SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                	JFrame frame = new JFrame(error);
-                	PanelErrorMessage panel = new PanelErrorMessage();
-                	frame.add(panel);
-                	frame.pack();
-                	frame.setVisible(true);
-                }
-            });
-		} finally {
-			db.close();
-		}
-		
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-	}
-
-	private void zSerActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		Pair<Object[][], String[]> objectsAndTitle = null;
-		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
-		try {
-			db.open();
-			Collection<ZooSeries> collection = db.getWithFilter(ZooSeries.class, "");
-			objectsAndTitle = getObjectsAndTitle(collection, filter);
-			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
-			openNewTable(model);
-		} catch (Exception e) {
-    		System.out.println(e.getMessage());
-    		final String error = e.getMessage();
-    		SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                	JFrame frame = new JFrame(error);
-                	PanelErrorMessage panel = new PanelErrorMessage();
-                	frame.add(panel);
-                	frame.pack();
-                	frame.setVisible(true);
-                }
-            });
-		} finally {
-			db.close();
-		}
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-	}
-
-	private void zConfActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		Pair<Object[][], String[]> objectsAndTitle = null;
-		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
-		try {
-			db.open();
-			Collection<ZooConference> collection = db.getWithFilter(ZooConference.class, "");
-			objectsAndTitle = getObjectsAndTitle(collection, filter);
-			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
-			openNewTable(model);
-		} catch (Exception e) {
-    		System.out.println(e.getMessage());
-    		final String error = e.getMessage();
-    		SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                	JFrame frame = new JFrame(error);
-                	PanelErrorMessage panel = new PanelErrorMessage();
-                	frame.add(panel);
-                	frame.pack();
-                	frame.setVisible(true);
-                }
-            });
-		} finally {
-			db.close();
-		}
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-	}
-
-	private void zPublisherActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		Pair<Object[][], String[]> objectsAndTitle = null;
-		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
-		try {
-			db.open();
-			Collection<ZooPublication> collection = db.getWithFilter(ZooPublication.class, "");
-			objectsAndTitle = getObjectsAndTitle(collection, filter);
-			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
-			openNewTable(model);
-		} catch (Exception e) {
-    		System.out.println(e.getMessage());
-    		final String error = e.getMessage();
-    		SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                	JFrame frame = new JFrame(error);
-                	PanelErrorMessage panel = new PanelErrorMessage();
-                	frame.add(panel);
-                	frame.pack();
-                	frame.setVisible(true);
-                }
-            });
-		} finally {
-			db.close();
-		}
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
+	private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
 	}
 	
-	private void zPublishcationActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		Pair<Object[][], String[]> objectsAndTitle = null;
-		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
-		try {
-			db.open();
-			Collection<ZooPublisher> collection = db.getWithFilter(ZooPublisher.class, "");
-			objectsAndTitle = getObjectsAndTitle(collection, filter);
-			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
-			openNewTable(model);
-		} catch (Exception e) {
-    		System.out.println(e.getMessage());
-    		final String error = e.getMessage();
-    		SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                	JFrame frame = new JFrame(error);
-                	PanelErrorMessage panel = new PanelErrorMessage();
-                	frame.add(panel);
-                	frame.pack();
-                	frame.setVisible(true);
-                }
-            });
-		} finally {
-			db.close();
-		}
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
+	private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
 	}
 
-	private void zProActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-    	Pair<Object[][], String[]> objectsAndTitle = null;
-		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
-		try {
-			db.open();
-			Collection<ZooProceedings> collection = db.getWithFilter(ZooProceedings.class, "");
-			objectsAndTitle = getObjectsAndTitle(collection, filter);
-			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
-			openNewTable(model);
-		} catch (Exception e) {
-    		System.out.println(e.getMessage());
-    		final String error = e.getMessage();
-    		SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                	JFrame frame = new JFrame(error);
-                	PanelErrorMessage panel = new PanelErrorMessage();
-                	frame.add(panel);
-                	frame.pack();
-                	frame.setVisible(true);
-                }
-            });
-		} finally {
-			db.close();
-		}
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
+	private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
 	}
-
-	private void zAuthEdActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		Pair<Object[][], String[]> objectsAndTitle = null;
-		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
-		try {
-			db.open();
-			Collection<ZooPerson> collection = db.getWithFilter(ZooPerson.class, "");
-			objectsAndTitle = getObjectsAndTitle(collection, filter);
-			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
-			openNewTable(model);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			final String error = e.getMessage();
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					JFrame frame = new JFrame(error);
-					PanelErrorMessage panel = new PanelErrorMessage();
-					frame.add(panel);
-					frame.pack();
-					frame.setVisible(true);
-				}
-			});
-		} finally {
-			db.close();
-		}
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-	}
-
-	private void zConfEdActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		Pair<Object[][], String[]> objectsAndTitle = null;
-		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
-		try {
-			db.open();
-			Collection<ZooConferenceEdition> collection = db.getWithFilter(ZooConferenceEdition.class, "");
-			objectsAndTitle = getObjectsAndTitle(collection, filter);
-			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
-			openNewTable(model);
-		} catch (Exception e) {
-    		System.out.println(e.getMessage());
-    		final String error = e.getMessage();
-    		SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                	JFrame frame = new JFrame(error);
-                	PanelErrorMessage panel = new PanelErrorMessage();
-                	frame.add(panel);
-                	frame.pack();
-                	frame.setVisible(true);
-                }
-            });
-		} finally {
-			db.close();
-		}
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-	}
-
-	private void zQuery1ActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-	}
-
-	private void zQuery2ActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-	}
-
-	private void zQuery3ActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-	}
-
-	private void zQuery4ActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		Pair<Object[][], String[]> objectsAndTitle = null;
-		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
-		try {
-			db.open();
-			Collection<ZooPerson> collection = db.getCoAuthors(ztextField1.getText());
-			
-			objectsAndTitle = getObjectsAndTitle(collection, filter);
-			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
-			openNewTable(model);
-		} catch (Exception e) {
-    		System.out.println(e.getMessage());
-    		final String error = e.getMessage();
-    		SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                	JFrame frame = new JFrame(error);
-                	PanelErrorMessage panel = new PanelErrorMessage();
-                	frame.add(panel);
-                	frame.pack();
-                	frame.setVisible(true);
-                }
-            });
-		} finally {
-			db.close();
-		}
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-	}
-
-	private void zQuery5ActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-	}
-
-	private void zQuery6ActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-	}
-
-	private void zQuery7ActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-	}
-
-	private void zQuery8ActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-	}
-
-	private void zQuery9ActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-	}
-
-	private void zQuery10ActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-	}
-
-	private void zQuery11ActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-	}
-
-	private void zQuery12ActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-	}
-
-	private void zQuery13ActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-	}
-
-	private void zQuery14ActionPerformed(java.awt.event.ActionEvent evt) {
-		Runtime.getRuntime().freeMemory();
-		long startTime = System.currentTimeMillis();
-		long stopTime = System.currentTimeMillis();
-		long time = stopTime - startTime;
-		long memory = Runtime.getRuntime().totalMemory()/1024/1024;
-		zLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
-	}
-
 	
-	
-	
-	
-	
-	
+	private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {
+	}
+
+	private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {
+	}
+
+	private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {
+	}
+
 	private void jTextField14MouseClicked(java.awt.event.MouseEvent evt) {
 		ztextField1.setText("");
 	}
@@ -2492,20 +2516,10 @@ public class WPanel extends javax.swing.JPanel {
 		// TODO add your handling code here:
 	}
 
-	private void jTextField15MouseClicked(java.awt.event.MouseEvent evt) {
-		ztextField3.setText("");
-	}
-
 	private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jTextField18MouseClicked(java.awt.event.MouseEvent evt) {
-		ztextField2.setText("");
 	}
 
 	private void jTextField18ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
