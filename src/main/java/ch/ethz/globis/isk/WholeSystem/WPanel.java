@@ -7,6 +7,7 @@ import com.mongodb.client.model.Filters;
 
 import ch.ethz.globis.isk.mongodb.Database;
 import ch.ethz.globis.isk.mongodb.Table;
+import ch.ethz.globis.isk.xmldb.api.BaseXClient.Query;
 
 
 
@@ -51,9 +52,9 @@ public class WPanel extends javax.swing.JPanel {
        jTextField8 = new javax.swing.JTextField();
        jTextField9 = new javax.swing.JTextField();
        jTextField10 = new javax.swing.JTextField();
-       jTextField11 = new javax.swing.JTextField();
-       jTextField13 = new javax.swing.JTextField();
-       jTextField12 = new javax.swing.JTextField();
+       xtextField1 = new javax.swing.JTextField();
+       xtextField3 = new javax.swing.JTextField();
+       xtextField2 = new javax.swing.JTextField();
        
        jLabel7 = new javax.swing.JLabel();
        jLabel9 = new javax.swing.JLabel();
@@ -109,7 +110,7 @@ public class WPanel extends javax.swing.JPanel {
        
        xSerButton = new javax.swing.JButton();
        xProButton = new javax.swing.JButton();
-       xPreButton = new javax.swing.JButton();
+       xInProButton = new javax.swing.JButton();
        xConfButton = new javax.swing.JButton();
        xConfEdButton = new javax.swing.JButton();
        xAuthEdButton = new javax.swing.JButton();
@@ -310,92 +311,104 @@ public class WPanel extends javax.swing.JPanel {
        
        //------------------------------------------------------------------------------------//
        
-       xPreButton.setText("InProceddings");
-       xPreButton.addActionListener(new java.awt.event.ActionListener() {
+       xInProButton.setText("InProceddings");
+       xInProButton.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton26ActionPerformed(evt);
+               xInProActionPerformed(evt);
            }
        });
        
        xPublisherButton.setText("Publishers");
        xPublisherButton.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton30ActionPerformed(evt);
+               xPublisherActionPerformed(evt);
            }
        });
        
        xProButton.setText("Proceedings");
        xProButton.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton25ActionPerformed(evt);
+               xProActionPerformed(evt);
            }
        });
        
        xSerButton.setText("Series");
        xSerButton.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton20ActionPerformed(evt);
+               xSerActionPerformed(evt);
            }
        });
        
        xAuthEdButton.setText("Authors/Editors");
        xAuthEdButton.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton29ActionPerformed(evt);
+               xAuthEdActionPerformed(evt);
            }
        });
        
        xConfEdButton.setText("Conf Editions");
        xConfEdButton.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton28ActionPerformed(evt);
+               xConfEdActionPerformed(evt);
            }
        });
        
        xPublicationButton.setText("Publications");
        xPublicationButton.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent evt) {
-               xpublicationsButtonActionPerformed(evt);
+               xPublicationActionPerformed(evt);
            }
        });
        
        xConfButton.setText("Conferences");
        xConfButton.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton27ActionPerformed(evt);
+               xConfActionPerformed(evt);
            }
        });
        
        xQuery1Button.setText("1.Pub by ID");
+       xQuery1Button.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               xQuery1ActionPerformed(evt);
+           }
+       });
        
        xQuery2Button.setText("2. Pub by title");
        xQuery2Button.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton32ActionPerformed(evt);
+               xQuery2ActionPerformed(evt);
            }
        });
        
        xQuery3Button.setText("3. Q2 ord by title");
        xQuery3Button.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton33ActionPerformed(evt);
+               xQuery3ActionPerformed(evt);
            }
        });
        
        xQuery4Button.setText("4. Co-Authors");
        xQuery4Button.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton34ActionPerformed(evt);
+               xQuery4ActionPerformed(evt);
            }
       
        });
        
        xQuery5Button.setText("5. Short. P Authors");
+       xQuery5Button.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               xQuery5ActionPerformed(evt);
+           }
+       });
+       
+       
        
        xQuery6Button.setText("6. Avg Pub");
        xQuery6Button.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton39ActionPerformed(evt);
+               xQuery6ActionPerformed(evt);
            }
        });
        
@@ -403,50 +416,64 @@ public class WPanel extends javax.swing.JPanel {
        xQuery7Button.setText("7. PubCount y");
        xQuery7Button.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton40ActionPerformed(evt);
+               xQuery7ActionPerformed(evt);
            }
        });
        
        xQuery8Button.setText("8. PubCount Conf");
+       xQuery8Button.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               xQuery8ActionPerformed(evt);
+           }
+       });
        
        xQuery9Button.setText("9. Auth/Ed Count");
        xQuery9Button.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton35ActionPerformed(evt);
+               xQuery9ActionPerformed(evt);
            }
        });
        
        xQuery10Button.setText("10. Auth of Conf");
        xQuery10Button.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton36ActionPerformed(evt);
+               xQuery10ActionPerformed(evt);
            }
        });
        
        xQuery11Button.setText("11. Pub of Conf");
        xQuery11Button.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton38ActionPerformed(evt);
+               xQuery11ActionPerformed(evt);
            }
        });
        
        xQuery12Button.setText("12. Auth = Ed");
+       xQuery12Button.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               xQuery12ActionPerformed(evt);
+           }
+       });
        
        xQuery13Button.setText("13. Pub Auth last");
        xQuery13Button.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton42ActionPerformed(evt);
+               xQuery13ActionPerformed(evt);
            }
        });
        
        xQuery14Button.setText("14. Pub of Pro");
        xQuery14Button.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jButton43ActionPerformed(evt);
+               xQuery14ActionPerformed(evt);
            }
        });
+       
+       
 
-
+      
+       
+       add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, 330, 620));
        
       
 
@@ -698,22 +725,15 @@ public class WPanel extends javax.swing.JPanel {
        });
        
        jSeparator16.setForeground(new java.awt.Color(255, 255, 255));
-       jPanel4.add(xQuery5Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 150, -1));
+       
 
-       jPanel4.add(xQuery2Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 150, -1));
-       jPanel4.add(xAuthEdButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 150, -1));
-       jPanel4.add(xQuery12Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 470, 150, -1));
-       jPanel4.add(xQuery7Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 530, 150, -1));
-       jPanel4.add(xQuery4Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 150, -1));
-       jPanel4.add(xConfEdButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 150, -1));
-       jPanel4.add(xQuery14Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 530, 150, -1));
-       jPanel4.add(xPublicationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 150, -1));
+       
 
        jSeparator14.setForeground(new java.awt.Color(255, 255, 255));
-       jPanel4.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 260, -1));
-       jSeparator13.setForeground(new java.awt.Color(255, 255, 255));
-       jPanel4.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 260, -1));
+       
 
+       
+       jSeparator13.setForeground(new java.awt.Color(255, 255, 255));
        jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
        jLabel5.setText("XML");
@@ -721,40 +741,14 @@ public class WPanel extends javax.swing.JPanel {
 
        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-       jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 270, 47));
-       jTextField13.setBackground(new java.awt.Color(36, 47, 65));
-       jTextField13.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-       jTextField13.setForeground(new java.awt.Color(255, 255, 255));
-       jTextField13.setText("Enter  ");
-       jTextField13.setBorder(null);
-       jTextField13.addMouseListener(new java.awt.event.MouseAdapter() {
-           public void mouseClicked(java.awt.event.MouseEvent evt) {
-               jTextField13MouseClicked(evt);
-           }
-       });
-       jTextField13.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jTextField13ActionPerformed(evt);
-           }
-       });
-       jPanel4.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 260, 30));
+       
+   
        jSeparator17.setForeground(new java.awt.Color(255, 255, 255));
        
-       jPanel4.add(xQuery13Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 500, 150, -1));
-       jPanel4.add(xQuery1Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 150, -1));
+       
 
        jSeparator12.setForeground(new java.awt.Color(255, 255, 255));
-       jPanel4.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 260, -1));
-       jPanel4.add(xPreButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 150, -1));
-       jPanel4.add(xSerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 150, -1));
-       jPanel4.add(xQuery3Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, -1, -1));
-       jPanel4.add(xQuery11Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 440, 150, -1));
-       jPanel4.add(xConfButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 150, -1));
-       jPanel4.add(xPublisherButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 150, -1));
-       jPanel4.add(xQuery6Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 150, -1));
-       jPanel4.add(xQuery8Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 150, -1));
-       jPanel4.add(xQuery10Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 150, -1));
-       jPanel4.add(xProButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 150, -1));
+   
        
        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
        jPanel2.setLayout(jPanel2Layout);
@@ -927,44 +921,87 @@ public class WPanel extends javax.swing.JPanel {
            .addGap(0, 40, Short.MAX_VALUE)
        );
 
-       jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 480, -1, 40));
+       
 
-       jTextField11.setBackground(new java.awt.Color(36, 47, 65));
-       jTextField11.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-       jTextField11.setForeground(new java.awt.Color(255, 255, 255));
-       jTextField11.setText("Enter  ");
-       jTextField11.setBorder(null);
-       jTextField11.addMouseListener(new java.awt.event.MouseAdapter() {
+       xtextField1.setBackground(new java.awt.Color(36, 47, 65));
+       xtextField1.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+       xtextField1.setForeground(new java.awt.Color(255, 255, 255));
+       xtextField1.setText("Enter  ");
+       xtextField1.setBorder(null);
+       xtextField1.addMouseListener(new java.awt.event.MouseAdapter() {
            public void mouseClicked(java.awt.event.MouseEvent evt) {
                jTextField11MouseClicked(evt);
            }
        });
-       jTextField11.addActionListener(new java.awt.event.ActionListener() {
+       xtextField1.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
                jTextField11ActionPerformed(evt);
            }
        });
-       jPanel4.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 260, 26));
+       jPanel4.add(xQuery5Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 150, -1));
+       jPanel4.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 260, -1));
+       jPanel4.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 260, -1));
+       jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 270, 47));
+       jPanel4.add(xQuery13Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 500, 150, -1));
+       jPanel4.add(xQuery1Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 150, -1));
+       jPanel4.add(xtextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 260, 26));
        jPanel4.add(xQuery9Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 150, -1));
+       jPanel4.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 260, -1));
+       jPanel4.add(xInProButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 150, -1));
+       jPanel4.add(xSerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 150, -1));
+       jPanel4.add(xQuery3Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, -1, -1));
+       jPanel4.add(xQuery11Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 440, 150, -1));
+       jPanel4.add(xConfButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 150, -1));
+       jPanel4.add(xPublisherButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 150, -1));
+       jPanel4.add(xQuery6Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 150, -1));
+       jPanel4.add(xQuery8Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 150, -1));
+       jPanel4.add(xQuery10Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 150, -1));
+       jPanel4.add(xProButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 150, -1));
+       jPanel4.add(xtextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 260, 26));
+       jPanel4.add(xQuery2Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 150, -1));
+       jPanel4.add(xAuthEdButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 150, -1));
+       jPanel4.add(xQuery12Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 470, 150, -1));
+       jPanel4.add(xQuery7Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 530, 150, -1));
+       jPanel4.add(xQuery4Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 150, -1));
+       jPanel4.add(xConfEdButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 150, -1));
+       jPanel4.add(xQuery14Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 530, 150, -1));
+       jPanel4.add(xPublicationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 150, -1));
 
-       jTextField12.setBackground(new java.awt.Color(36, 47, 65));
-       jTextField12.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-       jTextField12.setForeground(new java.awt.Color(255, 255, 255));
-       jTextField12.setText("Enter  ");
-       jTextField12.setBorder(null);
-       jTextField12.addMouseListener(new java.awt.event.MouseAdapter() {
+       xtextField2.setBackground(new java.awt.Color(36, 47, 65));
+       xtextField2.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+       xtextField2.setForeground(new java.awt.Color(255, 255, 255));
+       xtextField2.setText("Enter  ");
+       xtextField2.setBorder(null);
+       xtextField2.addMouseListener(new java.awt.event.MouseAdapter() {
            public void mouseClicked(java.awt.event.MouseEvent evt) {
                jTextField12MouseClicked(evt);
            }
        });
-       jTextField12.addActionListener(new java.awt.event.ActionListener() {
+       xtextField2.addActionListener(new java.awt.event.ActionListener() {
            public void actionPerformed(java.awt.event.ActionEvent evt) {
                jTextField12ActionPerformed(evt);
            }
        });
-       jPanel4.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 260, 26));
+       
+       xtextField3.setBackground(new java.awt.Color(36, 47, 65));
+       xtextField3.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+       xtextField3.setForeground(new java.awt.Color(255, 255, 255));
+       xtextField3.setText("Enter  ");
+       xtextField3.setBorder(null);
+       xtextField3.addMouseListener(new java.awt.event.MouseAdapter() {
+           public void mouseClicked(java.awt.event.MouseEvent evt) {
+               jTextField13MouseClicked(evt);
+           }
+       });
+       xtextField3.addActionListener(new java.awt.event.ActionListener() {
+           public void actionPerformed(java.awt.event.ActionEvent evt) {
+               jTextField13ActionPerformed(evt);
+           }
+       });
+       jPanel4.add(xtextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 260, 30));
+       
 
-       add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, 330, 620));
+       
 
        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 30)); // NOI18N
        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -1149,75 +1186,519 @@ public class WPanel extends javax.swing.JPanel {
 
    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {                                             
        // TODO add your handling code here:
-   }                                            
+   }    
+   
+   
+   
+   
+   //-----------------------------------------------------------------------------------------//
 
-   private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-       // TODO add your handling code here:
+   private void xSerActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	   new ch.ethz.globis.isk.xmldb.Table(
+   			db3,
+   			"series.xml",
+   			null,
+   			"Series",
+   			new String[] { "Name", "Publications" },
+   			new String[] { "id", "pid" },
+   			true
+   	);
    }                                         
 
-   private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-       // TODO add your handling code here:
+   private void xProActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	   new ch.ethz.globis.isk.xmldb.Table(
+   			db3,
+   			"proceedings.xml",
+   			null,
+   			"Proceedings",
+   			new String[] { "ID", "Title", "Conference", "Conference Edition", "Publisher", "Series", "ISBN", "Editors"  },
+   			new String[] { "id", "title", "cid", "ceid", "publisher", "sid", "isbn", "editor"  },
+   			true
+   	);
    }                                         
 
-   private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-       // TODO add your handling code here:
+   private void xInProActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	   new ch.ethz.globis.isk.xmldb.Table(
+   			db3,
+   			"inproceedings.xml",
+   			null,
+   			"Inproceedings",
+   			new String[] { "ID", "Title", "Proceedings", "Authors" },
+   			new String[] { "id", "title", "pid", "author" },
+   			true
+   	);
    }                                         
 
-   private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-       // TODO add your handling code here:
+   private void xConfActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	   new ch.ethz.globis.isk.xmldb.Table(
+   			db3,
+   			"conferences.xml",
+   			null,
+   			"Conferences",
+   			new String[] { "Name", "Editions" },
+   			new String[] { "id", "ceid" },
+   			true
+   	);
    }                                         
 
-   private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-       // TODO add your handling code here:
+   private void xConfEdActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	   new ch.ethz.globis.isk.xmldb.Table(
+   			db3,
+   			"conferenceEditions.xml",
+   			null,
+   			"ConferenceEditions",
+   			new String[] { "Year", "Conference", "Proceedings" },
+   			new String[] { "id", "cid", "pid" },
+   			true
+   	);
    }                                         
 
-   private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-       // TODO add your handling code here:
+   private void xAuthEdActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	   new ch.ethz.globis.isk.xmldb.Table(
+   			db3,
+   			"persons.xml",
+   			null,
+   			"Authors/Editors",
+   			new String[] { "Name", "Authored Publications", "Edited Publications" },
+   			new String[] { "id", "iid", "pid" },
+   			true
+   	);
    }                                         
 
-   private void jButton30ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-       // TODO add your handling code here:
+   private void xPublisherActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	   new ch.ethz.globis.isk.xmldb.Table(
+   			db3,
+   			"publishers.xml",
+   			null,
+   			"Publishers",
+   			new String[] { "Name", "Publications" },
+   			new String[] { "id", "pid" },
+   			true
+   	);
+   }    
+
+   private void xQuery1ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	   String id = xtextField1.getText();
+   	String input =
+   	  "let $publications := doc('publications.xml')/root//* "
+		+ "return <root>{ "
+		+   "for $p in $publications "
+		+   "return "
+		+     "if (contains($p/id, '" + id + "')) "
+		+     "then $p "
+		+     "else () "
+		+ "}</root> ";
+   	Query query = db3.execute(input);
+   	
+   	new ch.ethz.globis.isk.xmldb.Table(
+   			db3,
+   			null,
+   			query,
+   			"Publications by id",
+   			new String[] { "ID", "Title" },
+   			new String[] { "id", "title" },
+   			false
+   	);
+   }  
+ 
+   private void xQuery2ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	   String id = xtextField1.getText();
+   	int beginOffset = 0;
+   	int endOffset = 0;
+   	try {
+	    	beginOffset = Integer.parseInt(xtextField2.getText());
+	    	endOffset = Integer.parseInt(xtextField3.getText());
+   	} catch (Exception e) {
+   		e.printStackTrace();
+   	}
+   	String input =
+		 "let $publications := doc('publications.xml')/root//*[contains(title, '" + id + "')] "
+		+"return <root>{ "
+		+  "subsequence($publications, " + beginOffset +  ", " + (endOffset - beginOffset) + ") "
+		+"}</root> ";
+   	Query query = db3.execute(input);
+   	
+	new ch.ethz.globis.isk.xmldb.Table(
+   			db3,
+   			null,
+   			query,
+   			"Publications by id limited",
+   			new String[] { "ID", "Title" },
+   			new String[] { "id", "title" },
+   			false
+   	);
    }                                         
 
-   private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-       // TODO add your handling code here:
+   private void xQuery3ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	   String id = xtextField1.getText();
+   	int beginOffset = 0;
+   	int endOffset = 0;
+   	try {
+	    	beginOffset = Integer.parseInt(xtextField2.getText());
+	    	endOffset = Integer.parseInt(xtextField3.getText());
+   	} catch (Exception e) {
+   		e.printStackTrace();
+   	}
+   	String input =
+		 "let $publications := doc('publications.xml')/root//*[contains(title, '" + id + "')] "
+		+"return <root>{ "
+		+  "let $sorted := for $publication in $publications "
+		+     "order by $publication/title/text() "
+		+     "return $publication "
+		+  "return subsequence($sorted, " + beginOffset +  ", " + (endOffset - beginOffset) + ") "
+		+"}</root> ";
+   	Query query = db3.execute(input);
+   	
+	new ch.ethz.globis.isk.xmldb.Table(
+   			db3,
+   			null,
+   			query,
+   			"Publications by id sorted limited",
+   			new String[] { "ID", "Title" },
+   			new String[] { "id", "title" },
+   			false
+   	);
    }                                         
 
-   private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-       // TODO add your handling code here:
+   private void xQuery4ActionPerformed(java.awt.event.ActionEvent evt) {   
+	   String authorId = xtextField1.getText();
+   	String input =
+		 "let $author := doc('persons.xml')/root//*[id = '" + authorId + "'] "
+		+"return <root>{ "
+		+  "<author>{ "
+		+    "$author/id, "
+		+    "for $i in doc('inproceedings.xml')/root//*[id = $author//iid/text()] "
+		+    "return "
+		+      "for $coAuthor in $i//author "
+		+      "return "
+		+        "if ($coAuthor/text() = $author/id/text()) "
+		+        "then () "
+		+        "else <coAuthor>{$coAuthor/text()}</coAuthor> "
+		+  "}</author> "
+		+"}</root> ";
+   	Query query = db3.execute(input);
+   	
+	new ch.ethz.globis.isk.xmldb.Table(
+   			db3,
+   			null,
+   			query,
+   			"Co-Authors",
+   			new String[] { "Author", "Co-Authors" },
+   			new String[] { "id", "coAuthor" },
+   			false
+   	);
+   }  
+   
+   private void xQuery5ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	   String author1Id = xtextField1.getText();
+   	String author2Id = xtextField2.getText();
+   	String input =
+   	 "declare function local:shortestPath($authors, $target, $depth) { "
+   	+  "if ($depth > 20) "
+   	+  "then 'The authors do not have anything in common' "
+   	+  "else "
+   	+    "if (some $author in $authors satisfies $author/id/text() = $target/id/text()) "
+   	+    "then $depth "
+   	+    "else local:shortestPath(doc('coAuthors.xml')/root//*[id/text() = $authors//coAuthor/text()], $target, $depth + 1) "
+   	+"}; "
+   	+"let $coAuthors := doc('coAuthors.xml')/root//*, "
+   	+"$author := $coAuthors[id = '" + author1Id + "'], "
+   	+"$target := $coAuthors[id = '" + author2Id + "'] "
+   	+"return <root>{ "
+   	+  "<item>{ "
+   	+    "<shortestPath>{ "
+   	+      "local:shortestPath($author, $target, 0) "
+   	+    "}</shortestPath> "
+   	+  "}</item> "
+   	+"}</root> ";
+   	Query query = db3.execute(input);
+   	
+	new ch.ethz.globis.isk.xmldb.Table(
+   			db3,
+   			null,
+   			query,
+   			"Shortest Path",
+   			new String[] { "Shortest Path" },
+   			new String[] { "shortestPath" },
+   			false
+   	);
+   }  
+   
+   private void xQuery6ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	   Query query = db3.executeFile("query6.xq");
+   	
+		new ch.ethz.globis.isk.xmldb.Table(
+   			db3,
+   			null,
+   			query,
+   			"Global average number of authors per publication",
+   			new String[] { "Avg number of authors" },
+   			new String[] { "avg" },
+   			false
+   	);
    }                                         
 
-   private void jButton34ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-       // TODO add your handling code here:
+   private void xQuery7ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	   int beginYear = 0;
+   	int endYear = 0;
+   	try {
+   		beginYear = Integer.parseInt(xtextField1.getText());
+   		endYear = Integer.parseInt(xtextField2.getText());
+   	} catch (Exception e) {
+   		e.printStackTrace();
+   	}
+   	
+   	if (beginYear > endYear){
+   		int temp = beginYear;
+   		beginYear = endYear;
+   		endYear = temp;
+   	}
+   	
+   	String beginStr = Integer.toString(beginYear);
+   	String endStr   = Integer.toString(endYear);
+   	
+   	
+   	String input = "let $inproceedings := doc('publications.xml')/root/inproceedings[(ceid >= " + beginYear + ") and (ceid <= " + endYear + ")] "
+   			+ "return <root>{ "
+   			+ "for $year in distinct-values($inproceedings/ceid) "
+   			+ "order by $year "
+   			+ "return "
+   			+ "<result> "
+   			+ "<year>{ "
+   			+ "$year "
+   			+ "}</year> "
+   			+ "<num>{ "
+   			+ "count($inproceedings[ceid = $year]) "
+   			+ "}</num> "
+   			+ "</result> "
+   			+ "}</root>";
+   	
+   	
+   	Query query = db3.execute(input);
+   	
+	new ch.ethz.globis.isk.xmldb.Table(
+   			db3,
+   			null,
+   			query,
+   			"Number of publications per year between " + beginStr + " and " + endStr + ".",
+   			new String[] { "Year", "Number" },
+   			new String[] { "year", "num" },
+   			false
+   	);
+   } 
+   
+   private void xQuery8ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	// e.g. "ICPP"
+   	String confID = xtextField1.getText();
+   	
+   	
+   	String input = "let $publications := doc('publications.xml')/root "
+   			+ "return <root>{ "
+   			+ 	"<item>{ "
+   			+ 		"<num>{ "
+   			+ 			"for $p in $publications/proceedings[cid = '" + confID + "'] "
+   			+ 			"return ( "
+   			+ 				"count( "
+   			+ 					"for $ip in  $publications/inproceedings "
+   			+ 					"where $ip/pid = $p/id "
+   			+ 					"return $ip "
+   			+ 				") "
+   			+ 			") "
+   			+ 		"}</num> "
+   			+ 	"}</item> "
+   			+ "}</root>";
+   	
+   	Query query = db3.execute(input);
+   	
+	new ch.ethz.globis.isk.xmldb.Table(
+   			db3,
+   			null,
+   			query,
+   			"Number of publications for conference " + confID + ". ",
+   			new String[] { "Total" },
+   			new String[] { "num" },
+   			false
+   	);
+   }  
+
+   private void xQuery9ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	   String confID = xtextField1.getText();
+   	
+   	String input =
+   			"let $proceedings := doc('proceedings.xml')/root//*[cid/text() = '" + confID + "'], "
+   			+ "$inproceedings := doc('inproceedings.xml')/root//*[pid/text() = $proceedings/id/text()] "
+   			+ "return <root><item><count>{count(distinct-values($proceedings/editor/text() | $inproceedings/author/text()))}</count></item></root> ";
+       	
+       	Query query = db3.execute(input);
+       	
+       	new ch.ethz.globis.isk.xmldb.Table(
+       			db3,
+       			null,
+       			query,
+       			"Count of authors and editors of conference " + confID + ".",
+       			new String[] { "Count" },
+       			new String[] { "count" },
+       			false
+       	);
    }                                         
 
-   private void jButton35ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-       // TODO add your handling code here:
+   private void xQuery10ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	// e.g. "CONPAR"
+   	String confID = xtextField1.getText();
+   	
+   	
+   	/*String input = "let $publications := doc('publications.xml')/root "
+   			+ "return <root>{ "
+   			+ 	"for $p in $publications/proceedings "
+   			+ 	"where $p/cid = '" + confID +"' "
+   			+ 	"return( "
+   			+ 		"for $e in $p/editor "
+   			+ 		"return <name><author>{$e/text()}</author></name> "
+   			+ 	") "
+   			+ "} "
+   			+ "{ "
+   			+ 	"for $p in $publications/proceedings "
+   			+ 	"where $p/cid = '" + confID +"' "
+   			+ 	"return ( "
+   			+ 		"for $ip in $publications/inproceedings "
+   			+ 		"where $ip/pid = $p/id "
+   			+ 		"return "
+   			+ 			"for $a in $ip/author "
+   			+ 			"return <name>{$a}</name> "
+   			+ 	") "
+   			+ "}</root>";*/
+   	
+   	String input =
+	    	"let $proceedings := doc('proceedings.xml')/root//*[cid/text() = '" + confID + "'], "
+			+"$inproceedings := doc('inproceedings.xml')/root//*[pid/text() = $proceedings/id/text()] "
+			+"return "
+			+  "<root>{ "
+			+    "for $author in distinct-values($proceedings/editor/text() | $inproceedings/author/text()) "
+			+    "return "
+			+      "<author>{ "
+			+        "<id>{$author}</id> "
+			+      "}</author> "
+			+  "}</root> ";
+   	
+   	
+   	Query query = db3.execute(input);
+   	
+	new ch.ethz.globis.isk.xmldb.Table(
+   			db3,
+   			null,
+   			query,
+   			"Names of authors and editors of conference " + confID + ".",
+   			new String[] { "Name" },
+   			new String[] { "id" },
+   			false
+   	);
    }                                         
 
-   private void jButton36ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-       // TODO add your handling code here:
+   private void xQuery11ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	   String confID = xtextField1.getText();
+   	
+   	String input =
+   			"let $proceedings := doc('proceedings.xml')/root//*[cid/text() = '" + confID + "'], "
+   			+ "$inproceedings := doc('inproceedings.xml')/root//*[pid/text() = $proceedings/id/text()] "
+   			+ "return <root>{$inproceedings}</root> ";
+   		
+       	Query query = db3.execute(input);
+       	
+    	new ch.ethz.globis.isk.xmldb.Table(
+       			db3,
+       			null,
+       			query,
+       			"Inproceedings of conference " + confID + ".",
+       			new String[] { "ID", "Title", "Proceedings", "Authors" },
+       			new String[] { "id", "title", "pid", "author" },
+       			false
+       	);
    }                                         
 
-   private void jButton38ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-       // TODO add your handling code here:
+   private void xQuery12ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	   Query query = db3.executeFile("query12.xq");
+   	
+		new ch.ethz.globis.isk.xmldb.Table(
+   			db3,
+   			null,
+   			query,
+   			"Persons that are author in InProceedings and editor in appropriate Proceedings",
+   			new String[] { "Name" },
+   			new String[] { "id" },
+   			false
+   	);
+   }  
+                                        
+
+   private void xQuery13ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	   String authorID = xtextField1.getText();
+   	
+   	String input =
+   			"let $inproceedings :=doc('inproceedings.xml')/root/* "
+   			+"return <root>{ "
+   			+  "for $ip in $inproceedings "
+   			+  "where some $author in $ip/author[last()] satisfies $author/text() = '" + authorID + "' "
+   			+  "return $ip "
+   			+"}</root> ";
+   		
+       	Query query = db3.execute(input);
+       	
+    	new ch.ethz.globis.isk.xmldb.Table(
+       			db3,
+       			null,
+       			query,
+       			"Publications where author " + authorID + " appears as last author.",
+       			new String[] { "ID", "Title", "Proceedings", "Authors" },
+       			new String[] { "id", "title", "pid", "author" },
+       			false
+       	);
    }                                         
 
-   private void jButton39ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-       // TODO add your handling code here:
-   }                                         
-
-   private void jButton40ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-       // TODO add your handling code here:
-   }                                         
-
-   private void jButton42ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-       // TODO add your handling code here:
-   }                                         
-
-   private void jButton43ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-       // TODO add your handling code here:
-   }                                         
+   private void xQuery14ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+	   int beginYear = 0;
+   	int endYear = 0;
+   	try {
+   		beginYear = Integer.parseInt(xtextField1.getText());
+   		endYear = Integer.parseInt(xtextField2.getText());
+   	} catch (Exception e) {
+   		e.printStackTrace();
+   	}
+   	
+   	if (beginYear > endYear){
+   		int temp = beginYear;
+   		beginYear = endYear;
+   		endYear = temp;
+   	}
+   	
+   	String input =
+   			"let $proceedings := doc('proceedings.xml')/root/*[1982 <= ceid and ceid <= 1986], "
+   			+"$inproceedings := doc('inproceedings.xml')/root/*, "
+   			+"$publishers := "
+   			+  "for $p in $proceedings "
+   			+  "where every $e in $p/editor satisfies $e/id/text() = $inproceedings/author/id/text() "
+   			+  "return $p/publisher "
+   			+"return <root>{ "
+   			+  "for $publisher in distinct-values($publishers) "
+   			+  "return <publisher><id>{$publisher}</id></publisher> "
+   			+"}</root> ";
+   		
+       	Query query = db3.execute(input);
+       	
+    	new ch.ethz.globis.isk.xmldb.Table(
+       			db3,
+       			null,
+       			query,
+       			"Publishers of Proceedings whose authors appear in any InProceedings in range of years",
+       			new String[] { "Publisher" },
+       			new String[] { "id"  },
+       			false
+       	);
+   }  
+   
+   
+   
+   
+   
 
    private void jTextField14MouseClicked(java.awt.event.MouseEvent evt) {                                          
        // TODO add your handling code here:
@@ -1341,7 +1822,7 @@ public class WPanel extends javax.swing.JPanel {
   ///////////////////////////////////XML/////////////////////////////////////////////////////// 
    
    
-   private void xpublicationsButtonActionPerformed(ActionEvent evt) {
+   private void xPublicationActionPerformed(ActionEvent evt) {
    	new ch.ethz.globis.isk.xmldb.Table(
    			db3,
    			"publications.xml",
@@ -1381,7 +1862,7 @@ public class WPanel extends javax.swing.JPanel {
    private javax.swing.JButton jButton23;
    private javax.swing.JButton xPublicationButton;
    private javax.swing.JButton xProButton;
-   private javax.swing.JButton xPreButton;
+   private javax.swing.JButton xInProButton;
    private javax.swing.JButton xConfButton;
    private javax.swing.JButton xConfEdButton;
    private javax.swing.JButton xAuthEdButton;
@@ -1452,9 +1933,9 @@ public class WPanel extends javax.swing.JPanel {
    private javax.swing.JSeparator jSeparator17;
    private javax.swing.JSeparator jSeparator9;
    private javax.swing.JTextField jTextField10;
-   private javax.swing.JTextField jTextField11;
-   private javax.swing.JTextField jTextField12;
-   private javax.swing.JTextField jTextField13;
+   private javax.swing.JTextField xtextField1;
+   private javax.swing.JTextField xtextField2;
+   private javax.swing.JTextField xtextField3;
    private javax.swing.JTextField jTextField14;
    private javax.swing.JTextField jTextField15;
    private javax.swing.JTextField jTextField18;
