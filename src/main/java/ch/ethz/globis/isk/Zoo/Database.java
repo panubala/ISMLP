@@ -1,4 +1,4 @@
-package ch.ethz.globis.isk.zoo;
+package ch.ethz.globis.isk.Zoo;
 
 import java.io.File;
 import java.util.ArrayList;

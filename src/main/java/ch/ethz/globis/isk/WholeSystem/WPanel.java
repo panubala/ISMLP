@@ -1,17 +1,40 @@
 package ch.ethz.globis.isk.WholeSystem;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Iterator;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
 import org.bson.Document;
 
 import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.model.Filters;
 
+import ch.ethz.globis.isk.Zoo.PanelErrorMessage;
+import ch.ethz.globis.isk.domain.ConferenceEdition;
+import ch.ethz.globis.isk.domain.Person;
+import ch.ethz.globis.isk.domain.Publication;
+import ch.ethz.globis.isk.domain.zoodb.ZooConference;
+import ch.ethz.globis.isk.domain.zoodb.ZooConferenceEdition;
+import ch.ethz.globis.isk.domain.zoodb.ZooInProceedings;
+import ch.ethz.globis.isk.domain.zoodb.ZooPerson;
+import ch.ethz.globis.isk.domain.zoodb.ZooProceedings;
+import ch.ethz.globis.isk.domain.zoodb.ZooPublication;
+import ch.ethz.globis.isk.domain.zoodb.ZooPublisher;
+import ch.ethz.globis.isk.domain.zoodb.ZooSeries;
 import ch.ethz.globis.isk.mongodb.Database;
 import ch.ethz.globis.isk.mongodb.Table;
+import ch.ethz.globis.isk.util.Pair;
 import ch.ethz.globis.isk.xmldb.api.BaseXClient.Query;
 
 /**
@@ -41,20 +64,20 @@ public class WPanel extends javax.swing.JPanel {
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
-		
-		
 
 		jPanel1 = new javax.swing.JPanel();
 		jPanel2 = new javax.swing.JPanel();
 		jPanel4 = new javax.swing.JPanel();
 		jPanel5 = new javax.swing.JPanel();
 
-		jTextField18 = new javax.swing.JTextField();
-		jTextField14 = new javax.swing.JTextField();
-		jTextField15 = new javax.swing.JTextField();
+		ztextField2 = new javax.swing.JTextField();
+		ztextField1 = new javax.swing.JTextField();
+		ztextField3 = new javax.swing.JTextField();
+
 		mtextField1 = new javax.swing.JTextField();
 		mtextField2 = new javax.swing.JTextField();
 		mtextField3 = new javax.swing.JTextField();
+
 		xtextField1 = new javax.swing.JTextField();
 		xtextField3 = new javax.swing.JTextField();
 		xtextField2 = new javax.swing.JTextField();
@@ -62,11 +85,11 @@ public class WPanel extends javax.swing.JPanel {
 		jLabel7 = new javax.swing.JLabel();
 		jLabel9 = new javax.swing.JLabel();
 		jLabel6 = new javax.swing.JLabel();
-		resultLabel = new javax.swing.JLabel();
 		jLabel5 = new javax.swing.JLabel();
 		jLabel4 = new javax.swing.JLabel();
 		jLabel2 = new javax.swing.JLabel();
 		jLabel3 = new javax.swing.JLabel();
+		resultLabel = new javax.swing.JLabel();
 
 		jSeparator15 = new javax.swing.JSeparator();
 		jSeparator16 = new javax.swing.JSeparator();
@@ -127,164 +150,190 @@ public class WPanel extends javax.swing.JPanel {
 		xQuery13Button = new javax.swing.JButton();
 		xQuery14Button = new javax.swing.JButton();
 		xQuery12Button = new javax.swing.JButton();
-		jButton45 = new javax.swing.JButton();
-		jButton46 = new javax.swing.JButton();
-		jButton47 = new javax.swing.JButton();
-		jButton48 = new javax.swing.JButton();
-		jButton49 = new javax.swing.JButton();
-		jButton50 = new javax.swing.JButton();
-		jButton51 = new javax.swing.JButton();
-		jButton52 = new javax.swing.JButton();
-		jButton53 = new javax.swing.JButton();
-		jButton54 = new javax.swing.JButton();
-		jButton55 = new javax.swing.JButton();
-		jButton56 = new javax.swing.JButton();
-		jButton57 = new javax.swing.JButton();
-		jButton58 = new javax.swing.JButton();
-		jButton59 = new javax.swing.JButton();
-		jButton60 = new javax.swing.JButton();
-		jButton61 = new javax.swing.JButton();
-		jButton62 = new javax.swing.JButton();
-		jButton63 = new javax.swing.JButton();
-		jButton64 = new javax.swing.JButton();
-		jButton65 = new javax.swing.JButton();
-		jButton66 = new javax.swing.JButton();
+
+		zQuery13Button = new javax.swing.JButton();
+		zQuery5Button = new javax.swing.JButton();
+		zQuery1Button = new javax.swing.JButton();
+		zInProButton = new javax.swing.JButton();
+		zSerButton = new javax.swing.JButton();
+		zQuery2Button = new javax.swing.JButton();
+		zQuery3Button = new javax.swing.JButton();
+		zQuery11Button = new javax.swing.JButton();
+		zConfButton = new javax.swing.JButton();
+		zPublisherButton = new javax.swing.JButton();
+		zQuery6Button = new javax.swing.JButton();
+		zQuery8Button = new javax.swing.JButton();
+		zQuery10Button = new javax.swing.JButton();
+		zProButton = new javax.swing.JButton();
+		zAuthEdButton = new javax.swing.JButton();
+		zQuery12Button = new javax.swing.JButton();
+		zQuery4Button = new javax.swing.JButton();
+		zQuery7Button = new javax.swing.JButton();
+		zConfEdButton = new javax.swing.JButton();
+		zQuery14Button = new javax.swing.JButton();
+		zPublicationButton = new javax.swing.JButton();
+		zQuery9Button = new javax.swing.JButton();
 
 		setBackground(new java.awt.Color(97, 212, 195));
 		setForeground(new java.awt.Color(255, 255, 255));
 		setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-		jButton48.setText("InProceddings");
-		jButton48.addActionListener(new java.awt.event.ActionListener() {
+		zInProButton.setText("InProceddings");
+		zInProButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton48ActionPerformed(evt);
+				zInProActionPerformed(evt);
 			}
 		});
 
-		jButton66.setText("9. Auth/Ed Count");
-		jButton66.addActionListener(new java.awt.event.ActionListener() {
+		zPublisherButton.setText("Publishers");
+		zPublisherButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton66ActionPerformed(evt);
+				zPublisherActionPerformed(evt);
 			}
 		});
 
-		jButton64.setText("14. Pub of Pro");
-		jButton64.addActionListener(new java.awt.event.ActionListener() {
+		zPublicationButton.setText("Publications");
+		zPublicationButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton64ActionPerformed(evt);
+				zPublishcationActionPerformed(evt);
 			}
 		});
 
-		jButton63.setText("Conf Editions");
-		jButton63.addActionListener(new java.awt.event.ActionListener() {
+		zConfEdButton.setText("Conf Editions");
+		zConfEdButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton63ActionPerformed(evt);
+				zConfEdActionPerformed(evt);
 			}
 		});
 
-		jButton46.setText("5. Short. P Authors");
-
-		jButton55.setText("6. Avg Pub");
-		jButton55.addActionListener(new java.awt.event.ActionListener() {
+		zConfButton.setText("Conferences");
+		zConfButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton55ActionPerformed(evt);
+				zConfActionPerformed(evt);
 			}
 		});
 
-		jButton53.setText("Conferences");
-		jButton53.addActionListener(new java.awt.event.ActionListener() {
+		zAuthEdButton.setText("Authors/Editors");
+		zAuthEdButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton53ActionPerformed(evt);
+				zAuthEdActionPerformed(evt);
 			}
 		});
 
-		jButton52.setText("11. Pub of Conf");
-		jButton52.addActionListener(new java.awt.event.ActionListener() {
+		zSerButton.setText("Series");
+		zSerButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton52ActionPerformed(evt);
+				zSerActionPerformed(evt);
 			}
 		});
 
-		jButton45.setText("13. Pub Auth last");
-		jButton45.addActionListener(new java.awt.event.ActionListener() {
+		zProButton.setText("Proceedings");
+		zProButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton45ActionPerformed(evt);
+				zProActionPerformed(evt);
 			}
 		});
 
-		jButton54.setText("Publishers");
-		jButton54.addActionListener(new java.awt.event.ActionListener() {
+		zQuery1Button.setText("1.Pub by ID");
+		zQuery1Button.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton54ActionPerformed(evt);
+				zQuery1ActionPerformed(evt);
 			}
 		});
 
-		jButton50.setText("2. Pub by title");
-		jButton50.addActionListener(new java.awt.event.ActionListener() {
+		zQuery2Button.setText("2. Pub by title");
+		zQuery2Button.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton50ActionPerformed(evt);
+				zQuery2ActionPerformed(evt);
 			}
 		});
 
-		jButton61.setText("4. Co-Authors");
-		jButton61.addActionListener(new java.awt.event.ActionListener() {
+		zQuery3Button.setText("3. Q2 ord by title");
+		zQuery3Button.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton61ActionPerformed(evt);
+				zQuery3ActionPerformed(evt);
+			}
+		});
+
+		zQuery4Button.setText("4. Co-Authors");
+		zQuery4Button.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				zQuery4ActionPerformed(evt);
+			}
+		});
+
+		zQuery5Button.setText("5. Short. P Authors");
+		zQuery5Button.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				zQuery5ActionPerformed(evt);
+			}
+		});
+
+		zQuery6Button.setText("6. Avg Pub");
+		zQuery6Button.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				zQuery6ActionPerformed(evt);
+			}
+		});
+
+		zQuery7Button.setText("7. PubCount y");
+		zQuery7Button.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				zQuery7ActionPerformed(evt);
+			}
+		});
+
+		zQuery8Button.setText("8. PubCount Conf");
+		zQuery8Button.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				zQuery8ActionPerformed(evt);
+			}
+		});
+
+		zQuery9Button.setText("9. Auth/Ed Count");
+		zQuery9Button.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				zQuery9ActionPerformed(evt);
+			}
+		});
+
+		zQuery10Button.setText("10. Auth of Conf");
+		zQuery10Button.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				zQuery10ActionPerformed(evt);
+			}
+		});
+
+		zQuery11Button.setText("11. Pub of Conf");
+		zQuery11Button.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				zQuery11ActionPerformed(evt);
+			}
+		});
+
+		zQuery12Button.setText("12. Auth = Ed");
+		zQuery12Button.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				zQuery12ActionPerformed(evt);
+			}
+		});
+
+		zQuery13Button.setText("13. Pub Auth last");
+		zQuery13Button.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				zQuery13ActionPerformed(evt);
+			}
+		});
+
+		zQuery14Button.setText("14. Pub of Pro");
+		zQuery14Button.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				zQuery14ActionPerformed(evt);
 			}
 		});
 
 		jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
 		jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-
-		jButton49.setText("Series");
-		jButton49.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton49ActionPerformed(evt);
-			}
-		});
-
-		jButton47.setText("1.Pub by ID");
-
-		jButton65.setText("Publications");
-
-		jButton57.setText("10. Auth of Conf");
-		jButton57.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton57ActionPerformed(evt);
-			}
-		});
-
-		jButton59.setText("Authors/Editors");
-		jButton59.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton59ActionPerformed(evt);
-			}
-		});
-
-		jButton62.setText("7. PubCount y");
-		jButton62.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton62ActionPerformed(evt);
-			}
-		});
-
-		jButton56.setText("8. PubCount Conf");
-
-		jButton51.setText("3. Q2 ord by title");
-		jButton51.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton51ActionPerformed(evt);
-			}
-		});
-
-		jButton60.setText("12. Auth = Ed");
-
-		jButton58.setText("Proceedings");
-		jButton58.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton58ActionPerformed(evt);
-			}
-		});
 
 		// ------------------------------------------------------------------------------------//
 
@@ -632,33 +681,33 @@ public class WPanel extends javax.swing.JPanel {
 
 		jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
 		jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-		jTextField18.setBackground(new java.awt.Color(36, 47, 65));
-		jTextField18.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-		jTextField18.setForeground(new java.awt.Color(255, 255, 255));
-		jTextField18.setText("Enter  ");
-		jTextField18.setBorder(null);
-		jTextField18.addMouseListener(new java.awt.event.MouseAdapter() {
+		ztextField2.setBackground(new java.awt.Color(36, 47, 65));
+		ztextField2.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+		ztextField2.setForeground(new java.awt.Color(255, 255, 255));
+		ztextField2.setText("Enter  ");
+		ztextField2.setBorder(null);
+		ztextField2.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				jTextField18MouseClicked(evt);
 			}
 		});
-		jTextField18.addActionListener(new java.awt.event.ActionListener() {
+		ztextField2.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField18ActionPerformed(evt);
 			}
 		});
 
-		jTextField14.setBackground(new java.awt.Color(36, 47, 65));
-		jTextField14.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-		jTextField14.setForeground(new java.awt.Color(255, 255, 255));
-		jTextField14.setText("Enter  ");
-		jTextField14.setBorder(null);
-		jTextField14.addMouseListener(new java.awt.event.MouseAdapter() {
+		ztextField1.setBackground(new java.awt.Color(36, 47, 65));
+		ztextField1.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+		ztextField1.setForeground(new java.awt.Color(255, 255, 255));
+		ztextField1.setText("Enter  ");
+		ztextField1.setBorder(null);
+		ztextField1.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				jTextField14MouseClicked(evt);
 			}
 		});
-		jTextField14.addActionListener(new java.awt.event.ActionListener() {
+		ztextField1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField14ActionPerformed(evt);
 			}
@@ -668,17 +717,17 @@ public class WPanel extends javax.swing.JPanel {
 		jLabel6.setForeground(new java.awt.Color(255, 255, 255));
 		jLabel6.setText("ZooDB");
 
-		jTextField15.setBackground(new java.awt.Color(36, 47, 65));
-		jTextField15.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-		jTextField15.setForeground(new java.awt.Color(255, 255, 255));
-		jTextField15.setText("Enter  ");
-		jTextField15.setBorder(null);
-		jTextField15.addMouseListener(new java.awt.event.MouseAdapter() {
+		ztextField3.setBackground(new java.awt.Color(36, 47, 65));
+		ztextField3.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+		ztextField3.setForeground(new java.awt.Color(255, 255, 255));
+		ztextField3.setText("Enter  ");
+		ztextField3.setBorder(null);
+		ztextField3.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				jTextField15MouseClicked(evt);
 			}
 		});
-		jTextField15.addActionListener(new java.awt.event.ActionListener() {
+		ztextField3.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jTextField15ActionPerformed(evt);
 			}
@@ -710,7 +759,7 @@ public class WPanel extends javax.swing.JPanel {
 						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 						.addGroup(jPanel2Layout.createSequentialGroup().addGap(10, 10, 10)
 								.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-										.addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 260,
+										.addComponent(ztextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 260,
 												javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 300,
 												javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -718,59 +767,67 @@ public class WPanel extends javax.swing.JPanel {
 								.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 										.addComponent(jSeparator15, javax.swing.GroupLayout.PREFERRED_SIZE, 260,
 												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 260,
+										.addComponent(ztextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 260,
 												javax.swing.GroupLayout.PREFERRED_SIZE)))
 						.addGroup(jPanel2Layout.createSequentialGroup().addGap(10, 10, 10)
 								.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 										.addComponent(jSeparator16, javax.swing.GroupLayout.PREFERRED_SIZE, 260,
 												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 260,
+										.addComponent(ztextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 260,
 												javax.swing.GroupLayout.PREFERRED_SIZE)))
 						.addGroup(jPanel2Layout.createSequentialGroup().addGap(10, 10, 10).addComponent(jSeparator17,
 								javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(jButton58,
+						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(zProButton,
 								javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addComponent(jButton65, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+						.addComponent(zPublicationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
 								javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addComponent(jButton48, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+						.addComponent(zInProButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
 								javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(jButton53,
+						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(zConfButton,
 								javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(jButton59,
-								javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addComponent(jButton63, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(
+								zAuthEdButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+								javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addComponent(zConfEdButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
 								javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addComponent(jButton54, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+						.addComponent(zPublisherButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
 								javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(jButton49,
+						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(zSerButton,
 								javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addComponent(jButton47, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+						.addComponent(zQuery1Button, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
 								javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(jButton56,
-								javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addComponent(jButton50, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(
+								zQuery8Button, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+								javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addComponent(zQuery2Button, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
 								javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(jButton66,
-								javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addComponent(jButton51)
-						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(jButton57,
-								javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(jButton52,
-								javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addComponent(jButton61, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(
+								zQuery9Button, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+								javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addComponent(zQuery3Button)
+						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(
+								zQuery10Button, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+								javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(
+								zQuery11Button, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+								javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addComponent(zQuery4Button, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
 								javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(jButton60,
-								javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addComponent(jButton46, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(
+								zQuery12Button, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+								javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addComponent(zQuery5Button, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
 								javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addComponent(jButton55, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+						.addComponent(zQuery6Button, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
 								javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(jButton45,
-								javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addComponent(jButton62, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(
+								zQuery13Button, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+								javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addComponent(zQuery7Button, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
 								javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(jButton64,
-								javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(
+								zQuery14Button, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
+								javax.swing.GroupLayout.PREFERRED_SIZE))
 						.addGroup(jPanel2Layout.createSequentialGroup().addGap(10, 10, 10).addComponent(jLabel7,
 								javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
 						.addGap(0, 0, Short.MAX_VALUE)));
@@ -779,7 +836,7 @@ public class WPanel extends javax.swing.JPanel {
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
 						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addGroup(jPanel2Layout.createSequentialGroup().addGap(40, 40, 40).addComponent(
-										jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 26,
+										ztextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 26,
 										javax.swing.GroupLayout.PREFERRED_SIZE))
 								.addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 47,
 										javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -788,50 +845,50 @@ public class WPanel extends javax.swing.JPanel {
 								.addComponent(jSeparator15, javax.swing.GroupLayout.PREFERRED_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addGroup(jPanel2Layout.createSequentialGroup().addGap(10, 10, 10).addComponent(
-										jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 26,
+										ztextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 26,
 										javax.swing.GroupLayout.PREFERRED_SIZE)))
 						.addGap(4, 4, 4)
 						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addComponent(jSeparator16, javax.swing.GroupLayout.PREFERRED_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addGroup(jPanel2Layout.createSequentialGroup().addGap(10, 10, 10).addComponent(
-										jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
+										ztextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
 										javax.swing.GroupLayout.PREFERRED_SIZE)))
 						.addComponent(jSeparator17, javax.swing.GroupLayout.PREFERRED_SIZE,
 								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addGap(8, 8, 8)
 						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(jButton58).addComponent(jButton65))
+								.addComponent(zProButton).addComponent(zPublicationButton))
 						.addGap(1, 1, 1)
 						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(jButton48).addComponent(jButton53))
+								.addComponent(zInProButton).addComponent(zConfButton))
 						.addGap(1, 1, 1)
 						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(jButton59).addComponent(jButton63))
+								.addComponent(zAuthEdButton).addComponent(zConfEdButton))
 						.addGap(1, 1, 1)
 						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(jButton54).addComponent(jButton49))
+								.addComponent(zPublisherButton).addComponent(zSerButton))
 						.addGap(1, 1, 1)
 						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(jButton47).addComponent(jButton56))
+								.addComponent(zQuery1Button).addComponent(zQuery8Button))
 						.addGap(1, 1, 1)
 						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(jButton50).addComponent(jButton66))
+								.addComponent(zQuery2Button).addComponent(zQuery9Button))
 						.addGap(1, 1, 1)
 						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(jButton51).addComponent(jButton57))
+								.addComponent(zQuery3Button).addComponent(zQuery10Button))
 						.addGap(1, 1, 1)
 						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(jButton52).addComponent(jButton61))
+								.addComponent(zQuery11Button).addComponent(zQuery4Button))
 						.addGap(1, 1, 1)
 						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(jButton60).addComponent(jButton46))
+								.addComponent(zQuery12Button).addComponent(zQuery5Button))
 						.addGap(1, 1, 1)
 						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(jButton55).addComponent(jButton45))
+								.addComponent(zQuery6Button).addComponent(zQuery13Button))
 						.addGap(1, 1, 1)
 						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(jButton62).addComponent(jButton64))
+								.addComponent(zQuery7Button).addComponent(zQuery14Button))
 						.addGap(1, 1, 1).addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 47,
 								javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addGap(16, 16, 16)));
@@ -1024,687 +1081,415 @@ public class WPanel extends javax.swing.JPanel {
 	private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
 	}
-	
-	
+
 	private void mPublicationActionPerformed(ActionEvent evt) {
-		new ch.ethz.globis.isk.mongodb.Table(db2.publications,
-				db2.publications.find().iterator(),
-    			"Publications",
-    			new String[] { "ID", "Title" },
-    			new String[] { "_id", "title" },
-    			true);
+		new ch.ethz.globis.isk.mongodb.Table(db2.publications, db2.publications.find().iterator(), "Publications",
+				new String[] { "ID", "Title" }, new String[] { "_id", "title" }, true);
 	}
 
 	private void mProActionPerformed(ActionEvent evt) {
 		new ch.ethz.globis.isk.mongodb.Table(db2.publications,
-				db2.publications.find(Filters.exists("publications")).iterator(),
-    			"Proceedings",
-    			new String[] { "ID", "Title", "Year", "Publisher", "ISBN", "Editors", "Series", "Conference Edition", "Publications" },
-    			new String[] { "_id", "title", "year", "publisher", "isbn", "editors", "series", "conferenceEdition", "publications" },
-    			true);
+				db2.publications.find(Filters.exists("publications")).iterator(), "Proceedings",
+				new String[] { "ID", "Title", "Year", "Publisher", "ISBN", "Editors", "Series", "Conference Edition",
+						"Publications" },
+				new String[] { "_id", "title", "year", "publisher", "isbn", "editors", "series", "conferenceEdition",
+						"publications" },
+				true);
 	}
 
 	private void mSerActionPerformed(java.awt.event.ActionEvent evt) {
-		new ch.ethz.globis.isk.mongodb.Table(db2.series,
-				db2.series.find().iterator(),
-    			"Series",
-    			new String[] { "ID", "Name", "Publications" },
-    			new String[] { "_id", "name", "publications" },
-    			true);
+		new ch.ethz.globis.isk.mongodb.Table(db2.series, db2.series.find().iterator(), "Series",
+				new String[] { "ID", "Name", "Publications" }, new String[] { "_id", "name", "publications" }, true);
 	}
 
 	private void mInProActionPerformed(java.awt.event.ActionEvent evt) {
 		new ch.ethz.globis.isk.mongodb.Table(db2.publications,
-				db2.publications.find(Filters.exists("proceedings")).iterator(),
-    			"Inproceedings",
-    			new String[] { "ID", "Title", "Authors", "Proceedings" },
-    			new String[] { "_id", "title", "authors", "proceedings" },
-    			true);
+				db2.publications.find(Filters.exists("proceedings")).iterator(), "Inproceedings",
+				new String[] { "ID", "Title", "Authors", "Proceedings" },
+				new String[] { "_id", "title", "authors", "proceedings" }, true);
 	}
 
 	private void mConfActionPerformed(java.awt.event.ActionEvent evt) {
-		new ch.ethz.globis.isk.mongodb.Table(db2.conferences,
-				db2.conferences.find().iterator(),
-    			"Conferences",
-    			new String[] { "ID", "Name", "Conference Edition" },
-    			new String[] { "_id", "name", "editions" },
-    			true);
+		new ch.ethz.globis.isk.mongodb.Table(db2.conferences, db2.conferences.find().iterator(), "Conferences",
+				new String[] { "ID", "Name", "Conference Edition" }, new String[] { "_id", "name", "editions" }, true);
 	}
 
 	private void mConfEdActionPerformed(java.awt.event.ActionEvent evt) {
-		new ch.ethz.globis.isk.mongodb.Table(db2.conferenceEditions,
-				db2.conferenceEditions.find().iterator(),
-    			"Conference Editions",
-    			new String[] { "ID", "Conference", "Year", "Proceedings" },
-    			new String[] { "_id", "conference", "year", "proceedings" },
-    			true);
+		new ch.ethz.globis.isk.mongodb.Table(db2.conferenceEditions, db2.conferenceEditions.find().iterator(),
+				"Conference Editions", new String[] { "ID", "Conference", "Year", "Proceedings" },
+				new String[] { "_id", "conference", "year", "proceedings" }, true);
 	}
 
 	private void mAuthEdActionPerformed(java.awt.event.ActionEvent evt) {
-		new ch.ethz.globis.isk.mongodb.Table(db2.persons,
-				db2.persons.find().iterator(),
-    			"Authors/Editors",
-    			new String[] { "ID", "Name", "Authored Publications", "Edited Publications" },
-    			new String[] { "_id", "name", "authoredPublications", "editedPublications" },
-    			true);
+		new ch.ethz.globis.isk.mongodb.Table(db2.persons, db2.persons.find().iterator(), "Authors/Editors",
+				new String[] { "ID", "Name", "Authored Publications", "Edited Publications" },
+				new String[] { "_id", "name", "authoredPublications", "editedPublications" }, true);
 	}
 
 	private void mPublisherActionPerformed(java.awt.event.ActionEvent evt) {
-		new ch.ethz.globis.isk.mongodb.Table(db2.publishers,
-				db2.publishers.find().iterator(),
-    			"Publishers",
-    			new String[] { "ID", "Name", "Publications" },
-    			new String[] { "_id", "name", "publications" },
-    			true);
+		new ch.ethz.globis.isk.mongodb.Table(db2.publishers, db2.publishers.find().iterator(), "Publishers",
+				new String[] { "ID", "Name", "Publications" }, new String[] { "_id", "name", "publications" }, true);
 	}
 
 	private void mQuery1ActionPerformed(java.awt.event.ActionEvent evt) {
-String id = mtextField1.getText();
-    	
-    	Iterator<Document> iterator = db2.publications.find(Filters.eq("_id", id)).iterator();
-    	new ch.ethz.globis.isk.mongodb.Table(db2.publications,
-				iterator,
-    			"Publication by ID",
-    			new String[] { "ID", "Title" },
-    			new String[] { "_id", "title" },
-    			false);
+		String id = mtextField1.getText();
+
+		Iterator<Document> iterator = db2.publications.find(Filters.eq("_id", id)).iterator();
+		new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator, "Publication by ID",
+				new String[] { "ID", "Title" }, new String[] { "_id", "title" }, false);
 	}
 
 	private void mQuery2ActionPerformed(java.awt.event.ActionEvent evt) {
 		String title = mtextField1.getText();
-    	int beginOffset;
-    	int endOffset;
-    	
-    	try {
-        	beginOffset = Integer.parseInt(mtextField2.getText());
-        	endOffset = Integer.parseInt(mtextField3.getText());
-    	} catch (Exception e) {
-    		resultLabel.setText(invalidInput);
-    		return;
-    	}
-    	
-    	Iterator<Document> iterator =
-    			db2.publications.aggregate(Arrays.asList(
-    				new Document("$match",
-    					new Document("title",
-    						new Document("$regex", ".*" + title + ".*i")
-    					)
-					),
-					new Document("$skip", beginOffset),
-					new Document("$limit", endOffset - beginOffset)
-    			)).iterator();
-    	
-    	new ch.ethz.globis.isk.mongodb.Table(db2.publications,
-				iterator,
-    			"Publications by title, begin-offset, end-offset",
-    			new String[] { "ID", "Title" },
-    			new String[] { "_id", "title" },
-    			false);
+		int beginOffset;
+		int endOffset;
+
+		try {
+			beginOffset = Integer.parseInt(mtextField2.getText());
+			endOffset = Integer.parseInt(mtextField3.getText());
+		} catch (Exception e) {
+			resultLabel.setText(invalidInput);
+			return;
+		}
+
+		Iterator<Document> iterator = db2.publications
+				.aggregate(Arrays.asList(
+						new Document("$match", new Document("title", new Document("$regex", ".*" + title + ".*i"))),
+						new Document("$skip", beginOffset), new Document("$limit", endOffset - beginOffset)))
+				.iterator();
+
+		new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator,
+				"Publications by title, begin-offset, end-offset", new String[] { "ID", "Title" },
+				new String[] { "_id", "title" }, false);
 	}
 
 	private void mQuery3ActionPerformed(java.awt.event.ActionEvent evt) {
 		String title = mtextField1.getText();
-    	int beginOffset;
-    	int endOffset;
-    	
-    	try {
-        	beginOffset = Integer.parseInt(mtextField2.getText());
-        	endOffset = Integer.parseInt(mtextField3.getText());
-    	} catch (Exception e) {
-    		resultLabel.setText(invalidInput);
-    		return;
-    	}
-    	
-    	Iterator<Document> iterator =
-    			db2.publications.aggregate(Arrays.asList(
-    				new Document("$match",
-    					new Document("title",
-    						new Document("$regex", ".*" + title + ".*i")
-    					)
-					),
-					new Document("$skip", beginOffset),
-					new Document("$limit", endOffset - beginOffset),
-					new Document("$sort", new Document("title", 1))
-    			)).iterator();
-    	
-    	new ch.ethz.globis.isk.mongodb.Table(db2.publications,
-				iterator,
-    			"Publications by title, begin-offset, end-offset ordered by title",
-    			new String[] { "ID", "Title" },
-    			new String[] { "_id", "title" },
-    			false);
+		int beginOffset;
+		int endOffset;
+
+		try {
+			beginOffset = Integer.parseInt(mtextField2.getText());
+			endOffset = Integer.parseInt(mtextField3.getText());
+		} catch (Exception e) {
+			resultLabel.setText(invalidInput);
+			return;
+		}
+
+		Iterator<Document> iterator = db2.publications.aggregate(Arrays.asList(
+				new Document("$match", new Document("title", new Document("$regex", ".*" + title + ".*i"))),
+				new Document("$skip", beginOffset), new Document("$limit", endOffset - beginOffset),
+				new Document("$sort", new Document("title", 1)))).iterator();
+
+		new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator,
+				"Publications by title, begin-offset, end-offset ordered by title", new String[] { "ID", "Title" },
+				new String[] { "_id", "title" }, false);
 	}
 
 	private void mQuery4ActionPerformed(java.awt.event.ActionEvent evt) {
-		//String name = "Kevin D. Ashley";
-    	String name = mtextField1.getText();
-    	
-    	Iterator<Document> iterator =
-    			db2.publications.aggregate(Arrays.asList(
-    				new Document("$match",
-						new Document("authors", name)
-					),
-    				new Document("$project",
-    					new Document("author", name)
-    					.append("coAuthors",
-		    				new Document("$filter",
-								new Document("input", "$authors")
-			    				.append("as", "author")
-			    				.append("cond",
-			    					new Document("$ne", Arrays.asList(
-			    						"$$author", name
-		    						))
-								)
-		    				)
-	    				)
-					),
-    				new Document("$unwind", "$coAuthors"),
-    				new Document("$group",
-    					new Document("_id", "$author")
-    					.append("coAuthors",
-							new Document("$addToSet", "$coAuthors")
-						)
-					)
-    			)).iterator();
-    	
-    	new ch.ethz.globis.isk.mongodb.Table(db2.publications,
-				iterator,
-    			"Co-Authors",
-    			new String[] { "Author", "Co-Authors" },
-    			new String[] { "_id", "coAuthors" },
-    			false);
+		// String name = "Kevin D. Ashley";
+		String name = mtextField1.getText();
+
+		Iterator<Document> iterator = db2.publications
+				.aggregate(
+						Arrays.asList(new Document("$match", new Document("authors", name)),
+								new Document("$project",
+										new Document("author", name).append("coAuthors", new Document("$filter",
+												new Document("input", "$authors").append("as", "author").append("cond",
+														new Document("$ne", Arrays.asList("$$author", name)))))),
+								new Document("$unwind", "$coAuthors"),
+								new Document("$group", new Document("_id", "$author").append("coAuthors",
+										new Document("$addToSet", "$coAuthors")))))
+				.iterator();
+
+		new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator, "Co-Authors",
+				new String[] { "Author", "Co-Authors" }, new String[] { "_id", "coAuthors" }, false);
 	}
 
 	private void mQuery5ActionPerformed(java.awt.event.ActionEvent evt) {
 		String author1 = mtextField1.getText();
-    	String author2 = mtextField2.getText();
-    	
-    	Iterator<Document> iterator =
-    			db2.publications.aggregate(Arrays.asList(
-					new Document("$match",
-						new Document("$or", Arrays.asList(
-							new Document("authors", author1),
-							new Document("authors", author2)
-						))
-					),
-					/*new Document("$lookup",
-						new Document("from", "persons")
-						.append("localField", "authors")
-						.append("foreignField", "name")
-						.append("as", "author")
-					),*/
-					new Document("$unwind", "$authors"),
-    						
-					new Document("$graphLookup",
-						new Document("from", "$$ROOT")
-						.append("startWith", "$authors")
-						.append("connectFromField", "authors")
-						.append("connectToField", "authors")
-						.append("as", "connectedAuthors")
-					)
-    			)).iterator();
-    	
-    	new ch.ethz.globis.isk.mongodb.Table(db2.publications,
-				iterator,
-    			"Co-Authors",
-    			new String[] { "Author", "connectedAuthors", "authors", "author" },
-    			new String[] { "_id", "connectedAuthors", "authors", "author" },
-    			false);
+		String author2 = mtextField2.getText();
+
+		Iterator<Document> iterator = db2.publications.aggregate(Arrays.asList(
+				new Document("$match", new Document("$or",
+						Arrays.asList(new Document("authors", author1), new Document("authors", author2)))),
+				/*
+				 * new Document("$lookup", new Document("from", "persons")
+				 * .append("localField", "authors") .append("foreignField",
+				 * "name") .append("as", "author") ),
+				 */
+				new Document("$unwind", "$authors"),
+
+				new Document("$graphLookup",
+						new Document("from", "$$ROOT").append("startWith", "$authors")
+								.append("connectFromField", "authors").append("connectToField", "authors").append("as",
+										"connectedAuthors"))))
+				.iterator();
+
+		new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator, "Co-Authors",
+				new String[] { "Author", "connectedAuthors", "authors", "author" },
+				new String[] { "_id", "connectedAuthors", "authors", "author" }, false);
 	}
 
 	private void mQuery6ActionPerformed(java.awt.event.ActionEvent evt) {
-		AggregateIterable<Document> query = db2.publications.aggregate(Arrays.asList(
-    			new Document("$project", 
-    					new Document("_id", 1)
-    					.append("title", 1)
-    					.append("authors", 1)
-    					.append("total",
-    							new Document("$size",
-    									new Document("$ifNull",
-    											Arrays.asList("$authors", Arrays.asList())
-    											)
-    									)
-    							)
-    					),
-    			new Document("$group", 
-    					new Document("_id", "average")
-    					.append("count",
-    							new Document("$avg", "$total")))
-    			));
-    	
-    	Document firstRes = query.first();
-    	
-    	if(firstRes.containsKey("count")){
-    		this.resultLabel.setText(Double.toString(firstRes.getDouble("count")));
-    	}
-    	
+		AggregateIterable<Document> query = db2.publications
+				.aggregate(
+						Arrays.asList(
+								new Document("$project",
+										new Document("_id", 1).append("title", 1).append("authors", 1).append("total",
+												new Document("$size",
+														new Document("$ifNull",
+																Arrays.asList("$authors", Arrays.asList()))))),
+								new Document("$group", new Document("_id", "average").append("count",
+										new Document("$avg", "$total")))));
 
-    	
-    	new ch.ethz.globis.isk.mongodb.Table(db2.publications,
-    			query.iterator(),
-    			"Global avg",
-    			new String[] {"ID", "Count"},
-    			new String[] {"_id", "count"},
-    			true);
+		Document firstRes = query.first();
+
+		if (firstRes.containsKey("count")) {
+			this.resultLabel.setText(Double.toString(firstRes.getDouble("count")));
+		}
+
+		new ch.ethz.globis.isk.mongodb.Table(db2.publications, query.iterator(), "Global avg",
+				new String[] { "ID", "Count" }, new String[] { "_id", "count" }, true);
 	}
 
 	private void mQuery7ActionPerformed(java.awt.event.ActionEvent evt) {
 		// Number of publications per year
-    	String str1  = mtextField1.getText();
-    	String str2 = mtextField2.getText();
-    	
-    	int yearFrom;
-    	int yearTo;
-    	
-    	try {
-	    	yearFrom = Integer.parseInt(str1);
-	    	yearTo   = Integer.parseInt(str2);
-    	} catch (Exception e) {
-    		resultLabel.setText(invalidInput);
-    		return;
-    	}
-    	
-    	if(yearFrom > yearTo){
-    		int temp = yearTo;
-    		yearTo = yearFrom;
-    		yearFrom = temp;
-    	}
-    	
-    	/*String expr = "(this['year'] != undefined && this['year'] >= "
-    					+ yearFrom
-    					+ " && this['year'] <= "
-    					+ yearTo
-    					+ ")";
-    	    	
-		long result = db.publications.count(Filters.where(expr)); 
-		resultLabel.setText(Long.toString(result));
-    	
-    	new Table(db.publications, 
-    			db.publications.find(Filters.where(expr)).iterator(), 
-    			"Publications between " + yearFrom + " and " + yearTo,
-    			new String[] {"Title", "Year"}, 
-    			new String[] {"title", "year"},
-    			false);*/
-    	
-    	Iterator<Document> iterator =
-    			db2.publications.aggregate(Arrays.asList(
-					new Document("$project",
-						new Document("_id", "$_id")
-						.append("year", "$year")
-						.append("gte",
-							new Document("$gte", Arrays.asList(
-								"$year", yearFrom
-							))
-						)
-						.append("lte",
-							new Document("$lte", Arrays.asList(
-								"$year", yearTo
-							))
-						)
-					),
-					new Document("$match",
-						new Document("$and", Arrays.asList(
-							new Document("gte", true),
-							new Document("lte", true)
-						))
-					),
-					new Document("$group",
-						new Document("_id", "$_id")
-						.append("count",
-							new Document("$sum", 1)
-						)
-						.append("year",
-							new Document("$first", "$year")
-						)
-					),
-					new Document("$group",
-						new Document("_id", "$year")
-						.append("count",
-							new Document("$sum", "$count")
-						)
-					),
-					new Document("$sort", new Document("_id", 1))
-    			)).iterator();
-    	
-    	new ch.ethz.globis.isk.mongodb.Table(db2.publications, 
-    			iterator,
-    			"Publications between " + yearFrom + " and " + yearTo,
-    			new String[] {"Year", "Number of Publications"},
-    			new String[] {"_id", "count"},
-    			false);
+		String str1 = mtextField1.getText();
+		String str2 = mtextField2.getText();
+
+		int yearFrom;
+		int yearTo;
+
+		try {
+			yearFrom = Integer.parseInt(str1);
+			yearTo = Integer.parseInt(str2);
+		} catch (Exception e) {
+			resultLabel.setText(invalidInput);
+			return;
+		}
+
+		if (yearFrom > yearTo) {
+			int temp = yearTo;
+			yearTo = yearFrom;
+			yearFrom = temp;
+		}
+
+		/*
+		 * String expr = "(this['year'] != undefined && this['year'] >= " +
+		 * yearFrom + " && this['year'] <= " + yearTo + ")";
+		 * 
+		 * long result = db.publications.count(Filters.where(expr));
+		 * resultLabel.setText(Long.toString(result));
+		 * 
+		 * new Table(db.publications,
+		 * db.publications.find(Filters.where(expr)).iterator(),
+		 * "Publications between " + yearFrom + " and " + yearTo, new String[]
+		 * {"Title", "Year"}, new String[] {"title", "year"}, false);
+		 */
+
+		Iterator<Document> iterator = db2.publications.aggregate(Arrays.asList(
+				new Document("$project",
+						new Document("_id", "$_id").append("year", "$year")
+								.append("gte", new Document("$gte", Arrays.asList("$year", yearFrom))).append("lte",
+										new Document("$lte", Arrays.asList("$year", yearTo)))),
+				new Document("$match",
+						new Document("$and", Arrays.asList(new Document("gte", true), new Document("lte", true)))),
+				new Document("$group",
+						new Document("_id", "$_id").append("count", new Document("$sum", 1)).append("year",
+								new Document("$first", "$year"))),
+				new Document("$group", new Document("_id", "$year").append("count", new Document("$sum", "$count"))),
+				new Document("$sort", new Document("_id", 1)))).iterator();
+
+		new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator,
+				"Publications between " + yearFrom + " and " + yearTo,
+				new String[] { "Year", "Number of Publications" }, new String[] { "_id", "count" }, false);
 	}
 
 	private void mQuery8ActionPerformed(java.awt.event.ActionEvent evt) {
-String conferenceName = mtextField1.getText();
-    	
-    	Iterator<Document> iterator =
-    			db2.conferences.aggregate(Arrays.asList(
-    				new Document("$match",
-    					new Document("name", conferenceName)
-					),
-					new Document("$lookup",
-						new Document("from", "conferenceEditions")
-						.append("localField", "editions")
-						.append("foreignField", "_id")
-						.append("as", "editions")
-					),
-					new Document("$unwind", "$editions"),
-					
-					new Document("$lookup",
-						new Document("from", "publications")
-						.append("localField", "editions.proceedings")
-						.append("foreignField", "_id")
-						.append("as", "proceedings")
-					),
-					new Document("$unwind", "$proceedings"),
-					
-					new Document("$group",
-						new Document("_id", null)
-						.append("name",
-							new Document("$first", "$name")
-						)
-						.append("count",
-							new Document("$sum",
-								new Document("$size", "$proceedings.publications")
-							)
-						)
-					)
-    			)).iterator();
-    	
-    	new ch.ethz.globis.isk.mongodb.Table(db2.conferences, 
-    			iterator,
-    			"Number of Publications of conference " + conferenceName,
-    			new String[] {"Name", "Number of publications" },
-    			new String[] {"name", "count" },
-    			false);
+		String conferenceName = mtextField1.getText();
+
+		Iterator<Document> iterator = db2.conferences
+				.aggregate(Arrays.asList(new Document("$match", new Document("name", conferenceName)),
+						new Document("$lookup",
+								new Document("from", "conferenceEditions").append("localField", "editions")
+										.append("foreignField", "_id").append("as", "editions")),
+						new Document("$unwind", "$editions"),
+
+						new Document("$lookup",
+								new Document("from", "publications").append("localField", "editions.proceedings")
+										.append("foreignField", "_id").append("as", "proceedings")),
+						new Document("$unwind", "$proceedings"),
+
+						new Document("$group",
+								new Document("_id", null).append("name", new Document("$first", "$name")).append(
+										"count", new Document("$sum",
+												new Document("$size", "$proceedings.publications"))))))
+				.iterator();
+
+		new ch.ethz.globis.isk.mongodb.Table(db2.conferences, iterator,
+				"Number of Publications of conference " + conferenceName,
+				new String[] { "Name", "Number of publications" }, new String[] { "name", "count" }, false);
 	}
 
 	private void mQuery9ActionPerformed(java.awt.event.ActionEvent evt) {
-String conferenceName = mtextField1.getText();
-    	
-    	Iterator<Document> iterator =
-    			db2.conferences.aggregate(Arrays.asList(
-    				new Document("$match",
-    					new Document("name", conferenceName)
-					),
-					new Document("$lookup",
-						new Document("from", "conferenceEditions")
-						.append("localField", "editions")
-						.append("foreignField", "_id")
-						.append("as", "editions")
-					),
-					new Document("$unwind", "$editions"),
-					
-					new Document("$lookup",
-						new Document("from", "publications")
-						.append("localField", "editions.proceedings")
-						.append("foreignField", "_id")
-						.append("as", "proceedings")
-					),
-					new Document("$unwind", "$proceedings"),
-					
-					new Document("$lookup",
-						new Document("from", "publications")
-						.append("localField", "proceedings.publications")
-						.append("foreignField", "_id")
-						.append("as", "inProceedings")
-					),
-					new Document("$unwind", "$inProceedings"),
-					
-					new Document("$group",
-						new Document("_id", null)
-						.append("name",
-							new Document("$first", "$name")
-						)
-						.append("editors",
-							new Document("$addToSet", "$proceedings.editors")
-						)
-						.append("authors",
-							new Document("$addToSet", "$inProceedings.authors")
-						)
-					),
-					
-					new Document("$project",
-						new Document("name", "$name")
-						.append("authors",
-							new Document("$setUnion", Arrays.asList(
-								"$authors", "$editors"
-							))
-						)
-					),
-					
-					new Document("$group",
-						new Document("_id", null)
-						.append("name",
-							new Document("$first", "$name")
-						)
-						.append("count",
-							new Document("$sum",
-								new Document("$size", "$authors")
-							)
-						)
-					)
-    			)).iterator();
-    	
-    	new ch.ethz.globis.isk.mongodb.Table(db2.conferences, 
-    			iterator,
-    			"Number of Authors/Editors of conference " + conferenceName,
-    			new String[] {"Name", "Number of authors/editors" },
-    			new String[] {"name", "count" },
-    			false);
+		String conferenceName = mtextField1.getText();
+
+		Iterator<Document> iterator = db2.conferences
+				.aggregate(Arrays.asList(new Document("$match", new Document("name", conferenceName)),
+						new Document("$lookup",
+								new Document("from", "conferenceEditions").append("localField", "editions")
+										.append("foreignField", "_id").append("as", "editions")),
+						new Document("$unwind", "$editions"),
+
+						new Document("$lookup",
+								new Document("from", "publications").append("localField", "editions.proceedings")
+										.append("foreignField", "_id").append("as", "proceedings")),
+						new Document("$unwind", "$proceedings"),
+
+						new Document("$lookup",
+								new Document("from", "publications").append("localField", "proceedings.publications")
+										.append("foreignField", "_id").append("as", "inProceedings")),
+						new Document("$unwind", "$inProceedings"),
+
+						new Document("$group",
+								new Document("_id", null).append("name", new Document("$first", "$name"))
+										.append("editors", new Document("$addToSet", "$proceedings.editors")).append(
+												"authors", new Document("$addToSet", "$inProceedings.authors"))),
+
+						new Document("$project", new Document("name", "$name").append("authors",
+								new Document("$setUnion", Arrays.asList("$authors", "$editors")))),
+
+						new Document("$group",
+								new Document("_id", null).append("name", new Document("$first", "$name"))
+										.append("count", new Document("$sum", new Document("$size", "$authors"))))))
+				.iterator();
+
+		new ch.ethz.globis.isk.mongodb.Table(db2.conferences, iterator,
+				"Number of Authors/Editors of conference " + conferenceName,
+				new String[] { "Name", "Number of authors/editors" }, new String[] { "name", "count" }, false);
 	}
 
 	private void mQuery10ActionPerformed(java.awt.event.ActionEvent evt) {
 		String conferenceName = mtextField1.getText();
-		
-		Iterator<Document> iterator =
-				db2.conferences.aggregate(Arrays.asList(
-					new Document("$match",
-						new Document("name", conferenceName)
-					),
-					new Document("$lookup",
-						new Document("from", "conferenceEditions")
-						.append("localField", "editions")
-						.append("foreignField", "_id")
-						.append("as", "editions")
-					),
-					new Document("$unwind", "$editions"),
-					
-					new Document("$lookup",
-						new Document("from", "publications")
-						.append("localField", "editions.proceedings")
-						.append("foreignField", "_id")
-						.append("as", "proceedings")
-					),
-					new Document("$unwind", "$proceedings"),
-					
-					new Document("$lookup",
-						new Document("from", "publications")
-						.append("localField", "proceedings.publications")
-						.append("foreignField", "_id")
-						.append("as", "inProceedings")
-					),
-					new Document("$unwind", "$inProceedings"),
-					
-					new Document("$group",
-						new Document("_id", null)
-						.append("name",
-							new Document("$first", "$name")
-						)
-						.append("authors",
-							new Document("$addToSet", "$proceedings.editors")
-						)
-						.append("authors",
-							new Document("$addToSet", "$inProceedings.authors")
-						)
-					),
-					new Document("$unwind", "$authors"),
-					new Document("$unwind", "$authors"),
-					
-					new Document("$group",
-						new Document("_id", null)
-						.append("name",
-							new Document("$first", "$name")
-						)
-						.append("authors",
-							new Document("$addToSet", "$authors")
-						)
-					)
-				)).iterator();
-	
-		new ch.ethz.globis.isk.mongodb.Table(db2.conferences, 
-				iterator,
-				"Authors/Editors of conference " + conferenceName,
-				new String[] {"Name", "Authors/Editors" },
-				new String[] {"name", "authors" },
-				false);
+
+		Iterator<Document> iterator = db2.conferences
+				.aggregate(Arrays.asList(new Document("$match", new Document("name", conferenceName)),
+						new Document("$lookup",
+								new Document("from", "conferenceEditions").append("localField", "editions")
+										.append("foreignField", "_id").append("as", "editions")),
+						new Document("$unwind", "$editions"),
+
+						new Document("$lookup",
+								new Document("from", "publications").append("localField", "editions.proceedings")
+										.append("foreignField", "_id").append("as", "proceedings")),
+						new Document("$unwind", "$proceedings"),
+
+						new Document("$lookup",
+								new Document("from", "publications").append("localField", "proceedings.publications")
+										.append("foreignField", "_id").append("as", "inProceedings")),
+						new Document("$unwind", "$inProceedings"),
+
+						new Document("$group",
+								new Document("_id", null).append("name", new Document("$first", "$name"))
+										.append("authors", new Document("$addToSet", "$proceedings.editors")).append(
+												"authors", new Document("$addToSet", "$inProceedings.authors"))),
+						new Document("$unwind", "$authors"), new Document("$unwind", "$authors"),
+
+						new Document("$group", new Document("_id", null).append("name", new Document("$first", "$name"))
+								.append("authors", new Document("$addToSet", "$authors")))))
+				.iterator();
+
+		new ch.ethz.globis.isk.mongodb.Table(db2.conferences, iterator,
+				"Authors/Editors of conference " + conferenceName, new String[] { "Name", "Authors/Editors" },
+				new String[] { "name", "authors" }, false);
 	}
 
 	private void mQuery11ActionPerformed(java.awt.event.ActionEvent evt) {
-String conferenceName = mtextField1.getText();
-    	
-    	Iterator<Document> iterator =
-    			db2.conferences.aggregate(Arrays.asList(
-    				new Document("$match",
-    					new Document("name", conferenceName)
-					),
-					new Document("$lookup",
-						new Document("from", "conferenceEditions")
-						.append("localField", "editions")
-						.append("foreignField", "_id")
-						.append("as", "editions")
-					),
-					new Document("$unwind", "$editions"),
-					
-					new Document("$lookup",
-						new Document("from", "publications")
-						.append("localField", "editions.proceedings")
-						.append("foreignField", "_id")
-						.append("as", "proceedings")
-					),
-					new Document("$unwind", "$proceedings"),
-					
-					new Document("$lookup",
-						new Document("from", "publications")
-						.append("localField", "proceedings.publications")
-						.append("foreignField", "_id")
-						.append("as", "inProceedings")
-					),
-					new Document("$unwind", "$inProceedings"),
-					
-					new Document("$group",
-						new Document("_id", null)
-						.append("name",
-							new Document("$first", "$name")
-						)
-						.append("inProceedings",
-							new Document("$addToSet", "$inProceedings._id")
-						)
-						.append("proceedings",
-							new Document("$addToSet", "$proceedings._id")
-						)
-					),
-					
-					new Document("$project",
-						new Document("name", "$name")
-						.append("publications",
-							new Document("$setUnion", Arrays.asList(
-								"$inProceedings", "$proceedings"
-							))
-						)
-					)
-    			)).iterator();
-    	
-    	new ch.ethz.globis.isk.mongodb.Table(db2.conferences, 
-    			iterator,
-    			"Publications of conference " + conferenceName,
-    			new String[] {"Name", "Publications" },
-    			new String[] {"name", "publications" },
-    			false);
+		String conferenceName = mtextField1.getText();
+
+		Iterator<Document> iterator = db2.conferences
+				.aggregate(Arrays.asList(new Document("$match", new Document("name", conferenceName)),
+						new Document("$lookup",
+								new Document("from", "conferenceEditions").append("localField", "editions")
+										.append("foreignField", "_id").append("as", "editions")),
+						new Document("$unwind", "$editions"),
+
+						new Document("$lookup",
+								new Document("from", "publications").append("localField", "editions.proceedings")
+										.append("foreignField", "_id").append("as", "proceedings")),
+						new Document("$unwind", "$proceedings"),
+
+						new Document("$lookup",
+								new Document("from", "publications").append("localField", "proceedings.publications")
+										.append("foreignField", "_id").append("as", "inProceedings")),
+						new Document("$unwind", "$inProceedings"),
+
+						new Document("$group",
+								new Document("_id", null).append("name", new Document("$first", "$name"))
+										.append("inProceedings", new Document("$addToSet", "$inProceedings._id"))
+										.append("proceedings", new Document("$addToSet", "$proceedings._id"))),
+
+						new Document("$project",
+								new Document("name", "$name").append("publications",
+										new Document("$setUnion", Arrays.asList("$inProceedings", "$proceedings"))))))
+				.iterator();
+
+		new ch.ethz.globis.isk.mongodb.Table(db2.conferences, iterator, "Publications of conference " + conferenceName,
+				new String[] { "Name", "Publications" }, new String[] { "name", "publications" }, false);
 	}
 
 	private void mQuery12ActionPerformed(java.awt.event.ActionEvent evt) {
-		
+
 	}
 
 	private void mQuery13ActionPerformed(java.awt.event.ActionEvent evt) {
-String name = mtextField1.getText();
-    	
-    	// Exact matching could be used alternatively
-    	//String expr = "this.authors != undefined && this.authors[this.authors.length - 1] === '" + name + "'";
-    	String expr = "this.authors != undefined && this.authors[this.authors.length - 1].includes('" + name + "')";
-    	
-    	Iterator<Document> iterator = db2.publications.find(Filters.where(expr)).iterator();
-    	
-    	new ch.ethz.globis.isk.mongodb.Table(db2.publications,
-    			iterator,
-    			"Publications containing " + name + " as last author",
-    			new String[]{"ID", "Title", "Authors", "Pages", "Year"},
-    			new String[]{"_id", "title", "authors", "pages", "year"},
-    			true);
+		String name = mtextField1.getText();
+
+		// Exact matching could be used alternatively
+		// String expr = "this.authors != undefined &&
+		// this.authors[this.authors.length - 1] === '" + name + "'";
+		String expr = "this.authors != undefined && this.authors[this.authors.length - 1].includes('" + name + "')";
+
+		Iterator<Document> iterator = db2.publications.find(Filters.where(expr)).iterator();
+
+		new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator,
+				"Publications containing " + name + " as last author",
+				new String[] { "ID", "Title", "Authors", "Pages", "Year" },
+				new String[] { "_id", "title", "authors", "pages", "year" }, true);
 	}
 
 	private void mQuery14ActionPerformed(java.awt.event.ActionEvent evt) {
 		int yearFrom;
-    	int yearTo;
-    	
-    	try {
-        	yearFrom = Integer.parseInt(mtextField1.getText());
-        	yearTo = Integer.parseInt(mtextField2.getText());
-    	} catch (Exception e) {
-    		resultLabel.setText(invalidInput);
-    		return;
-    	}
-    	
-    	Iterator<Document> iterator =
-    			db2.publications.aggregate(Arrays.asList(
-					new Document("$project",
-						new Document("_id", "$_id")
-						.append("publisher", "$publisher")
-						.append("authors", "$authors")
-						.append("editors", "$editors")
-						.append("year", "$year")
-						.append("gte",
-							new Document("$gte", Arrays.asList(
-								"$year", yearFrom
-							))
-						)
-						.append("lte",
-							new Document("$lte", Arrays.asList(
-								"$year", yearTo
-							))
-						)
-					),
-					new Document("$match",
-						new Document("$and", Arrays.asList(
-							new Document("gte", true),
-							new Document("lte", true)
-						))
-					),
-					
-					new Document("$lookup",
-						new Document("from", "$$ROOT")
-						.append("localField", "authors")
-						.append("foreignField", "editors")
-						.append("as", "proceedings")
-					),
-					
-					new Document("$group",
-						new Document("_id", "$publisher")
-					)
-    			)).iterator();
-    	
-    	new ch.ethz.globis.isk.mongodb.Table(db2.publishers, 
-    			iterator,
-    			"Publishers of proceedings whose authors appear in inproceedings in range of years " + yearFrom + " to " + yearTo,
-    			new String[] {"Publisher"},
-    			new String[] {"_id"},
-    			false);
+		int yearTo;
+
+		try {
+			yearFrom = Integer.parseInt(mtextField1.getText());
+			yearTo = Integer.parseInt(mtextField2.getText());
+		} catch (Exception e) {
+			resultLabel.setText(invalidInput);
+			return;
+		}
+
+		Iterator<Document> iterator = db2.publications.aggregate(Arrays.asList(
+				new Document("$project",
+						new Document("_id", "$_id").append("publisher", "$publisher").append("authors", "$authors")
+								.append("editors", "$editors").append("year", "$year")
+								.append("gte", new Document("$gte", Arrays.asList("$year", yearFrom)))
+								.append("lte", new Document("$lte", Arrays.asList("$year", yearTo)))),
+				new Document("$match",
+						new Document("$and", Arrays.asList(new Document("gte", true), new Document("lte", true)))),
+
+				new Document("$lookup", new Document("from", "$$ROOT").append("localField", "authors")
+						.append("foreignField", "editors").append("as", "proceedings")),
+
+				new Document("$group", new Document("_id", "$publisher")))).iterator();
+
+		new ch.ethz.globis.isk.mongodb.Table(db2.publishers, iterator,
+				"Publishers of proceedings whose authors appear in inproceedings in range of years " + yearFrom + " to "
+						+ yearTo,
+				new String[] { "Publisher" }, new String[] { "_id" }, false);
 	}
-	
-	
-	
-	
 
 	private void jTextField11MouseClicked(java.awt.event.MouseEvent evt) {
 		// TODO add your handling code here:
@@ -2014,102 +1799,331 @@ String name = mtextField1.getText();
 				"Publishers of Proceedings whose authors appear in any InProceedings in range of years",
 				new String[] { "Publisher" }, new String[] { "id" }, false);
 	}
+	
+	
+	
+	
+	
+
+	private void zInProActionPerformed(java.awt.event.ActionEvent evt) {
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
+		try {
+			db.open();
+			Collection<ZooInProceedings> collection = db.getWithFilter(ZooInProceedings.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    		final String error = e.getMessage();
+    		SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                	JFrame frame = new JFrame(error);
+                	PanelErrorMessage panel = new PanelErrorMessage();
+                	frame.add(panel);
+                	frame.pack();
+                	frame.setVisible(true);
+                }
+            });
+		} finally {
+			db.close();
+		}
+	}
+
+	private void zSerActionPerformed(java.awt.event.ActionEvent evt) {
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
+		try {
+			db.open();
+			Collection<ZooSeries> collection = db.getWithFilter(ZooSeries.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    		final String error = e.getMessage();
+    		SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                	JFrame frame = new JFrame(error);
+                	PanelErrorMessage panel = new PanelErrorMessage();
+                	frame.add(panel);
+                	frame.pack();
+                	frame.setVisible(true);
+                }
+            });
+		} finally {
+			db.close();
+		}
+	}
+
+	private void zConfActionPerformed(java.awt.event.ActionEvent evt) {
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
+		try {
+			db.open();
+			Collection<ZooConference> collection = db.getWithFilter(ZooConference.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    		final String error = e.getMessage();
+    		SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                	JFrame frame = new JFrame(error);
+                	PanelErrorMessage panel = new PanelErrorMessage();
+                	frame.add(panel);
+                	frame.pack();
+                	frame.setVisible(true);
+                }
+            });
+		} finally {
+			db.close();
+		}
+	}
+
+	private void zPublisherActionPerformed(java.awt.event.ActionEvent evt) {
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
+		try {
+			db.open();
+			Collection<ZooPublication> collection = db.getWithFilter(ZooPublication.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    		final String error = e.getMessage();
+    		SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                	JFrame frame = new JFrame(error);
+                	PanelErrorMessage panel = new PanelErrorMessage();
+                	frame.add(panel);
+                	frame.pack();
+                	frame.setVisible(true);
+                }
+            });
+		} finally {
+			db.close();
+		}
+	}
+	
+	private void zPublishcationActionPerformed(java.awt.event.ActionEvent evt) {
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
+		try {
+			db.open();
+			Collection<ZooPublisher> collection = db.getWithFilter(ZooPublisher.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    		final String error = e.getMessage();
+    		SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                	JFrame frame = new JFrame(error);
+                	PanelErrorMessage panel = new PanelErrorMessage();
+                	frame.add(panel);
+                	frame.pack();
+                	frame.setVisible(true);
+                }
+            });
+		} finally {
+			db.close();
+		}
+	}
+
+	private void zProActionPerformed(java.awt.event.ActionEvent evt) {
+    	Pair<Object[][], String[]> objectsAndTitle = null;
+		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
+		try {
+			db.open();
+			Collection<ZooProceedings> collection = db.getWithFilter(ZooProceedings.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    		final String error = e.getMessage();
+    		SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                	JFrame frame = new JFrame(error);
+                	PanelErrorMessage panel = new PanelErrorMessage();
+                	frame.add(panel);
+                	frame.pack();
+                	frame.setVisible(true);
+                }
+            });
+		} finally {
+			db.close();
+		}
+	}
+
+	private void zAuthEdActionPerformed(java.awt.event.ActionEvent evt) {
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
+		try {
+			db.open();
+			Collection<ZooPerson> collection = db.getWithFilter(ZooPerson.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			final String error = e.getMessage();
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					JFrame frame = new JFrame(error);
+					PanelErrorMessage panel = new PanelErrorMessage();
+					frame.add(panel);
+					frame.pack();
+					frame.setVisible(true);
+				}
+			});
+		} finally {
+			db.close();
+		}
+	}
+
+	private void zConfEdActionPerformed(java.awt.event.ActionEvent evt) {
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
+		try {
+			db.open();
+			Collection<ZooConferenceEdition> collection = db.getWithFilter(ZooConferenceEdition.class, "");
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    		final String error = e.getMessage();
+    		SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                	JFrame frame = new JFrame(error);
+                	PanelErrorMessage panel = new PanelErrorMessage();
+                	frame.add(panel);
+                	frame.pack();
+                	frame.setVisible(true);
+                }
+            });
+		} finally {
+			db.close();
+		}
+	}
+
+	private void zQuery1ActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
+	}
+
+	private void zQuery2ActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
+	}
+
+	private void zQuery3ActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
+	}
+
+	private void zQuery4ActionPerformed(java.awt.event.ActionEvent evt) {
+		Pair<Object[][], String[]> objectsAndTitle = null;
+		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
+		try {
+			db.open();
+			Collection<ZooPerson> collection = db.getCoAuthors(ztextField1.getText());
+			
+			objectsAndTitle = getObjectsAndTitle(collection, filter);
+			DefaultTableModel model = new DefaultTableModel(objectsAndTitle.a, objectsAndTitle.b);
+			openNewTable(model);
+		} catch (Exception e) {
+    		System.out.println(e.getMessage());
+    		final String error = e.getMessage();
+    		SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                	JFrame frame = new JFrame(error);
+                	PanelErrorMessage panel = new PanelErrorMessage();
+                	frame.add(panel);
+                	frame.pack();
+                	frame.setVisible(true);
+                }
+            });
+		} finally {
+			db.close();
+		}
+	}
+
+	private void zQuery5ActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
+	}
+
+	private void zQuery6ActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
+	}
+
+	private void zQuery7ActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
+	}
+
+	private void zQuery8ActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
+	}
+
+	private void zQuery9ActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
+	}
+
+	private void zQuery10ActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
+	}
+
+	private void zQuery11ActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
+	}
+
+	private void zQuery12ActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
+	}
+
+	private void zQuery13ActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
+	}
+
+	private void zQuery14ActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
+	}
 
 	private void jTextField14MouseClicked(java.awt.event.MouseEvent evt) {
-		jTextField14.setText("");
+		ztextField1.setText("");
 	}
 
 	private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
 	}
-	
-	
-
-	private void jButton45ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
 
 	private void jTextField15MouseClicked(java.awt.event.MouseEvent evt) {
-		// TODO add your handling code here:
+		ztextField3.setText("");
 	}
 
 	private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
 	}
 
-	private void jButton48ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jButton49ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jButton50ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jButton51ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jButton52ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jButton53ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jButton54ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jButton55ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jButton57ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jButton58ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jButton59ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jButton61ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jButton62ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jButton63ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jButton64ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
-	private void jButton66ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
-
 	private void jTextField18MouseClicked(java.awt.event.MouseEvent evt) {
-		// TODO add your handling code here:
+		ztextField2.setText("");
 	}
 
 	private void jTextField18ActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
 	}
-
-	
 
 	/////////////////////////////////// XML///////////////////////////////////////////////////////
 
@@ -2118,10 +2132,137 @@ String name = mtextField1.getText();
 				new String[] { "ID", "Title" }, new String[] { "id", "title" }, true);
 	}
 
-	// Variables declaration - do not modify
-	
-	
+	private Pair<Object[][], String[]> getObjectsAndTitle(Collection<?> collection, String filter) {
+		if (collection.isEmpty())
+			return null;
+
+		Object[][] objects = new Object[collection.size()][];
+		int i = 0;
+		for (Object object : collection) {
+			if (object instanceof ZooPublication) {
+				ZooPublication publication = (ZooPublication) object;
+				String authors = "";
+				for (Person author : publication.getAuthors()) {
+					authors += author.getName() + ", ";
+				}
+				if (authors.length() > 2)
+					authors = authors.substring(0, authors.length() - 2);
+
+				if ((publication.getTitle() != null && publication.getTitle().contains(filter))
+						|| (Integer.toString(publication.getYear()).contains(filter)) || (authors.contains(filter)))
+					objects[i++] = new Object[] { publication.getTitle(), publication.getYear(), authors };
+			} else if (object instanceof ZooConference) {
+				ZooConference conference = (ZooConference) object;
+				String editions = "";
+				for (ConferenceEdition edition : conference.getEditions()) {
+					editions += edition.getYear() + ", ";
+				}
+				if (editions.length() > 2)
+					editions = editions.substring(0, editions.length() - 2);
+
+				if ((conference.getName() != null && conference.getName().contains(filter))
+						|| (editions.contains(filter)))
+					objects[i++] = new Object[] { conference.getName(), editions };
+			} else if (object instanceof ZooConferenceEdition) {
+				ZooConferenceEdition conferenceEdition = (ZooConferenceEdition) object;
+				if ((conferenceEdition.getConference() != null && conferenceEdition.getConference().getName() != null
+						&& conferenceEdition.getConference().getName().contains(filter))
+						|| (Integer.toString(conferenceEdition.getYear()).contains(filter)))
+					objects[i++] = new Object[] { conferenceEdition.getConference().getName(),
+							conferenceEdition.getYear() };
+			} else if (object instanceof ZooPerson) {
+				ZooPerson person = (ZooPerson) object;
+				String publications = "";
+				for (Publication publication : person.getAuthoredPublications()) {
+					publications += publication.getTitle() + ", ";
+				}
+				for (Publication publication : person.getEditedPublications()) {
+					publications += publication.getTitle() + ", ";
+				}
+				if (publications.length() > 2)
+					publications = publications.substring(0, publications.length() - 2);
+
+				if ((person.getName() != null && person.getName().contains(filter)) || (publications.contains(filter)))
+					objects[i++] = new Object[] { person.getName(), publications };
+			} else if (object instanceof ZooPublisher) {
+				ZooPublisher publisher = (ZooPublisher) object;
+				String publications = "";
+				for (Publication publication : publisher.getPublications()) {
+					publications += publication.getTitle() + ", ";
+				}
+				if (publications.length() > 2)
+					publications = publications.substring(0, publications.length() - 2);
+
+				if ((publisher.getName() != null && publisher.getName().contains(filter))
+						|| (publications.contains(filter)))
+					objects[i++] = new Object[] { publisher.getName(), publications };
+			} else if (object instanceof ZooSeries) {
+				ZooSeries series = (ZooSeries) object;
+				String publications = "";
+				for (Publication publication : series.getPublications()) {
+					publications += publication.getTitle() + ", ";
+				}
+				if (publications.length() > 2)
+					publications = publications.substring(0, publications.length() - 2);
+
+				if ((series.getName() != null && series.getName().contains(filter)) || (publications.contains(filter)))
+					objects[i++] = new Object[] { series.getName(), publications };
+			}
+		}
+
+		String[] title = null;
+		if (collection.iterator().next() instanceof ZooPublication)
+			title = new String[] { "Title", "Year", "Authors" };
+		else if (collection.iterator().next() instanceof ZooConference)
+			title = new String[] { "Name", "Editions" };
+		else if (collection.iterator().next() instanceof ZooConferenceEdition)
+			title = new String[] { "Conference", "Edition" };
+		else if (collection.iterator().next() instanceof ZooPerson)
+			title = new String[] { "Name", "Publications" };
+		else if (collection.iterator().next() instanceof ZooPublisher)
+			title = new String[] { "Name", "Publications" };
+		else if (collection.iterator().next() instanceof ZooSeries)
+			title = new String[] { "Name", "Publications" };
+
+		return new Pair<Object[][], String[]>(objects, title);
+	}
+
+	private void openNewTable(DefaultTableModel model) {
+		////////////// Table/////////
+		JFrame frame = new JFrame("Result");
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+		JPanel panel = new JPanel();
+
+		panel.setBackground(new java.awt.Color(97, 212, 195));
+		panel.setForeground(new java.awt.Color(255, 255, 255));
+		panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+		JTable table = new JTable();
+		table.setModel(model);
+		table.setFont(new java.awt.Font("Century Gothic", 0, 12));
+		table.setGridColor(new java.awt.Color(97, 212, 195));
+		// table.setBackground(new java.awt.Color(97, 212, 195));
+		table.getTableHeader().setOpaque(false);
+		table.getTableHeader().setBackground(new java.awt.Color(97, 212, 195));
+		table.getTableHeader().setForeground(new java.awt.Color(255, 255, 255));
+		table.getTableHeader().setBorder(null);
+		table.getTableHeader().setFont(new java.awt.Font("Century Gothic", 0, 12));
+
+		Container container = getRootPane();
+
+		container.setLayout(new BorderLayout());
+		container.setBackground(new java.awt.Color(97, 212, 195));
+		container.add(table.getTableHeader(), BorderLayout.PAGE_START);
+		container.add(table, BorderLayout.CENTER);
+		frame.add(new JScrollPane(table));
+		frame.pack();
+		// frame.add(panel);
+		frame.setVisible(true);
+	}
+
 	private String invalidInput = "Invalid Input";
+	private String filter = "";
 
 	private javax.swing.JButton mSerButton;
 	private javax.swing.JButton mInProButton;
@@ -2167,28 +2308,28 @@ String name = mtextField1.getText();
 	private javax.swing.JButton xQuery13Button;
 	private javax.swing.JButton xQuery14Button;
 	private javax.swing.JButton xQuery12Button;
-	private javax.swing.JButton jButton45;
-	private javax.swing.JButton jButton46;
-	private javax.swing.JButton jButton47;
-	private javax.swing.JButton jButton48;
-	private javax.swing.JButton jButton49;
-	private javax.swing.JButton jButton50;
-	private javax.swing.JButton jButton51;
-	private javax.swing.JButton jButton52;
-	private javax.swing.JButton jButton53;
-	private javax.swing.JButton jButton54;
-	private javax.swing.JButton jButton55;
-	private javax.swing.JButton jButton56;
-	private javax.swing.JButton jButton57;
-	private javax.swing.JButton jButton58;
-	private javax.swing.JButton jButton59;
-	private javax.swing.JButton jButton60;
-	private javax.swing.JButton jButton61;
-	private javax.swing.JButton jButton62;
-	private javax.swing.JButton jButton63;
-	private javax.swing.JButton jButton64;
-	private javax.swing.JButton jButton65;
-	private javax.swing.JButton jButton66;
+	private javax.swing.JButton zQuery13Button;
+	private javax.swing.JButton zQuery5Button;
+	private javax.swing.JButton zQuery1Button;
+	private javax.swing.JButton zInProButton;
+	private javax.swing.JButton zSerButton;
+	private javax.swing.JButton zQuery2Button;
+	private javax.swing.JButton zQuery3Button;
+	private javax.swing.JButton zQuery11Button;
+	private javax.swing.JButton zConfButton;
+	private javax.swing.JButton zPublisherButton;
+	private javax.swing.JButton zQuery6Button;
+	private javax.swing.JButton zQuery8Button;
+	private javax.swing.JButton zQuery10Button;
+	private javax.swing.JButton zProButton;
+	private javax.swing.JButton zAuthEdButton;
+	private javax.swing.JButton zQuery12Button;
+	private javax.swing.JButton zQuery4Button;
+	private javax.swing.JButton zQuery7Button;
+	private javax.swing.JButton zConfEdButton;
+	private javax.swing.JButton zQuery14Button;
+	private javax.swing.JButton zPublicationButton;
+	private javax.swing.JButton zQuery9Button;
 
 	private javax.swing.JLabel resultLabel;
 	private javax.swing.JLabel jLabel2;
@@ -2217,9 +2358,9 @@ String name = mtextField1.getText();
 	private javax.swing.JTextField xtextField1;
 	private javax.swing.JTextField xtextField2;
 	private javax.swing.JTextField xtextField3;
-	private javax.swing.JTextField jTextField14;
-	private javax.swing.JTextField jTextField15;
-	private javax.swing.JTextField jTextField18;
+	private javax.swing.JTextField ztextField1;
+	private javax.swing.JTextField ztextField3;
+	private javax.swing.JTextField ztextField2;
 	private javax.swing.JTextField mtextField1;
 	private javax.swing.JTextField mtextField2;
 	// End of variables declaration
