@@ -82,14 +82,14 @@ public class WPanel extends javax.swing.JPanel {
 		xtextField3 = new javax.swing.JTextField();
 		xtextField2 = new javax.swing.JTextField();
 
-		jLabel7 = new javax.swing.JLabel();
+		zLabel = new javax.swing.JLabel();
 		jLabel9 = new javax.swing.JLabel();
 		jLabel6 = new javax.swing.JLabel();
 		jLabel5 = new javax.swing.JLabel();
-		jLabel4 = new javax.swing.JLabel();
+		xLabel = new javax.swing.JLabel();
 		jLabel2 = new javax.swing.JLabel();
 		jLabel3 = new javax.swing.JLabel();
-		resultLabel = new javax.swing.JLabel();
+		mLabel = new javax.swing.JLabel();
 
 		jSeparator15 = new javax.swing.JSeparator();
 		jSeparator16 = new javax.swing.JSeparator();
@@ -332,8 +332,8 @@ public class WPanel extends javax.swing.JPanel {
 			}
 		});
 
-		jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-		jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+		zLabel.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+		zLabel.setForeground(new java.awt.Color(255, 255, 255));
 
 		// ------------------------------------------------------------------------------------//
 
@@ -743,8 +743,8 @@ public class WPanel extends javax.swing.JPanel {
 		jLabel5.setText("XML");
 		jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 300, 47));
 
-		jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-		jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+		xLabel.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+		xLabel.setForeground(new java.awt.Color(255, 255, 255));
 
 		jSeparator17.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -828,7 +828,7 @@ public class WPanel extends javax.swing.JPanel {
 						.addGroup(jPanel2Layout.createSequentialGroup().addGap(140, 140, 140).addComponent(
 								zQuery14Button, javax.swing.GroupLayout.PREFERRED_SIZE, 150,
 								javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addGroup(jPanel2Layout.createSequentialGroup().addGap(10, 10, 10).addComponent(jLabel7,
+						.addGroup(jPanel2Layout.createSequentialGroup().addGap(10, 10, 10).addComponent(zLabel,
 								javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
 						.addGap(0, 0, Short.MAX_VALUE)));
 		jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -889,15 +889,15 @@ public class WPanel extends javax.swing.JPanel {
 						.addGap(1, 1, 1)
 						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addComponent(zQuery7Button).addComponent(zQuery14Button))
-						.addGap(1, 1, 1).addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 47,
+						.addGap(1, 1, 1).addComponent(zLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47,
 								javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addGap(16, 16, 16)));
 
 		add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 620));
 
-		resultLabel.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-		resultLabel.setForeground(new java.awt.Color(255, 255, 255));
-		add(resultLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 560, 270, 47));
+		mLabel.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+		mLabel.setForeground(new java.awt.Color(255, 255, 255));
+		add(mLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 560, 270, 47));
 		add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1057, 243, 300, 0));
 
 		jPanel4.setBackground(new java.awt.Color(36, 47, 65));
@@ -928,7 +928,7 @@ public class WPanel extends javax.swing.JPanel {
 		jPanel4.add(xQuery5Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 150, -1));
 		jPanel4.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 260, -1));
 		jPanel4.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 260, -1));
-		jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 270, 47));
+		jPanel4.add(xLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 270, 47));
 		jPanel4.add(xQuery13Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 500, 150, -1));
 		jPanel4.add(xQuery1Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 150, -1));
 		jPanel4.add(xtextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 260, 26));
@@ -1083,11 +1083,16 @@ public class WPanel extends javax.swing.JPanel {
 	}
 
 	private void mPublicationActionPerformed(ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.mongodb.Table(db2.publications, db2.publications.find().iterator(), "Publications",
 				new String[] { "ID", "Title" }, new String[] { "_id", "title" }, true);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mProActionPerformed(ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.mongodb.Table(db2.publications,
 				db2.publications.find(Filters.exists("publications")).iterator(), "Proceedings",
 				new String[] { "ID", "Title", "Year", "Publisher", "ISBN", "Editors", "Series", "Conference Edition",
@@ -1095,51 +1100,84 @@ public class WPanel extends javax.swing.JPanel {
 				new String[] { "_id", "title", "year", "publisher", "isbn", "editors", "series", "conferenceEdition",
 						"publications" },
 				true);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mSerActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.mongodb.Table(db2.series, db2.series.find().iterator(), "Series",
 				new String[] { "ID", "Name", "Publications" }, new String[] { "_id", "name", "publications" }, true);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mInProActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.mongodb.Table(db2.publications,
 				db2.publications.find(Filters.exists("proceedings")).iterator(), "Inproceedings",
 				new String[] { "ID", "Title", "Authors", "Proceedings" },
 				new String[] { "_id", "title", "authors", "proceedings" }, true);
+		
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mConfActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.mongodb.Table(db2.conferences, db2.conferences.find().iterator(), "Conferences",
 				new String[] { "ID", "Name", "Conference Edition" }, new String[] { "_id", "name", "editions" }, true);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mConfEdActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.mongodb.Table(db2.conferenceEditions, db2.conferenceEditions.find().iterator(),
 				"Conference Editions", new String[] { "ID", "Conference", "Year", "Proceedings" },
 				new String[] { "_id", "conference", "year", "proceedings" }, true);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mAuthEdActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.mongodb.Table(db2.persons, db2.persons.find().iterator(), "Authors/Editors",
 				new String[] { "ID", "Name", "Authored Publications", "Edited Publications" },
 				new String[] { "_id", "name", "authoredPublications", "editedPublications" }, true);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mPublisherActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.mongodb.Table(db2.publishers, db2.publishers.find().iterator(), "Publishers",
 				new String[] { "ID", "Name", "Publications" }, new String[] { "_id", "name", "publications" }, true);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mQuery1ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		String id = mtextField1.getText();
 
 		Iterator<Document> iterator = db2.publications.find(Filters.eq("_id", id)).iterator();
 		new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator, "Publication by ID",
 				new String[] { "ID", "Title" }, new String[] { "_id", "title" }, false);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mQuery2ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		String title = mtextField1.getText();
 		int beginOffset;
 		int endOffset;
@@ -1148,7 +1186,7 @@ public class WPanel extends javax.swing.JPanel {
 			beginOffset = Integer.parseInt(mtextField2.getText());
 			endOffset = Integer.parseInt(mtextField3.getText());
 		} catch (Exception e) {
-			resultLabel.setText(invalidInput);
+			mLabel.setText(invalidInput);
 			return;
 		}
 
@@ -1161,9 +1199,13 @@ public class WPanel extends javax.swing.JPanel {
 		new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator,
 				"Publications by title, begin-offset, end-offset", new String[] { "ID", "Title" },
 				new String[] { "_id", "title" }, false);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mQuery3ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		String title = mtextField1.getText();
 		int beginOffset;
 		int endOffset;
@@ -1172,7 +1214,7 @@ public class WPanel extends javax.swing.JPanel {
 			beginOffset = Integer.parseInt(mtextField2.getText());
 			endOffset = Integer.parseInt(mtextField3.getText());
 		} catch (Exception e) {
-			resultLabel.setText(invalidInput);
+			mLabel.setText(invalidInput);
 			return;
 		}
 
@@ -1184,9 +1226,13 @@ public class WPanel extends javax.swing.JPanel {
 		new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator,
 				"Publications by title, begin-offset, end-offset ordered by title", new String[] { "ID", "Title" },
 				new String[] { "_id", "title" }, false);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mQuery4ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		// String name = "Kevin D. Ashley";
 		String name = mtextField1.getText();
 
@@ -1204,9 +1250,13 @@ public class WPanel extends javax.swing.JPanel {
 
 		new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator, "Co-Authors",
 				new String[] { "Author", "Co-Authors" }, new String[] { "_id", "coAuthors" }, false);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mQuery5ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		String author1 = mtextField1.getText();
 		String author2 = mtextField2.getText();
 
@@ -1229,9 +1279,13 @@ public class WPanel extends javax.swing.JPanel {
 		new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator, "Co-Authors",
 				new String[] { "Author", "connectedAuthors", "authors", "author" },
 				new String[] { "_id", "connectedAuthors", "authors", "author" }, false);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mQuery6ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		AggregateIterable<Document> query = db2.publications
 				.aggregate(
 						Arrays.asList(
@@ -1246,14 +1300,18 @@ public class WPanel extends javax.swing.JPanel {
 		Document firstRes = query.first();
 
 		if (firstRes.containsKey("count")) {
-			this.resultLabel.setText(Double.toString(firstRes.getDouble("count")));
+			this.mLabel.setText(Double.toString(firstRes.getDouble("count")));
 		}
 
 		new ch.ethz.globis.isk.mongodb.Table(db2.publications, query.iterator(), "Global avg",
 				new String[] { "ID", "Count" }, new String[] { "_id", "count" }, true);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mQuery7ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		// Number of publications per year
 		String str1 = mtextField1.getText();
 		String str2 = mtextField2.getText();
@@ -1265,7 +1323,7 @@ public class WPanel extends javax.swing.JPanel {
 			yearFrom = Integer.parseInt(str1);
 			yearTo = Integer.parseInt(str2);
 		} catch (Exception e) {
-			resultLabel.setText(invalidInput);
+			mLabel.setText(invalidInput);
 			return;
 		}
 
@@ -1304,9 +1362,13 @@ public class WPanel extends javax.swing.JPanel {
 		new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator,
 				"Publications between " + yearFrom + " and " + yearTo,
 				new String[] { "Year", "Number of Publications" }, new String[] { "_id", "count" }, false);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mQuery8ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		String conferenceName = mtextField1.getText();
 
 		Iterator<Document> iterator = db2.conferences
@@ -1330,9 +1392,13 @@ public class WPanel extends javax.swing.JPanel {
 		new ch.ethz.globis.isk.mongodb.Table(db2.conferences, iterator,
 				"Number of Publications of conference " + conferenceName,
 				new String[] { "Name", "Number of publications" }, new String[] { "name", "count" }, false);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mQuery9ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		String conferenceName = mtextField1.getText();
 
 		Iterator<Document> iterator = db2.conferences
@@ -1368,9 +1434,13 @@ public class WPanel extends javax.swing.JPanel {
 		new ch.ethz.globis.isk.mongodb.Table(db2.conferences, iterator,
 				"Number of Authors/Editors of conference " + conferenceName,
 				new String[] { "Name", "Number of authors/editors" }, new String[] { "name", "count" }, false);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mQuery10ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		String conferenceName = mtextField1.getText();
 
 		Iterator<Document> iterator = db2.conferences
@@ -1403,9 +1473,13 @@ public class WPanel extends javax.swing.JPanel {
 		new ch.ethz.globis.isk.mongodb.Table(db2.conferences, iterator,
 				"Authors/Editors of conference " + conferenceName, new String[] { "Name", "Authors/Editors" },
 				new String[] { "name", "authors" }, false);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mQuery11ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		String conferenceName = mtextField1.getText();
 
 		Iterator<Document> iterator = db2.conferences
@@ -1437,13 +1511,20 @@ public class WPanel extends javax.swing.JPanel {
 
 		new ch.ethz.globis.isk.mongodb.Table(db2.conferences, iterator, "Publications of conference " + conferenceName,
 				new String[] { "Name", "Publications" }, new String[] { "name", "publications" }, false);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mQuery12ActionPerformed(java.awt.event.ActionEvent evt) {
-
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mQuery13ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		String name = mtextField1.getText();
 
 		// Exact matching could be used alternatively
@@ -1457,9 +1538,13 @@ public class WPanel extends javax.swing.JPanel {
 				"Publications containing " + name + " as last author",
 				new String[] { "ID", "Title", "Authors", "Pages", "Year" },
 				new String[] { "_id", "title", "authors", "pages", "year" }, true);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void mQuery14ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		int yearFrom;
 		int yearTo;
 
@@ -1467,7 +1552,7 @@ public class WPanel extends javax.swing.JPanel {
 			yearFrom = Integer.parseInt(mtextField1.getText());
 			yearTo = Integer.parseInt(mtextField2.getText());
 		} catch (Exception e) {
-			resultLabel.setText(invalidInput);
+			mLabel.setText(invalidInput);
 			return;
 		}
 
@@ -1489,7 +1574,14 @@ public class WPanel extends javax.swing.JPanel {
 				"Publishers of proceedings whose authors appear in inproceedings in range of years " + yearFrom + " to "
 						+ yearTo,
 				new String[] { "Publisher" }, new String[] { "_id" }, false);
+		
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		mLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
+	
+	
+	
 
 	private void jTextField11MouseClicked(java.awt.event.MouseEvent evt) {
 		// TODO add your handling code here:
@@ -1518,45 +1610,77 @@ public class WPanel extends javax.swing.JPanel {
 	// -----------------------------------------------------------------------------------------//
 
 	private void xSerActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
+		
 		new ch.ethz.globis.isk.xmldb.Table(db3, "series.xml", null, "Series", new String[] { "Name", "Publications" },
 				new String[] { "id", "pid" }, true);
+		
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
+		
 	}
 
 	private void xProActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.xmldb.Table(db3, "proceedings.xml", null, "Proceedings",
 				new String[] { "ID", "Title", "Conference", "Conference Edition", "Publisher", "Series", "ISBN",
 						"Editors" },
 				new String[] { "id", "title", "cid", "ceid", "publisher", "sid", "isbn", "editor" }, true);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void xInProActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.xmldb.Table(db3, "inproceedings.xml", null, "Inproceedings",
 				new String[] { "ID", "Title", "Proceedings", "Authors" },
 				new String[] { "id", "title", "pid", "author" }, true);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void xConfActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.xmldb.Table(db3, "conferences.xml", null, "Conferences",
 				new String[] { "Name", "Editions" }, new String[] { "id", "ceid" }, true);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void xConfEdActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.xmldb.Table(db3, "conferenceEditions.xml", null, "ConferenceEditions",
 				new String[] { "Year", "Conference", "Proceedings" }, new String[] { "id", "cid", "pid" }, true);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void xAuthEdActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.xmldb.Table(db3, "persons.xml", null, "Authors/Editors",
 				new String[] { "Name", "Authored Publications", "Edited Publications" },
 				new String[] { "id", "iid", "pid" }, true);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void xPublisherActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		new ch.ethz.globis.isk.xmldb.Table(db3, "publishers.xml", null, "Publishers",
 				new String[] { "Name", "Publications" }, new String[] { "id", "pid" }, true);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void xQuery1ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		String id = xtextField1.getText();
 		String input = "let $publications := doc('publications.xml')/root//* " + "return <root>{ "
 				+ "for $p in $publications " + "return " + "if (contains($p/id, '" + id + "')) " + "then $p "
@@ -1565,9 +1689,13 @@ public class WPanel extends javax.swing.JPanel {
 
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Publications by id", new String[] { "ID", "Title" },
 				new String[] { "id", "title" }, false);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void xQuery2ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		String id = xtextField1.getText();
 		int beginOffset = 0;
 		int endOffset = 0;
@@ -1584,9 +1712,13 @@ public class WPanel extends javax.swing.JPanel {
 
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Publications by id limited",
 				new String[] { "ID", "Title" }, new String[] { "id", "title" }, false);
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void xQuery3ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		String id = xtextField1.getText();
 		int beginOffset = 0;
 		int endOffset = 0;
@@ -1604,9 +1736,14 @@ public class WPanel extends javax.swing.JPanel {
 
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Publications by id sorted limited",
 				new String[] { "ID", "Title" }, new String[] { "id", "title" }, false);
+		
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void xQuery4ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		String authorId = xtextField1.getText();
 		String input = "let $author := doc('persons.xml')/root//*[id = '" + authorId + "'] " + "return <root>{ "
 				+ "<author>{ " + "$author/id, "
@@ -1617,9 +1754,14 @@ public class WPanel extends javax.swing.JPanel {
 
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Co-Authors", new String[] { "Author", "Co-Authors" },
 				new String[] { "id", "coAuthor" }, false);
+		
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void xQuery5ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		String author1Id = xtextField1.getText();
 		String author2Id = xtextField2.getText();
 		String input = "declare function local:shortestPath($authors, $target, $depth) { " + "if ($depth > 20) "
@@ -1634,16 +1776,26 @@ public class WPanel extends javax.swing.JPanel {
 
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Shortest Path", new String[] { "Shortest Path" },
 				new String[] { "shortestPath" }, false);
+		
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void xQuery6ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		Query query = db3.executeFile("query6.xq");
 
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Global average number of authors per publication",
 				new String[] { "Avg number of authors" }, new String[] { "avg" }, false);
+		
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void xQuery7ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		int beginYear = 0;
 		int endYear = 0;
 		try {
@@ -1673,9 +1825,14 @@ public class WPanel extends javax.swing.JPanel {
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
 				"Number of publications per year between " + beginStr + " and " + endStr + ".",
 				new String[] { "Year", "Number" }, new String[] { "year", "num" }, false);
+		
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void xQuery8ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		// e.g. "ICPP"
 		String confID = xtextField1.getText();
 
@@ -1688,9 +1845,14 @@ public class WPanel extends javax.swing.JPanel {
 
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Number of publications for conference " + confID + ". ",
 				new String[] { "Total" }, new String[] { "num" }, false);
+		
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void xQuery9ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		String confID = xtextField1.getText();
 
 		String input = "let $proceedings := doc('proceedings.xml')/root//*[cid/text() = '" + confID + "'], "
@@ -1702,9 +1864,14 @@ public class WPanel extends javax.swing.JPanel {
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
 				"Count of authors and editors of conference " + confID + ".", new String[] { "Count" },
 				new String[] { "count" }, false);
+		
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void xQuery10ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		// e.g. "CONPAR"
 		String confID = xtextField1.getText();
 
@@ -1732,9 +1899,14 @@ public class WPanel extends javax.swing.JPanel {
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
 				"Names of authors and editors of conference " + confID + ".", new String[] { "Name" },
 				new String[] { "id" }, false);
+		
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void xQuery11ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		String confID = xtextField1.getText();
 
 		String input = "let $proceedings := doc('proceedings.xml')/root//*[cid/text() = '" + confID + "'], "
@@ -1746,17 +1918,27 @@ public class WPanel extends javax.swing.JPanel {
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Inproceedings of conference " + confID + ".",
 				new String[] { "ID", "Title", "Proceedings", "Authors" },
 				new String[] { "id", "title", "pid", "author" }, false);
+		
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void xQuery12ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		Query query = db3.executeFile("query12.xq");
 
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
 				"Persons that are author in InProceedings and editor in appropriate Proceedings",
 				new String[] { "Name" }, new String[] { "id" }, false);
+		
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void xQuery13ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		String authorID = xtextField1.getText();
 
 		String input = "let $inproceedings :=doc('inproceedings.xml')/root/* " + "return <root>{ "
@@ -1769,9 +1951,14 @@ public class WPanel extends javax.swing.JPanel {
 				"Publications where author " + authorID + " appears as last author.",
 				new String[] { "ID", "Title", "Proceedings", "Authors" },
 				new String[] { "id", "title", "pid", "author" }, false);
+		
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void xQuery14ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		int beginYear = 0;
 		int endYear = 0;
 		try {
@@ -1798,14 +1985,19 @@ public class WPanel extends javax.swing.JPanel {
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
 				"Publishers of Proceedings whose authors appear in any InProceedings in range of years",
 				new String[] { "Publisher" }, new String[] { "id" }, false);
+		
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		xLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 	
 	
-	
+	// -----------------------------------------------------------------------------------------//
 	
 	
 
 	private void zInProActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		Pair<Object[][], String[]> objectsAndTitle = null;
 		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
 		try {
@@ -1830,9 +2022,14 @@ public class WPanel extends javax.swing.JPanel {
 		} finally {
 			db.close();
 		}
+		
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void zSerActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		Pair<Object[][], String[]> objectsAndTitle = null;
 		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
 		try {
@@ -1857,9 +2054,13 @@ public class WPanel extends javax.swing.JPanel {
 		} finally {
 			db.close();
 		}
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void zConfActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		Pair<Object[][], String[]> objectsAndTitle = null;
 		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
 		try {
@@ -1884,9 +2085,13 @@ public class WPanel extends javax.swing.JPanel {
 		} finally {
 			db.close();
 		}
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void zPublisherActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		Pair<Object[][], String[]> objectsAndTitle = null;
 		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
 		try {
@@ -1911,9 +2116,13 @@ public class WPanel extends javax.swing.JPanel {
 		} finally {
 			db.close();
 		}
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 	
 	private void zPublishcationActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		Pair<Object[][], String[]> objectsAndTitle = null;
 		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
 		try {
@@ -1938,9 +2147,13 @@ public class WPanel extends javax.swing.JPanel {
 		} finally {
 			db.close();
 		}
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void zProActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
     	Pair<Object[][], String[]> objectsAndTitle = null;
 		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
 		try {
@@ -1965,9 +2178,13 @@ public class WPanel extends javax.swing.JPanel {
 		} finally {
 			db.close();
 		}
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void zAuthEdActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		Pair<Object[][], String[]> objectsAndTitle = null;
 		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
 		try {
@@ -1992,9 +2209,13 @@ public class WPanel extends javax.swing.JPanel {
 		} finally {
 			db.close();
 		}
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void zConfEdActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		Pair<Object[][], String[]> objectsAndTitle = null;
 		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
 		try {
@@ -2019,21 +2240,34 @@ public class WPanel extends javax.swing.JPanel {
 		} finally {
 			db.close();
 		}
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void zQuery1ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void zQuery2ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void zQuery3ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void zQuery4ActionPerformed(java.awt.event.ActionEvent evt) {
+		long startTime = System.currentTimeMillis();
 		Pair<Object[][], String[]> objectsAndTitle = null;
 		ch.ethz.globis.isk.Zoo.Database db = new ch.ethz.globis.isk.Zoo.Database("database", false);
 		try {
@@ -2059,46 +2293,79 @@ public class WPanel extends javax.swing.JPanel {
 		} finally {
 			db.close();
 		}
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void zQuery5ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void zQuery6ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void zQuery7ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void zQuery8ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void zQuery9ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void zQuery10ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void zQuery11ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void zQuery12ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void zQuery13ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void zQuery14ActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		long startTime = System.currentTimeMillis();
+		long stopTime = System.currentTimeMillis();
+		long time = stopTime - startTime;
+		zLabel.setText("Time: " + Long.toString(time) + " ms");
 	}
 
 	private void jTextField14MouseClicked(java.awt.event.MouseEvent evt) {
@@ -2125,7 +2392,7 @@ public class WPanel extends javax.swing.JPanel {
 		// TODO add your handling code here:
 	}
 
-	/////////////////////////////////// XML///////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	private void xPublicationActionPerformed(ActionEvent evt) {
 		new ch.ethz.globis.isk.xmldb.Table(db3, "publications.xml", null, "Publications",
@@ -2331,13 +2598,13 @@ public class WPanel extends javax.swing.JPanel {
 	private javax.swing.JButton zPublicationButton;
 	private javax.swing.JButton zQuery9Button;
 
-	private javax.swing.JLabel resultLabel;
+	private javax.swing.JLabel mLabel;
 	private javax.swing.JLabel jLabel2;
 	private javax.swing.JLabel jLabel3;
-	private javax.swing.JLabel jLabel4;
+	private javax.swing.JLabel xLabel;
 	private javax.swing.JLabel jLabel5;
 	private javax.swing.JLabel jLabel6;
-	private javax.swing.JLabel jLabel7;
+	private javax.swing.JLabel zLabel;
 	private javax.swing.JLabel jLabel9;
 	private javax.swing.JPanel jPanel1;
 	private javax.swing.JPanel jPanel2;
