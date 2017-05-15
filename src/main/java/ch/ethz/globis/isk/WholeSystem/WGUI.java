@@ -14,9 +14,14 @@ import ch.ethz.globis.isk.Zoo.*;
 public class WGUI extends JFrame {
 	public static void main(String[] args) {
     	//final ch.ethz.globis.isk.Zoo.Database zoodb = new ch.ethz.globis.isk.Zoo.Database("database", false);
-    	final ch.ethz.globis.isk.mongodb.Database mongodb = new ch.ethz.globis.isk.mongodb.Database("MongoDb");
+		
+		System.out.println("---### DEBUG: Creating MoongoDB object... ");
+    	final ch.ethz.globis.isk.mongodb.Database mongodb = new ch.ethz.globis.isk.mongodb.Database("database");
+    	
+    	System.out.println("---### DEBUG: Creating xmldb object...");
     	final ch.ethz.globis.isk.xmldb.Database xmldb = new ch.ethz.globis.isk.xmldb.Database();
     //	zoodb.open();
+    	
     	mongodb.open();
     	System.out.println("MongoDb connected");
     	xmldb.open();
