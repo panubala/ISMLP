@@ -617,7 +617,7 @@ public class Panel extends JPanel {
 
     private void query8ButtonActionPerformed(ActionEvent evt) {
     	
-    	// e.g. "ICPP"
+    	// e.g. "CONCUR"
     	String confID = textField1.getText();
     	
     	

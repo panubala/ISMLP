@@ -195,7 +195,7 @@ public class MongoQueryExecutor {
     }
     
     // Compute the global average number of authors per publication
-    public double query6() {
+    public void query6() {
     	
 //    	dbpublications.aggregate([
 //    	                          {$project: {_id: 1, title: 1, authors: 1,
@@ -226,7 +226,7 @@ public class MongoQueryExecutor {
     	
     	if(firstRes.containsKey("count")){
 //    		this.resultLabel.setText(Double.toString(firstRes.getDouble("count")));
-    		return firstRes.getDouble("count");
+    		firstRes.getDouble("count");
     	}else{
     		throw new RuntimeException("Invalid Result. ");
     	}
@@ -536,6 +536,7 @@ public class MongoQueryExecutor {
     }
     
     // TODO: Missing code. ???
+    //  list of persons which were at the same time author in an InProceedings and editor in the appropriate Proceedings
     public void query12() {
     	
     	

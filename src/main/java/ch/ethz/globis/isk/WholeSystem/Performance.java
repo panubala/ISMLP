@@ -52,18 +52,128 @@ import ch.ethz.globis.isk.mongodb.MongoQueryExecutor;
 public class Performance {
 
 	private static ch.ethz.globis.isk.Zoo.Database dbZ;
-	
 	private static ch.ethz.globis.isk.mongodb.Database dbM;
-
 	private static ch.ethz.globis.isk.xmldb.Database dbX;
 
 	private static String filter = "";
 	
 	private static MongoQueryExecutor mongoQE;
+	private static BasexQueryExecutor basexQE;
 	
-	public static int ITERATIONS = 30;
+	public static int ITERATIONS = 100;
 
+	// TODO: Implement memory usage measurement
 	public static void main(String[] args) throws IOException {
+		
+		// TODO: Implement database creation for ZooDB
+		// Create new database objects for all three databases.
+		dbM = new ch.ethz.globis.isk.mongodb.Database("database");
+		dbX = new ch.ethz.globis.isk.xmldb.Database();
+				
+		// Open databases
+		dbM.open();
+		dbX.open();
+				
+		// Create MongoQueryExecutor class.
+		mongoQE = new MongoQueryExecutor(dbM);
+		basexQE = new BasexQueryExecutor(dbX);
+
+
+		
+		test1(30);
+		
+		dbM.close();
+		dbX.close();
+	}
+	
+
+	// -----SIMPLER QUERIES------------------------
+	
+	private static double test1(int iters){
+		
+		String id1 = "conf/icail/Berman89";	// Cutting legal loops
+		String id2 = "conf/hmi/Waxman87";	// Planting the seeds
+		String id3 = "conf/hmi/Lindberg87";// In praise of computing
+		
+		long startTime;
+		long stopTime;
+		long elapsedZoo, elapsedMongo, elapsedBasex;
+		long memZoo, memMongo, memXml;
+		
+		System.out.println("Starting query 1 measurement.");
+		
+		// ZooDB measurement
+		System.out.println("Measuring ZooDB...");
+		// TODO: Implement
+		System.out.println("Measured average time: " + 0.0 + " ms");
+		
+		
+		
+		// MongoDB measurement------------------------------------------------------------------
+		System.out.println("Measuring MongoDB...");
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			mongoQE.query1(id1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			mongoQE.query1(id2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			mongoQE.query1(id3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedMongo = (stopTime - startTime) / 3;
+		
+		System.out.println("Measured average time: " + elapsedMongo + " ms");
+		
+		
+		// BaseX measurement-------------------------------------------------------------------
+		System.out.println("Measuring BaseX...");
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			basexQE.query1(id1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			basexQE.query1(id2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			basexQE.query1(id3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedBasex = (stopTime - startTime) / 3;
+		
+		System.out.println("Measured average time: " + elapsedBasex + " ms");
+		
+		
+		return 0.0;
+		
+	}
+	
+	// --------------------------------------------
+	
+	public static void main_Old(String[] args) throws IOException {
 		
 		
 		// Create new MongoDB database object.
@@ -163,85 +273,6 @@ public class Performance {
 	}
 	
 	
-	// -----SIMPLER QUERIES------------------------
-	
-	private double test1(){
-		
-		String id1 = "conf/icail/Berman89";	// Cutting legal loops
-		String id2 = "conf/hmi/Waxman87";	// Planting the seeds
-		String id3 = "conf/hmi/Lindberg87";// In praise of computing
-		
-		long startTime;
-		long stopTime;
-		long elapsedZoo, elapsedMongo, elapsedXml;
-		
-		
-		// ZooDB measurement
-		// TODO: Implement
-		
-		// MongoDB measurement
-		
-		startTime = System.nanoTime();
-		
-		// Iteration 1
-		for(int i = 0; i < ITERATIONS; i++){
-			mongoQE.query1(id1);
-		}
-		
-		// Iteration 2
-		for(int i = 0; i < ITERATIONS; i++){
-			mongoQE.query1(id2);
-		}
-		
-		// Iteration 3
-		for(int i = 0; i < ITERATIONS; i++){
-			mongoQE.query1(id3);
-		}
-		
-		stopTime = System.nanoTime();
-		
-		elapsedMongo = stopTime - startTime;
-		
-		// BaseX measeurement
-		// TODO: implement
-		
-		
-
-//		ArrayList<Long> ztimeList = new ArrayList<>();
-//		ArrayList<Long> zmemoryList = new ArrayList<>();
-//
-//		long memory = 0;
-//
-//		for (int i = 0; i < 30; i++) {
-//			Runtime.getRuntime().freeMemory();
-//			long startTime = System.currentTimeMillis();
-//
-//			dbM.open();
-//			Iterator<Document> iterator = dbM.publications.find(Filters.eq("_id", id)).iterator();
-//			new ch.ethz.globis.isk.mongodb.Table(dbM.publications, iterator, "Publication by ID",
-//					new String[] { "ID", "Title" }, new String[] { "_id", "title" }, false);
-//			dbM.close();
-//
-//			long stopTime = System.currentTimeMillis();
-//			ztimeList.add(stopTime - startTime);
-//
-//			Runtime runtime = Runtime.getRuntime();
-//
-//			runtime.gc();
-//
-//			memory = (runtime.totalMemory() - runtime.freeMemory()) / 1024 / 1024;
-//			zmemoryList.add(memory);
-//
-//			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
-//		}
-//
-//		utils(ztimeList, zmemoryList, "mQuery1" + num);
-		
-		return 0.9;
-		
-	}
-	
-	// --------------------------------------------
 
 	private static void utils(ArrayList<Long> ztimeList, ArrayList<Long> zmemoryList, String name) throws IOException {
 
