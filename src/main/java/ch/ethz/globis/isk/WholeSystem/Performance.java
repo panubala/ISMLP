@@ -51,22 +51,78 @@ import ch.ethz.globis.isk.xmldb.*;
 public class Performance {
 
 	private static ch.ethz.globis.isk.mongodb.Database db2;
-	
+
 	private static ch.ethz.globis.isk.xmldb.Database db3;
 
 	private static String filter = "";
 
 	public static void main(String[] args) throws IOException {
-		
-		db2 = new ch.ethz.globis.isk.mongodb.Database("MongoDb"); 
-		
-		db3 = new ch.ethz.globis.isk.xmldb.Database();
-		
-//		zPublications("3");
-//		mPublications("3");
-		
-//		mProceedings("3");
 
+		db2 = new ch.ethz.globis.isk.mongodb.Database("MongoDb");
+
+		db3 = new ch.ethz.globis.isk.xmldb.Database();
+
+		// zPublications("3");
+		// mPublications("3");
+
+		// mProceedings("3");
+
+		// mInProceedings("3");
+		
+//		mQuery1("3", "conf/cscw/1986");
+		
+//		mQuery2("3", "International", 20, 30);
+		
+//		mQuery3("1", "IEEE International Conference on Acoustics", 10, 20);
+//		mQuery3("2", "CSCW", 76, 85);
+//		mQuery3("3", "IEEE", 11, 14);
+		
+//		mQuery4("1", "R. D. Purdy");
+//		mQuery4("2", "Alan Tyree");
+//		mQuery4("3", "G. Grdy");
+		
+		
+//		mQuery5("1", "R. D. Purdy", "Alan Tyree");
+//		mQuery5("2", "R. D. Purdy", "G. Grdy");
+//		mQuery5("3", "G. Grdy", "Alan Tyree");
+		
+//		mQuery6("1");
+//		mQuery6("2");
+//		mQuery6("3");
+		
+//		mQuery7("1", 1987, 1990);
+//		mQuery7("2", 1990, 1995);
+//		mQuery7("3", 1987, 1988);
+		
+//		mQuery8("1", "Concurrency 88: International Conference on Concurrency");
+//		mQuery8("2", "Proceedings of the 1990 International Conference on Parallel Processing, Volume 1");
+//		mQuery8("3", "Logic Colloquium");
+	
+//		mQuery9("1", "ICPP");
+//		mQuery9("2", "EACL");
+//		mQuery9("3", "ECHT");
+		
+//		mQuery10("1", "ICPP");
+//		mQuery10("2", "EACL");
+//		mQuery10("3", "ECHT");
+		
+//		mQuery11("1", "ICPP");
+//		mQuery11("2", "EACL");
+//		mQuery11("3", "ECHT");
+		
+//		mQuery12("1");
+//		mQuery12("2");
+//		mQuery12("3");
+	
+		
+//		mQuery13("1", "R. D. Purdy");
+//		mQuery13("2", "Alan Tyree");
+//		mQuery13("3", "G. Grdy");
+		
+//		mQuery14("1", 1987, 1988);
+//		mQuery14("2", 1998, 2017);
+//		mQuery14("3", 1987, 2017);
+		
 	}
 
 	private static void utils(ArrayList<Long> ztimeList, ArrayList<Long> zmemoryList, String name) throws IOException {
@@ -140,7 +196,7 @@ public class Performance {
 	}
 
 	private static void mPublications(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -149,14 +205,14 @@ public class Performance {
 		for (int i = 0; i < 30; i++) {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
-			
+
 			db2.open();
 
 			new ch.ethz.globis.isk.mongodb.Table(db2.publications, db2.publications.find().iterator(), "Publications",
 					new String[] { "ID", "Title" }, new String[] { "_id", "title" }, true);
-			
+
 			db2.close();
-			
+
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
 
@@ -170,13 +226,12 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-	
 		utils(ztimeList, zmemoryList, "mPublications" + num);
 
 	}
 
 	private static void xPublications(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -202,7 +257,6 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
@@ -210,7 +264,7 @@ public class Performance {
 	// Proceedings
 
 	private static void zProceedings(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -220,7 +274,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -235,13 +289,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zProceedings" + num);
 
 	}
 
 	private static void mProceedings(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -253,10 +307,10 @@ public class Performance {
 			db2.open();
 			new ch.ethz.globis.isk.mongodb.Table(db2.publications,
 					db2.publications.find(Filters.exists("publications")).iterator(), "Proceedings",
-					new String[] { "ID", "Title", "Year", "Publisher", "ISBN", "Editors", "Series", "Conference Edition",
-							"Publications" },
-					new String[] { "_id", "title", "year", "publisher", "isbn", "editors", "series", "conferenceEdition",
-							"publications" },
+					new String[] { "ID", "Title", "Year", "Publisher", "ISBN", "Editors", "Series",
+							"Conference Edition", "Publications" },
+					new String[] { "_id", "title", "year", "publisher", "isbn", "editors", "series",
+							"conferenceEdition", "publications" },
 					true);
 			db2.close();
 			long stopTime = System.currentTimeMillis();
@@ -272,13 +326,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "mProceedings" + num);
 
 	}
 
 	private static void xProceedings(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -288,7 +342,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -303,7 +357,6 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		
 		utils(ztimeList, zmemoryList, "xProceedings" + num);
 
 	}
@@ -311,7 +364,7 @@ public class Performance {
 	// InProceedings
 
 	private static void zInProceedings(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -321,7 +374,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -341,7 +394,7 @@ public class Performance {
 	}
 
 	private static void mInProceedings(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -350,9 +403,13 @@ public class Performance {
 		for (int i = 0; i < 30; i++) {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
-			
+
 			db2.open();
-			//TODO
+			new ch.ethz.globis.isk.mongodb.Table(db2.publications,
+					db2.publications.find(Filters.exists("proceedings")).iterator(), "Inproceedings",
+					new String[] { "ID", "Title", "Authors", "Proceedings" },
+					new String[] { "_id", "title", "authors", "proceedings" }, true);
+
 			db2.close();
 
 			long stopTime = System.currentTimeMillis();
@@ -368,13 +425,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "mInProceedings" + num);
 
 	}
 
 	private static void xInProceedings(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -384,7 +441,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -399,7 +456,7 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
@@ -407,7 +464,7 @@ public class Performance {
 	// Conferences
 
 	private static void zConference(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -417,7 +474,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -432,13 +489,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	private static void mConference(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -449,7 +506,7 @@ public class Performance {
 			long startTime = System.currentTimeMillis();
 
 			db2.open();
-			//TODO
+			// TODO
 			db2.close();
 
 			long stopTime = System.currentTimeMillis();
@@ -465,13 +522,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	private static void xConference(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -481,7 +538,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -496,7 +553,7 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
@@ -504,7 +561,7 @@ public class Performance {
 	// Conference Edtions
 
 	private static void zConferenceEdition(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -514,7 +571,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -529,13 +586,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	private static void mConferenceEdition(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -546,7 +603,7 @@ public class Performance {
 			long startTime = System.currentTimeMillis();
 
 			db2.open();
-			//TODO
+			// TODO
 			db2.close();
 
 			long stopTime = System.currentTimeMillis();
@@ -562,13 +619,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	private static void xConferenceEdition(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -578,7 +635,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -593,7 +650,7 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
@@ -601,7 +658,7 @@ public class Performance {
 	// Authors
 
 	private static void zAuthors(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -611,7 +668,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -626,13 +683,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	private static void mAuthors(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -643,7 +700,7 @@ public class Performance {
 			long startTime = System.currentTimeMillis();
 
 			db2.open();
-			//TODO
+			// TODO
 			db2.close();
 
 			long stopTime = System.currentTimeMillis();
@@ -659,13 +716,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	private static void xAuthors(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -675,7 +732,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -690,7 +747,7 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
@@ -698,7 +755,7 @@ public class Performance {
 	// Publishers
 
 	private static void zPublishers(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -708,7 +765,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -723,13 +780,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	private static void mPublishers(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -740,7 +797,7 @@ public class Performance {
 			long startTime = System.currentTimeMillis();
 
 			db2.open();
-			//TODO
+			// TODO
 			db2.close();
 
 			long stopTime = System.currentTimeMillis();
@@ -756,13 +813,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	private static void xPublishers(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -772,7 +829,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -787,7 +844,7 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
@@ -795,7 +852,7 @@ public class Performance {
 	// Series
 
 	private static void zSeries(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -805,7 +862,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -820,13 +877,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	private static void mSeries(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -837,7 +894,7 @@ public class Performance {
 			long startTime = System.currentTimeMillis();
 
 			db2.open();
-			//TODO
+			// TODO
 			db2.close();
 
 			long stopTime = System.currentTimeMillis();
@@ -853,13 +910,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	private static void xSeries(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -869,7 +926,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -884,7 +941,7 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
@@ -892,7 +949,7 @@ public class Performance {
 	// Query 1
 
 	private static void zQuery1(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -902,7 +959,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -917,13 +974,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
-	private static void mQuery1(String num) throws IOException {
-		
+	private static void mQuery1(String num, String id) throws IOException {
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -934,7 +991,9 @@ public class Performance {
 			long startTime = System.currentTimeMillis();
 
 			db2.open();
-			//TODO
+			Iterator<Document> iterator = db2.publications.find(Filters.eq("_id", id)).iterator();
+			new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator, "Publication by ID",
+					new String[] { "ID", "Title" }, new String[] { "_id", "title" }, false);
 			db2.close();
 
 			long stopTime = System.currentTimeMillis();
@@ -950,13 +1009,12 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "mQuery1" + num);
 
 	}
 
 	private static void xQuery1(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -966,7 +1024,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -981,7 +1039,7 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
@@ -989,7 +1047,7 @@ public class Performance {
 	// Query 2
 
 	private static void zQuery2(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -999,7 +1057,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1014,13 +1072,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
-	private static void mQuery2(String num) throws IOException {
-		
+	private static void mQuery2(String num, String title, int beginOffset, int endOffset) throws IOException {
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1031,7 +1089,13 @@ public class Performance {
 			long startTime = System.currentTimeMillis();
 
 			db2.open();
-			//TODO
+			Iterator<Document> iterator = db2.publications.aggregate(Arrays.asList(
+					new Document("$match", new Document("title", new Document("$regex", ".*" + title + ".*i"))),
+					new Document("$skip", beginOffset), new Document("$limit", endOffset - beginOffset))).iterator();
+
+			new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator,
+					"Publications by title, begin-offset, end-offset", new String[] { "ID", "Title" },
+					new String[] { "_id", "title" }, false);
 			db2.close();
 
 			long stopTime = System.currentTimeMillis();
@@ -1047,13 +1111,12 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "mQuery2" + num);
 
 	}
 
 	private static void xQuery2(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1063,7 +1126,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1078,7 +1141,7 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
@@ -1086,7 +1149,7 @@ public class Performance {
 	// Query 3
 
 	private static void zQuery3(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1096,7 +1159,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1111,13 +1174,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
-	private static void mQuery3(String num) throws IOException {
-		
+	private static void mQuery3(String num, String title,int beginOffset,int endOffset) throws IOException {
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1128,7 +1191,18 @@ public class Performance {
 			long startTime = System.currentTimeMillis();
 
 			db2.open();
-			//TODO
+			
+
+		
+
+			Iterator<Document> iterator = db2.publications.aggregate(Arrays.asList(
+					new Document("$match", new Document("title", new Document("$regex", ".*" + title + ".*i"))),
+					new Document("$skip", beginOffset), new Document("$limit", endOffset - beginOffset),
+					new Document("$sort", new Document("title", 1)))).iterator();
+
+			new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator,
+					"Publications by title, begin-offset, end-offset ordered by title", new String[] { "ID", "Title" },
+					new String[] { "_id", "title" }, false);
 			db2.close();
 
 			long stopTime = System.currentTimeMillis();
@@ -1144,13 +1218,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		// TODO
+		utils(ztimeList, zmemoryList, "mQuery3" + num);
 
 	}
 
 	private static void xQuery3(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1160,7 +1234,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1175,7 +1249,7 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
@@ -1183,7 +1257,7 @@ public class Performance {
 	// Query 4
 
 	private static void zQuery4(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1193,7 +1267,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1208,13 +1282,12 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "zQuery4" + num);
 
 	}
 
-	private static void mQuery4(String num) throws IOException {
-		
+	private static void mQuery4(String num, String name) throws IOException {
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1225,7 +1298,22 @@ public class Performance {
 			long startTime = System.currentTimeMillis();
 
 			db2.open();
-			//TODO
+			
+
+			Iterator<Document> iterator = db2.publications
+					.aggregate(
+							Arrays.asList(new Document("$match", new Document("authors", name)),
+									new Document("$project",
+											new Document("author", name).append("coAuthors", new Document("$filter",
+													new Document("input", "$authors").append("as", "author").append("cond",
+															new Document("$ne", Arrays.asList("$$author", name)))))),
+									new Document("$unwind", "$coAuthors"),
+									new Document("$group", new Document("_id", "$author").append("coAuthors",
+											new Document("$addToSet", "$coAuthors")))))
+					.iterator();
+
+			new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator, "Co-Authors",
+					new String[] { "Author", "Co-Authors" }, new String[] { "_id", "coAuthors" }, false);
 			db2.close();
 
 			long stopTime = System.currentTimeMillis();
@@ -1241,13 +1329,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		// TODO
+		utils(ztimeList, zmemoryList, "mQuery4" + num);
 
 	}
 
 	private static void xQuery4(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1257,7 +1345,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1272,14 +1360,14 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	// Query 5
 	private static void zQuery5(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1289,7 +1377,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1304,13 +1392,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
+		// TODO
 		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
-	private static void mQuery5(String num) throws IOException {
-		
+	private static void mQuery5(String num, String author1, String author2) throws IOException {
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1321,7 +1409,27 @@ public class Performance {
 			long startTime = System.currentTimeMillis();
 
 			db2.open();
-			//TODO
+			
+
+			Iterator<Document> iterator = db2.publications.aggregate(Arrays.asList(
+					new Document("$match", new Document("$or",
+							Arrays.asList(new Document("authors", author1), new Document("authors", author2)))),
+					/*
+					 * new Document("$lookup", new Document("from", "persons")
+					 * .append("localField", "authors") .append("foreignField",
+					 * "name") .append("as", "author") ),
+					 */
+					new Document("$unwind", "$authors"),
+
+					new Document("$graphLookup",
+							new Document("from", "$$ROOT").append("startWith", "$authors")
+									.append("connectFromField", "authors").append("connectToField", "authors").append("as",
+											"connectedAuthors"))))
+					.iterator();
+
+			new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator, "Co-Authors",
+					new String[] { "Author", "connectedAuthors", "authors", "author" },
+					new String[] { "_id", "connectedAuthors", "authors", "author" }, false);
 			db2.close();
 
 			long stopTime = System.currentTimeMillis();
@@ -1337,13 +1445,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		// TODO
+		utils(ztimeList, zmemoryList, "mQuery5" + num);
 
 	}
 
 	private static void xQuery5(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1353,7 +1461,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1368,15 +1476,15 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	// Query 6
 
 	private static void zQuery6(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1386,7 +1494,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1401,13 +1509,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	private static void mQuery6(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1418,7 +1526,23 @@ public class Performance {
 			long startTime = System.currentTimeMillis();
 
 			db2.open();
-			//TODO
+			AggregateIterable<Document> query = db2.publications
+					.aggregate(
+							Arrays.asList(
+									new Document("$project",
+											new Document("_id", 1).append("title", 1).append("authors", 1).append("total",
+													new Document("$size",
+															new Document("$ifNull",
+																	Arrays.asList("$authors", Arrays.asList()))))),
+									new Document("$group", new Document("_id", "average").append("count",
+											new Document("$avg", "$total")))));
+
+			Document firstRes = query.first();
+
+			
+
+			new ch.ethz.globis.isk.mongodb.Table(db2.publications, query.iterator(), "Global avg",
+					new String[] { "ID", "Count" }, new String[] { "_id", "count" }, true);
 			db2.close();
 
 			long stopTime = System.currentTimeMillis();
@@ -1434,13 +1558,12 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		utils(ztimeList, zmemoryList, "mQuery6" + num);
 
 	}
 
 	private static void xQuery6(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1450,7 +1573,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1465,15 +1588,15 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	// Query 7
 
 	private static void zQuery7(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1483,7 +1606,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1498,13 +1621,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
-	private static void mQuery7(String num) throws IOException {
-		
+	private static void mQuery7(String num, int yearFrom,int yearTo ) throws IOException {
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1515,7 +1638,45 @@ public class Performance {
 			long startTime = System.currentTimeMillis();
 
 			db2.open();
-			//TODO
+		
+
+			
+
+			if (yearFrom > yearTo) {
+				int temp = yearTo;
+				yearTo = yearFrom;
+				yearFrom = temp;
+			}
+
+			/*
+			 * String expr = "(this['year'] != undefined && this['year'] >= " +
+			 * yearFrom + " && this['year'] <= " + yearTo + ")";
+			 * 
+			 * long result = db.publications.count(Filters.where(expr));
+			 * resultLabel.setText(Long.toString(result));
+			 * 
+			 * new Table(db.publications,
+			 * db.publications.find(Filters.where(expr)).iterator(),
+			 * "Publications between " + yearFrom + " and " + yearTo, new String[]
+			 * {"Title", "Year"}, new String[] {"title", "year"}, false);
+			 */
+
+			Iterator<Document> iterator = db2.publications.aggregate(Arrays.asList(
+					new Document("$project",
+							new Document("_id", "$_id").append("year", "$year")
+									.append("gte", new Document("$gte", Arrays.asList("$year", yearFrom))).append("lte",
+											new Document("$lte", Arrays.asList("$year", yearTo)))),
+					new Document("$match",
+							new Document("$and", Arrays.asList(new Document("gte", true), new Document("lte", true)))),
+					new Document("$group",
+							new Document("_id", "$_id").append("count", new Document("$sum", 1)).append("year",
+									new Document("$first", "$year"))),
+					new Document("$group", new Document("_id", "$year").append("count", new Document("$sum", "$count"))),
+					new Document("$sort", new Document("_id", 1)))).iterator();
+
+			new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator,
+					"Publications between " + yearFrom + " and " + yearTo,
+					new String[] { "Year", "Number of Publications" }, new String[] { "_id", "count" }, false);
 			db2.close();
 
 			long stopTime = System.currentTimeMillis();
@@ -1531,13 +1692,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "mQuery7" + num);
 
 	}
 
 	private static void xQuery7(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1547,7 +1708,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1562,15 +1723,15 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	// Query 8
 
 	private static void zQuery8(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1580,7 +1741,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1595,13 +1756,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
-	private static void mQuery8(String num) throws IOException {
-		
+	private static void mQuery8(String num, String conferenceName) throws IOException {
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1612,7 +1773,29 @@ public class Performance {
 			long startTime = System.currentTimeMillis();
 
 			db2.open();
-			//TODO
+			
+
+			Iterator<Document> iterator = db2.conferences
+					.aggregate(Arrays.asList(new Document("$match", new Document("name", conferenceName)),
+							new Document("$lookup",
+									new Document("from", "conferenceEditions").append("localField", "editions")
+											.append("foreignField", "_id").append("as", "editions")),
+							new Document("$unwind", "$editions"),
+
+							new Document("$lookup",
+									new Document("from", "publications").append("localField", "editions.proceedings")
+											.append("foreignField", "_id").append("as", "proceedings")),
+							new Document("$unwind", "$proceedings"),
+
+							new Document("$group",
+									new Document("_id", null).append("name", new Document("$first", "$name")).append(
+											"count", new Document("$sum",
+													new Document("$size", "$proceedings.publications"))))))
+					.iterator();
+
+			new ch.ethz.globis.isk.mongodb.Table(db2.conferences, iterator,
+					"Number of Publications of conference " + conferenceName,
+					new String[] { "Name", "Number of publications" }, new String[] { "name", "count" }, false);
 			db2.close();
 
 			long stopTime = System.currentTimeMillis();
@@ -1628,13 +1811,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		
+		utils(ztimeList, zmemoryList, "mQuery8" + num);
 
 	}
 
 	private static void xQuery8(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1644,7 +1827,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1659,15 +1842,15 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	// Query 9
 
 	private static void zQuery9(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1677,7 +1860,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1692,13 +1875,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
-	private static void mQuery9(String num) throws IOException {
-		
+	private static void mQuery9(String num, String conferenceName) throws IOException {
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1709,7 +1892,41 @@ public class Performance {
 			long startTime = System.currentTimeMillis();
 
 			db2.open();
-			//TODO
+			
+
+			Iterator<Document> iterator = db2.conferences
+					.aggregate(Arrays.asList(new Document("$match", new Document("name", conferenceName)),
+							new Document("$lookup",
+									new Document("from", "conferenceEditions").append("localField", "editions")
+											.append("foreignField", "_id").append("as", "editions")),
+							new Document("$unwind", "$editions"),
+
+							new Document("$lookup",
+									new Document("from", "publications").append("localField", "editions.proceedings")
+											.append("foreignField", "_id").append("as", "proceedings")),
+							new Document("$unwind", "$proceedings"),
+
+							new Document("$lookup",
+									new Document("from", "publications").append("localField", "proceedings.publications")
+											.append("foreignField", "_id").append("as", "inProceedings")),
+							new Document("$unwind", "$inProceedings"),
+
+							new Document("$group",
+									new Document("_id", null).append("name", new Document("$first", "$name"))
+											.append("editors", new Document("$addToSet", "$proceedings.editors")).append(
+													"authors", new Document("$addToSet", "$inProceedings.authors"))),
+
+							new Document("$project", new Document("name", "$name").append("authors",
+									new Document("$setUnion", Arrays.asList("$authors", "$editors")))),
+
+							new Document("$group",
+									new Document("_id", null).append("name", new Document("$first", "$name"))
+											.append("count", new Document("$sum", new Document("$size", "$authors"))))))
+					.iterator();
+
+			new ch.ethz.globis.isk.mongodb.Table(db2.conferences, iterator,
+					"Number of Authors/Editors of conference " + conferenceName,
+					new String[] { "Name", "Number of authors/editors" }, new String[] { "name", "count" }, false);
 			db2.close();
 
 			long stopTime = System.currentTimeMillis();
@@ -1725,13 +1942,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		
+		utils(ztimeList, zmemoryList, "mQuery9" + num);
 
 	}
 
 	private static void xQuery9(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1741,7 +1958,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1756,15 +1973,15 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	// Query 10
 
 	private static void zQuery10(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1774,7 +1991,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1789,13 +2006,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
-	private static void mQuery10(String num) throws IOException {
-		
+	private static void mQuery10(String num, String conferenceName) throws IOException {
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1806,7 +2023,38 @@ public class Performance {
 			long startTime = System.currentTimeMillis();
 
 			db2.open();
-			//TODO
+			
+
+			Iterator<Document> iterator = db2.conferences
+					.aggregate(Arrays.asList(new Document("$match", new Document("name", conferenceName)),
+							new Document("$lookup",
+									new Document("from", "conferenceEditions").append("localField", "editions")
+											.append("foreignField", "_id").append("as", "editions")),
+							new Document("$unwind", "$editions"),
+
+							new Document("$lookup",
+									new Document("from", "publications").append("localField", "editions.proceedings")
+											.append("foreignField", "_id").append("as", "proceedings")),
+							new Document("$unwind", "$proceedings"),
+
+							new Document("$lookup",
+									new Document("from", "publications").append("localField", "proceedings.publications")
+											.append("foreignField", "_id").append("as", "inProceedings")),
+							new Document("$unwind", "$inProceedings"),
+
+							new Document("$group",
+									new Document("_id", null).append("name", new Document("$first", "$name"))
+											.append("authors", new Document("$addToSet", "$proceedings.editors")).append(
+													"authors", new Document("$addToSet", "$inProceedings.authors"))),
+							new Document("$unwind", "$authors"), new Document("$unwind", "$authors"),
+
+							new Document("$group", new Document("_id", null).append("name", new Document("$first", "$name"))
+									.append("authors", new Document("$addToSet", "$authors")))))
+					.iterator();
+
+			new ch.ethz.globis.isk.mongodb.Table(db2.conferences, iterator,
+					"Authors/Editors of conference " + conferenceName, new String[] { "Name", "Authors/Editors" },
+					new String[] { "name", "authors" }, false);
 			db2.close();
 
 			long stopTime = System.currentTimeMillis();
@@ -1822,13 +2070,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "mQuery10" + num);
 
 	}
 
 	private static void xQuery10(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1838,7 +2086,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1853,15 +2101,15 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	// Query 11
 
 	private static void zQuery11(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1871,7 +2119,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1886,13 +2134,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
-	private static void mQuery11(String num) throws IOException {
-		
+	private static void mQuery11(String num, String conferenceName) throws IOException {
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1903,7 +2151,37 @@ public class Performance {
 			long startTime = System.currentTimeMillis();
 
 			db2.open();
-			//TODO
+			
+
+			Iterator<Document> iterator = db2.conferences
+					.aggregate(Arrays.asList(new Document("$match", new Document("name", conferenceName)),
+							new Document("$lookup",
+									new Document("from", "conferenceEditions").append("localField", "editions")
+											.append("foreignField", "_id").append("as", "editions")),
+							new Document("$unwind", "$editions"),
+
+							new Document("$lookup",
+									new Document("from", "publications").append("localField", "editions.proceedings")
+											.append("foreignField", "_id").append("as", "proceedings")),
+							new Document("$unwind", "$proceedings"),
+
+							new Document("$lookup",
+									new Document("from", "publications").append("localField", "proceedings.publications")
+											.append("foreignField", "_id").append("as", "inProceedings")),
+							new Document("$unwind", "$inProceedings"),
+
+							new Document("$group",
+									new Document("_id", null).append("name", new Document("$first", "$name"))
+											.append("inProceedings", new Document("$addToSet", "$inProceedings._id"))
+											.append("proceedings", new Document("$addToSet", "$proceedings._id"))),
+
+							new Document("$project",
+									new Document("name", "$name").append("publications",
+											new Document("$setUnion", Arrays.asList("$inProceedings", "$proceedings"))))))
+					.iterator();
+
+			new ch.ethz.globis.isk.mongodb.Table(db2.conferences, iterator, "Publications of conference " + conferenceName,
+					new String[] { "Name", "Publications" }, new String[] { "name", "publications" }, false);
 			db2.close();
 
 			long stopTime = System.currentTimeMillis();
@@ -1919,13 +2197,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		
+		utils(ztimeList, zmemoryList, "mQuery11" + num);
 
 	}
 
 	private static void xQuery11(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1935,7 +2213,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1950,15 +2228,15 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	// Query 12
 
 	private static void zQuery12(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -1968,7 +2246,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1983,13 +2261,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	private static void mQuery12(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -2000,7 +2278,6 @@ public class Performance {
 			long startTime = System.currentTimeMillis();
 
 			db2.open();
-			//TODO
 			db2.close();
 
 			long stopTime = System.currentTimeMillis();
@@ -2016,13 +2293,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		
+		utils(ztimeList, zmemoryList, "mQuery12" + num);
 
 	}
 
 	private static void xQuery12(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -2032,7 +2309,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2047,15 +2324,15 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	// Query 13
 
 	private static void zQuery13(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -2065,7 +2342,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2080,13 +2357,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
-	private static void mQuery13(String num) throws IOException {
-		
+	private static void mQuery13(String num, String name) throws IOException {
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -2097,7 +2374,19 @@ public class Performance {
 			long startTime = System.currentTimeMillis();
 
 			db2.open();
-			//TODO
+			
+
+			// Exact matching could be used alternatively
+			// String expr = "this.authors != undefined &&
+			// this.authors[this.authors.length - 1] === '" + name + "'";
+			String expr = "this.authors != undefined && this.authors[this.authors.length - 1].includes('" + name + "')";
+
+			Iterator<Document> iterator = db2.publications.find(Filters.where(expr)).iterator();
+
+			new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator,
+					"Publications containing " + name + " as last author",
+					new String[] { "ID", "Title", "Authors", "Pages", "Year" },
+					new String[] { "_id", "title", "authors", "pages", "year" }, true);
 			db2.close();
 
 			long stopTime = System.currentTimeMillis();
@@ -2113,13 +2402,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "mQuery13" + num);
 
 	}
 
 	private static void xQuery13(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -2129,7 +2418,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2144,15 +2433,15 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
 	// Query 14
 
 	private static void zQuery14(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -2162,7 +2451,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2177,13 +2466,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
-	private static void mQuery14(String num) throws IOException {
-		
+	private static void mQuery14(String num, int yearFrom, int yearTo) throws IOException {
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -2194,7 +2483,26 @@ public class Performance {
 			long startTime = System.currentTimeMillis();
 
 			db2.open();
-			//TODO
+			
+
+			Iterator<Document> iterator = db2.publications.aggregate(Arrays.asList(
+					new Document("$project",
+							new Document("_id", "$_id").append("publisher", "$publisher").append("authors", "$authors")
+									.append("editors", "$editors").append("year", "$year")
+									.append("gte", new Document("$gte", Arrays.asList("$year", yearFrom)))
+									.append("lte", new Document("$lte", Arrays.asList("$year", yearTo)))),
+					new Document("$match",
+							new Document("$and", Arrays.asList(new Document("gte", true), new Document("lte", true)))),
+
+					new Document("$lookup", new Document("from", "$$ROOT").append("localField", "authors")
+							.append("foreignField", "editors").append("as", "proceedings")),
+
+					new Document("$group", new Document("_id", "$publisher")))).iterator();
+
+			new ch.ethz.globis.isk.mongodb.Table(db2.publishers, iterator,
+					"Publishers of proceedings whose authors appear in inproceedings in range of years " + yearFrom + " to "
+							+ yearTo,
+					new String[] { "Publisher" }, new String[] { "_id" }, false);
 			db2.close();
 
 			long stopTime = System.currentTimeMillis();
@@ -2210,13 +2518,13 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		
+		utils(ztimeList, zmemoryList, "mQuery14" + num);
 
 	}
 
 	private static void xQuery14(String num) throws IOException {
-		
+
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
 
@@ -2226,7 +2534,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			//TODO
+			// TODO
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2241,8 +2549,8 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		//TODO
-		utils(ztimeList, zmemoryList, "zPublications" +num);
+		// TODO
+		utils(ztimeList, zmemoryList, "zPublications" + num);
 
 	}
 
