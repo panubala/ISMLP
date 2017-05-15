@@ -2432,6 +2432,7 @@ public class WPanel extends javax.swing.JPanel {
 				+ "return $p/publisher " + "return <root>{ " + "for $publisher in distinct-values($publishers) "
 				+ "return <publisher><id>{$publisher}</id></publisher> " + "}</root> ";
 
+		
 		Query query = db3.execute(input);
 
 		new ch.ethz.globis.isk.xmldb.Table(db3, null, query,

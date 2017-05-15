@@ -58,7 +58,7 @@ public class Performance {
 
 	public static void main(String[] args) throws IOException {
 
-		db2 = new ch.ethz.globis.isk.mongodb.Database("MongoDb");
+		db2 = new ch.ethz.globis.isk.mongodb.Database("database");
 
 		db3 = new ch.ethz.globis.isk.xmldb.Database();
 
@@ -71,32 +71,50 @@ public class Performance {
 		
 //		mQuery1("3", "conf/cscw/1986");
 		
+//		mQuery1("1", "conf/hmi/1987");
+//		mQuery1("2", "conf/cscw/1990");
+//		mQuery1("3", "conf/cscw/1986");
+//		
+//		mQuery2("1", "IEEE", 20, 30);
+//		mQuery2("2", "CSCW", 20, 30);
 //		mQuery2("3", "International", 20, 30);
-		
+//		
+//		
 //		mQuery3("1", "IEEE International Conference on Acoustics", 10, 20);
 //		mQuery3("2", "CSCW", 76, 85);
 //		mQuery3("3", "IEEE", 11, 14);
-		
+//		
 //		mQuery4("1", "R. D. Purdy");
 //		mQuery4("2", "Alan Tyree");
 //		mQuery4("3", "G. Grdy");
 		
+//		xQuery4("1", "R. D. Purdy");
+//		xQuery4("2", "Alan Tyree");
+//		xQuery4("3", "G. Grdy");
 		
-//		mQuery5("1", "R. D. Purdy", "Alan Tyree");
-//		mQuery5("2", "R. D. Purdy", "G. Grdy");
-//		mQuery5("3", "G. Grdy", "Alan Tyree");
+		mQuery5("1", "R. D. Purdy", "Alan Tyree");
+		mQuery5("2", "R. D. Purdy", "G. Grdy");
+		mQuery5("3", "G. Grdy", "Alan Tyree");
 		
-//		mQuery6("1");
-//		mQuery6("2");
-//		mQuery6("3");
+//		xQuery5("1", "R. D. Purdy", "Alan Tyree");
+//		xQuery5("2", "R. D. Purdy", "G. Grdy");
+//		xQuery5("3", "G. Grdy", "Alan Tyree");
 		
-//		mQuery7("1", 1987, 1990);
-//		mQuery7("2", 1990, 1995);
-//		mQuery7("3", 1987, 1988);
+		mQuery6("1");
+		mQuery6("2");
+		mQuery6("3");
 		
-//		mQuery8("1", "Concurrency 88: International Conference on Concurrency");
-//		mQuery8("2", "Proceedings of the 1990 International Conference on Parallel Processing, Volume 1");
-//		mQuery8("3", "Logic Colloquium");
+		mQuery7("1", 1987, 1990);
+		mQuery7("2", 1990, 1995);
+		mQuery7("3", 1987, 1988);
+		
+//		xQuery7("1", 1987, 1990);
+//		xQuery7("2", 1990, 1995);
+//		xQuery7("3", 1987, 1988);
+		
+		mQuery8("1", "Concurrency 88: International Conference on Concurrency");
+		mQuery8("2", "Proceedings of the 1990 International Conference on Parallel Processing, Volume 1");
+		mQuery8("3", "Logic Colloquium");
 	
 //		mQuery9("1", "ICPP");
 //		mQuery9("2", "EACL");
@@ -257,7 +275,7 @@ public class Performance {
 			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
 		}
 
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "xPublications" + num);
 
 	}
 
@@ -341,8 +359,10 @@ public class Performance {
 		for (int i = 0; i < 30; i++) {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
-
+			
+			db3.open();
 			// TODO
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -441,7 +461,9 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
+			db3.open();
 			// TODO
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -538,7 +560,9 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
+			db3.open();
 			// TODO
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -554,7 +578,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "xConference" + num);
 
 	}
 
@@ -635,7 +659,9 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
+			db3.open();
 			// TODO
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -651,7 +677,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "xConferenceEdition" + num);
 
 	}
 
@@ -684,7 +710,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "zAuthors" + num);
 
 	}
 
@@ -732,7 +758,9 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
+			db3.open();
 			// TODO
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -748,7 +776,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "xAuthors" + num);
 
 	}
 
@@ -829,7 +857,9 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
+			db3.open();
 			// TODO
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -845,7 +875,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "xPublishers" + num);
 
 	}
 
@@ -926,7 +956,9 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
+			db3.open();
 			// TODO
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -942,7 +974,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "xSeries" + num);
 
 	}
 
@@ -1013,7 +1045,7 @@ public class Performance {
 
 	}
 
-	private static void xQuery1(String num) throws IOException {
+	private static void xQuery1(String num, String id) throws IOException {
 
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
@@ -1024,7 +1056,16 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			// TODO
+			db3.open();
+			
+			String input = "let $publications := doc('publications.xml')/root//* " + "return <root>{ "
+					+ "for $p in $publications " + "return " + "if (contains($p/id, '" + id + "')) " + "then $p "
+					+ "else () " + "}</root> ";
+			Query query = db3.execute(input);
+
+			new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Publications by id", new String[] { "ID", "Title" },
+					new String[] { "id", "title" }, false);
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1040,7 +1081,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "xQuery1" + num);
 
 	}
 
@@ -1115,7 +1156,7 @@ public class Performance {
 
 	}
 
-	private static void xQuery2(String num) throws IOException {
+	private static void xQuery2(String num, String id, int beginOffset,int endOffset) throws IOException {
 
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
@@ -1126,7 +1167,17 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			// TODO
+			db3.open();
+			
+		
+			String input = "let $publications := doc('publications.xml')/root//*[contains(title, '" + id + "')] "
+					+ "return <root>{ " + "subsequence($publications, " + beginOffset + ", " + (endOffset - beginOffset)
+					+ ") " + "}</root> ";
+			Query query = db3.execute(input);
+
+			new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Publications by id limited",
+					new String[] { "ID", "Title" }, new String[] { "id", "title" }, false);
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1142,7 +1193,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "xQuery2" + num);
 
 	}
 
@@ -1175,7 +1226,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "zQuery3" + num);
 
 	}
 
@@ -1223,7 +1274,7 @@ public class Performance {
 
 	}
 
-	private static void xQuery3(String num) throws IOException {
+	private static void xQuery3(String num, String id, int beginOffset,int endOffset) throws IOException {
 
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
@@ -1234,7 +1285,17 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			// TODO
+			db3.open();
+			
+			String input = "let $publications := doc('publications.xml')/root//*[contains(title, '" + id + "')] "
+					+ "return <root>{ " + "let $sorted := for $publication in $publications "
+					+ "order by $publication/title/text() " + "return $publication " + "return subsequence($sorted, "
+					+ beginOffset + ", " + (endOffset - beginOffset) + ") " + "}</root> ";
+			Query query = db3.execute(input);
+
+			new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Publications by id sorted limited",
+					new String[] { "ID", "Title" }, new String[] { "id", "title" }, false);
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1250,7 +1311,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "xQuery3" + num);
 
 	}
 
@@ -1334,7 +1395,7 @@ public class Performance {
 
 	}
 
-	private static void xQuery4(String num) throws IOException {
+	private static void xQuery4(String num, String authorId) throws IOException {
 
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
@@ -1345,7 +1406,18 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			// TODO
+			db3.open();
+			
+			String input = "let $author := doc('persons.xml')/root//*[id = '" + authorId + "'] " + "return <root>{ "
+					+ "<author>{ " + "$author/id, "
+					+ "for $i in doc('inproceedings.xml')/root//*[id = $author//iid/text()] " + "return "
+					+ "for $coAuthor in $i//author " + "return " + "if ($coAuthor/text() = $author/id/text()) " + "then () "
+					+ "else <coAuthor>{$coAuthor/text()}</coAuthor> " + "}</author> " + "}</root> ";
+			Query query = db3.execute(input);
+
+			new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Co-Authors", new String[] { "Author", "Co-Authors" },
+					new String[] { "id", "coAuthor" }, false);
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1361,7 +1433,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "xQuery4" + num);
 
 	}
 
@@ -1450,7 +1522,7 @@ public class Performance {
 
 	}
 
-	private static void xQuery5(String num) throws IOException {
+	private static void xQuery5(String num, String author1Id, String author2Id) throws IOException {
 
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
@@ -1460,8 +1532,24 @@ public class Performance {
 		for (int i = 0; i < 30; i++) {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
-
-			// TODO
+			db3.open();
+			
+			System.out.println("Geopned");
+			
+			String input = "declare function local:shortestPath($authors, $target, $depth) { " + "if ($depth > 20) "
+					+ "then 'The authors do not have anything in common' " + "else "
+					+ "if (some $author in $authors satisfies $author/id/text() = $target/id/text()) " + "then $depth "
+					+ "else local:shortestPath(doc('coAuthors.xml')/root//*[id/text() = $authors//coAuthor/text()], $target, $depth + 1) "
+					+ "}; " + "let $coAuthors := doc('coAuthors.xml')/root//*, " + "$author := $coAuthors[id = '"
+					+ author1Id + "'], " + "$target := $coAuthors[id = '" + author2Id + "'] " + "return <root>{ "
+					+ "<item>{ " + "<shortestPath>{ " + "local:shortestPath($author, $target, 0) " + "}</shortestPath> "
+					+ "}</item> " + "}</root> ";
+			
+			System.out.println("here");
+			Query query = db3.execute(input);
+			new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Shortest Path", new String[] { "Shortest Path" },
+					new String[] { "shortestPath" }, false);
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1477,7 +1565,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "xQuery5" + num);
 
 	}
 
@@ -1573,7 +1661,12 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			// TODO
+			db3.open();
+			Query query = db3.executeFile("query6.xq");
+
+			new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Global average number of authors per publication",
+					new String[] { "Avg number of authors" }, new String[] { "avg" }, false);
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1589,7 +1682,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "xQuery6" + num);
 
 	}
 
@@ -1697,7 +1790,7 @@ public class Performance {
 
 	}
 
-	private static void xQuery7(String num) throws IOException {
+	private static void xQuery7(String num, int beginYear,int endYear) throws IOException {
 
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
@@ -1708,7 +1801,31 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			// TODO
+			db3.open();
+			
+
+			if (beginYear > endYear) {
+				int temp = beginYear;
+				beginYear = endYear;
+				endYear = temp;
+			}
+
+			String beginStr = Integer.toString(beginYear);
+			String endStr = Integer.toString(endYear);
+
+			String input = "let $inproceedings := doc('publications.xml')/root/inproceedings[(ceid >= " + beginYear
+					+ ") and (ceid <= " + endYear + ")] " + "return <root>{ "
+					+ "for $year in distinct-values($inproceedings/ceid) " + "order by $year " + "return " + "<result> "
+					+ "<year>{ " + "$year " + "}</year> " + "<num>{ " + "count($inproceedings[ceid = $year]) " + "}</num> "
+					+ "</result> " + "}</root>";
+			System.out.println("Here");
+			
+			Query query = db3.execute(input);
+
+			new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
+					"Number of publications per year between " + beginStr + " and " + endStr + ".",
+					new String[] { "Year", "Number" }, new String[] { "year", "num" }, false);
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1724,7 +1841,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "xQuery7" + num);
 
 	}
 
@@ -1816,7 +1933,7 @@ public class Performance {
 
 	}
 
-	private static void xQuery8(String num) throws IOException {
+	private static void xQuery8(String num, String confID) throws IOException {
 
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
@@ -1827,7 +1944,19 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			// TODO
+			db3.open();
+			
+
+			String input = "let $publications := doc('publications.xml')/root " + "return <root>{ " + "<item>{ " + "<num>{ "
+					+ "for $p in $publications/proceedings[cid = '" + confID + "'] " + "return ( " + "count( "
+					+ "for $ip in  $publications/inproceedings " + "where $ip/pid = $p/id " + "return $ip " + ") " + ") "
+					+ "}</num> " + "}</item> " + "}</root>";
+
+			Query query = db3.execute(input);
+
+			new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Number of publications for conference " + confID + ". ",
+					new String[] { "Total" }, new String[] { "num" }, false);
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1843,7 +1972,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "xQuery8" + num);
 
 	}
 
@@ -1947,7 +2076,7 @@ public class Performance {
 
 	}
 
-	private static void xQuery9(String num) throws IOException {
+	private static void xQuery9(String num, String confID) throws IOException {
 
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
@@ -1958,7 +2087,19 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			// TODO
+			db3.open();
+			
+
+			String input = "let $proceedings := doc('proceedings.xml')/root//*[cid/text() = '" + confID + "'], "
+					+ "$inproceedings := doc('inproceedings.xml')/root//*[pid/text() = $proceedings/id/text()] "
+					+ "return <root><item><count>{count(distinct-values($proceedings/editor/text() | $inproceedings/author/text()))}</count></item></root> ";
+
+			Query query = db3.execute(input);
+
+			new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
+					"Count of authors and editors of conference " + confID + ".", new String[] { "Count" },
+					new String[] { "count" }, false);
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1974,7 +2115,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "xQuery9" + num);
 
 	}
 
@@ -2075,7 +2216,7 @@ public class Performance {
 
 	}
 
-	private static void xQuery10(String num) throws IOException {
+	private static void xQuery10(String num, String confID) throws IOException {
 
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
@@ -2086,7 +2227,34 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			// TODO
+			db3.open();
+			
+
+			/*
+			 * String input = "let $publications := doc('publications.xml')/root " +
+			 * "return <root>{ " + "for $p in $publications/proceedings " +
+			 * "where $p/cid = '" + confID +"' " + "return( " +
+			 * "for $e in $p/editor " +
+			 * "return <name><author>{$e/text()}</author></name> " + ") " + "} " +
+			 * "{ " + "for $p in $publications/proceedings " + "where $p/cid = '" +
+			 * confID +"' " + "return ( " +
+			 * "for $ip in $publications/inproceedings " + "where $ip/pid = $p/id "
+			 * + "return " + "for $a in $ip/author " + "return <name>{$a}</name> " +
+			 * ") " + "}</root>";
+			 */
+
+			String input = "let $proceedings := doc('proceedings.xml')/root//*[cid/text() = '" + confID + "'], "
+					+ "$inproceedings := doc('inproceedings.xml')/root//*[pid/text() = $proceedings/id/text()] " + "return "
+					+ "<root>{ "
+					+ "for $author in distinct-values($proceedings/editor/text() | $inproceedings/author/text()) "
+					+ "return " + "<author>{ " + "<id>{$author}</id> " + "}</author> " + "}</root> ";
+
+			Query query = db3.execute(input);
+
+			new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
+					"Names of authors and editors of conference " + confID + ".", new String[] { "Name" },
+					new String[] { "id" }, false);
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2102,7 +2270,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "xQuery10" + num);
 
 	}
 
@@ -2202,7 +2370,7 @@ public class Performance {
 
 	}
 
-	private static void xQuery11(String num) throws IOException {
+	private static void xQuery11(String num, String confID) throws IOException {
 
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
@@ -2213,7 +2381,19 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			// TODO
+			db3.open();
+			
+
+			String input = "let $proceedings := doc('proceedings.xml')/root//*[cid/text() = '" + confID + "'], "
+					+ "$inproceedings := doc('inproceedings.xml')/root//*[pid/text() = $proceedings/id/text()] "
+					+ "return <root>{$inproceedings}</root> ";
+
+			Query query = db3.execute(input);
+
+			new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Inproceedings of conference " + confID + ".",
+					new String[] { "ID", "Title", "Proceedings", "Authors" },
+					new String[] { "id", "title", "pid", "author" }, false);
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2229,7 +2409,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "xQuery11" + num);
 
 	}
 
@@ -2309,7 +2489,13 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			// TODO
+			db3.open();
+			Query query = db3.executeFile("query12.xq");
+
+			new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
+					"Persons that are author in InProceedings and editor in appropriate Proceedings",
+					new String[] { "Name" }, new String[] { "id" }, false);
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2325,7 +2511,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "xQuery12" + num);
 
 	}
 
@@ -2407,7 +2593,7 @@ public class Performance {
 
 	}
 
-	private static void xQuery13(String num) throws IOException {
+	private static void xQuery13(String num, String authorID) throws IOException {
 
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
@@ -2418,7 +2604,21 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			// TODO
+			db3.open();
+			
+
+			String input = "let $inproceedings :=doc('inproceedings.xml')/root/* " + "return <root>{ "
+					+ "for $ip in $inproceedings " + "where some $author in $ip/author[last()] satisfies $author/text() = '"
+					+ authorID + "' " + "return $ip " + "}</root> ";
+
+			Query query = db3.execute(input);
+
+			new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
+					"Publications where author " + authorID + " appears as last author.",
+					new String[] { "ID", "Title", "Proceedings", "Authors" },
+					new String[] { "id", "title", "pid", "author" }, false);
+
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2434,7 +2634,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "xQuery13" + num);
 
 	}
 
@@ -2523,7 +2723,7 @@ public class Performance {
 
 	}
 
-	private static void xQuery14(String num) throws IOException {
+	private static void xQuery14(String num, int beginYear, int endYear) throws IOException {
 
 		ArrayList<Long> ztimeList = new ArrayList<>();
 		ArrayList<Long> zmemoryList = new ArrayList<>();
@@ -2534,7 +2734,28 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			// TODO
+			db3.open();
+			
+		
+
+			if (beginYear > endYear) {
+				int temp = beginYear;
+				beginYear = endYear;
+				endYear = temp;
+			}
+
+			String input = "let $proceedings := doc('proceedings.xml')/root/*[1982 <= ceid and ceid <= 1986], "
+					+ "$inproceedings := doc('inproceedings.xml')/root/*, " + "$publishers := " + "for $p in $proceedings "
+					+ "where every $e in $p/editor satisfies $e/id/text() = $inproceedings/author/id/text() "
+					+ "return $p/publisher " + "return <root>{ " + "for $publisher in distinct-values($publishers) "
+					+ "return <publisher><id>{$publisher}</id></publisher> " + "}</root> ";
+
+			Query query = db3.execute(input);
+
+			new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
+					"Publishers of Proceedings whose authors appear in any InProceedings in range of years",
+					new String[] { "Publisher" }, new String[] { "id" }, false);
+			db3.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2550,7 +2771,7 @@ public class Performance {
 		}
 
 		// TODO
-		utils(ztimeList, zmemoryList, "zPublications" + num);
+		utils(ztimeList, zmemoryList, "xQuery14" + num);
 
 	}
 
