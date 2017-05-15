@@ -85,13 +85,54 @@ public class Performance {
 		basexQE = new BasexQueryExecutor(dbX);
 
 
-		System.out.println("Testing query 1:");
+		System.out.println("\n\t\t-----Testing query 1:-----");
 		test1(30);
+		
+		System.out.println("\n\t\t-----Testing query 2:-----");
+		test2(30);
+		
+		System.out.println("\n\t\t-----Testing query 3:-----");
+		test3(30);
+		
+		System.out.println("\n\t\t-----Testing query 4:-----");
+		test4(30);
+		
+		System.out.println("\n\t\t-----Testing query 5:-----");
+		test5(30);
+		
+		System.out.println("\n\t\t-----Testing query 6:-----");
+		test6(30);
+		
+		System.out.println("\n\t\t-----Testing query 7:-----");
+		test7(30);
+		
+		System.out.println("\n\t\t-----Testing query 8:-----");
+		test8(30);
+		
+		System.out.println("\n\t\t-----Testing query 9:-----");
+		test9(30);
+		
+		System.out.println("\n\t\t-----Testing query 10:-----");
+		test10(30);
+		
+		System.out.println("\n\t\t-----Testing query 11:-----");
+		test11(30);
+		
+		System.out.println("\n\t\t-----Testing query 12:-----");
+		test12(30);
+		
+		System.out.println("\n\t\t-----Testing query 13:-----");
+		test13(30);
+		
+		System.out.println("\n\t\t-----Testing query 14:-----");
+		test14(30);
+		
+		
 		
 		dbM.close();
 		dbX.close();
 		
-		System.out.println("Testing finished.");
+		System.out.println("\t\t-----Testing finished.-----");
 	}
 	
 
@@ -106,15 +147,12 @@ public class Performance {
 		long startTime, stopTime;
 		long elapsedZoo, elapsedMongo, elapsedBasex;
 		Runtime runtime = Runtime.getRuntime();
-		long maxMemZoodb = -1;
-		long maxMemMongo = -1;
-		long maxMemBasex = -1;
 		
 		// ZooDB measurement
 		System.out.println("Measuring ZooDB...");
 		// TODO: Implement
 		elapsedZoo = -1;
-		System.out.println("Measured average time: " + -1.0 + " ms");
+		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
 		
 		
 		
@@ -145,7 +183,7 @@ public class Performance {
 		
 		elapsedMongo = (stopTime - startTime) / 3;
 		
-		System.out.println("Measured average time: " + elapsedMongo + " ms");
+		System.out.println("\tMeasured average time: " + elapsedMongo + " ms");
 				
 		
 		// BaseX measurement-------------------------------------------------------------------
@@ -174,11 +212,1095 @@ public class Performance {
 		
 		elapsedBasex = (stopTime - startTime) / 3;
 		
-		System.out.println("Measured average time: " + elapsedBasex + " ms");
+		System.out.println("\tMeasured average time: " + elapsedBasex + " ms");
 		
 		
 		return new Triple(elapsedZoo, elapsedMongo, elapsedBasex);
 		
+	}
+	
+	// TODO: Add values
+	private static Triple test2(int iters){
+		
+		String title1 = "";
+		String title2 = "";
+		String title3 = "";
+		
+		int beginOffset1 = 0;
+		int beginOffset2 = 0;
+		int beginOffset3 = 0;
+		
+		int endOffset1 = 10;
+		int endOffset2 = 10;
+		int endOffset3 = 10;
+		
+		
+		long startTime, stopTime;
+		long elapsedZoo, elapsedMongo, elapsedBasex;
+		Runtime runtime = Runtime.getRuntime();
+		
+		// ZooDB measurement
+		System.out.println("Measuring ZooDB...");
+		// TODO: Implement
+		elapsedZoo = -1;
+		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
+		
+		
+		
+		// MongoDB measurement------------------------------------------------------------------
+		System.out.println("Measuring MongoDB...");
+		
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			mongoQE.query2(title1, beginOffset1, endOffset1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			mongoQE.query2(title2, beginOffset2, endOffset2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			mongoQE.query2(title3, beginOffset3, endOffset3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedMongo = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedMongo + " ms");
+				
+		
+		// BaseX measurement-------------------------------------------------------------------
+		System.out.println("Measuring BaseX...");
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			basexQE.query2(title1, beginOffset1, endOffset1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			basexQE.query2(title2, beginOffset2, endOffset2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			basexQE.query2(title3, beginOffset3, endOffset3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedBasex = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedBasex + " ms");
+		
+		
+		return new Triple(elapsedZoo, elapsedMongo, elapsedBasex);
+	}
+	
+	// TODO: Add values
+	private static Triple test3(int iters){
+		
+		String title1 = "";
+		String title2 = "";
+		String title3 = "";
+		
+		int beginOffset1 = 0;
+		int beginOffset2 = 0;
+		int beginOffset3 = 0;
+		
+		int endOffset1 = 10;
+		int endOffset2 = 10;
+		int endOffset3 = 10;
+		
+		
+		long startTime, stopTime;
+		long elapsedZoo, elapsedMongo, elapsedBasex;
+		Runtime runtime = Runtime.getRuntime();
+		
+		// ZooDB measurement
+		System.out.println("Measuring ZooDB...");
+		// TODO: Implement
+		elapsedZoo = -1;
+		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
+		
+		
+		
+		// MongoDB measurement------------------------------------------------------------------
+		System.out.println("Measuring MongoDB...");
+		
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			mongoQE.query3(title1, beginOffset1, endOffset1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			mongoQE.query3(title2, beginOffset2, endOffset2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			mongoQE.query3(title3, beginOffset3, endOffset3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedMongo = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedMongo + " ms");
+				
+		
+		// BaseX measurement-------------------------------------------------------------------
+		System.out.println("Measuring BaseX...");
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			basexQE.query3(title1, beginOffset1, endOffset1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			basexQE.query3(title2, beginOffset2, endOffset2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			basexQE.query3(title3, beginOffset3, endOffset3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedBasex = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedBasex + " ms");
+		
+		
+		return new Triple(elapsedZoo, elapsedMongo, elapsedBasex);
+	}
+	
+	// TODO: Add values
+	private static Triple test4(int iters){
+		
+		String title1 = "";
+		String title2 = "";
+		String title3 = "";
+		
+		long startTime, stopTime;
+		long elapsedZoo, elapsedMongo, elapsedBasex;
+		Runtime runtime = Runtime.getRuntime();
+		
+		// ZooDB measurement
+		System.out.println("Measuring ZooDB...");
+		// TODO: Implement
+		elapsedZoo = -1;
+		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
+		
+		
+		
+		// MongoDB measurement------------------------------------------------------------------
+		System.out.println("Measuring MongoDB...");
+		
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			mongoQE.query4(title1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			mongoQE.query4(title2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			mongoQE.query4(title3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedMongo = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedMongo + " ms");
+				
+		
+		// BaseX measurement-------------------------------------------------------------------
+		System.out.println("Measuring BaseX...");
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			basexQE.query4(title1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			basexQE.query4(title2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			basexQE.query4(title3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedBasex = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedBasex + " ms");
+		
+		
+		return new Triple(elapsedZoo, elapsedMongo, elapsedBasex);
+	}
+	
+	// TODO: Add values
+	private static Triple test5(int iters){
+		
+		String author1L = "";
+		String author2L = "";
+		String author3L = "";
+		
+		String author1R = "";
+		String author2R = "";
+		String author3R = "";
+		
+		
+		long startTime, stopTime;
+		long elapsedZoo, elapsedMongo, elapsedBasex;
+		Runtime runtime = Runtime.getRuntime();
+		
+		// ZooDB measurement
+		System.out.println("Measuring ZooDB...");
+		// TODO: Implement
+		elapsedZoo = -1;
+		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
+		
+		
+		
+		// MongoDB measurement------------------------------------------------------------------
+		System.out.println("Measuring MongoDB...");
+		
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			mongoQE.query5(author1L, author1R);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			mongoQE.query5(author2L, author2R);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			mongoQE.query5(author3L, author3R);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedMongo = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedMongo + " ms");
+				
+		
+		// BaseX measurement-------------------------------------------------------------------
+		System.out.println("Measuring BaseX...");
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			basexQE.query5(author1L, author1R);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			basexQE.query5(author2L, author2R);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			basexQE.query5(author3L, author3R);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedBasex = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedBasex + " ms");
+		
+		
+		return new Triple(elapsedZoo, elapsedMongo, elapsedBasex);
+	}
+	
+	private static Triple test6(int iters){
+		
+		long startTime, stopTime;
+		long elapsedZoo, elapsedMongo, elapsedBasex;
+		Runtime runtime = Runtime.getRuntime();
+		
+		// ZooDB measurement
+		System.out.println("Measuring ZooDB...");
+		// TODO: Implement
+		elapsedZoo = -1;
+		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
+		
+		
+		
+		// MongoDB measurement------------------------------------------------------------------
+		System.out.println("Measuring MongoDB...");
+		
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			mongoQE.query6();
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			mongoQE.query6();
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			mongoQE.query6();
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedMongo = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedMongo + " ms");
+				
+		
+		// BaseX measurement-------------------------------------------------------------------
+		System.out.println("Measuring BaseX...");
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			basexQE.query6();
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			basexQE.query6();
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			basexQE.query6();
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedBasex = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedBasex + " ms");
+		
+		
+		return new Triple(elapsedZoo, elapsedMongo, elapsedBasex);
+	}
+	
+	// TODO: Add values
+	private static Triple test7(int iters){
+		
+		int yearFrom1 = 0;
+		int yearFrom2 = 0;
+		int yearFrom3 = 0;
+		
+		int yearTo1 = 0;
+		int yearTo2 = 0;
+		int yearTo3 = 0;
+		
+		
+		long startTime, stopTime;
+		long elapsedZoo, elapsedMongo, elapsedBasex;
+		Runtime runtime = Runtime.getRuntime();
+		
+		// ZooDB measurement
+		System.out.println("Measuring ZooDB...");
+		// TODO: Implement
+		elapsedZoo = -1;
+		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
+		
+		
+		
+		// MongoDB measurement------------------------------------------------------------------
+		System.out.println("Measuring MongoDB...");
+		
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			mongoQE.query7(yearFrom1, yearTo1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			mongoQE.query7(yearFrom2, yearTo2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			mongoQE.query7(yearFrom3, yearTo3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedMongo = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedMongo + " ms");
+				
+		
+		// BaseX measurement-------------------------------------------------------------------
+		System.out.println("Measuring BaseX...");
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			basexQE.query7(yearFrom1, yearTo1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			basexQE.query7(yearFrom2, yearTo2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			basexQE.query7(yearFrom3, yearTo3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedBasex = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedBasex + " ms");
+		
+		
+		return new Triple(elapsedZoo, elapsedMongo, elapsedBasex);
+	}
+	
+	// TODO: Add values
+	private static Triple test8(int iters){
+		
+		String confName1 = "";
+		String confName2 = "";
+		String confName3 = "";
+		
+		
+		long startTime, stopTime;
+		long elapsedZoo, elapsedMongo, elapsedBasex;
+		Runtime runtime = Runtime.getRuntime();
+		
+		// ZooDB measurement
+		System.out.println("Measuring ZooDB...");
+		// TODO: Implement
+		elapsedZoo = -1;
+		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
+		
+		
+		
+		// MongoDB measurement------------------------------------------------------------------
+		System.out.println("Measuring MongoDB...");
+		
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			mongoQE.query8(confName1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			mongoQE.query8(confName2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			mongoQE.query8(confName3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedMongo = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedMongo + " ms");
+				
+		
+		// BaseX measurement-------------------------------------------------------------------
+		System.out.println("Measuring BaseX...");
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			basexQE.query8(confName1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			basexQE.query8(confName2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			basexQE.query8(confName3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedBasex = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedBasex + " ms");
+		
+		
+		return new Triple(elapsedZoo, elapsedMongo, elapsedBasex);
+	}
+	
+	// TODO: Add values
+	private static Triple test9(int iters){
+		
+		String confName1 = "";
+		String confName2 = "";
+		String confName3 = "";
+		
+		
+		long startTime, stopTime;
+		long elapsedZoo, elapsedMongo, elapsedBasex;
+		Runtime runtime = Runtime.getRuntime();
+		
+		// ZooDB measurement
+		System.out.println("Measuring ZooDB...");
+		// TODO: Implement
+		elapsedZoo = -1;
+		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
+		
+		
+		
+		// MongoDB measurement------------------------------------------------------------------
+		System.out.println("Measuring MongoDB...");
+		
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			mongoQE.query9(confName1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			mongoQE.query9(confName2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			mongoQE.query9(confName3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedMongo = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedMongo + " ms");
+				
+		
+		// BaseX measurement-------------------------------------------------------------------
+		System.out.println("Measuring BaseX...");
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			basexQE.query9(confName1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			basexQE.query9(confName2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			basexQE.query9(confName3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedBasex = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedBasex + " ms");
+		
+		
+		return new Triple(elapsedZoo, elapsedMongo, elapsedBasex);
+	}
+	
+	// TODO: Add values
+	private static Triple test10(int iters){
+		
+		String confName1 = "";
+		String confName2 = "";
+		String confName3 = "";
+		
+		
+		long startTime, stopTime;
+		long elapsedZoo, elapsedMongo, elapsedBasex;
+		Runtime runtime = Runtime.getRuntime();
+		
+		// ZooDB measurement
+		System.out.println("Measuring ZooDB...");
+		// TODO: Implement
+		elapsedZoo = -1;
+		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
+		
+		
+		
+		// MongoDB measurement------------------------------------------------------------------
+		System.out.println("Measuring MongoDB...");
+		
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			mongoQE.query10(confName1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			mongoQE.query10(confName2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			mongoQE.query10(confName3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedMongo = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedMongo + " ms");
+				
+		
+		// BaseX measurement-------------------------------------------------------------------
+		System.out.println("Measuring BaseX...");
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			basexQE.query10(confName1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			basexQE.query10(confName2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			basexQE.query10(confName3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedBasex = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedBasex + " ms");
+		
+		
+		return new Triple(elapsedZoo, elapsedMongo, elapsedBasex);
+	}
+
+	// TODO: Add values
+	private static Triple test11(int iters){
+		
+		String confName1 = "";
+		String confName2 = "";
+		String confName3 = "";
+		
+		
+		long startTime, stopTime;
+		long elapsedZoo, elapsedMongo, elapsedBasex;
+		Runtime runtime = Runtime.getRuntime();
+		
+		// ZooDB measurement
+		System.out.println("Measuring ZooDB...");
+		// TODO: Implement
+		elapsedZoo = -1;
+		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
+		
+		
+		
+		// MongoDB measurement------------------------------------------------------------------
+		System.out.println("Measuring MongoDB...");
+		
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			mongoQE.query11(confName1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			mongoQE.query11(confName2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			mongoQE.query11(confName3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedMongo = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedMongo + " ms");
+				
+		
+		// BaseX measurement-------------------------------------------------------------------
+		System.out.println("Measuring BaseX...");
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			basexQE.query11(confName1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			basexQE.query11(confName2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			basexQE.query11(confName3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedBasex = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedBasex + " ms");
+		
+		
+		return new Triple(elapsedZoo, elapsedMongo, elapsedBasex);
+	}
+
+	// TODO: Check what to do with the Mongo Implementation
+	private static Triple test12(int iters){
+		
+		long startTime, stopTime;
+		long elapsedZoo, elapsedMongo, elapsedBasex;
+		Runtime runtime = Runtime.getRuntime();
+		
+		// ZooDB measurement
+		System.out.println("Measuring ZooDB...");
+		// TODO: Implement
+		elapsedZoo = -1;
+		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
+		
+		
+		
+		// MongoDB measurement------------------------------------------------------------------
+		System.out.println("Measuring MongoDB...");
+		
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// TODO: Uncomment after fixing query.
+//		// Iteration 1
+//		for(int i = 0; i < iters; i++){
+//			mongoQE.query12();
+//		}
+//		
+//		// Iteration 2
+//		for(int i = 0; i < iters; i++){
+//			mongoQE.query12();
+//		}
+//		
+//		// Iteration 3
+//		for(int i = 0; i < iters; i++){
+//			mongoQE.query12();
+//		}
+		
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedMongo = (stopTime - startTime) / 3;
+		elapsedMongo = -1;
+		
+		System.out.println("\tMeasured average time: " + elapsedMongo + " ms");
+				
+		
+		// BaseX measurement-------------------------------------------------------------------
+		System.out.println("Measuring BaseX...");
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			basexQE.query12();
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			basexQE.query12();
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			basexQE.query12();
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedBasex = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedBasex + " ms");
+		
+		
+		return new Triple(elapsedZoo, elapsedMongo, elapsedBasex);
+	}
+
+	// TODO: Add values
+	private static Triple test13(int iters){
+		
+		String name1 = "";
+		String name2 = "";
+		String name3 = "";
+		
+		
+		long startTime, stopTime;
+		long elapsedZoo, elapsedMongo, elapsedBasex;
+		Runtime runtime = Runtime.getRuntime();
+		
+		// ZooDB measurement
+		System.out.println("Measuring ZooDB...");
+		// TODO: Implement
+		elapsedZoo = -1;
+		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
+		
+		
+		
+		// MongoDB measurement------------------------------------------------------------------
+		System.out.println("Measuring MongoDB...");
+		
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			mongoQE.query13(name1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			mongoQE.query13(name2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			mongoQE.query13(name3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedMongo = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedMongo + " ms");
+				
+		
+		// BaseX measurement-------------------------------------------------------------------
+		System.out.println("Measuring BaseX...");
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			basexQE.query13(name1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			basexQE.query13(name2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			basexQE.query13(name3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedBasex = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedBasex + " ms");
+		
+		
+		return new Triple(elapsedZoo, elapsedMongo, elapsedBasex);
+	}
+	
+	// TODO: Add values
+	private static Triple test14(int iters){
+		
+		int yearFrom1 = 0;
+		int yearFrom2 = 0;
+		int yearFrom3 = 0;
+		
+		int yearTo1 = 0;
+		int yearTo2 = 0;
+		int yearTo3 = 0;
+		
+		long startTime, stopTime;
+		long elapsedZoo, elapsedMongo, elapsedBasex;
+		Runtime runtime = Runtime.getRuntime();
+		
+		// ZooDB measurement
+		System.out.println("Measuring ZooDB...");
+		// TODO: Implement
+		elapsedZoo = -1;
+		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
+		
+		
+		
+		// MongoDB measurement------------------------------------------------------------------
+		System.out.println("Measuring MongoDB...");
+		
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			mongoQE.query14(yearFrom1, yearTo1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			mongoQE.query14(yearFrom2, yearTo2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			mongoQE.query14(yearFrom3, yearTo3);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedMongo = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedMongo + " ms");
+				
+		
+		// BaseX measurement-------------------------------------------------------------------
+		System.out.println("Measuring BaseX...");
+		
+		//startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
+		
+		// Iteration 1
+		for(int i = 0; i < iters; i++){
+			basexQE.query14(yearFrom1, yearTo1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < iters; i++){
+			basexQE.query14(yearFrom1, yearTo1);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < iters; i++){
+			basexQE.query14(yearFrom1, yearTo1);
+		}
+		
+		//stopTime = System.nanoTime();
+		stopTime = System.currentTimeMillis();
+		
+		elapsedBasex = (stopTime - startTime) / 3;
+		
+		System.out.println("\tMeasured average time: " + elapsedBasex + " ms");
+		
+		
+		return new Triple(elapsedZoo, elapsedMongo, elapsedBasex);
 	}
 	
 	// --------------------------------------------
