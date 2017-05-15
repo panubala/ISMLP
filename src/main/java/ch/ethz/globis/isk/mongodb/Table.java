@@ -52,6 +52,8 @@ public class Table extends JTable {
 	}
 	
 	public <T extends MongoDomainObject> Table(final MongoCollection<Document> collection, final Iterator<Document> cursor, final String title, final String[] columnNames, final String[] fieldNames, final boolean allowModifications) {
+		
+		
 		this.collection = collection;
 		this.fieldNames = fieldNames;
 		
@@ -205,9 +207,23 @@ public class Table extends JTable {
 	
     // Insert all documents as rows
 	private void insert(Iterator<Document> cursor) {
+		
+		//--- Debug code-----
+		
+		
+		if(null == cursor){
+			System.out.println("---### ERROR: In MongoDB: In Table: In insert() cursor == null");
+		} else{
+			System.out.println("---### DEBUG: In MongoDB: Size of collection: " + collection.count());
+		}
+			
+		//-------------------
+		
 		Document document;
         Vector<Object> row;
+                
         while (cursor.hasNext()) {
+        	
         	document = cursor.next();
         	row = new Vector<>();
         	for (String fieldName : fieldNames)

@@ -40,8 +40,17 @@ public class Database {
 	}
 	
 	public void open() {
+		
+		System.out.println("---### DEBUG: MongoDB: Connectind to localhost...");
+		
         mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase(name);
+        
+        if(null == database){
+        	System.out.println("---### ERROR: Could not connect to database. database == null");
+        }else{
+        	System.out.println("---### DEBUG: Loaded database with name " + database.getName());
+        }
         
     	conferences 		= database.getCollection("conferences");
     	conferenceEditions 	= database.getCollection("conferenceEditions");

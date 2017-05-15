@@ -47,20 +47,35 @@ import ch.ethz.globis.isk.util.Pair;
 import ch.ethz.globis.isk.xmldb.api.BaseXClient.Query;
 import ch.ethz.globis.isk.domain.mongodb.*;
 import ch.ethz.globis.isk.xmldb.*;
+import ch.ethz.globis.isk.mongodb.MongoQueryExecutor;
 
 public class Performance {
 
-	private static ch.ethz.globis.isk.mongodb.Database db2;
+	private static ch.ethz.globis.isk.Zoo.Database dbZ;
+	
+	private static ch.ethz.globis.isk.mongodb.Database dbM;
 
-	private static ch.ethz.globis.isk.xmldb.Database db3;
+	private static ch.ethz.globis.isk.xmldb.Database dbX;
 
 	private static String filter = "";
+	
+	private static MongoQueryExecutor mongoQE;
+	
+	public static int ITERATIONS = 30;
 
 	public static void main(String[] args) throws IOException {
+		
+		
+		// Create new MongoDB database object.
+		dbM = new ch.ethz.globis.isk.mongodb.Database("database");
+		
+		// Open database
+		dbM.open();
+		
+		// Create MongoQueryExecutor class.
+		mongoQE = new MongoQueryExecutor(dbM);
 
-		db2 = new ch.ethz.globis.isk.mongodb.Database("database");
-
-		db3 = new ch.ethz.globis.isk.xmldb.Database();
+		dbX = new ch.ethz.globis.isk.xmldb.Database();
 
 		// zPublications("3");
 		// mPublications("3");
@@ -141,7 +156,92 @@ public class Performance {
 //		mQuery14("2", 1998, 2017);
 //		mQuery14("3", 1987, 2017);
 		
+		
+		// Close MongoDB database
+		dbM.close();
+		
 	}
+	
+	
+	// -----SIMPLER QUERIES------------------------
+	
+	private double test1(){
+		
+		String id1 = "conf/icail/Berman89";	// Cutting legal loops
+		String id2 = "conf/hmi/Waxman87";	// Planting the seeds
+		String id3 = "conf/hmi/Lindberg87";// In praise of computing
+		
+		long startTime;
+		long stopTime;
+		long elapsedZoo, elapsedMongo, elapsedXml;
+		
+		
+		// ZooDB measurement
+		// TODO: Implement
+		
+		// MongoDB measurement
+		
+		startTime = System.nanoTime();
+		
+		// Iteration 1
+		for(int i = 0; i < ITERATIONS; i++){
+			mongoQE.query1(id1);
+		}
+		
+		// Iteration 2
+		for(int i = 0; i < ITERATIONS; i++){
+			mongoQE.query1(id2);
+		}
+		
+		// Iteration 3
+		for(int i = 0; i < ITERATIONS; i++){
+			mongoQE.query1(id3);
+		}
+		
+		stopTime = System.nanoTime();
+		
+		elapsedMongo = stopTime - startTime;
+		
+		// BaseX measeurement
+		// TODO: implement
+		
+		
+
+//		ArrayList<Long> ztimeList = new ArrayList<>();
+//		ArrayList<Long> zmemoryList = new ArrayList<>();
+//
+//		long memory = 0;
+//
+//		for (int i = 0; i < 30; i++) {
+//			Runtime.getRuntime().freeMemory();
+//			long startTime = System.currentTimeMillis();
+//
+//			dbM.open();
+//			Iterator<Document> iterator = dbM.publications.find(Filters.eq("_id", id)).iterator();
+//			new ch.ethz.globis.isk.mongodb.Table(dbM.publications, iterator, "Publication by ID",
+//					new String[] { "ID", "Title" }, new String[] { "_id", "title" }, false);
+//			dbM.close();
+//
+//			long stopTime = System.currentTimeMillis();
+//			ztimeList.add(stopTime - startTime);
+//
+//			Runtime runtime = Runtime.getRuntime();
+//
+//			runtime.gc();
+//
+//			memory = (runtime.totalMemory() - runtime.freeMemory()) / 1024 / 1024;
+//			zmemoryList.add(memory);
+//
+//			System.out.println(Long.toString(stopTime - startTime) + "    " + Long.toString(memory));
+//		}
+//
+//		utils(ztimeList, zmemoryList, "mQuery1" + num);
+		
+		return 0.9;
+		
+	}
+	
+	// --------------------------------------------
 
 	private static void utils(ArrayList<Long> ztimeList, ArrayList<Long> zmemoryList, String name) throws IOException {
 
@@ -224,12 +324,9 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
-
-			new ch.ethz.globis.isk.mongodb.Table(db2.publications, db2.publications.find().iterator(), "Publications",
-					new String[] { "ID", "Title" }, new String[] { "_id", "title" }, true);
-
-			db2.close();
+			
+			// TODO: Change method and method call (change name, delete parameter);
+			mongoQE.publications();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -258,10 +355,10 @@ public class Performance {
 		for (int i = 0; i < 30; i++) {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
-			db3.open();
-			new ch.ethz.globis.isk.xmldb.Table(db3, "publications.xml", null, "Publications",
+			dbX.open();
+			new ch.ethz.globis.isk.xmldb.Table(dbX, "publications.xml", null, "Publications",
 					new String[] { "ID", "Title" }, new String[] { "id", "title" }, true);
-			db3.close();
+			dbX.close();
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
 
@@ -322,15 +419,15 @@ public class Performance {
 		for (int i = 0; i < 30; i++) {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
-			db2.open();
-			new ch.ethz.globis.isk.mongodb.Table(db2.publications,
-					db2.publications.find(Filters.exists("publications")).iterator(), "Proceedings",
+			dbM.open();
+			new ch.ethz.globis.isk.mongodb.Table(dbM.publications,
+					dbM.publications.find(Filters.exists("publications")).iterator(), "Proceedings",
 					new String[] { "ID", "Title", "Year", "Publisher", "ISBN", "Editors", "Series",
 							"Conference Edition", "Publications" },
 					new String[] { "_id", "title", "year", "publisher", "isbn", "editors", "series",
 							"conferenceEdition", "publications" },
 					true);
-			db2.close();
+			dbM.close();
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
 
@@ -360,9 +457,9 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 			
-			db3.open();
+			dbX.open();
 			// TODO
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -424,13 +521,13 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
-			new ch.ethz.globis.isk.mongodb.Table(db2.publications,
-					db2.publications.find(Filters.exists("proceedings")).iterator(), "Inproceedings",
+			dbM.open();
+			new ch.ethz.globis.isk.mongodb.Table(dbM.publications,
+					dbM.publications.find(Filters.exists("proceedings")).iterator(), "Inproceedings",
 					new String[] { "ID", "Title", "Authors", "Proceedings" },
 					new String[] { "_id", "title", "authors", "proceedings" }, true);
 
-			db2.close();
+			dbM.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -461,9 +558,9 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db3.open();
+			dbX.open();
 			// TODO
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -527,9 +624,9 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
+			dbM.open();
 			// TODO
-			db2.close();
+			dbM.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -560,9 +657,9 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db3.open();
+			dbX.open();
 			// TODO
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -626,9 +723,9 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
+			dbM.open();
 			// TODO
-			db2.close();
+			dbM.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -659,9 +756,9 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db3.open();
+			dbX.open();
 			// TODO
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -725,9 +822,9 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
+			dbM.open();
 			// TODO
-			db2.close();
+			dbM.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -758,9 +855,9 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db3.open();
+			dbX.open();
 			// TODO
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -824,9 +921,9 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
+			dbM.open();
 			// TODO
-			db2.close();
+			dbM.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -857,9 +954,9 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db3.open();
+			dbX.open();
 			// TODO
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -923,9 +1020,9 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
+			dbM.open();
 			// TODO
-			db2.close();
+			dbM.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -956,9 +1053,9 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db3.open();
+			dbX.open();
 			// TODO
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1022,11 +1119,11 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
-			Iterator<Document> iterator = db2.publications.find(Filters.eq("_id", id)).iterator();
-			new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator, "Publication by ID",
+			dbM.open();
+			Iterator<Document> iterator = dbM.publications.find(Filters.eq("_id", id)).iterator();
+			new ch.ethz.globis.isk.mongodb.Table(dbM.publications, iterator, "Publication by ID",
 					new String[] { "ID", "Title" }, new String[] { "_id", "title" }, false);
-			db2.close();
+			dbM.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1056,16 +1153,16 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db3.open();
+			dbX.open();
 			
 			String input = "let $publications := doc('publications.xml')/root//* " + "return <root>{ "
 					+ "for $p in $publications " + "return " + "if (contains($p/id, '" + id + "')) " + "then $p "
 					+ "else () " + "}</root> ";
-			Query query = db3.execute(input);
+			Query query = dbX.execute(input);
 
-			new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Publications by id", new String[] { "ID", "Title" },
+			new ch.ethz.globis.isk.xmldb.Table(dbX, null, query, "Publications by id", new String[] { "ID", "Title" },
 					new String[] { "id", "title" }, false);
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1129,15 +1226,15 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
-			Iterator<Document> iterator = db2.publications.aggregate(Arrays.asList(
+			dbM.open();
+			Iterator<Document> iterator = dbM.publications.aggregate(Arrays.asList(
 					new Document("$match", new Document("title", new Document("$regex", ".*" + title + ".*i"))),
 					new Document("$skip", beginOffset), new Document("$limit", endOffset - beginOffset))).iterator();
 
-			new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator,
+			new ch.ethz.globis.isk.mongodb.Table(dbM.publications, iterator,
 					"Publications by title, begin-offset, end-offset", new String[] { "ID", "Title" },
 					new String[] { "_id", "title" }, false);
-			db2.close();
+			dbM.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1167,17 +1264,17 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db3.open();
+			dbX.open();
 			
 		
 			String input = "let $publications := doc('publications.xml')/root//*[contains(title, '" + id + "')] "
 					+ "return <root>{ " + "subsequence($publications, " + beginOffset + ", " + (endOffset - beginOffset)
 					+ ") " + "}</root> ";
-			Query query = db3.execute(input);
+			Query query = dbX.execute(input);
 
-			new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Publications by id limited",
+			new ch.ethz.globis.isk.xmldb.Table(dbX, null, query, "Publications by id limited",
 					new String[] { "ID", "Title" }, new String[] { "id", "title" }, false);
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1241,20 +1338,20 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
+			dbM.open();
 			
 
 		
 
-			Iterator<Document> iterator = db2.publications.aggregate(Arrays.asList(
+			Iterator<Document> iterator = dbM.publications.aggregate(Arrays.asList(
 					new Document("$match", new Document("title", new Document("$regex", ".*" + title + ".*i"))),
 					new Document("$skip", beginOffset), new Document("$limit", endOffset - beginOffset),
 					new Document("$sort", new Document("title", 1)))).iterator();
 
-			new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator,
+			new ch.ethz.globis.isk.mongodb.Table(dbM.publications, iterator,
 					"Publications by title, begin-offset, end-offset ordered by title", new String[] { "ID", "Title" },
 					new String[] { "_id", "title" }, false);
-			db2.close();
+			dbM.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1285,17 +1382,17 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db3.open();
+			dbX.open();
 			
 			String input = "let $publications := doc('publications.xml')/root//*[contains(title, '" + id + "')] "
 					+ "return <root>{ " + "let $sorted := for $publication in $publications "
 					+ "order by $publication/title/text() " + "return $publication " + "return subsequence($sorted, "
 					+ beginOffset + ", " + (endOffset - beginOffset) + ") " + "}</root> ";
-			Query query = db3.execute(input);
+			Query query = dbX.execute(input);
 
-			new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Publications by id sorted limited",
+			new ch.ethz.globis.isk.xmldb.Table(dbX, null, query, "Publications by id sorted limited",
 					new String[] { "ID", "Title" }, new String[] { "id", "title" }, false);
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1358,10 +1455,10 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
+			dbM.open();
 			
 
-			Iterator<Document> iterator = db2.publications
+			Iterator<Document> iterator = dbM.publications
 					.aggregate(
 							Arrays.asList(new Document("$match", new Document("authors", name)),
 									new Document("$project",
@@ -1373,9 +1470,9 @@ public class Performance {
 											new Document("$addToSet", "$coAuthors")))))
 					.iterator();
 
-			new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator, "Co-Authors",
+			new ch.ethz.globis.isk.mongodb.Table(dbM.publications, iterator, "Co-Authors",
 					new String[] { "Author", "Co-Authors" }, new String[] { "_id", "coAuthors" }, false);
-			db2.close();
+			dbM.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1406,18 +1503,18 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db3.open();
+			dbX.open();
 			
 			String input = "let $author := doc('persons.xml')/root//*[id = '" + authorId + "'] " + "return <root>{ "
 					+ "<author>{ " + "$author/id, "
 					+ "for $i in doc('inproceedings.xml')/root//*[id = $author//iid/text()] " + "return "
 					+ "for $coAuthor in $i//author " + "return " + "if ($coAuthor/text() = $author/id/text()) " + "then () "
 					+ "else <coAuthor>{$coAuthor/text()}</coAuthor> " + "}</author> " + "}</root> ";
-			Query query = db3.execute(input);
+			Query query = dbX.execute(input);
 
-			new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Co-Authors", new String[] { "Author", "Co-Authors" },
+			new ch.ethz.globis.isk.xmldb.Table(dbX, null, query, "Co-Authors", new String[] { "Author", "Co-Authors" },
 					new String[] { "id", "coAuthor" }, false);
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1480,10 +1577,10 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
+			dbM.open();
 			
 
-			Iterator<Document> iterator = db2.publications.aggregate(Arrays.asList(
+			Iterator<Document> iterator = dbM.publications.aggregate(Arrays.asList(
 					new Document("$match", new Document("$or",
 							Arrays.asList(new Document("authors", author1), new Document("authors", author2)))),
 					/*
@@ -1499,10 +1596,10 @@ public class Performance {
 											"connectedAuthors"))))
 					.iterator();
 
-			new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator, "Co-Authors",
+			new ch.ethz.globis.isk.mongodb.Table(dbM.publications, iterator, "Co-Authors",
 					new String[] { "Author", "connectedAuthors", "authors", "author" },
 					new String[] { "_id", "connectedAuthors", "authors", "author" }, false);
-			db2.close();
+			dbM.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1532,7 +1629,7 @@ public class Performance {
 		for (int i = 0; i < 30; i++) {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
-			db3.open();
+			dbX.open();
 			
 			System.out.println("Geopned");
 			
@@ -1546,10 +1643,10 @@ public class Performance {
 					+ "}</item> " + "}</root> ";
 			
 			System.out.println("here");
-			Query query = db3.execute(input);
-			new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Shortest Path", new String[] { "Shortest Path" },
+			Query query = dbX.execute(input);
+			new ch.ethz.globis.isk.xmldb.Table(dbX, null, query, "Shortest Path", new String[] { "Shortest Path" },
 					new String[] { "shortestPath" }, false);
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1613,8 +1710,8 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
-			AggregateIterable<Document> query = db2.publications
+			dbM.open();
+			AggregateIterable<Document> query = dbM.publications
 					.aggregate(
 							Arrays.asList(
 									new Document("$project",
@@ -1629,9 +1726,9 @@ public class Performance {
 
 			
 
-			new ch.ethz.globis.isk.mongodb.Table(db2.publications, query.iterator(), "Global avg",
+			new ch.ethz.globis.isk.mongodb.Table(dbM.publications, query.iterator(), "Global avg",
 					new String[] { "ID", "Count" }, new String[] { "_id", "count" }, true);
-			db2.close();
+			dbM.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1661,12 +1758,12 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db3.open();
-			Query query = db3.executeFile("query6.xq");
+			dbX.open();
+			Query query = dbX.executeFile("query6.xq");
 
-			new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Global average number of authors per publication",
+			new ch.ethz.globis.isk.xmldb.Table(dbX, null, query, "Global average number of authors per publication",
 					new String[] { "Avg number of authors" }, new String[] { "avg" }, false);
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1730,7 +1827,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
+			dbM.open();
 		
 
 			
@@ -1754,7 +1851,7 @@ public class Performance {
 			 * {"Title", "Year"}, new String[] {"title", "year"}, false);
 			 */
 
-			Iterator<Document> iterator = db2.publications.aggregate(Arrays.asList(
+			Iterator<Document> iterator = dbM.publications.aggregate(Arrays.asList(
 					new Document("$project",
 							new Document("_id", "$_id").append("year", "$year")
 									.append("gte", new Document("$gte", Arrays.asList("$year", yearFrom))).append("lte",
@@ -1767,10 +1864,10 @@ public class Performance {
 					new Document("$group", new Document("_id", "$year").append("count", new Document("$sum", "$count"))),
 					new Document("$sort", new Document("_id", 1)))).iterator();
 
-			new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator,
+			new ch.ethz.globis.isk.mongodb.Table(dbM.publications, iterator,
 					"Publications between " + yearFrom + " and " + yearTo,
 					new String[] { "Year", "Number of Publications" }, new String[] { "_id", "count" }, false);
-			db2.close();
+			dbM.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1801,7 +1898,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db3.open();
+			dbX.open();
 			
 
 			if (beginYear > endYear) {
@@ -1820,12 +1917,12 @@ public class Performance {
 					+ "</result> " + "}</root>";
 			System.out.println("Here");
 			
-			Query query = db3.execute(input);
+			Query query = dbX.execute(input);
 
-			new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
+			new ch.ethz.globis.isk.xmldb.Table(dbX, null, query,
 					"Number of publications per year between " + beginStr + " and " + endStr + ".",
 					new String[] { "Year", "Number" }, new String[] { "year", "num" }, false);
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1889,10 +1986,10 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
+			dbM.open();
 			
 
-			Iterator<Document> iterator = db2.conferences
+			Iterator<Document> iterator = dbM.conferences
 					.aggregate(Arrays.asList(new Document("$match", new Document("name", conferenceName)),
 							new Document("$lookup",
 									new Document("from", "conferenceEditions").append("localField", "editions")
@@ -1910,10 +2007,10 @@ public class Performance {
 													new Document("$size", "$proceedings.publications"))))))
 					.iterator();
 
-			new ch.ethz.globis.isk.mongodb.Table(db2.conferences, iterator,
+			new ch.ethz.globis.isk.mongodb.Table(dbM.conferences, iterator,
 					"Number of Publications of conference " + conferenceName,
 					new String[] { "Name", "Number of publications" }, new String[] { "name", "count" }, false);
-			db2.close();
+			dbM.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -1944,7 +2041,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db3.open();
+			dbX.open();
 			
 
 			String input = "let $publications := doc('publications.xml')/root " + "return <root>{ " + "<item>{ " + "<num>{ "
@@ -1952,11 +2049,11 @@ public class Performance {
 					+ "for $ip in  $publications/inproceedings " + "where $ip/pid = $p/id " + "return $ip " + ") " + ") "
 					+ "}</num> " + "}</item> " + "}</root>";
 
-			Query query = db3.execute(input);
+			Query query = dbX.execute(input);
 
-			new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Number of publications for conference " + confID + ". ",
+			new ch.ethz.globis.isk.xmldb.Table(dbX, null, query, "Number of publications for conference " + confID + ". ",
 					new String[] { "Total" }, new String[] { "num" }, false);
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2020,10 +2117,10 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
+			dbM.open();
 			
 
-			Iterator<Document> iterator = db2.conferences
+			Iterator<Document> iterator = dbM.conferences
 					.aggregate(Arrays.asList(new Document("$match", new Document("name", conferenceName)),
 							new Document("$lookup",
 									new Document("from", "conferenceEditions").append("localField", "editions")
@@ -2053,10 +2150,10 @@ public class Performance {
 											.append("count", new Document("$sum", new Document("$size", "$authors"))))))
 					.iterator();
 
-			new ch.ethz.globis.isk.mongodb.Table(db2.conferences, iterator,
+			new ch.ethz.globis.isk.mongodb.Table(dbM.conferences, iterator,
 					"Number of Authors/Editors of conference " + conferenceName,
 					new String[] { "Name", "Number of authors/editors" }, new String[] { "name", "count" }, false);
-			db2.close();
+			dbM.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2087,19 +2184,19 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db3.open();
+			dbX.open();
 			
 
 			String input = "let $proceedings := doc('proceedings.xml')/root//*[cid/text() = '" + confID + "'], "
 					+ "$inproceedings := doc('inproceedings.xml')/root//*[pid/text() = $proceedings/id/text()] "
 					+ "return <root><item><count>{count(distinct-values($proceedings/editor/text() | $inproceedings/author/text()))}</count></item></root> ";
 
-			Query query = db3.execute(input);
+			Query query = dbX.execute(input);
 
-			new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
+			new ch.ethz.globis.isk.xmldb.Table(dbX, null, query,
 					"Count of authors and editors of conference " + confID + ".", new String[] { "Count" },
 					new String[] { "count" }, false);
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2163,10 +2260,10 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
+			dbM.open();
 			
 
-			Iterator<Document> iterator = db2.conferences
+			Iterator<Document> iterator = dbM.conferences
 					.aggregate(Arrays.asList(new Document("$match", new Document("name", conferenceName)),
 							new Document("$lookup",
 									new Document("from", "conferenceEditions").append("localField", "editions")
@@ -2193,10 +2290,10 @@ public class Performance {
 									.append("authors", new Document("$addToSet", "$authors")))))
 					.iterator();
 
-			new ch.ethz.globis.isk.mongodb.Table(db2.conferences, iterator,
+			new ch.ethz.globis.isk.mongodb.Table(dbM.conferences, iterator,
 					"Authors/Editors of conference " + conferenceName, new String[] { "Name", "Authors/Editors" },
 					new String[] { "name", "authors" }, false);
-			db2.close();
+			dbM.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2227,7 +2324,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db3.open();
+			dbX.open();
 			
 
 			/*
@@ -2249,12 +2346,12 @@ public class Performance {
 					+ "for $author in distinct-values($proceedings/editor/text() | $inproceedings/author/text()) "
 					+ "return " + "<author>{ " + "<id>{$author}</id> " + "}</author> " + "}</root> ";
 
-			Query query = db3.execute(input);
+			Query query = dbX.execute(input);
 
-			new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
+			new ch.ethz.globis.isk.xmldb.Table(dbX, null, query,
 					"Names of authors and editors of conference " + confID + ".", new String[] { "Name" },
 					new String[] { "id" }, false);
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2318,10 +2415,10 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
+			dbM.open();
 			
 
-			Iterator<Document> iterator = db2.conferences
+			Iterator<Document> iterator = dbM.conferences
 					.aggregate(Arrays.asList(new Document("$match", new Document("name", conferenceName)),
 							new Document("$lookup",
 									new Document("from", "conferenceEditions").append("localField", "editions")
@@ -2348,9 +2445,9 @@ public class Performance {
 											new Document("$setUnion", Arrays.asList("$inProceedings", "$proceedings"))))))
 					.iterator();
 
-			new ch.ethz.globis.isk.mongodb.Table(db2.conferences, iterator, "Publications of conference " + conferenceName,
+			new ch.ethz.globis.isk.mongodb.Table(dbM.conferences, iterator, "Publications of conference " + conferenceName,
 					new String[] { "Name", "Publications" }, new String[] { "name", "publications" }, false);
-			db2.close();
+			dbM.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2381,19 +2478,19 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db3.open();
+			dbX.open();
 			
 
 			String input = "let $proceedings := doc('proceedings.xml')/root//*[cid/text() = '" + confID + "'], "
 					+ "$inproceedings := doc('inproceedings.xml')/root//*[pid/text() = $proceedings/id/text()] "
 					+ "return <root>{$inproceedings}</root> ";
 
-			Query query = db3.execute(input);
+			Query query = dbX.execute(input);
 
-			new ch.ethz.globis.isk.xmldb.Table(db3, null, query, "Inproceedings of conference " + confID + ".",
+			new ch.ethz.globis.isk.xmldb.Table(dbX, null, query, "Inproceedings of conference " + confID + ".",
 					new String[] { "ID", "Title", "Proceedings", "Authors" },
 					new String[] { "id", "title", "pid", "author" }, false);
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2457,8 +2554,8 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
-			db2.close();
+			dbM.open();
+			dbM.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2489,13 +2586,13 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db3.open();
-			Query query = db3.executeFile("query12.xq");
+			dbX.open();
+			Query query = dbX.executeFile("query12.xq");
 
-			new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
+			new ch.ethz.globis.isk.xmldb.Table(dbX, null, query,
 					"Persons that are author in InProceedings and editor in appropriate Proceedings",
 					new String[] { "Name" }, new String[] { "id" }, false);
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2559,7 +2656,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
+			dbM.open();
 			
 
 			// Exact matching could be used alternatively
@@ -2567,13 +2664,13 @@ public class Performance {
 			// this.authors[this.authors.length - 1] === '" + name + "'";
 			String expr = "this.authors != undefined && this.authors[this.authors.length - 1].includes('" + name + "')";
 
-			Iterator<Document> iterator = db2.publications.find(Filters.where(expr)).iterator();
+			Iterator<Document> iterator = dbM.publications.find(Filters.where(expr)).iterator();
 
-			new ch.ethz.globis.isk.mongodb.Table(db2.publications, iterator,
+			new ch.ethz.globis.isk.mongodb.Table(dbM.publications, iterator,
 					"Publications containing " + name + " as last author",
 					new String[] { "ID", "Title", "Authors", "Pages", "Year" },
 					new String[] { "_id", "title", "authors", "pages", "year" }, true);
-			db2.close();
+			dbM.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2604,21 +2701,21 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db3.open();
+			dbX.open();
 			
 
 			String input = "let $inproceedings :=doc('inproceedings.xml')/root/* " + "return <root>{ "
 					+ "for $ip in $inproceedings " + "where some $author in $ip/author[last()] satisfies $author/text() = '"
 					+ authorID + "' " + "return $ip " + "}</root> ";
 
-			Query query = db3.execute(input);
+			Query query = dbX.execute(input);
 
-			new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
+			new ch.ethz.globis.isk.xmldb.Table(dbX, null, query,
 					"Publications where author " + authorID + " appears as last author.",
 					new String[] { "ID", "Title", "Proceedings", "Authors" },
 					new String[] { "id", "title", "pid", "author" }, false);
 
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2682,10 +2779,10 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db2.open();
+			dbM.open();
 			
 
-			Iterator<Document> iterator = db2.publications.aggregate(Arrays.asList(
+			Iterator<Document> iterator = dbM.publications.aggregate(Arrays.asList(
 					new Document("$project",
 							new Document("_id", "$_id").append("publisher", "$publisher").append("authors", "$authors")
 									.append("editors", "$editors").append("year", "$year")
@@ -2699,11 +2796,11 @@ public class Performance {
 
 					new Document("$group", new Document("_id", "$publisher")))).iterator();
 
-			new ch.ethz.globis.isk.mongodb.Table(db2.publishers, iterator,
+			new ch.ethz.globis.isk.mongodb.Table(dbM.publishers, iterator,
 					"Publishers of proceedings whose authors appear in inproceedings in range of years " + yearFrom + " to "
 							+ yearTo,
 					new String[] { "Publisher" }, new String[] { "_id" }, false);
-			db2.close();
+			dbM.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);
@@ -2734,7 +2831,7 @@ public class Performance {
 			Runtime.getRuntime().freeMemory();
 			long startTime = System.currentTimeMillis();
 
-			db3.open();
+			dbX.open();
 			
 		
 
@@ -2750,12 +2847,12 @@ public class Performance {
 					+ "return $p/publisher " + "return <root>{ " + "for $publisher in distinct-values($publishers) "
 					+ "return <publisher><id>{$publisher}</id></publisher> " + "}</root> ";
 
-			Query query = db3.execute(input);
+			Query query = dbX.execute(input);
 
-			new ch.ethz.globis.isk.xmldb.Table(db3, null, query,
+			new ch.ethz.globis.isk.xmldb.Table(dbX, null, query,
 					"Publishers of Proceedings whose authors appear in any InProceedings in range of years",
 					new String[] { "Publisher" }, new String[] { "id" }, false);
-			db3.close();
+			dbX.close();
 
 			long stopTime = System.currentTimeMillis();
 			ztimeList.add(stopTime - startTime);

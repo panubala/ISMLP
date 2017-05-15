@@ -1479,12 +1479,36 @@ public class WPanel extends javax.swing.JPanel {
 	private void mPublicationActionPerformed(ActionEvent evt) {
 		Runtime.getRuntime().freeMemory();
 		long startTime = System.currentTimeMillis();
-		new ch.ethz.globis.isk.mongodb.Table(db2.publications, db2.publications.find().iterator(), "Publications",
-				new String[] { "ID", "Title" }, new String[] { "_id", "title" }, true);
+		
+		// ---- Debug code---------------
+		
+		if(null == db2){
+			System.out.println("---### ERROR: MongoDB object == null.");
+		}
+		
+		
+		if(null == db2.publications){
+			System.out.println("---### ERROR: MongoDB publications == null.");
+		}else {
+			System.out.println("---### DEBUG: MongoDB publications size: " + db2.publications.count());
+		}
+		
+		//-------------------------------
+		
+		new ch.ethz.globis.isk.mongodb.Table(db2.publications,
+				db2.publications.find().iterator(),
+				"Publications",
+				new String[] { "ID", "Title" },
+				new String[] { "_id", "title" },
+				true);
+		
+		
+		
 		long stopTime = System.currentTimeMillis();
 		long time = stopTime - startTime;
 		long memory = Runtime.getRuntime().totalMemory() / 1024 / 1024;
 		mLabel.setText("Time: " + Long.toString(time) + " ms" + "        Memory: " + Long.toString(memory) + "MB");
+		
 	}
 
 	private void mProActionPerformed(ActionEvent evt) {
