@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -48,6 +50,7 @@ import ch.ethz.globis.isk.xmldb.api.BaseXClient.Query;
 import ch.ethz.globis.isk.domain.mongodb.*;
 import ch.ethz.globis.isk.xmldb.*;
 import ch.ethz.globis.isk.mongodb.MongoQueryExecutor;
+import ch.ethz.globis.isk.util.Triple;
 
 public class Performance {
 
@@ -69,6 +72,9 @@ public class Performance {
 		// Create new database objects for all three databases.
 		dbM = new ch.ethz.globis.isk.mongodb.Database("database");
 		dbX = new ch.ethz.globis.isk.xmldb.Database();
+		
+		// Suppress unimportaint mongo logging
+		Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
 				
 		// Open databases
 		dbM.open();
@@ -79,38 +85,42 @@ public class Performance {
 		basexQE = new BasexQueryExecutor(dbX);
 
 
-		
+		System.out.println("Testing query 1:");
 		test1(30);
 		
 		dbM.close();
 		dbX.close();
+		
+		System.out.println("Testing finished.");
 	}
 	
 
 	// -----SIMPLER QUERIES------------------------
 	
-	private static double test1(int iters){
+	private static Triple test1(int iters){
 		
 		String id1 = "conf/icail/Berman89";	// Cutting legal loops
 		String id2 = "conf/hmi/Waxman87";	// Planting the seeds
-		String id3 = "conf/hmi/Lindberg87";// In praise of computing
+		String id3 = "conf/hmi/Lindberg87"; // In praise of computing
 		
-		long startTime;
-		long stopTime;
+		long startTime, stopTime;
 		long elapsedZoo, elapsedMongo, elapsedBasex;
-		long memZoo, memMongo, memXml;
-		
-		System.out.println("Starting query 1 measurement.");
+		Runtime runtime = Runtime.getRuntime();
+		long maxMemZoodb = -1;
+		long maxMemMongo = -1;
+		long maxMemBasex = -1;
 		
 		// ZooDB measurement
 		System.out.println("Measuring ZooDB...");
 		// TODO: Implement
-		System.out.println("Measured average time: " + 0.0 + " ms");
+		elapsedZoo = -1;
+		System.out.println("Measured average time: " + -1.0 + " ms");
 		
 		
 		
 		// MongoDB measurement------------------------------------------------------------------
 		System.out.println("Measuring MongoDB...");
+		
 		
 		//startTime = System.nanoTime();
 		startTime = System.currentTimeMillis();
@@ -136,7 +146,7 @@ public class Performance {
 		elapsedMongo = (stopTime - startTime) / 3;
 		
 		System.out.println("Measured average time: " + elapsedMongo + " ms");
-		
+				
 		
 		// BaseX measurement-------------------------------------------------------------------
 		System.out.println("Measuring BaseX...");
@@ -167,7 +177,7 @@ public class Performance {
 		System.out.println("Measured average time: " + elapsedBasex + " ms");
 		
 		
-		return 0.0;
+		return new Triple(elapsedZoo, elapsedMongo, elapsedBasex);
 		
 	}
 	
