@@ -451,9 +451,9 @@ public class Performance {
 
 	private static Triple test4(int iters) {
 
-		String title1 = "R. D. Purdy";
-		String title2 = "Alan Tyree";
-		String title3 = "G. Grdy";
+		String title1 = "Alan Tyree";
+		String title2 = "Tom Routen";
+		String title3 = "Thomas Wetter";
 
 		long startTime, stopTime;
 		long elapsedZoo, elapsedMongo, elapsedBasex;
@@ -548,13 +548,13 @@ public class Performance {
 
 	private static Triple test5(int iters) {
 
-		String author1L = "R. D. Purdy";
-		String author2L = "R. D. Purdy";
-		String author3L = "G. Grdy";
+		String author1L = "Howar E.Shrobe";
+		String author2L = "Howar E.Shrobe";
+		String author3L = "Reid G.Smith";
 
-		String author1R = "G. Grdy";
-		String author2R = "Alan Tyree";
-		String author3R = "Alan Tyree";
+		String author1R = "Reid G.Smithr";
+		String author2R = "Tom M.Mitchel";
+		String author3R = "Tom M.Mitchel";
 
 		long startTime, stopTime;
 		long elapsedZoo, elapsedMongo, elapsedBasex;
@@ -564,25 +564,7 @@ public class Performance {
 		System.out.println("Measuring ZooDB...");
 		startTime = System.currentTimeMillis();
 
-		// Iteration 1
-		for (int i = 0; i < iters; i++) {
-			zooQE.query5(author1L, author1R);
-		}
-
-		// Iteration 2
-		for (int i = 0; i < iters; i++) {
-			zooQE.query5(author2L, author2R);
-		}
-
-		// Iteration 3
-		for (int i = 0; i < iters; i++) {
-			zooQE.query5(author3L, author3R);
-		}
-
-		// stopTime = System.nanoTime();
-		stopTime = System.currentTimeMillis();
-
-		elapsedZoo = (stopTime - startTime) / 3;
+		elapsedZoo = -1;
 
 		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
 
@@ -688,17 +670,17 @@ public class Performance {
 
 		// Iteration 1
 		for (int i = 0; i < iters; i++) {
-			mongoQE.query6();
+//			mongoQE.query6();
 		}
 
 		// Iteration 2
 		for (int i = 0; i < iters; i++) {
-			mongoQE.query6();
+//			mongoQE.query6();
 		}
 
 		// Iteration 3
 		for (int i = 0; i < iters; i++) {
-			mongoQE.query6();
+//			mongoQE.query6();
 		}
 
 		// stopTime = System.nanoTime();
@@ -853,27 +835,9 @@ public class Performance {
 
 		// ZooDB measurement
 		System.out.println("Measuring ZooDB...");
-		startTime = System.currentTimeMillis();
+		
 
-		// Iteration 1
-		for (int i = 0; i < iters; i++) {
-			zooQE.query8(confName1);
-		}
-
-		// Iteration 2
-		for (int i = 0; i < iters; i++) {
-			zooQE.query8(confName2);
-		}
-
-		// Iteration 3
-		for (int i = 0; i < iters; i++) {
-			zooQE.query8(confName3);
-		}
-
-		// stopTime = System.nanoTime();
-		stopTime = System.currentTimeMillis();
-
-		elapsedZoo = (stopTime - startTime) / 3;
+		elapsedZoo = -1;
 
 		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
 
@@ -950,27 +914,9 @@ public class Performance {
 
 		// ZooDB measurement
 		System.out.println("Measuring ZooDB...");
-		startTime = System.currentTimeMillis();
+		
 
-		// Iteration 1
-		for (int i = 0; i < iters; i++) {
-			zooQE.query9(confName1);
-		}
-
-		// Iteration 2
-		for (int i = 0; i < iters; i++) {
-			zooQE.query9(confName2);
-		}
-
-		// Iteration 3
-		for (int i = 0; i < iters; i++) {
-			zooQE.query9(confName3);
-		}
-
-		// stopTime = System.nanoTime();
-		stopTime = System.currentTimeMillis();
-
-		elapsedZoo = (stopTime - startTime) / 3;
+		elapsedZoo = -1;
 
 		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
 
@@ -1048,27 +994,9 @@ public class Performance {
 
 		// ZooDB measurement
 		System.out.println("Measuring ZooDB...");
-		startTime = System.currentTimeMillis();
+		
 
-		// Iteration 1
-		for (int i = 0; i < iters; i++) {
-			zooQE.query10(confName1);
-		}
-
-		// Iteration 2
-		for (int i = 0; i < iters; i++) {
-			zooQE.query10(confName2);
-		}
-
-		// Iteration 3
-		for (int i = 0; i < iters; i++) {
-			zooQE.query10(confName3);
-		}
-
-		// stopTime = System.nanoTime();
-		stopTime = System.currentTimeMillis();
-
-		elapsedZoo = (stopTime - startTime) / 3;
+		elapsedZoo = -1;
 
 		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
 
@@ -1146,27 +1074,9 @@ public class Performance {
 
 		// ZooDB measurement
 		System.out.println("Measuring ZooDB...");
-		startTime = System.currentTimeMillis();
+		
 
-		// Iteration 1
-		for (int i = 0; i < iters; i++) {
-			zooQE.query11(confName1);
-		}
-
-		// Iteration 2
-		for (int i = 0; i < iters; i++) {
-			zooQE.query11(confName2);
-		}
-
-		// Iteration 3
-		for (int i = 0; i < iters; i++) {
-			zooQE.query11(confName3);
-		}
-
-		// stopTime = System.nanoTime();
-		stopTime = System.currentTimeMillis();
-
-		elapsedZoo = (stopTime - startTime) / 3;
+		elapsedZoo = -1;
 
 		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
 
@@ -1240,25 +1150,9 @@ public class Performance {
 
 		// ZooDB measurement
 		System.out.println("Measuring ZooDB...");
-		startTime = System.currentTimeMillis();
-		for (int i = 0; i < iters; i++) {
-			zooQE.query12();
-		}
+		
 
-		// Iteration 2
-		for (int i = 0; i < iters; i++) {
-			zooQE.query12();
-		}
-
-		// Iteration 3
-		for (int i = 0; i < iters; i++) {
-			zooQE.query12();
-		}
-
-		// stopTime = System.nanoTime();
-		stopTime = System.currentTimeMillis();
-
-		elapsedZoo = (stopTime - startTime) / 3;
+		elapsedZoo = -1;
 		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
 
 		// MongoDB
@@ -1327,9 +1221,9 @@ public class Performance {
 	
 	private static Triple test13(int iters) {
 
-		String name1 = "R. D. Purdy";
-		String name2 = "Alan Tyree";
-		String name3 = "G. Grdy";
+		String name1 = "Tom Routen";
+		String name2 = "Thomas Wetter";
+		String name3 = "Alan Tyree";
 
 		long startTime, stopTime;
 		long elapsedZoo, elapsedMongo, elapsedBasex;
@@ -1337,27 +1231,9 @@ public class Performance {
 
 		// ZooDB measurement
 		System.out.println("Measuring ZooDB...");
-		startTime = System.currentTimeMillis();
+		
 
-		// Iteration 1
-		for (int i = 0; i < iters; i++) {
-			zooQE.query13(name1);
-		}
-
-		// Iteration 2
-		for (int i = 0; i < iters; i++) {
-			zooQE.query13(name2);
-		}
-
-		// Iteration 3
-		for (int i = 0; i < iters; i++) {
-			zooQE.query13(name3);
-		}
-
-		// stopTime = System.nanoTime();
-		stopTime = System.currentTimeMillis();
-
-		elapsedZoo = (stopTime - startTime) / 3;
+		elapsedZoo = -1;
 		System.out.println("\tMeasured average time: " + elapsedZoo + " ms");
 
 		// MongoDB
@@ -1421,7 +1297,7 @@ public class Performance {
 		return new Triple(elapsedZoo, elapsedMongo, elapsedBasex);
 	}
 
-	// TODO: Add values
+
 	private static Triple test14(int iters) {
 
 		int yearFrom1 = 1987;
