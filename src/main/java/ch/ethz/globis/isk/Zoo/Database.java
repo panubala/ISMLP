@@ -416,11 +416,11 @@ public class Database {
     
     // 8.) Count the number of publications by conference
     //TODO
-//    public int getNumPublicationsByConference(String conferenceName){
-//    	
-//    	
-//    	return null;
-//    }
+    public int getNumPublicationsByConference(String conferenceName){
+    	
+    	
+    	return 0;
+    }
     
     // 9.) Count all authors and editors of a conference
     //TODO
@@ -431,7 +431,7 @@ public class Database {
     
     //10.) Retrieve all authors of a given conference
     //TODO: Implement
-    public List<ZooPerson> getAllAuthorsByConference(Conference conference){
+    public List<ZooPerson> getAllAuthorsByConference(String conference){
     	
 ////    	List<ZooPerson> authors = (List<ZooPerson>) getWithFilter(ZooPerson.class, "");
 //    	
@@ -474,7 +474,7 @@ public class Database {
     
     //12.) Retrieve a list of persons which were at the same time author in an InProceedings and editor in the appropriate Proceedings.
     //TODO
-    public List<ZooPerson> getAllPersonByAuthorInPreAndEditorInPre(String name){
+    public List<ZooPerson> getAllPersonByAuthorInPreAndEditorInPre(){
     	
 //    	Collection<ZooPerson> authors = getWithFilter(ZooPerson.class, "name == '" + name + "'");
 //    	Set<Publication> authoredPublications = new HashSet<Publication>();
