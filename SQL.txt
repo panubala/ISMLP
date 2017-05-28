@@ -1,0 +1,52 @@
+CREATE TABLE DomainObject (
+	-- 1
+	id VARCHAR UNIQUE -- or PRIMARY KEY
+);
+
+CREATE TABLE Publication (
+	-- 2
+	title VARCHAR NOT NULL,
+	-- 3
+	year INTEGER,
+	CONSTRAINT valid_year CHECK (1991 <= year AND year <= YEAR(GetDate()) + 1)
+);
+
+CREATE TABLE InProceedings (
+	-- 4
+	authors MULTISET NOT NULL,
+	CONSTRAINT valid_authors CHECK (authors IS NOT EMPTY),
+	-- 6
+	pages VARCHAR,
+	CONSTRAINT valid_pages
+		CHECK (pages IS NULL
+		OR pages ~ "(\\d)+"
+		OR pages ~ "(\\d)+-(\\d)+"),
+	-- 7
+	proceedings VARCHAR FOREIGN KEY REFERENCES Proceedings(id),
+	-- 8
+	note VARCHAR,
+	CONSTRAINT valid_note
+		CHECK (note = "Draft")
+		OR (note = "Submitted")
+		OR (note = "Accepted")
+		OR (note = "Published"),
+);
+
+-- 5
+CREATE TABLE Proceedings (
+	isbn VARCHAR,
+	note VARCHAR
+);
+CREATE TRIGGER set_note_when_isbn_edited
+	ON  Proceedings
+	BEFORE INSERT, UPDATE
+AS 
+BEGIN
+	IF UPDATE(isbn)
+	BEGIN
+		UPDATE		Proceedings
+		SET			note = isbn
+	END
+END
+
+-- 8: no multiple copies
