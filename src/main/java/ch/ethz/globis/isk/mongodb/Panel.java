@@ -14,17 +14,12 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import org.bson.Document;
-import org.bson.conversions.Bson;
 
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
-import com.mongodb.QueryBuilder;
 import com.mongodb.client.AggregateIterable;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.*;
-import com.mongodb.operation.GroupOperation;
-
 public class Panel extends JPanel {
     
 	private Database db;
@@ -307,8 +302,8 @@ public class Panel extends JPanel {
     	new Table(db.publications,
 				db.publications.find(Filters.exists("publications")).iterator(),
     			"Proceedings",
-    			new String[] { "ID", "Title", "Year", "Publisher", "ISBN", "Editors", "Series", "Conference Edition", "Publications" },
-    			new String[] { "_id", "title", "year", "publisher", "isbn", "editors", "series", "conferenceEdition", "publications" },
+    			new String[] { "ID", "Title", "Year", "Publisher", "ISBN", "Editors", "Series", "Conference Edition", "Publications", "Note"  },
+    			new String[] { "_id", "title", "year", "publisher", "isbn", "editors", "series", "conferenceEdition", "publications", "note" },
     			true);
     }
     
@@ -316,8 +311,8 @@ public class Panel extends JPanel {
     	new Table(db.publications,
 				db.publications.find(Filters.exists("proceedings")).iterator(),
     			"Inproceedings",
-    			new String[] { "ID", "Title", "Authors", "Proceedings" },
-    			new String[] { "_id", "title", "authors", "proceedings" },
+    			new String[] { "ID", "Title", "Authors", "Proceedings", "Pages", "Note" },
+    			new String[] { "_id", "title", "authors", "proceedings", "pages", "note" },
     			true);
     }
     
