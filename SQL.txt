@@ -23,7 +23,7 @@ CREATE TABLE InProceedings (
 		OR pages ~ "(\\d)+-(\\d)+"),
 	-- 7
 	proceedings VARCHAR FOREIGN KEY REFERENCES Proceedings(id),
-	-- 8
+	-- 9
 	note VARCHAR,
 	CONSTRAINT valid_note
 		CHECK (note = "Draft")
